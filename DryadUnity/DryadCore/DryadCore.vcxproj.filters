@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\core.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\dryad\core.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\definitions.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\degree.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\harmonygraph.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\harmonynode.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\includes.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\measure.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\monitoring.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\motif.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\motifconfig.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\motifvariation.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\note.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\phrase.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\position.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\scale.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\scaleconfig.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\score.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\utils.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\voice.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{8e9949b1-772c-469a-a955-b4cd5702eee7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{a3bd8d25-f3e2-4184-be90-8cd5cdfcf218}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
