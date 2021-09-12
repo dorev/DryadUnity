@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+#include "gtest-all.cc"
 
 int main(int argc, char **argv) 
 {
