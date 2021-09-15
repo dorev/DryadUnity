@@ -1,28 +1,28 @@
 #pragma once
 
-#include "definitions.h"
+#include "types.h"
 #include "monitoring.h"
 
-namespace dryad
+namespace Dryad
 {
 
-struct position_t;
-struct voice_t;
-struct motif_t;
+struct Position;
+struct Voice;
+struct Motif;
 
-struct note_t : monitor_count<note_t>
+struct Note : MonitorCount<Note>
 {
-    note_t(int offset = 0)
+    Note(uint offset = 0)
         : offset(offset)
         , duration(0)
         , midi(-1)
-        , accidental(accidental_e::none)
+        , accidental(Accidental::None)
         , octave(-1)
         , step(nullptr)
         , name(nullptr)
     {}
 
-    note_t(const note_t& other)
+    Note(const Note& other)
         : offset(other.offset)
         , duration(other.duration)
         , midi(other.midi)
@@ -32,19 +32,19 @@ struct note_t : monitor_count<note_t>
         , name(other.name)
         , voice(other.voice)
         , motif(other.motif)
-        , parent_position(parent_position)
+        , parentPosition(parentPosition)
     {}
 
-    int offset;
-    int duration;
-    int midi;
-    accidental_e accidental;
-    int octave;
+    sint offset;
+    uint duration;
+    uint midi;
+    Accidental accidental;
+    uint octave;
     const char* step;
     const char* name;
-    voice_ptr voice;
-    motif_variation_weak_ptr motif;
-    position_weak_ptr parent_position;
+    SharedPtr<Voice> voice;
+    WeakPtr<MotifVariation> motif;
+    WeakPtr<Position> parentPosition;
 };
 
-} // namespace dryad
+} // namespace Dryad

@@ -1,27 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadUnityTest\\DryadUnityTest.csproj": {}
+    "D:\\Git\\DryadUnity\\DryadUnity\\DryadUnityTest\\DryadUnityTest.csproj": {}
   },
   "projects": {
-    "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadApi\\DryadApi.vcxproj": {
+    "D:\\Git\\DryadUnity\\DryadUnity\\DryadApi\\DryadApi.vcxproj": {
       "restore": {
-        "projectUniqueName": "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadApi\\DryadApi.vcxproj",
+        "projectUniqueName": "D:\\Git\\DryadUnity\\DryadUnity\\DryadApi\\DryadApi.vcxproj",
         "projectName": "DryadApi",
-        "projectPath": "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadApi\\DryadApi.vcxproj"
+        "projectPath": "D:\\Git\\DryadUnity\\DryadUnity\\DryadApi\\DryadApi.vcxproj"
       },
       "frameworks": {
         "native": {}
       }
     },
-    "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadUnityTest\\DryadUnityTest.csproj": {
+    "D:\\Git\\DryadUnity\\DryadUnity\\DryadUnityTest\\DryadUnityTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadUnityTest\\DryadUnityTest.csproj",
+        "projectUniqueName": "D:\\Git\\DryadUnity\\DryadUnity\\DryadUnityTest\\DryadUnityTest.csproj",
         "projectName": "DryadUnityTest",
-        "projectPath": "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadUnityTest\\DryadUnityTest.csproj",
+        "projectPath": "D:\\Git\\DryadUnity\\DryadUnity\\DryadUnityTest\\DryadUnityTest.csproj",
         "packagesPath": "C:\\Users\\Vincent\\.nuget\\packages\\",
-        "outputPath": "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadUnityTest\\obj\\",
+        "outputPath": "D:\\Git\\DryadUnity\\DryadUnity\\DryadUnityTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Vincent\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -38,11 +38,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadApi\\DryadApi.vcxproj": {
-                "projectPath": "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadApi\\DryadApi.vcxproj"
+              "D:\\Git\\DryadUnity\\DryadUnity\\DryadApi\\DryadApi.vcxproj": {
+                "projectPath": "D:\\Git\\DryadUnity\\DryadUnity\\DryadApi\\DryadApi.vcxproj"
               },
-              "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadUnity\\DryadUnity.csproj": {
-                "projectPath": "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadUnity\\DryadUnity.csproj"
+              "D:\\Git\\DryadUnity\\DryadUnity\\DryadUnity\\DryadUnity.csproj": {
+                "projectPath": "D:\\Git\\DryadUnity\\DryadUnity\\DryadUnity\\DryadUnity.csproj"
               }
             }
           }
@@ -75,14 +75,14 @@
         }
       }
     },
-    "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadUnity\\DryadUnity.csproj": {
+    "D:\\Git\\DryadUnity\\DryadUnity\\DryadUnity\\DryadUnity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadUnity\\DryadUnity.csproj",
+        "projectUniqueName": "D:\\Git\\DryadUnity\\DryadUnity\\DryadUnity\\DryadUnity.csproj",
         "projectName": "DryadUnity",
-        "projectPath": "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadUnity\\DryadUnity.csproj",
+        "projectPath": "D:\\Git\\DryadUnity\\DryadUnity\\DryadUnity\\DryadUnity.csproj",
         "packagesPath": "C:\\Users\\Vincent\\.nuget\\packages\\",
-        "outputPath": "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadUnity\\obj\\",
+        "outputPath": "D:\\Git\\DryadUnity\\DryadUnity\\DryadUnity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Vincent\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -99,8 +99,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadApi\\DryadApi.vcxproj": {
-                "projectPath": "D:\\UnityProjects\\Dryad\\DryadUnity\\DryadApi\\DryadApi.vcxproj"
+              "D:\\Git\\DryadUnity\\DryadUnity\\DryadApi\\DryadApi.vcxproj": {
+                "projectPath": "D:\\Git\\DryadUnity\\DryadUnity\\DryadApi\\DryadApi.vcxproj"
               }
             }
           }

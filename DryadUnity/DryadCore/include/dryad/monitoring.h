@@ -2,30 +2,30 @@
 
 #include "utils.h"
 
-namespace dryad
+namespace Dryad
 {
 
-template <class type>
-struct monitor_count : crtp_helper<type, monitor_count>
+template <class T>
+struct MonitorCount : CrtpHelper<T, MonitorCount>
 {
-    monitor_count()
+    MonitorCount()
     {
-        alive_count++;
+        _aliveCount++;
     }
 
-    ~monitor_count()
+    ~MonitorCount()
     {
-        alive_count--;
+        _aliveCount--;
     }
 
-    static uint64_t get_count() { return alive_count; }
+    static uint GetCount() { return _aliveCount; }
 
 private:
 
-    static uint64_t alive_count;
+    static uint _aliveCount;
 };
 
-template <typename type>
-uint64_t monitor_count<type>::alive_count = 0;
+template <typename T>
+uint64_t MonitorCount<T>::_aliveCount = 0;
 
-} // namespace dryad
+} // namespace Dryad

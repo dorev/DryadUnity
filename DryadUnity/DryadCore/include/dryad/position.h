@@ -1,32 +1,32 @@
 #pragma once
 
-#include "definitions.h"
+#include "types.h"
 #include "monitoring.h"
 
-namespace dryad
+namespace Dryad
 {
 
-struct harmony_node_t;
-struct measure_t;
-struct note_t;
+struct HarmonyNode;
+struct Measure;
+struct Note;
 
-struct position_t : monitor_count<position_t>
+struct Position : MonitorCount<Position>
 {
-    position_t()
-        : measure_time(0)
+    Position()
+        : measureTime(0)
     {}
 
-    position_t(measure_ptr parent_measure, int time = 0)
-        : measure_time(time)
-        , parent_measure(parent_measure)
+    Position(SharedPtr<Measure> parentMeasure, uint time = 0)
+        : measureTime(time)
+        , parentMeasure(parentMeasure)
     {}
 
-    int measure_time;
-    std::vector<note_ptr> notes;
-    harmony_node_ptr harmony_node;
-    measure_weak_ptr parent_measure;
-    position_weak_ptr next;
-    position_weak_ptr previous;
+    uint measureTime;
+    Vector<SharedPtr<Note>> notes;
+    SharedPtr<HarmonyNode> harmonyNode;
+    WeakPtr<Measure> parentMeasure;
+    WeakPtr<Position> next;
+    WeakPtr<Position> previous;
 };
 
-} // namespace dryad
+} // namespace Dryad

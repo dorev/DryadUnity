@@ -1,20 +1,20 @@
 #pragma once
 
-#include "definitions.h"
+#include "types.h"
 
-namespace dryad
+namespace Dryad
 {
 
-struct motif_t;
-struct phrase_t;
-struct voice_t;
+struct Motif;
+struct Phrase;
+struct Voice;
 
-struct score_t
+struct Score
 {
-    std::vector<motif_ptr> motifs;
-    std::vector<voice_ptr> voices;
-    std::vector<phrase_ptr> phrases;
-    harmony_graph_ptr graph;
+    Vector<SharedPtr<Motif>> motifs;
+    Vector<SharedPtr<Voice>> voices;
+    Vector<SharedPtr<Phrase>> phrases;
+    SharedPtr<HarmonyGraph> graph;
 };
 
-} // namespace dryad
+} // namespace Dryad

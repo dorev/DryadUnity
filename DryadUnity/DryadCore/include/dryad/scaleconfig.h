@@ -1,21 +1,21 @@
 #pragma once
 
-#include "definitions.h"
+#include "types.h"
 
-namespace dryad
+namespace Dryad
 {
 
-struct degree_t;
+struct Degree;
 
-struct scale_config_t
+struct ScaleConfig
 {
-    scale_config_t(int root = 0, accidental_e accidental = accidental_e::sharp)
+    ScaleConfig(uint root = 0, Accidental accidental = Accidental::Sharp)
         : root(root)
         , accidental(accidental)
     {}
 
-    int root;
-    accidental_e accidental;
+    uint root;
+    Accidental accidental;
 };
 
-} // namespace dryad
+} // namespace Dryad

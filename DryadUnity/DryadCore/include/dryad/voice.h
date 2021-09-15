@@ -1,23 +1,23 @@
 #pragma once
 
-#include "definitions.h"
+#include "types.h"
 #include "monitoring.h"
 
-namespace dryad
+namespace Dryad
 {
 
-struct score_t;
+struct Score;
 
-struct voice_t : monitor_count<voice_t>
+struct Voice : MonitorCount<Voice>
 {
-    voice_t()
+    Voice()
         : octave(5)
         , name("")
     {}
 
-    int octave;
-    std::string name;
-    score_weak_ptr parent_score;
+    uint octave;
+    String name;
+    WeakPtr<Score> parentScore;
 };
 
-} // namespace dryad
+} // namespace Dryad

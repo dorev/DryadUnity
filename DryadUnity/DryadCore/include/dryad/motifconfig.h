@@ -1,25 +1,25 @@
 #pragma once
 
-#include "definitions.h"
+#include "types.h"
 
-namespace dryad
+namespace Dryad
 {
 
-struct motif_config_t
+struct MotifConfig
 {
-    motif_config_t(int duration = 0, int melodic_energy = 0, int rhythmic_energy = 0)
+    MotifConfig(uint duration = 0, Energy melodicEnergy = 0, Energy rhythmicEnergy = 0)
         : duration(duration)
-        , melodic_energy(melodic_energy)
-        , min_melodic_energy(1)
-        , max_melodic_energy(8)
-        , rhythmic_energy(rhythmic_energy)
+        , melodicEnergy(melodicEnergy)
+        , minMelodicEnergy(1)
+        , maxMelodicEnergy(8)
+        , rhythmicEnergy(rhythmicEnergy)
     {}
 
-    int duration;
-    int melodic_energy;
-    int min_melodic_energy;
-    int max_melodic_energy;
-    int rhythmic_energy;
+    uint duration;
+    Energy melodicEnergy;
+    Energy minMelodicEnergy;
+    Energy maxMelodicEnergy;
+    Energy rhythmicEnergy;
 };
 
-} // namespace dryad
+} // namespace Dryad

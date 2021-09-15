@@ -1,74 +1,74 @@
 #include "core.h"
 
-namespace dryad
+namespace Dryad
 {
 
 // Creates an empty score with an empty harmony graph
-score_ptr create_score()
+SharedPtr<Score> createScore()
 {
-    score_ptr score = make_score();
-    score->graph = make_harmony_graph();
-    score->graph->parent_score = score;
+    SharedPtr<Score> score = make<Score>();
+    score->graph = make<HarmonyGraph>();
+    score->graph->parentScore = score;
 
     return score;
 }
 
 // Used to set a group of node as potential progression starting point
-void mark_as_entry(std::initializer_list<harmony_node_ptr> nodes, bool value)
+void markAsEntry(InitializerList<SharedPtr<HarmonyNode>> nodes, bool value)
 {
-    for (harmony_node_ptr node : nodes)
+    for (SharedPtr<HarmonyNode> node : nodes)
     {
-        node->is_entry = value;
+        node->isEntry = value;
     }
 }
 
 // Used to set a group of nodes as potential progression ending point
-void mark_as_exit(std::initializer_list<harmony_node_ptr> nodes, bool value)
+void markAsExit(InitializerList<SharedPtr<HarmonyNode>> nodes, bool value)
 {
-    for (harmony_node_ptr node : nodes)
+    for (SharedPtr<HarmonyNode> node : nodes)
     {
-        node->is_exit = value;
+        node->isExit = value;
     }
 }
 
 // Adds other_node as edge if it is not already there
-void add_edge(harmony_node_ptr node, harmony_node_ptr other_node)
+void addEdge(SharedPtr<HarmonyNode> node, SharedPtr<HarmonyNode> otherNode)
 {
-    for (const harmony_node_weak_ptr& edge : node->edges)
+    for (const WeakPtr<HarmonyNode>& edge : node->edges)
     {
-        harmony_node_ptr locked_edge = edge.lock();
+        SharedPtr<HarmonyNode> lockedEdge = edge.lock();
 
-        if (locked_edge == nullptr)
+        if (lockedEdge == nullptr)
         {
             DEBUG_BREAK("Unable to add edge to node, it is expired");
         }
 
-        if (locked_edge == other_node)
+        if (lockedEdge == otherNode)
         {
             return;
         }
     }
 
-    node->edges.push_back(other_node);
+    node->edges.push_back(otherNode);
 }
 
 // Adds multiple other_nodes as edges if they are not already there
-void add_edges(harmony_node_ptr node, std::initializer_list<harmony_node_ptr> other_nodes)
+void addMultipleEdges(SharedPtr<HarmonyNode> node, InitializerList<SharedPtr<HarmonyNode>> otherNodes)
 { 
-    for (const harmony_node_ptr& other_node : other_nodes)
+    for (const SharedPtr<HarmonyNode>& other_node : otherNodes)
     {
         bool skip = false;
 
-        for (const harmony_node_weak_ptr& edge : node->edges)
+        for (const WeakPtr<HarmonyNode>& edge : node->edges)
         {
-            harmony_node_ptr locked_edge = edge.lock();
+            SharedPtr<HarmonyNode> lockedEdge = edge.lock();
 
-            if (locked_edge == nullptr)
+            if (lockedEdge == nullptr)
             {
                 DEBUG_BREAK("Unable to add edge to node, it is expired");
             }
 
-            if (locked_edge == other_node)
+            if (lockedEdge == other_node)
             {
                 skip = true;
                 break;
@@ -87,50 +87,50 @@ void add_edges(harmony_node_ptr node, std::initializer_list<harmony_node_ptr> ot
 // Used when generating progressions of a harmony_graph
 // Checks if the node has not already been visit more often
 // than allowed by the current graph setup
-bool is_visitable(harmony_node_ptr node)
+bool isVisitable(SharedPtr<HarmonyNode> node)
 {
-    return node->visit_count < node->max_visit;
+    return node->visitCount < node->maxVisit;
 }
 
 // Recursive function used to generate possible progression
 // of a harmony_graph
-void visit(harmony_node_ptr node, std::vector<harmony_node_weak_ptr>& progression)
+void visit(SharedPtr<HarmonyNode> node, Vector<WeakPtr<HarmonyNode>>& progression)
 {
-    node->visit_count++;
+    node->visitCount++;
 
     // Adds this node to the progression currently being built
     progression.push_back(node);
 
     // If the node can conclude a progression, store this progression in its
     // current state in the list of the harmony_graph
-    if (node->is_exit &&
+    if (node->isExit &&
         progression.size() > 1)
     {
-        if (harmony_graph_ptr graph = node->parent_harmony_graph.lock())
+        if (SharedPtr<HarmonyGraph> graph = node->parentHarmonyGraph.lock())
         {
             graph->progressions.push_back(progression);
         }
         else
         {
-            DEBUG_BREAK("harmony_graph has been deallocated before its nodes");
+            DEBUG_BREAK("HarmonyGraph has been deallocated before its nodes");
         }
     }
 
-    // For each harmony_node connected to this one
-    for (harmony_node_weak_ptr edge : node->edges)
+    // For each harmonyNode connected to this one
+    for (WeakPtr<HarmonyNode> edge : node->edges)
     {
-        harmony_node_ptr locked_edge = edge.lock();
+        SharedPtr<HarmonyNode> lockedEdge = edge.lock();
 
-        if (locked_edge == nullptr)
+        if (lockedEdge == nullptr)
         {
             DEBUG_BREAK("Node edge has expired, unable to explore graph");
         }
 
         // If the edge node has not been visited to often yet
-        if (is_visitable(locked_edge))
+        if (isVisitable(lockedEdge))
         {
             // Recursive call
-            visit(locked_edge, progression);
+            visit(lockedEdge, progression);
         }
     }
 
@@ -139,16 +139,16 @@ void visit(harmony_node_ptr node, std::vector<harmony_node_weak_ptr>& progressio
 }
 
 // Takes a step back in the harmony_graph during progression generation
-void leave(harmony_node_ptr node, std::vector<harmony_node_weak_ptr>& progression)
+void leave(SharedPtr<HarmonyNode> node, Vector<WeakPtr<HarmonyNode>>& progression)
 {
-    if (node->visit_count == 0)
+    if (node->visitCount == 0)
     {
-        DEBUG_BREAK("harmony_node is left more than it was visited");
+        DEBUG_BREAK("harmonyNode is left more than it was visited");
     }
 
-    // The harmony_node is "un-visited" because it can still be encountered
+    // The harmonyNode is "un-visited" because it can still be encountered
     // on permutations originating from earlier nodes in the harmony_graph
-    node->visit_count--;
+    node->visitCount--;
 
     if (progression.empty())
     {
@@ -160,60 +160,60 @@ void leave(harmony_node_ptr node, std::vector<harmony_node_weak_ptr>& progressio
 
 // Triggers the exploration of the harmony_graph to generate all
 // possible progressions bases on the contained harmony_nodes parameters
-void generate_progressions(harmony_graph_ptr graph)
+void generateAllProgressions(SharedPtr<HarmonyGraph> graph)
 {
-    std::vector<harmony_node_weak_ptr> progression;
+    Vector<WeakPtr<HarmonyNode>> progression;
 
-    for (harmony_node_ptr node : graph->nodes)
+    for (SharedPtr<HarmonyNode> node : graph->nodes)
     {
-        if (node->is_entry)
+        if (node->isEntry)
         {
             visit(node, progression);
         }
     }
 }
 
-// Adds a harmony_node to a harmony_graph
-void add_node(harmony_graph_ptr graph, harmony_node_ptr node)
+// Adds a harmonyNode to a harmony_graph
+void addNode(SharedPtr<HarmonyGraph> graph, SharedPtr<HarmonyNode> node)
 {
-    node->parent_harmony_graph = graph;
+    node->parentHarmonyGraph = graph;
     graph->nodes.push_back(node);
 }
 
 // Adds multiple harmony_nodes to a harmony_graph
-void add_nodes(harmony_graph_ptr graph, std::initializer_list<harmony_node_ptr> nodes)
+void addMultipleNodes(SharedPtr<HarmonyGraph> graph, InitializerList<SharedPtr<HarmonyNode>> nodes)
 {
-    for (harmony_node_ptr node : nodes)
+    for (SharedPtr<HarmonyNode> node : nodes)
     {
-        node->parent_harmony_graph = graph;
+        node->parentHarmonyGraph = graph;
         graph->nodes.push_back(node);
     }
 }
 
 // Adds a degree to a scale if it does not exists yet in it
-void add_degree(scale_ptr scale, degree_ptr added_degree)
+void addDegree(SharedPtr<Scale> scale, SharedPtr<Degree> addedDegree)
 {
-    for (const degree_ptr& existing_degree : scale->degrees)
+    for (const SharedPtr<Degree>& existingDegree : scale->degrees)
     {
-        if (existing_degree == added_degree)
+        if (existingDegree == addedDegree)
         {
             return;
         }
     }
 
-    scale->degrees.push_back(added_degree);
+    scale->degrees.push_back(addedDegree);
 }
 
 // Adds multiple degrees to a scale if they don't appear in it yet
-void add_degrees(scale_ptr scale, std::initializer_list<degree_ptr> added_degrees)
+void addMultipleDegrees(SharedPtr<Scale> scale, InitializerList<SharedPtr<Degree>> addedDegrees)
 {
-    for (degree_ptr degree : added_degrees)
+    for (SharedPtr<Degree> degree : addedDegrees)
     {
         bool skip = false;
 
-        for (const degree_ptr& existing_degree : scale->degrees)
+        for (const SharedPtr<Degree>& existingDegree : scale->degrees)
         {
-            if (existing_degree == degree)
+            if (existingDegree == degree)
             {
                 skip = true;
                 break;
@@ -230,312 +230,312 @@ void add_degrees(scale_ptr scale, std::initializer_list<degree_ptr> added_degree
 }
 
 // Creates a Major ionian scale
-scale_ptr create_major_scale()
+SharedPtr<Scale> createMajorScale()
 {
-    scale_ptr major_scale = make_scale();
+    SharedPtr<Scale> majorScale = make<Scale>();
 
-    major_scale->name = "Major Ionian scale";
+    majorScale->name = "Major Ionian scale";
 
-    add_degrees(major_scale, 
+    addMultipleDegrees(majorScale, 
     {
-        make_degree(0, major_scale),
-        make_degree(2, major_scale),
-        make_degree(4, major_scale),
-        make_degree(5, major_scale),
-        make_degree(7, major_scale),
-        make_degree(9, major_scale),
-        make_degree(11, major_scale),
+        make<Degree>(0, majorScale),
+        make<Degree>(2, majorScale),
+        make<Degree>(4, majorScale),
+        make<Degree>(5, majorScale),
+        make<Degree>(7, majorScale),
+        make<Degree>(9, majorScale),
+        make<Degree>(11, majorScale),
     });
 
     // Binds together the degrees so they can be used in cycles with
     // endless calls to next() and previous()
-    for (int i = 0; i < 7; ++i)
+    for (uint i = 0; i < 7; ++i)
     {
-        major_scale->degrees[i]->next = major_scale->degrees[(i + 1) % 7];
-        major_scale->degrees[(i + 1) % 7]->previous = major_scale->degrees[i];
+        majorScale->degrees[i]->next = majorScale->degrees[(i + 1) % 7];
+        majorScale->degrees[(i + 1) % 7]->previous = majorScale->degrees[i];
     }
 
-    return major_scale;
+    return majorScale;
 }
 
 // Evaluates the type of chord of a degree based on the following
 // degrees in the scale
-const std::vector<int>& get_chord_interval(degree_ptr degree)
+const Vector<uint>& getChordIntervals(SharedPtr<Degree> degree)
 {
     // Do not execute this function if custom intervals are set
-    if (degree->chord_intervals.size() > 0)
+    if (degree->chordIntervals.size() > 0)
     {
-        return degree->chord_intervals;
+        return degree->chordIntervals;
     }
 
     // Reach other degrees of the chord
-    degree_ptr third = next(next(degree));
-    degree_ptr fifth = next(next(third));
-    degree_ptr seventh = next(next(fifth));
+    SharedPtr<Degree> third = next(next(degree));
+    SharedPtr<Degree> fifth = next(next(third));
+    SharedPtr<Degree> seventh = next(next(fifth));
 
-    int root = degree->interval_from_root;
+    uint root = degree->intervalFromRoot;
 
     // Handle potential inverted order of inteval from root
-    int third_interval = third->interval_from_root < root
-        ? third->interval_from_root + 12 - root
-        : third->interval_from_root - root;
+    uint thirdInterval = third->intervalFromRoot < root
+        ? third->intervalFromRoot + 12 - root
+        : third->intervalFromRoot - root;
 
     // Validate that third is either major or minor
-    if (third_interval != 3 && third_interval != 4)
+    if (thirdInterval != 3 && thirdInterval != 4)
     {
         DEBUG_BREAK("unsupported third chord interval");
     }
 
     // Handle potential inverted order of inteval from root
-    int fifth_interval = fifth->interval_from_root < root
-        ? fifth->interval_from_root + 12 - root
-        : fifth->interval_from_root - root;
+    uint fifthInterval = fifth->intervalFromRoot < root
+        ? fifth->intervalFromRoot + 12 - root
+        : fifth->intervalFromRoot - root;
 
     // Handle cases where the chord does not have a perfect fifth
-    if (fifth_interval != 7)
+    if (fifthInterval != 7)
     {
-        if (fifth_interval == 6 && third_interval == 3)
+        if (fifthInterval == 6 && thirdInterval == 3)
         {
-            degree->chord_intervals = _dim_;
-            return degree->chord_intervals;
+            degree->chordIntervals = Constants::ChordIntervals::Diminished;
+            return degree->chordIntervals;
         }
-        else if (fifth_interval == 8 && third_interval == 4)
+        else if (fifthInterval == 8 && thirdInterval == 4)
         {
-            degree->chord_intervals = _aug_;
-            return degree->chord_intervals;
+            degree->chordIntervals = Constants::ChordIntervals::Augmented;
+            return degree->chordIntervals;
         }
 
         DEBUG_BREAK("unsupported fifth chord interval");
     }
 
     // Handle potential inverted order of inteval from root
-    int seventh_interval = seventh->interval_from_root < root
-        ? seventh->interval_from_root + 12 - root
-        : seventh->interval_from_root - root;
+    uint seventhInterval = seventh->intervalFromRoot < root
+        ? seventh->intervalFromRoot + 12 - root
+        : seventh->intervalFromRoot - root;
 
     // Validate that seventh is either major or minor
-    if (seventh_interval != 10 && third_interval != 11)
+    if (seventhInterval != 10 && thirdInterval != 11)
     {
         DEBUG_BREAK("unsupported seventh chord interval");
     }
 
     // Identify complete chord interval following the previous validations
-    if (third_interval == 3)
+    if (thirdInterval == 3)
     {
-        if (seventh_interval == 10)
+        if (seventhInterval == 10)
         {
-            degree->chord_intervals = _m7_;
+            degree->chordIntervals = Constants::ChordIntervals::m7;
         }
         else
         {
-            degree->chord_intervals = _mM7_;
+            degree->chordIntervals = Constants::ChordIntervals::mM7;
         }
 
-        return degree->chord_intervals;
+        return degree->chordIntervals;
     }
     else
     {
-        if (seventh_interval == 10)
+        if (seventhInterval == 10)
         {
-            degree->chord_intervals = _M7_;
+            degree->chordIntervals = Constants::ChordIntervals::M7;
         }
         else
         {
-            degree->chord_intervals = _MM7_;
+            degree->chordIntervals = Constants::ChordIntervals::MM7;
         }
 
-        return degree->chord_intervals;
+        return degree->chordIntervals;
     }
 }
 
 // Create a harmony_graph based on the major ionian scale with a
 // mostly agreeable configuration
-harmony_graph_ptr create_major_graph()
+SharedPtr<HarmonyGraph> createMajorGraph()
 {
-    harmony_graph_ptr graph = make_harmony_graph();
-    graph->scale = create_major_scale();
+    SharedPtr<HarmonyGraph> graph = make<HarmonyGraph>();
+    graph->scale = createMajorScale();
 
-    for (int i = 0; i < 7; ++i)
+    for (uint i = 0; i < 7; ++i)
     {
-        harmony_node_ptr node = make_harmony_node();
+        SharedPtr<HarmonyNode> node = make<HarmonyNode>();
         node->degree = graph->scale->degrees[i];
-        node->parent_harmony_graph = graph;
-        add_node(graph, node);
+        node->parentHarmonyGraph = graph;
+        addNode(graph, node);
     }
 
-    harmony_node_ptr I = graph->nodes[0];
-    harmony_node_ptr ii = graph->nodes[1];
-    harmony_node_ptr iii = graph->nodes[2];
-    harmony_node_ptr IV = graph->nodes[3];
-    harmony_node_ptr V = graph->nodes[4];
-    harmony_node_ptr vi = graph->nodes[5];
-    harmony_node_ptr viid = graph->nodes[6];
+    SharedPtr<HarmonyNode> I = graph->nodes[0];
+    SharedPtr<HarmonyNode> ii = graph->nodes[1];
+    SharedPtr<HarmonyNode> iii = graph->nodes[2];
+    SharedPtr<HarmonyNode> IV = graph->nodes[3];
+    SharedPtr<HarmonyNode> V = graph->nodes[4];
+    SharedPtr<HarmonyNode> vi = graph->nodes[5];
+    SharedPtr<HarmonyNode> viid = graph->nodes[6];
 
-    mark_as_entry({I, iii, IV, V, vi});
-    mark_as_exit({I, IV, V, vi, viid});
+    markAsEntry({I, iii, IV, V, vi});
+    markAsExit({I, IV, V, vi, viid});
 
-    add_edges(I,    {ii, iii, IV, V, vi, viid});
-    add_edges(ii,   {V, viid});
-    add_edges(iii,  {vi});
-    add_edges(IV,   {V, viid});
-    add_edges(V,    {I});
-    add_edges(vi,   {ii, IV});
-    add_edges(viid, {I, iii});
+    addMultipleEdges(I,    {ii, iii, IV, V, vi, viid});
+    addMultipleEdges(ii,   {V, viid});
+    addMultipleEdges(iii,  {vi});
+    addMultipleEdges(IV,   {V, viid});
+    addMultipleEdges(V,    {I});
+    addMultipleEdges(vi,   {ii, IV});
+    addMultipleEdges(viid, {I, iii});
 
-    I->max_visit  = 2;
-    IV->max_visit = 2;
-    V->max_visit  = 2;
-    vi->max_visit = 2;
+    I->maxVisit  = 2;
+    IV->maxVisit = 2;
+    V->maxVisit  = 2;
+    vi->maxVisit = 2;
 
     return graph;
 }
 
-// Creates a motif_variation based on the motif_config provided
+// Creates a motifVariation based on the motifConfig provided
 // The energy is randomly distributed to the notes of the motif 
 // and increases the pitch offset of the notes compared to their
 // neighbours
 
 // Should be called after spend_rhythmic_energy() otherwise there
 // might be only one note in the motif
-void spend_melodic_energy(motif_variation_ptr motif, motif_config_ptr motif_config)
+void spendMelodicEnergy(SharedPtr<MotifVariation> motif, SharedPtr<MotifConfig> motifConfig)
 {
     if (motif->notes.size() == 0)
     {
         DEBUG_BREAK("no notes to spend melodic energy on");
     }
 
-    int energy_left = motif_config->melodic_energy;
-    int max = motif_config->max_melodic_energy;
-    int min = motif_config->min_melodic_energy;
+    Energy energyLeft = motifConfig->melodicEnergy;
+    Energy max = motifConfig->maxMelodicEnergy;
+    Energy min = motifConfig->minMelodicEnergy;
 
     // Created a vector to store "how the energy will be distributed"
-    std::vector<int> energy_distribution(motif->notes.size(), 0);
+    Vector<Energy> energyDistribution(motif->notes.size(), 0);
 
-    while(energy_left != 0)
+    while(energyLeft != 0)
     {
         // Randomly determines what note will get the energy
-        int targeted_note = static_cast<int>(random::range(0ULL, energy_distribution.size() - 1));
-        int energy_given = 0;
+        uint targetedNote = static_cast<uint>(Random::range(0ULL, energyDistribution.size() - 1));
+        Energy energyGiven = 0;
 
         // If the note can still receive energy, according to
-        // the motif_config
-        if (energy_distribution[targeted_note] < max)
+        // the motifConfig
+        if (energyDistribution[targetedNote] < max)
         {
-            if (energy_left >= min)
+            if (energyLeft >= min)
             {
-                energy_given = min == 0 ? 1 : min;
+                energyGiven = min == 0 ? 1 : min;
             }
             else
             {
-                energy_given = energy_left;
+                energyGiven = energyLeft;
             }
         }
         // Find another note to give energy too
         else
         {
             // Vector to store potential alternative energy receivers
-            std::vector<int> candidate_indices;
+            Vector<uint> candidateIndices;
 
             // Identify all notes still having room for more energy
-            for (unsigned i = 0; i < motif->notes.size(); ++i)
+            for (uint i = 0; i < motif->notes.size(); ++i)
             {
-                if (energy_distribution[i] < max)
+                if (energyDistribution[i] < max)
                 {
-                    candidate_indices.emplace_back(i);
+                    candidateIndices.emplace_back(i);
                 }
             }
             
-            if (candidate_indices.empty())
+            if (candidateIndices.empty())
             {
                 // All notes are maxed on energy, unable to spend anymore energy
                 break;
             }
 
             // Randomly select a note among the candidates
-            targeted_note = random::in(candidate_indices);
+            targetedNote = Random::in(candidateIndices);
 
-            if (energy_left >= min)
+            if (energyLeft >= min)
             {
-                energy_given = min == 0 ? 1 : min;
+                energyGiven = min == 0 ? 1 : min;
             }
             else
             {
-                energy_given = energy_left;
+                energyGiven = energyLeft;
             }
         }
 
         // Prevent note from getting too much energy
-        if (energy_distribution[targeted_note] + energy_given > max)
+        if (energyDistribution[targetedNote] + energyGiven > max)
         {
-            energy_given = max - energy_distribution[targeted_note];
+            energyGiven = max - energyDistribution[targetedNote];
         }
 
         // Update energy value of the note
-        energy_distribution[targeted_note] += energy_given;
-        energy_left -= energy_given;
+        energyDistribution[targetedNote] += energyGiven;
+        energyLeft -= energyGiven;
     }
 
     // Randomly decide for each note of the energy makes the note
     // get lower or higher and then assigned the final value
     // to the motif
-    for (unsigned i = 0; i < energy_distribution.size(); ++i)
+    for (uint i = 0; i < energyDistribution.size(); ++i)
     {
-        if (random::coin_flip())
+        if (Random::fiftyFifty())
         {
             // Give a negative direction to energy
-            energy_distribution[i] -= 2 * energy_distribution[i];
+            energyDistribution[i] -= 2 * energyDistribution[i];
         }
 
-        motif->notes[i]->offset = energy_distribution[i];
+        motif->notes[i]->offset = energyDistribution[i];
     }
 }
 
 // Breaks a motif duration into multiple smaller durations
-void spend_rhythmic_energy(motif_variation_ptr motif, motif_config_ptr motif_config)
+void spendRythmicEnergy(SharedPtr<MotifVariation> motif, SharedPtr<MotifConfig> motifConfig)
 {
-    int duration = motif_config->duration;
-    int energy_left = motif_config->rhythmic_energy;
+    uint duration = motifConfig->duration;
+    uint energyLeft = motifConfig->rhythmicEnergy;
 
-    std::vector<int> notes_durations({ duration });
-    std::vector<std::pair<int, int>> solutions;
+    Vector<uint> notesDurations({ duration });
+    Vector<std::pair<uint, uint>> solutions;
 
-    while(energy_left--)
+    while(energyLeft--)
     {
-        int targeted_note = random::range(0, (int)notes_durations.size() - 1);
-        int note_duration = notes_durations[targeted_note];
+        uint targetedNote = Random::range(0ULL, notesDurations.size() - 1);
+        uint notesDuration = notesDurations[targetedNote];
 
-        if (note_duration > _sixteenth_)
+        if (notesDuration > Constants::Duration::Sixteenth)
         {
-            get_equivalent_duration_pairs(note_duration, solutions);
-            const std::pair<int, int>& selected_solution = random::in(solutions);
-            notes_durations[targeted_note] = selected_solution.first;
-            notes_durations.insert(notes_durations.begin() + targeted_note, selected_solution.second);
+            getEquivalentDurationPairs(notesDuration, solutions);
+            const std::pair<uint, uint>& selectedSolution = Random::in(solutions);
+            notesDurations[targetedNote] = selectedSolution.first;
+            notesDurations.insert(notesDurations.begin() + targetedNote, selectedSolution.second);
         }
-        else if (note_duration == _sixteenth_)
+        else if (notesDuration == Constants::Duration::Sixteenth)
         {
             // Find another note to split
-            std::vector<int> candidate_indices;
+            Vector<uint> candidateIndices;
 
-            for (int i = 0; i < (int)notes_durations.size(); ++i)
+            for (uint i = 0; i < (uint)notesDurations.size(); ++i)
             {
-                if (notes_durations[i] > _sixteenth_)
+                if (notesDurations[i] > Constants::Duration::Sixteenth)
                 {
-                    candidate_indices.emplace_back(i);
+                    candidateIndices.emplace_back(i);
                 }
             }
 
-            if (candidate_indices.empty())
+            if (candidateIndices.empty())
             {
-                // notes_durations vector contains only sixteenth,
+                // notesDurations vector contains only sixteenth,
                 // unable to spend anymore energy
                 break;
             }
 
-            int new_targeted_note = random::in(candidate_indices);
-            get_equivalent_duration_pairs(notes_durations[new_targeted_note], solutions);
-            const std::pair<int, int>& selected_solution = random::in(solutions);
-            notes_durations[new_targeted_note] = selected_solution.first;
-            notes_durations.insert(notes_durations.begin() + new_targeted_note, selected_solution.second);
+            uint new_targeted_note = Random::in(candidateIndices);
+            getEquivalentDurationPairs(notesDurations[new_targeted_note], solutions);
+            const std::pair<uint, uint>& selectedSolution = Random::in(solutions);
+            notesDurations[new_targeted_note] = selectedSolution.first;
+            notesDurations.insert(notesDurations.begin() + new_targeted_note, selectedSolution.second);
         }
         else
         {
@@ -543,94 +543,94 @@ void spend_rhythmic_energy(motif_variation_ptr motif, motif_config_ptr motif_con
         }
     }
 
-    for(int i = 0; i < (int)notes_durations.size(); ++i)
+    for(uint i = 0; i < notesDurations.size(); ++i)
     {
-        note_ptr new_note = make_note();
+        SharedPtr<Note> new_note = make<Note>();
         new_note->duration = duration;
         new_note->motif = motif;
         motif->notes.emplace_back(new_note);
     }
 }
 
-void generate_motif(motif_variation_ptr motif, motif_config_ptr motif_config)
+void generateMotif(SharedPtr<MotifVariation> motif, SharedPtr<MotifConfig> motifConfig)
 {
-    if (motif_config->duration % _quarter_)
+    if (motifConfig->duration % Constants::Duration::Quarter)
     {
         DEBUG_BREAK("motif duration should be a factor of quarter notes");
     }
-    if (motif_config->duration > 2 * _whole_)
+    if (motifConfig->duration > 2 * Constants::Duration::Whole)
     {
         DEBUG_BREAK("requested motif duration is too long");
     }
 
-    spend_rhythmic_energy(motif, motif_config);
-    spend_melodic_energy(motif, motif_config);
+    spendRythmicEnergy(motif, motifConfig);
+    spendMelodicEnergy(motif, motifConfig);
 }
 
-void generate_motif(motif_ptr motif, motif_config_ptr motif_config)
+void generateMotif(SharedPtr<Motif> motif, SharedPtr<MotifConfig> motifConfig)
 {
-    if (motif_config->duration % _quarter_)
+    if (motifConfig->duration % Constants::Duration::Quarter)
     {
         DEBUG_BREAK("motif duration should be a factor of quarter notes");
     }
-    if (motif_config->duration > 2 * _whole_)
+    if (motifConfig->duration > 2 * Constants::Duration::Whole)
     {
         DEBUG_BREAK("requested motif duration is too long");
     }
 
     if (motif->variations.size() == 0)
     {
-        motif->variations.emplace_back(make_motif_variation());
-        generate_motif(motif->variations[0], motif_config);
+        motif->variations.emplace_back(make<MotifVariation>());
+        generateMotif(motif->variations[0], motifConfig);
         return;
     }
 
     DEBUG_BREAK("generate_motif should not be called on a motif already containing variations");
 }
 
-void apply_progression(phrase_ptr phrase, const std::vector<harmony_node_weak_ptr>& progression, fitting_mode_e fitting_mode)
+void applyProgression(SharedPtr<Phrase> phrase, const Vector<WeakPtr<HarmonyNode>>& progression, FittingMode fittingMode)
 {
-    std::vector<measure_ptr>& measures = phrase->measures;
-    int progression_size = (int)progression.size();
-    int phrase_size = (int)measures.size();
+    Vector<SharedPtr<Measure>>& measures = phrase->measures;
+    uint progressionSize = progression.size();
+    uint phraseSize = measures.size();
 
-    if (!is_power_of_2(phrase_size))
+    if (!isPowerOf2(phraseSize))
     {
         DEBUG_BREAK("A phrase should be a power of 2");
     }
 
     // Perfect fit! Easy dispatch
-    if (progression_size == phrase_size)
+    if (progressionSize == phraseSize)
     {
-        for (int i = 0; i < phrase_size; ++i)
+        for (uint i = 0; i < phraseSize; ++i)
         {
             measures[i]->progression.emplace_back(progression[i]);
         }
         return;
     }
 
-    std::vector<int> degrees_distribution(phrase_size, 0);
+    Vector<uint> degreesDistribution(phraseSize, 0);
 
     // Values that cannot be initialized in the switch case
-    int chords_to_fit = progression_size;
-    int offset = phrase_size;
-    int measure = 0;
+    uint chordsToFit = progressionSize;
+    uint offset = phraseSize;
+    uint measure = 0;
 
-    switch (fitting_mode)
+    switch (fittingMode)
     {
-    case fitting_mode_e::power_of_2_left:
-    case fitting_mode_e::power_of_2_right:
+    case FittingMode::PowerOf2Left:
+    case FittingMode::PowerOf2Right:
 
-        for (int n = 0; n < chords_to_fit; ++n)
+        for (uint n = 0; n < chordsToFit; ++n)
         {
-            offset = phrase_size;
+            offset = phraseSize;
             measure = 0;
 
-            for(int bit = 0; bit < std::log2(phrase_size); ++bit)
+            for(uint bit = 0; bit < std::log2(phraseSize); ++bit)
             {
                 offset >>= 1;
 
-                bool bit_of_n_is_off = !((1 << bit) & n);
+                bool bit_of_n_is_off = !((1ULL << bit) & n);
 
                 if (bit_of_n_is_off)
                 {
@@ -638,14 +638,14 @@ void apply_progression(phrase_ptr phrase, const std::vector<harmony_node_weak_pt
                 }
             }
 
-            if (progression_size < phrase_size ||
-                fitting_mode == fitting_mode_e::power_of_2_left)
+            if (progressionSize < phraseSize ||
+                fittingMode == FittingMode::PowerOf2Left)
             {
-                ++degrees_distribution[(phrase_size - 1) - measure];
+                ++degreesDistribution[(phraseSize - 1) - measure];
             }
-            else if (fitting_mode == fitting_mode_e::power_of_2_right)
+            else if (fittingMode == FittingMode::PowerOf2Right)
             {
-                ++degrees_distribution[measure];
+                ++degreesDistribution[measure];
             }
             else
             {
@@ -655,30 +655,30 @@ void apply_progression(phrase_ptr phrase, const std::vector<harmony_node_weak_pt
 
         break;
 
-    case fitting_mode_e::compact_left:
-    case fitting_mode_e::compact_right:
+    case FittingMode::CompactLeft:
+    case FittingMode::CompactRight:
 
-        while (chords_to_fit != 0)
+        while (chordsToFit != 0)
         {
             bool break_while = false;
 
-            for (measure = phrase_size; measure > (phrase_size - offset); --measure)
+            for (measure = phraseSize; measure > (phraseSize - offset); --measure)
             {
-                if (progression_size < phrase_size ||
-                    fitting_mode == fitting_mode_e::compact_left)
+                if (progressionSize < phraseSize ||
+                    fittingMode == FittingMode::CompactLeft)
                 {
-                    ++degrees_distribution[phrase_size - measure];
+                    ++degreesDistribution[phraseSize - measure];
                 }
-                else if (fitting_mode == fitting_mode_e::compact_right)
+                else if (fittingMode == FittingMode::CompactRight)
                 {
-                    ++degrees_distribution[measure - 1];
+                    ++degreesDistribution[measure - 1];
                 }
                 else
                 {
                     DEBUG_BREAK("We should not reach this point");
                 }
 
-                if (--chords_to_fit == 0)
+                if (--chordsToFit == 0)
                 {
                     break_while = true;
                     break;
@@ -694,7 +694,7 @@ void apply_progression(phrase_ptr phrase, const std::vector<harmony_node_weak_pt
 
             if (offset == 0)
             {
-                offset = phrase_size;
+                offset = phraseSize;
             }
         }
 
@@ -704,36 +704,36 @@ void apply_progression(phrase_ptr phrase, const std::vector<harmony_node_weak_pt
         break;
     }
 
-    int progression_index = 0;
+    uint progressionIndex = 0;
 
-    for(int i = 0; i < phrase_size; ++i)
+    for(uint i = 0; i < phraseSize; ++i)
     {
         // For the number of chords in that measure
-        while (degrees_distribution[i]--)
+        while (degreesDistribution[i]--)
         {
-            measures[i]->progression.emplace_back(progression[progression_index++]);
+            measures[i]->progression.emplace_back(progression[progressionIndex++]);
         }
     }
 }
 
-void apply_motif(phrase_ptr phrase, motif_variation_ptr motif_variation, voice_ptr voice)
+void applyMotif(SharedPtr<Phrase> phrase, SharedPtr<MotifVariation> motifVariation, SharedPtr<Voice> voice)
 {
     // Append the motif in loop until the phrase is fully filled
     for (;;)
     {
         // For each note of the motif
-        for (note_ptr note : motif_variation->notes)
+        for (SharedPtr<Note> note : motifVariation->notes)
         {
             // Find the last measure with room for the target voice
-            for (measure_ptr measure : phrase->measures)
+            for (SharedPtr<Measure> measure : phrase->measures)
             {
-                int voice_duration = get_total_voice_duration(measure, voice);
+                uint voiceDuration = getTotalVoiceDuration(measure, voice);
                 
-                if (voice_duration < measure->duration)
+                if (voiceDuration < measure->duration)
                 {
-                    note_ptr cloned_note = clone(note);
-                    cloned_note->voice = voice;
-                    append_note(measure, cloned_note);
+                    SharedPtr<Note> clonedNote = clone(note);
+                    clonedNote->voice = voice;
+                    appendNote(measure, clonedNote);
 
                     // Append next note
                     break;
@@ -748,60 +748,60 @@ void apply_motif(phrase_ptr phrase, motif_variation_ptr motif_variation, voice_p
     }
 }
 
-void append_phrase(score_ptr score, phrase_ptr phrase)
+void appendPhrase(SharedPtr<Score> score, SharedPtr<Phrase> phrase)
 {
-    std::vector<phrase_ptr>& phrases = score->phrases;
-    phrase->parent_score = score;
+    Vector<SharedPtr<Phrase>>& phrases = score->phrases;
+    phrase->parentScore = score;
 
     if (!phrases.empty())
     {
-        if (phrase_ptr last_phrase = last(phrases))
+        if (SharedPtr<Phrase> lastPhrase = last(phrases))
         {
-            last_phrase->next = phrase;
-            phrase->previous = last_phrase;
+            lastPhrase->next = phrase;
+            phrase->previous = lastPhrase;
         }
     }
 
     phrases.emplace_back(phrase);
 }
 
-void append_measure(phrase_ptr phrase, measure_ptr measure)
+void appendMeasure(SharedPtr<Phrase> phrase, SharedPtr<Measure> measure)
 {
-    std::vector<measure_ptr>& measures = phrase->measures;
-    measure->parent_phrase = phrase;
+    Vector<SharedPtr<Measure>>& measures = phrase->measures;
+    measure->parentPhrase = phrase;
 
     if (measures.empty())
     {
-        if (measure_ptr last_measure = last(measures))
+        if (SharedPtr<Measure> lastMeasure = last(measures))
         {
-            last_measure->next = measure;
-            measure->previous = last_measure;
+            lastMeasure->next = measure;
+            measure->previous = lastMeasure;
         }
-        else if (phrase_ptr previous_phrase = previous(phrase))
+        else if (SharedPtr<Phrase> previousPhrase = previous(phrase))
         {
-            measure_ptr last_measure = last(previous_phrase->measures);
-            last_measure->next = measure;
-            measure->previous = last_measure;
+            SharedPtr<Measure> lastMeasure = last(previousPhrase->measures);
+            lastMeasure->next = measure;
+            measure->previous = lastMeasure;
         }
     }
     else
     {
-        if (measure_ptr last_measure = last(measures))
+        if (SharedPtr<Measure> lastMeasure = last(measures))
         {
-            last_measure->next = measure;
-            measure->previous = last_measure;
+            lastMeasure->next = measure;
+            measure->previous = lastMeasure;
         }
     }
 
     if (measure->positions.size() != 0)
     {
-        if (measure_ptr last_measure = last(measures))
+        if (SharedPtr<Measure> lastMeasure = last(measures))
         {
-            if (position_ptr last_position = last(last_measure->positions))
+            if (SharedPtr<Position> lastPosition = last(lastMeasure->positions))
             {
-                position_ptr position = first(measure->positions);
-                position->previous = last_position;
-                last_position->next = position;
+                SharedPtr<Position> position = first(measure->positions);
+                position->previous = lastPosition;
+                lastPosition->next = position;
             }
         }
     }
@@ -809,55 +809,55 @@ void append_measure(phrase_ptr phrase, measure_ptr measure)
     measures.emplace_back(measure);
 }
 
-void append_note(measure_ptr measure, note_ptr note)
+void appendNote(SharedPtr<Measure> measure, SharedPtr<Note> note)
 {
-    int voice_duration = get_total_voice_duration(measure, note->voice);
+    uint voiceDuration = getTotalVoiceDuration(measure, note->voice);
 
-    if (voice_duration >= measure->duration)
+    if (voiceDuration >= measure->duration)
     {
         // Try to append on next measure
-        if (measure_ptr next_measure = next(measure))
+        if (SharedPtr<Measure> nextMeasure = next(measure))
         {
-            append_note(next_measure, note);
+            appendNote(nextMeasure, note);
         }
 
         return;
     }
 
-    position_ptr note_position = get_position_at_time(measure, voice_duration);
+    SharedPtr<Position> notePosition = getPositionAtTime(measure, voiceDuration);
 
-    if (note_position == nullptr)
+    if (notePosition == nullptr)
     {
-        note_position = insert_position_at_time(measure, voice_duration);
+        notePosition = insertPositionAtTime(measure, voiceDuration);
     }
 
-    if( (note->duration + note_position->measure_time) > measure->duration)
+    if( (note->duration + notePosition->measureTime) > measure->duration)
     {
         // Overflow note duration to next measure
         // TODO: liaisons?
-        int duration_this_measure = measure->duration - note_position->measure_time;
+        uint durationCurrentMeasure = measure->duration - notePosition->measureTime;
 
         // Try to append on next measure
-        if (measure_ptr next_measure = next(measure))
+        if (SharedPtr<Measure> nextMeasure = next(measure))
         {
-            int duration_next_measure = note->duration - duration_this_measure;
-            note_ptr next_measure_cloned_note = clone(note);
-            next_measure_cloned_note->duration = duration_next_measure;
-            append_note(next_measure, next_measure_cloned_note);
+            uint durationNextMeasure = note->duration - durationCurrentMeasure;
+            SharedPtr<Note> nextMeasureClonedNote = clone(note);
+            nextMeasureClonedNote->duration = durationNextMeasure;
+            appendNote(nextMeasure, nextMeasureClonedNote);
         }
 
-        note->duration = duration_this_measure;
+        note->duration = durationCurrentMeasure;
     }
 
-    note->parent_position = note_position;
-    note_position->notes.emplace_back(note);
+    note->parentPosition = notePosition;
+    notePosition->notes.emplace_back(note);
 }
 
-position_ptr get_position_at_time(measure_ptr measure, int time)
+SharedPtr<Position> getPositionAtTime(SharedPtr<Measure> measure, uint time)
 {
-    for (position_ptr position : measure->positions)
+    for (SharedPtr<Position> position : measure->positions)
     {
-        if (position->measure_time == time)
+        if (position->measureTime == time)
         {
             return position;
         }
@@ -866,118 +866,118 @@ position_ptr get_position_at_time(measure_ptr measure, int time)
     return nullptr;
 }
 
-position_ptr insert_position_at_time(measure_ptr measure, int time)
+SharedPtr<Position> insertPositionAtTime(SharedPtr<Measure> measure, uint time)
 {
-    position_ptr position_before = nullptr;
-    position_ptr position_after = nullptr;
-    std::vector<position_ptr>& positions = measure->positions;
+    SharedPtr<Position> positionBefore = nullptr;
+    SharedPtr<Position> positionAfter = nullptr;
+    Vector<SharedPtr<Position>>& positions = measure->positions;
 
-    for (position_ptr position : positions)
+    for (SharedPtr<Position> position : positions)
     {
-        int position_time = position->measure_time;
+        uint positionTime = position->measureTime;
 
-        if (position_time == time)
+        if (positionTime == time)
         {
             return position;
         }
-        else if (position_time > time)
+        else if (positionTime > time)
         {
-            position_after = position;
+            positionAfter = position;
             break;
         }
 
-        position_before = position;
+        positionBefore = position;
     }
 
-    if (position_before == nullptr)
+    if (positionBefore == nullptr)
     {
-        position_ptr new_position = make_position(measure, time);
-        new_position->parent_measure = measure;
+        SharedPtr<Position> newPosition = make<Position>(measure, time);
+        newPosition->parentMeasure = measure;
 
         if (time != 0)
         {
             // Add initial position with a rest
-            position_ptr zero_position = make_position(measure);
-            zero_position->parent_measure = measure;
+            SharedPtr<Position> zeroPosition = make<Position>(measure);
+            zeroPosition->parentMeasure = measure;
 
-            resolve_harmony_node(zero_position);
-            new_position->previous = zero_position;
-            zero_position->next = new_position;
+            getHarmonyNode(zeroPosition);
+            newPosition->previous = zeroPosition;
+            zeroPosition->next = newPosition;
 
-            if (measure_ptr previous_measure = previous(measure))
+            if (SharedPtr<Measure> previousMeasure = previous(measure))
             {
-                if (position_ptr last_position = last(previous_measure->positions))
+                if (SharedPtr<Position> lastPosition = last(previousMeasure->positions))
                 {
-                    zero_position->previous = last_position;
+                    zeroPosition->previous = lastPosition;
                 }
             }
 
-            positions.emplace_back(zero_position);
+            positions.emplace_back(zeroPosition);
         }
 
-        positions.emplace_back(new_position);
-        resolve_harmony_node(new_position);
-        return new_position;
+        positions.emplace_back(newPosition);
+        getHarmonyNode(newPosition);
+        return newPosition;
     }
 
     for(auto it = positions.begin(); it != positions.end(); ++it)
     {
-        if (*it == position_before)
+        if (*it == positionBefore)
         {
-            position_ptr new_position = make_position();
-            new_position->parent_measure = measure;
+            SharedPtr<Position> newPosition = make<Position>();
+            newPosition->parentMeasure = measure;
 
-            new_position->measure_time = time;
-            new_position->parent_measure = measure;
-            positions.insert(it, new_position);
+            newPosition->measureTime = time;
+            newPosition->parentMeasure = measure;
+            positions.insert(it, newPosition);
 
-            position_before->next = new_position;
-            new_position->previous = position_before;
+            positionBefore->next = newPosition;
+            newPosition->previous = positionBefore;
 
-            if (position_after != nullptr)
+            if (positionAfter != nullptr)
             {
-                new_position->next = position_after;
-                position_after->previous = new_position;
+                newPosition->next = positionAfter;
+                positionAfter->previous = newPosition;
             }
 
-            resolve_harmony_node(new_position);
-            return new_position;
+            getHarmonyNode(newPosition);
+            return newPosition;
         }
     }
 
     DEBUG_BREAK("this section should never be reached");
 }
 
-int get_total_voice_duration(measure_ptr measure, voice_ptr voice)
+uint getTotalVoiceDuration(SharedPtr<Measure> measure, SharedPtr<Voice> voice)
 {
     if (measure->positions.size() == 0)
     {
         return 0;
     }
 
-    bool voice_exists_in_measure = false;
+    bool voiceExistsInMeasure = false;
 
     // Inspect first position of measure to check if the targeted voice is
     // present in the measure
-    for (note_ptr note : measure->positions[0]->notes)
+    for (SharedPtr<Note> note : measure->positions[0]->notes)
     {
         if (note->voice == voice)
         {
-            voice_exists_in_measure = true;
+            voiceExistsInMeasure = true;
             break;
         }
     }
 
-    if (!voice_exists_in_measure)
+    if (!voiceExistsInMeasure)
     {
         return 0;
     }
 
-    int total_duration = 0;
+    uint total_duration = 0;
 
-    for (position_ptr position : measure->positions)
+    for (SharedPtr<Position> position : measure->positions)
     {
-        for (note_ptr note : position->notes)
+        for (SharedPtr<Note> note : position->notes)
         {
             if (note->voice == voice)
             {
@@ -993,68 +993,68 @@ int get_total_voice_duration(measure_ptr measure, voice_ptr voice)
     return total_duration;
 }
 
-void relink_phrase(phrase_ptr phrase)
+void relinkPhrase(SharedPtr<Phrase> phrase)
 {
-    std::vector<measure_ptr>& measures = phrase->measures;
-    int measure_count = (int)measures.size();
+    Vector<SharedPtr<Measure>>& measures = phrase->measures;
+    uint measureCount = (uint)measures.size();
 
-    for (int measure_index = 0; measure_index < measure_count; ++measure_index)
+    for (uint measureIndex = 0; measureIndex < measureCount; ++measureIndex)
     {
-        measure_ptr measure = measures[measure_index];
-        measure->parent_phrase = phrase;
+        SharedPtr<Measure> measure = measures[measureIndex];
+        measure->parentPhrase = phrase;
 
-        if (measure_index == 0)
+        if (measureIndex == 0)
         {
-            if (phrase_ptr previous_phrase = previous(phrase))
+            if (SharedPtr<Phrase> previousPhrase = previous(phrase))
             {
-                if (measure_ptr last_measure = last(previous_phrase->measures))
+                if (SharedPtr<Measure> lastMeasure = last(previousPhrase->measures))
                 {
-                    measure->previous = last_measure;
-                    last_measure->next = measure;
+                    measure->previous = lastMeasure;
+                    lastMeasure->next = measure;
                 }
             }
         }
         else
         {
-            measure->previous = measures[measure_index - 1];
+            measure->previous = measures[measureIndex - 1];
         }
 
-        if (measure_index < (measure_count - 1))
+        if (measureIndex < (measureCount - 1))
         {
-            measure->next = measures[measure_index + 1];
+            measure->next = measures[measureIndex + 1];
         }
         else
         {
             measure->next.reset();
         }
 
-        std::vector<position_ptr>& positions = measure->positions;
-        int position_count = (int)positions.size();
+        Vector<SharedPtr<Position>>& positions = measure->positions;
+        uint positionCount = (uint)positions.size();
 
-        for (int position_index = 0; position_index < position_count; ++position_index)
+        for (uint positionIndex = 0; positionIndex < positionCount; ++positionIndex)
         {
-            position_ptr position = positions[position_index];
-            position->parent_measure = measure;
+            SharedPtr<Position> position = positions[positionIndex];
+            position->parentMeasure = measure;
 
-            if (position_index == 0)
+            if (positionIndex == 0)
             {
-                if (measure_ptr previous_measure = previous(measure))
+                if (SharedPtr<Measure> previousMeasure = previous(measure))
                 {
-                    if (position_ptr previous_position = last(previous_measure->positions))
+                    if (SharedPtr<Position> previousPosition = last(previousMeasure->positions))
                     {
-                        position->previous = previous_position;
-                        previous_position->next = position;
+                        position->previous = previousPosition;
+                        previousPosition->next = position;
                     }
                 }
             }
             else
             {
-                position->previous = positions[position_index - 1];
+                position->previous = positions[positionIndex - 1];
             }
 
-            if (position_index < (position_count - 1))
+            if (positionIndex < (positionCount - 1))
             {
-                position->next = positions[position_index + 1];
+                position->next = positions[positionIndex + 1];
             }
             else
             {
@@ -1064,111 +1064,112 @@ void relink_phrase(phrase_ptr phrase)
     }
 }
 
-void relink_score(score_ptr score)
+void relinkScore(SharedPtr<Score> score)
 {
-    std::vector<phrase_ptr>& phrases = score->phrases;
-    int phrase_count = (int)phrases.size();
+    Vector<SharedPtr<Phrase>>& phrases = score->phrases;
+    uint phraseCount = (uint)phrases.size();
 
-    for (int phrase_index = 0; phrase_index < phrase_count; ++phrase_index)
+    for (uint phraseIndex = 0; phraseIndex < phraseCount; ++phraseIndex)
     {
-        phrase_ptr phrase = phrases[phrase_index];
-        phrase->parent_score = score;
+        SharedPtr<Phrase> phrase = phrases[phraseIndex];
+        phrase->parentScore = score;
 
-        if (phrase_index != 0)
+        if (phraseIndex != 0)
         {
-            phrase->previous = phrases[phrase_index - 1];
+            phrase->previous = phrases[phraseIndex - 1];
         }
 
-        if (phrase_index < (phrase_count - 1))
+        if (phraseIndex < (phraseCount - 1))
         {
-            phrase->next = phrases[phrase_index + 1];
+            phrase->next = phrases[phraseIndex + 1];
         }
         else
         {
             phrase->next.reset();
         }
 
-        relink_phrase(phrase);
+        relinkPhrase(phrase);
     }
 }
 
-void apply_scale(note_ptr note, scale_ptr scale, scale_config_ptr scale_config)
+void applyScale(SharedPtr<Note> note, SharedPtr<Scale> scale, SharedPtr<ScaleConfig> scaleConfig)
 {
-    position_ptr position = note->parent_position.lock();
+    SharedPtr<Position> position = note->parentPosition.lock();
 
     if (position == nullptr)
     {
         DEBUG_BREAK("note has no parent_position assigned");
     }
 
-    harmony_node_ptr harmony_node = position->harmony_node;
+    SharedPtr<HarmonyNode> harmonyNode = position->harmonyNode;
 
-    degree_ptr harmony_node_degree = harmony_node->degree.lock();
+    SharedPtr<Degree> harmonyNodeDegree = harmonyNode->degree.lock();
 
-    if (harmony_node_degree == nullptr)
+    if (harmonyNodeDegree == nullptr)
     {
         DEBUG_BREAK("No degree associated with node");
     }
 
-    int midi_value = note->midi = scale_config->root +
-        harmony_node_degree->interval_from_root +
-        harmony_node->alteration +
-        harmony_node->modulation +
+    uint midiValue = note->midi = scaleConfig->root +
+        harmonyNodeDegree->intervalFromRoot +
+        harmonyNode->alteration +
+        harmonyNode->modulation +
         (12 * note->voice->octave);
 
-    note->octave = midi_value / 12;
+    note->octave = midiValue / 12;
 
-    int absolute_note = midi_value % 12;
+    uint absoluteNote = midiValue % 12;
 
-    if (contains(absolute_note, _base_notes_))
+    if (contains(absoluteNote, Constants::BaseNotes))
     {
-        note->name = _note_names_sharp_[absolute_note];
-        note->accidental = accidental_e::none;
+        note->name = Constants::NoteNamesSharp[absoluteNote];
+        note->accidental = Accidental::None;
     }
     else
     {
-        switch (scale_config->accidental)
+        switch (scaleConfig->accidental)
         {
             default:
-            case accidental_e::none:
-            case accidental_e::sharp:
-                note->accidental = accidental_e::sharp;
-                note->name = _note_names_sharp_[absolute_note];
-                note->step = _note_names_sharp_[absolute_note - 1];
+            case Accidental::None:
+            case Accidental::Sharp:
+                note->accidental = Accidental::Sharp;
+                note->name = Constants::NoteNamesSharp[absoluteNote];
+                note->step = Constants::NoteNamesSharp[absoluteNote - 1];
                 return;
 
-            case accidental_e::flat:
-                note->accidental = accidental_e::flat;
-                note->name = _note_names_flat_[absolute_note];
-                note->step = _note_names_flat_[absolute_note + 1];
+            case Accidental::Flat:
+                note->accidental = Accidental::Flat;
+                note->name = Constants::NoteNamesFlat[absoluteNote];
+                note->step = Constants::NoteNamesFlat[absoluteNote + 1];
                 return;
         }
     }
 }
 
 // Score construction
-void apply_scale(score_ptr score, scale_ptr scale, scale_config_ptr scale_config)
+void applyScale(SharedPtr<Score> score, SharedPtr<Scale> scale, SharedPtr<ScaleConfig> scaleConfig)
 {
-    relink_score(score);
+    relinkScore(score);
 
-    for (phrase_ptr phrase : score->phrases)
+    for (SharedPtr<Phrase> phrase : score->phrases)
     {
-        for (measure_ptr measure : phrase->measures)
+        for (SharedPtr<Measure> measure : phrase->measures)
         {
-            for (position_ptr position : measure->positions)
+            for (SharedPtr<Position> position : measure->positions)
             {
-                for (note_ptr note : position->notes)
+                for (SharedPtr<Note> note : position->notes)
                 {
-                    apply_scale(note, scale, scale_config);
+                    applyScale(note, scale, scaleConfig);
                 }
             }
         }
     }
 }
 
-harmony_node_ptr find_latest_harmony_node(position_ptr position)
+// Walk up previous measures and returns the first node found
+SharedPtr<HarmonyNode> findLatestHarmonyNode(SharedPtr<Position> position)
 {
-    measure_ptr measure = position->parent_measure.lock();
+    SharedPtr<Measure> measure = position->parentMeasure.lock();
 
     if (measure == nullptr)
     {
@@ -1191,36 +1192,37 @@ harmony_node_ptr find_latest_harmony_node(position_ptr position)
     }
 }
 
-harmony_node_ptr resolve_harmony_node(position_ptr position)
+// Find the HarmonyNode influencing this position
+SharedPtr<HarmonyNode> getHarmonyNode(SharedPtr<Position> position)
 {
-    measure_ptr measure = position->parent_measure.lock();
+    SharedPtr<Measure> measure = position->parentMeasure.lock();
 
     if (measure == nullptr)
     {
-        position->harmony_node = nullptr;
+        position->harmonyNode = nullptr;
         DEBUG_BREAK("a position is always expected to have a parent_measure");
     }
 
-    int progression_size = (int)measure->progression.size();
+    uint progressionSize = (uint)measure->progression.size();
 
-    if (progression_size == 0)
+    if (progressionSize == 0)
     {
-        return position->harmony_node = find_latest_harmony_node(position);
+        return position->harmonyNode = findLatestHarmonyNode(position);
     }
-    else if (progression_size == 1)
+    else if (progressionSize == 1)
     {
-        return position->harmony_node = measure->progression[0];
+        return position->harmonyNode = measure->progression[0];
     }
 
-    int chord_duration = measure->duration / progression_size;
-    int good_node_index = position->measure_time / chord_duration;
+    uint chord_duration = measure->duration / progressionSize;
+    uint good_node_index = position->measureTime / chord_duration;
 
-    return position->harmony_node = measure->progression[good_node_index];
+    return position->harmonyNode = measure->progression[good_node_index];
 }
 
 // Score rendering
-void render_musicxml(score_t* score)
+void renderMusicXml(Score* score)
 {
 }
 
-} // namespace dryad
+} // namespace Dryad

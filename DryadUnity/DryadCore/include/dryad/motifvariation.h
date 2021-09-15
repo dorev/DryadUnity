@@ -1,18 +1,18 @@
 #pragma once
 
-#include "definitions.h"
+#include "types.h"
 #include "monitoring.h"
 
-namespace dryad
+namespace Dryad
 {
 
-struct note_t;
-struct motif_t;
+struct Note;
+struct Motif;
 
-struct motif_variation_t : monitor_count<motif_variation_t>
+struct MotifVariation : MonitorCount<MotifVariation>
 {
-    motif_weak_ptr parent_motif;
-    std::vector<note_ptr> notes;
+    WeakPtr<Motif> parentMotif;
+    Vector<SharedPtr<Note>> notes;
 };
 
-} // namespace dryad
+} // namespace Dryad

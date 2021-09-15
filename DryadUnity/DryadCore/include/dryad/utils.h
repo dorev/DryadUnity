@@ -1,24 +1,31 @@
 #pragma once
 
-#include "definitions.h"
+#include "types.h"
 
-namespace dryad
+namespace Dryad
 {
+
+template <class T, class... Args>
+SharedPtr<T> make(Args... args)
+{
+    return std::make_shared<T>(std::forward<Args>(args)...);
+}
 
 // CRTP class helper
-template <typename sub_class, template<typename> typename crtp_class>
-class crtp_helper
+template <typename InheritingClass, template<typename> typename CrtpClass>
+class CrtpHelper
 {
     // Convenience function to retrieve a reference to the inheriting class
-    sub_class& get_child() { return static_cast<sub_class&>(*this); }
+    InheritingClass& GetInheritingClass() { return static_cast<InheritingClass&>(*this); }
+    //const InheritingClass& GetInheritingClass() { return static_cast<const InheritingClass&>(*this); }
 
     // Private constructor resolves the ambiguity if more than once class implement the same crtp_class
     // Solves the diamond problem if a class inherits from multiple crtp_class
-    friend crtp_class<sub_class>;
-    crtp_helper() {}
+    friend CrtpClass<InheritingClass>;
+    CrtpHelper() {}
 };
 
-struct random
+struct Random
 {
     template <class T>
     static T range(T min, T max)
@@ -45,35 +52,13 @@ struct random
         return container[distribution(generator)];
     }
 
-    static bool coin_flip();
+    static bool fiftyFifty();
 };
 
 template <class T>
-typename std::enable_if<std::is_integral<T>::value, bool>::type
-is_power_of_2(T integer)
+bool contains(const T& value, const Vector<T>& vector)
 {
-    uint64_t set_bits = 0;
-
-    if (integer < 0)
-    {
-        integer = std::abs(integer);
-    }
-
-    for (uint64_t bit = 0; bit < (sizeof(T) * 8); ++bit)
-    {
-        if ((int)integer & (1ULL << bit) && set_bits++)
-        {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-template <class T>
-bool contains(const T& value, const std::vector<T>& vector)
-{
-    for (size_t i = 0; i < vector.size(); ++i)
+    for (uint i = 0; i < vector.size(); ++i)
     {
         if (value == vector[i])
         {
@@ -85,39 +70,27 @@ bool contains(const T& value, const std::vector<T>& vector)
 }
 
 template <class T>
-typename std::enable_if<std::is_arithmetic<T>::value, T>::type
-reduce_vector(const std::vector<T>& vector)
-{
-    return std::reduce(
-        vector.begin(), vector.end(), 0,
-        [](T acc, const T& value)
-        {
-            return acc + value;
-        });
-}
-
-template <class T>
-typename std::enable_if<std::is_same<std::weak_ptr<T>, decltype(T::next)>::value, std::shared_ptr<T>>::type
-next(std::shared_ptr<T> item)
+typename std::enable_if<std::is_same<WeakPtr<T>, decltype(T::next)>::value, SharedPtr<T>>::type
+next(SharedPtr<T> item)
 {
     return item->next.lock();
 }
 
 template <class T>
-typename std::enable_if<std::is_same<std::weak_ptr<T>, decltype(T::previous)>::value, std::shared_ptr<T>>::type
-previous(std::shared_ptr<T> item)
+typename std::enable_if<std::is_same<WeakPtr<T>, decltype(T::previous)>::value, SharedPtr<T>>::type
+previous(SharedPtr<T> item)
 {
     return item->previous.lock();
 }
 
 template <class T>
-std::shared_ptr<T> clone(std::shared_ptr<T> item)
+SharedPtr<T> clone(SharedPtr<T> item)
 {
     return std::make_shared<T>(*item);
 }
 
 template <class T>
-std::shared_ptr<T> last(const std::vector<std::shared_ptr<T>>& vector)
+SharedPtr<T> last(const Vector<SharedPtr<T>>& vector)
 {
     if (vector.size() == 0)
     {
@@ -128,7 +101,7 @@ std::shared_ptr<T> last(const std::vector<std::shared_ptr<T>>& vector)
 }
 
 template <class T>
-std::shared_ptr<T> first(const std::vector<std::shared_ptr<T>>& vector)
+SharedPtr<T> first(const Vector<SharedPtr<T>>& vector)
 {
     if (vector.size() == 0)
     {
@@ -138,6 +111,8 @@ std::shared_ptr<T> first(const std::vector<std::shared_ptr<T>>& vector)
     return vector.front();
 }
 
-void get_equivalent_duration_pairs(int duration, std::vector<std::pair<int, int>>& solutions);
+void getEquivalentDurationPairs(uint duration, Vector<Pair<uint, uint>>& solutions);
 
-} // namespace dryad
+bool isPowerOf2(uint value);
+
+} // namespace Dryad

@@ -1,17 +1,17 @@
 #pragma once
 
-#include "definitions.h"
+#include "types.h"
 #include "monitoring.h"
 
-namespace dryad
+namespace Dryad
 {
 
-struct degree_t;
+struct Degree;
 
-struct scale_t : monitor_count<scale_t>
+struct Scale : MonitorCount<Scale>
 {
-    std::string name;
-    std::vector<degree_ptr> degrees;
+    String name;
+    Vector<SharedPtr<Degree>> degrees;
 };
 
-} // namespace dryad
+} // namespace Dryad

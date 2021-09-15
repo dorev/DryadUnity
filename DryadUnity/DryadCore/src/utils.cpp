@@ -1,27 +1,31 @@
+#include "constants.h"
+#include "definitions.h"
 #include "utils.h"
 
-namespace dryad
+namespace Dryad
 {
 
-bool random::coin_flip()
+bool Random::fiftyFifty()
 {
     static thread_local std::mt19937 generator;
-    std::uniform_int_distribution<int> distribution(0, 1);
+    std::uniform_int_distribution<uint> distribution(0, 1);
     return distribution(generator) > 0;
 }
 
-void get_equivalent_duration_pairs(int duration, std::vector<std::pair<int, int>>& solutions)
+void getEquivalentDurationPairs(uint duration, Vector<Pair<uint, uint>>& solutions)
 {
     solutions.clear();
 
+    const auto& fractions = Constants::allowedRythmicFractions;
+
     // Inverted solutions duplicates are deliberatly preserved
-    for (int i = 0; i < (int)allowed_rhythmic_fractions.size(); ++i)
+    for (uint i = 0; i < fractions.size(); ++i)
     {
-        for (int j = 0; j < (int)allowed_rhythmic_fractions.size(); ++j)
+        for (uint j = 0; j < fractions.size(); ++j)
         {
-            if (allowed_rhythmic_fractions[i] + allowed_rhythmic_fractions[j] == duration)
+            if (fractions[i] + fractions[j] == duration)
             {
-                solutions.emplace_back(allowed_rhythmic_fractions[i], allowed_rhythmic_fractions[j]);
+                solutions.emplace_back(fractions[i], fractions[j]);
             }
         }
     }
@@ -32,5 +36,20 @@ void get_equivalent_duration_pairs(int duration, std::vector<std::pair<int, int>
     }
 }
 
+bool isPowerOf2(uint value)
+{
+    uint setBits = 0;
 
-} // namespace dryad
+    for (uint bit = 0; bit < (sizeof(uint) * 8); ++bit)
+    {
+        if (value & (1ULL << bit) && setBits++)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
+} // namespace Dryad

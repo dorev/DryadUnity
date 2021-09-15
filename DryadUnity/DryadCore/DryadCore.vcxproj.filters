@@ -12,7 +12,7 @@
     <ClInclude Include="include\dryad\core.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\dryad\definitions.h">
+    <ClInclude Include="include\dryad\types.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\degree.h">
@@ -64,6 +64,15 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\voice.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\session.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\constants.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\definitions.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

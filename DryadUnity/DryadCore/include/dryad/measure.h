@@ -1,27 +1,28 @@
 #pragma once
 
-#include "definitions.h"
+#include "types.h"
+#include "constants.h"
 #include "monitoring.h"
 
-namespace dryad
+namespace Dryad
 {
 
-struct position_t;
-struct phrase_t;
-struct harmony_node_t;
+struct Position;
+struct Phrase;
+struct HarmonyNode;
 
-struct measure_t : monitor_count<measure_t>
+struct Measure : MonitorCount<Measure>
 {
-    measure_t(int duration = _whole_)
+    Measure(uint duration = Constants::Duration::Whole)
         : duration(duration)
     {}
 
-    int duration;
-    std::vector<position_ptr> positions;
-    std::vector<harmony_node_ptr> progression;
-    phrase_weak_ptr parent_phrase;
-    measure_weak_ptr next;
-    measure_weak_ptr previous;
+    uint duration;
+    Vector<SharedPtr<Position>> positions;
+    Vector<SharedPtr<HarmonyNode>> progression;
+    WeakPtr<Phrase> parentPhrase;
+    WeakPtr<Measure> next;
+    WeakPtr<Measure> previous;
 };
 
-} // namespace dryad
+} // namespace Dryad
