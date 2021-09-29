@@ -83,6 +83,7 @@ struct Event
 struct Engine
 {
     void Start(double time){};
+    void Stop(){};
     void SetTempo(int tempo){};
     void RegisterMotif(std::string name, Motif motif){};
     void AddMotif(std::string name){};

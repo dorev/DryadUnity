@@ -10,24 +10,24 @@ namespace Constants
 
 namespace Duration
 {
-    static constexpr uint WholeDotted           = 144;
-    static constexpr uint Whole                 = 96;
-    static constexpr uint HalfDotted            = 72;
-    static constexpr uint Half                  = 48;
-    static constexpr uint QuarterDotted         = 36;
-    static constexpr uint HalfTriplet           = 32;
-    static constexpr uint Quarter               = 24;
-    static constexpr uint EighthDotted          = 18;
-    static constexpr uint QuarterTriplet        = 16;
-    static constexpr uint Eighth                = 12;
-    static constexpr uint EighthTriplet         = 8;
-    static constexpr uint Sixteenth             = 6;
-    static constexpr uint SixteenthTriplet      = 4;
-    static constexpr uint ThirtySecond          = 3;
-    static constexpr uint ThirtySecondTriplet   = 2;
+    static constexpr U64 WholeDotted           = 144;
+    static constexpr U64 Whole                 = 96;
+    static constexpr U64 HalfDotted            = 72;
+    static constexpr U64 Half                  = 48;
+    static constexpr U64 QuarterDotted         = 36;
+    static constexpr U64 HalfTriplet           = 32;
+    static constexpr U64 Quarter               = 24;
+    static constexpr U64 EighthDotted          = 18;
+    static constexpr U64 QuarterTriplet        = 16;
+    static constexpr U64 Eighth                = 12;
+    static constexpr U64 EighthTriplet         = 8;
+    static constexpr U64 Sixteenth             = 6;
+    static constexpr U64 SixteenthTriplet      = 4;
+    static constexpr U64 ThirtySecond          = 3;
+    static constexpr U64 ThirtySecondTriplet   = 2;
 };
 
-static const Vector<uint> allowedRythmicFractions =
+static const Vector<U64> allowedRythmicFractions =
 {
     Duration::Sixteenth,
     Duration::Eighth,
@@ -92,16 +92,16 @@ static const Vector<const char*> NoteNamesFlat =
     NoteName::B
 };
 
-static const Vector<uint> BaseNotes = {0, 2, 4, 5, 7, 9, 11};
+static const Vector<U64> BaseNotes = {0, 2, 4, 5, 7, 9, 11};
 
 namespace ChordIntervals
 {
-    static const Vector<uint> M7  = { 4, 7, 10 };
-    static const Vector<uint> MM7 = { 4, 7, 11 };
-    static const Vector<uint> m7  = { 3, 7, 10 };
-    static const Vector<uint> mM7 = { 3, 7, 11 };
-    static const Vector<uint> Diminished = { 3, 6 };
-    static const Vector<uint> Augmented = { 4, 8 };
+    static const Vector<U64> M7  = { 4, 7, 10 };
+    static const Vector<U64> MM7 = { 4, 7, 11 };
+    static const Vector<U64> m7  = { 3, 7, 10 };
+    static const Vector<U64> mM7 = { 3, 7, 11 };
+    static const Vector<U64> Diminished = { 3, 6 };
+    static const Vector<U64> Augmented = { 4, 8 };
 }
 
 } // namespace Constants

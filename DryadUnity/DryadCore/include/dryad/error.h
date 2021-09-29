@@ -1,0 +1,103 @@
+#pragma once
+
+#include "definitions.h"
+#include "types.h"
+
+namespace Dryad
+{
+
+///////////////////////////////////////////////////////////////////////////////
+// Error codes
+///////////////////////////////////////////////////////////////////////////////
+
+class ErrorCode
+{
+public:
+
+    static constexpr U64 GenericCategory = 0ULL << 32;
+    static constexpr U64 NoError = GenericCategory | 0;
+    static constexpr U64 Undefined = GenericCategory | 1;
+
+    static constexpr U64 ResultCategory = 1ULL << 32;
+    static constexpr U64 UninitializedError = ResultCategory | 0;
+    static constexpr U64 AsyncResultLocked = ResultCategory | 1;
+
+    static constexpr U64 SessionCategory = 2ULL << 32;
+    static constexpr U64 GraphNameDoesNotExist = SessionCategory | 0;
+    static constexpr U64 GraphNameAlreadyExists = SessionCategory | 1;
+    static constexpr U64 MotifNameDoesNotExist = SessionCategory | 2;
+    static constexpr U64 MotifNameAlreadyExists = SessionCategory | 3;
+    static constexpr U64 TooEarlyForNextFrame = SessionCategory | 4;
+
+    static constexpr U64 ScoreCategory = 3ULL << 32;
+    static constexpr U64 PhraseDoesNotExist = ScoreCategory | 0;
+    static constexpr U64 MeasureDoesNotExist = ScoreCategory | 1;
+    static constexpr U64 PositionDoesNotExist = ScoreCategory | 2;
+    static constexpr U64 NoteDoesNotExist = ScoreCategory | 3;
+
+};
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Error
+///////////////////////////////////////////////////////////////////////////////
+
+class Error
+{
+public:
+
+    constexpr Error()
+        : _code(ErrorCode::UninitializedError)
+        , _description("Uninitialized Error")
+    {
+    }
+
+    constexpr Error(U64 code, const char* description)
+        : _code(code)
+        , _description(description)
+    {
+    }
+
+    constexpr Error(U64 code)
+        : _code(code)
+        , _description(nullptr)
+    {
+    }
+
+    constexpr bool operator==(const Error& other) const
+    {
+        if(_code != other._code)
+            return false;
+
+        if(_description == nullptr)
+            return other._description == nullptr;
+        
+        if(other._description == nullptr)
+            return false;
+
+        return strcmp(_description, other._description) == 0;
+    }
+
+    constexpr U64 getCode() const
+    {
+        return _code;
+    }
+
+    constexpr const char* getDescription() const
+    {
+        return _description;
+    }
+
+    constexpr explicit operator bool() const
+    {
+        return _code != ErrorCode::NoError;
+    }
+
+private:
+
+    const char* _description;
+    U64 _code;
+};
+
+
+} // namespace Utils

@@ -1,19 +1,17 @@
 #pragma once
 
 #include "types.h"
-#include "monitoring.h"
+#include "harmonynode.h"
+#include "scale.h"
 
 namespace Dryad
 {
 
-struct HarmonyNode;
-
-struct HarmonyGraph : MonitorCount<HarmonyGraph>
+class HarmonyGraph
 {
-    SharedPtr<Scale> scale;
-    WeakPtr<Score> parentScore;
-    Vector<SharedPtr<HarmonyNode>> nodes;
-    Vector<Vector<WeakPtr<HarmonyNode>>> progressions;
+    Scale scale;
+    Vector<HarmonyNode> nodes;
+    Vector<Vector<HarmonyNode*>> progressions;
 };
 
 } // namespace Dryad

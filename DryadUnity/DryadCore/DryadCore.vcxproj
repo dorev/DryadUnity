@@ -19,32 +19,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\core.cpp" />
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\dryad\composer.h" />
     <ClInclude Include="include\dryad\constants.h" />
-    <ClInclude Include="include\dryad\core.h" />
     <ClInclude Include="include\dryad\definitions.h" />
-    <ClInclude Include="include\dryad\types.h" />
-    <ClInclude Include="include\dryad\degree.h" />
+    <ClInclude Include="include\dryad\error.h" />
     <ClInclude Include="include\dryad\harmonygraph.h" />
     <ClInclude Include="include\dryad\harmonynode.h" />
-    <ClInclude Include="include\dryad\includes.h" />
-    <ClInclude Include="include\dryad\measure.h" />
-    <ClInclude Include="include\dryad\monitoring.h" />
+    <ClInclude Include="include\dryad\identifiers.h" />
     <ClInclude Include="include\dryad\motif.h" />
-    <ClInclude Include="include\dryad\motifconfig.h" />
-    <ClInclude Include="include\dryad\motifvariation.h" />
-    <ClInclude Include="include\dryad\note.h" />
-    <ClInclude Include="include\dryad\phrase.h" />
-    <ClInclude Include="include\dryad\position.h" />
+    <ClInclude Include="include\dryad\result.h" />
     <ClInclude Include="include\dryad\scale.h" />
-    <ClInclude Include="include\dryad\scaleconfig.h" />
     <ClInclude Include="include\dryad\score.h" />
+    <ClInclude Include="include\dryad\templateutils.h" />
+    <ClInclude Include="include\dryad\types.h" />
+    <ClInclude Include="include\dryad\note.h" />
     <ClInclude Include="include\dryad\session.h" />
     <ClInclude Include="include\dryad\utils.h" />
-    <ClInclude Include="include\dryad\voice.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

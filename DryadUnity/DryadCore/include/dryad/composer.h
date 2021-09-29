@@ -4,11 +4,10 @@
 
 namespace Dryad
 {
-/*
-class Score
+
+class Composer
 {
 
 };
-*/
 
 } // namespace Dryad
