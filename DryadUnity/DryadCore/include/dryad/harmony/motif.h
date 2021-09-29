@@ -1,14 +1,13 @@
 #pragma once
 
-#include "types.h"
+#include "dryad/types.h"
 
 namespace Dryad
 {
-/*
-class Score
-{
 
-};
-*/
+    class Motif
+    {
+
+    };
 
 } // namespace Dryad

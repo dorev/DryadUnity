@@ -1,7 +1,7 @@
 #pragma once
 
-#include "definitions.h"
-#include "types.h"
+#include "dryad/definitions.h"
+#include "dryad/types.h"
 #include <random>
 
 namespace Dryad

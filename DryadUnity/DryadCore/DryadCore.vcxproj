@@ -22,20 +22,28 @@
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\dryad\composer.h" />
     <ClInclude Include="include\dryad\constants.h" />
     <ClInclude Include="include\dryad\definitions.h" />
     <ClInclude Include="include\dryad\error.h" />
-    <ClInclude Include="include\dryad\harmonygraph.h" />
-    <ClInclude Include="include\dryad\harmonynode.h" />
-    <ClInclude Include="include\dryad\identifiers.h" />
-    <ClInclude Include="include\dryad\motif.h" />
+    <ClInclude Include="include\dryad\descriptors.h" />
+    <ClInclude Include="include\dryad\harmony\composer.h" />
+    <ClInclude Include="include\dryad\harmony\harmonygraph.h" />
+    <ClInclude Include="include\dryad\harmony\harmonynode.h" />
+    <ClInclude Include="include\dryad\harmony\motif.h" />
+    <ClInclude Include="include\dryad\harmony\scale.h" />
+    <ClInclude Include="include\dryad\idprovider.h" />
     <ClInclude Include="include\dryad\result.h" />
-    <ClInclude Include="include\dryad\scale.h" />
-    <ClInclude Include="include\dryad\score.h" />
-    <ClInclude Include="include\dryad\templateutils.h" />
+    <ClInclude Include="include\dryad\score\measure.h" />
+    <ClInclude Include="include\dryad\score\note.h" />
+    <ClInclude Include="include\dryad\score\phrase.h" />
+    <ClInclude Include="include\dryad\score\position.h" />
+    <ClInclude Include="include\dryad\score\score.h" />
+    <ClInclude Include="include\dryad\score\scorecommon.h" />
+    <ClInclude Include="include\dryad\score\traits\scoretraits.h" />
+    <ClInclude Include="include\dryad\score\traits\traitscorehierarchy.h" />
+    <ClInclude Include="include\dryad\score\traits\traitscorewritable.h" />
+    <ClInclude Include="include\dryad\crtphelper.h" />
     <ClInclude Include="include\dryad\types.h" />
-    <ClInclude Include="include\dryad\note.h" />
     <ClInclude Include="include\dryad\session.h" />
     <ClInclude Include="include\dryad\utils.h" />
   </ItemGroup>
@@ -139,7 +147,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>include/dryad;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>

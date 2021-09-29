@@ -1,8 +1,8 @@
 #pragma once
 
-#include "types.h"
-#include "harmonynode.h"
-#include "scale.h"
+#include "dryad/types.h"
+#include "dryad/harmony/harmonynode.h"
+#include "dryad/harmony/scale.h"
 
 namespace Dryad
 {

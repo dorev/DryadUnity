@@ -1,7 +1,8 @@
 #pragma once
 
-#include "types.h"
-#include "identifiers.h"
+#include "dryad/score/scorecommon.h"
+#include "dryad/score/traits/scoretraits.h"
+#include "dryad/descriptors.h"
 
 namespace Dryad
 {

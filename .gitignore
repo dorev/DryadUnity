@@ -81,4 +81,4 @@ crashlytics-build.properties
 
 DryadUnity/.vs/
 DryadUnity/**/x64/
-DryadUnity/**/obj/
+DryadUnity/**/obj

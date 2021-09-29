@@ -1,8 +1,8 @@
 #pragma once
 
-#include "definitions.h"
-#include "error.h"
-#include "types.h"
+#include "dryad/definitions.h"
+#include "dryad/error.h"
+#include "dryad/types.h"
 
 namespace Dryad
 {
