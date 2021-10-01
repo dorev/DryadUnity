@@ -1,26 +1,20 @@
 #pragma once
 
-#include "dryad/score/scorecommon.h"
 #include "dryad/score/traits/scoretraits.h"
-#include "dryad/score/phrase.h"
+#include "dryad/score/phrase.h" // child type
 
 namespace Dryad
 {
 
-class Score : public ScoreHierarchy<Score>, public ScoreWritable<Score>
+class Score : public ScoreTraits<Score>
 {
+
 public:
 
-    Score(Session& parentSession)
-        : ExplorableBase(parentSession)
+    Score(Session& parent)
+        : ScoreTraits(parent)
     {
     }
-
-private:
-
-    friend ExplorableBase;
-    friend WritableBase;
-    List<Phrase> _children;
 };
 
 } // namespace Dryad

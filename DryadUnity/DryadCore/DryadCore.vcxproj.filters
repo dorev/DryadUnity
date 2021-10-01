@@ -1,99 +1,96 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\utils.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="include\dryad\types.h">
-      <Filter>include</Filter>
+      <Filter>dryad</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\utils.h">
-      <Filter>include</Filter>
+      <Filter>dryad</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\session.h">
-      <Filter>include</Filter>
+      <Filter>dryad</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\constants.h">
-      <Filter>include</Filter>
+      <Filter>dryad</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\definitions.h">
-      <Filter>include</Filter>
+      <Filter>dryad</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\descriptors.h">
-      <Filter>include</Filter>
+      <Filter>dryad</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\result.h">
-      <Filter>include</Filter>
+      <Filter>dryad</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\error.h">
-      <Filter>include</Filter>
+      <Filter>dryad</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\crtphelper.h">
-      <Filter>include</Filter>
+      <Filter>dryad</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\score\measure.h">
-      <Filter>include\score</Filter>
+      <Filter>dryad\score</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\score\note.h">
-      <Filter>include\score</Filter>
+      <Filter>dryad\score</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\score\phrase.h">
-      <Filter>include\score</Filter>
+      <Filter>dryad\score</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\score\position.h">
-      <Filter>include\score</Filter>
+      <Filter>dryad\score</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\score\score.h">
-      <Filter>include\score</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dryad\score\scorecommon.h">
-      <Filter>include\score</Filter>
+      <Filter>dryad\score</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\idprovider.h">
-      <Filter>include</Filter>
+      <Filter>dryad</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\score\traits\scoretraits.h">
-      <Filter>include\score\traits</Filter>
+      <Filter>dryad\score\traits</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\score\traits\traitscorehierarchy.h">
-      <Filter>include\score\traits</Filter>
+      <Filter>dryad\score\traits</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\score\traits\traitscorewritable.h">
-      <Filter>include\score\traits</Filter>
+      <Filter>dryad\score\traits</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\harmony\harmonygraph.h">
-      <Filter>include\harmony</Filter>
+      <Filter>dryad\harmony</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\harmony\harmonynode.h">
-      <Filter>include\harmony</Filter>
+      <Filter>dryad\harmony</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\harmony\motif.h">
-      <Filter>include\harmony</Filter>
+      <Filter>dryad\harmony</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\harmony\scale.h">
-      <Filter>include\harmony</Filter>
+      <Filter>dryad\harmony</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\harmony\composer.h">
-      <Filter>include\harmony</Filter>
+      <Filter>dryad\harmony</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\score\traits\traitsutils.h">
+      <Filter>dryad\score\traits</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="src">
-      <UniqueIdentifier>{8e9949b1-772c-469a-a955-b4cd5702eee7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include">
+    <Filter Include="dryad">
       <UniqueIdentifier>{a3bd8d25-f3e2-4184-be90-8cd5cdfcf218}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\score">
+    <Filter Include="dryad\score">
       <UniqueIdentifier>{c2b7d7a6-4849-4bd1-8e47-bf5601cf0ab2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\score\traits">
+    <Filter Include="dryad\score\traits">
       <UniqueIdentifier>{f423fdf6-d2f4-452e-b93d-668ec372100b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\harmony">
+    <Filter Include="dryad\harmony">
       <UniqueIdentifier>{bafe32e0-7440-4500-b2ae-d750ef26b92b}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="include\dryad\utils.cpp">
+      <Filter>dryad</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

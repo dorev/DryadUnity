@@ -34,6 +34,56 @@ public:
     {
     }
 
+    using Frame = Vector<Pair<Note, TimestampMs>>;
+
+    Result<Frame> getScoreUntil(TimestampMs commitUntil)
+    {
+    /*
+        if (commitUntil <= _currentTimestamp)
+            return {ErrorCode::CannotCommitPastElements};
+
+        if(_motifs.empty())
+            return {ErrorCode::NoMotifAvailable};
+
+        // Do we have two full phrases generated?
+        if (_score.uncommittedPhrasesCount() < 2)
+        {
+            generateNextPhrase();
+            // generate only phrase with harmony nodes?
+            // so we could wait to know how much of the motifs we have to produce
+        }
+
+        if (motifsChanged())
+        {
+            for (MotifId& removedMotif : removedMotifs)
+                removePendingMotifsInstances(removedMotif);
+
+            for (MotifId& addedMotif : addedMotifs)
+                addMotif(addedMotif, MotifInsertionStrategy::NextStrongBeat);
+
+            harmonizeFrom(_score.lastCommittedPosition());
+        }
+
+        return uncommittedPositionsUntil(nextCommitRangeEnd);
+    */
+
+        // figure when generating, always generate for the full phrase and keep it on stand-by
+        // only modify the rest of the phrase if necessary
+        // know then the end of the phrase is close and prepare the next one
+        // if a motif is added, add it coherently (next strong time)
+        // if it is removed, let it finish its current occurence
+
+        // identify the measures & measureTime boundaries of next frame
+
+        // check if next motifs need to be added/removed
+        // check if a we need to transition to a new graph
+            // generate the rest of the phrase accordingly (only if something changed)
+
+        // always have the current phrase and the next one generated
+
+        return {};
+    }
+
     Session& reachSession()
     {
         return *this;
@@ -52,7 +102,7 @@ public:
         return _score;
     }
 
-    void setTempo(U32 tempo) 
+    void setTempo(U32 tempo)
     {
         _tempo = tempo;
     }
@@ -66,7 +116,7 @@ public:
     {
         _frameDuration = frameDuration;
     }
-    
+
     TimeMs getFrameDuration() const
     {
         return _frameDuration;
@@ -79,43 +129,18 @@ public:
 
     Error registerMotif(const String& name, const Motif& motif)
     {
-        if(_motifs.find(name) != _motifs.end())
-            return {ErrorCode::MotifNameAlreadyExists};
+        if (_motifs.find(name) != _motifs.end())
+            return { ErrorCode::MotifNameAlreadyExists };
 
         _motifs[name] = motif;
     }
 
     Error registerHarmonyGraph(const String& name, const HarmonyGraph& graph)
     {
-        if(_graphs.find(name) != _graphs.end())
-            return {ErrorCode::GraphNameAlreadyExists};
+        if (_graphs.find(name) != _graphs.end())
+            return { ErrorCode::GraphNameAlreadyExists };
 
         _graphs[name] = graph;
-    }
-
-    using Frame = Vector<Pair<Note, TimestampMs>>;
-
-    Result<Frame> getNextFrame(TimestampMs currentTimestamp)
-    {
-        if((_currentTimestamp + _frameDuration) > currentTimestamp)
-            return {ErrorCode::TooEarlyForNextFrame};
-
-        Frame frame;
-
-        // figure when generating, always generate for the full phrase and keep it on stand-by
-        // only modify the rest of the phrase if necessary
-        // know then the end of the phrase is close and prepare the next one
-        // if a motif is added, add it coherently (next strong time)
-        // if it is removed, let it finish its current occurence
-
-        // identify the measures & measureTime boundaries of next frame
-
-        // check if next motifs need to be added/removed
-        // check if a we need to transition to a new graph
-            // generate the rest of the phrase accordingly (only if something changed)
-
-        // always have the current phrase and the next one generated
-        return frame;
     }
 
 private:
@@ -136,6 +161,5 @@ private:
 
     Score _score;
 };
-
 
 } // namespace Dryad

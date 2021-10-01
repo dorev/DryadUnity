@@ -1,6 +1,5 @@
 #pragma once
 
-#include "dryad/definitions.h"
 #include "dryad/types.h"
 
 namespace Dryad
@@ -12,6 +11,7 @@ namespace Dryad
 
 class ErrorCode
 {
+
 public:
 
     static constexpr U64 GenericCategory = 0ULL << 32;
@@ -27,14 +27,15 @@ public:
     static constexpr U64 GraphNameAlreadyExists = SessionCategory | 1;
     static constexpr U64 MotifNameDoesNotExist = SessionCategory | 2;
     static constexpr U64 MotifNameAlreadyExists = SessionCategory | 3;
-    static constexpr U64 TooEarlyForNextFrame = SessionCategory | 4;
+    static constexpr U64 CannotCommitPastElements = SessionCategory | 4;
+    static constexpr U64 NoMotifAvailable = SessionCategory | 5;
+    static constexpr U64 NoHarmonyNodeAvailable = SessionCategory | 6;
 
     static constexpr U64 ScoreCategory = 3ULL << 32;
     static constexpr U64 PhraseDoesNotExist = ScoreCategory | 0;
     static constexpr U64 MeasureDoesNotExist = ScoreCategory | 1;
     static constexpr U64 PositionDoesNotExist = ScoreCategory | 2;
     static constexpr U64 NoteDoesNotExist = ScoreCategory | 3;
-
 };
 
 
@@ -44,6 +45,7 @@ public:
 
 class Error
 {
+
 public:
 
     constexpr Error()

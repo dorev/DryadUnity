@@ -19,9 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\utils.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="include\dryad\constants.h" />
     <ClInclude Include="include\dryad\definitions.h" />
     <ClInclude Include="include\dryad\error.h" />
@@ -38,14 +35,17 @@
     <ClInclude Include="include\dryad\score\phrase.h" />
     <ClInclude Include="include\dryad\score\position.h" />
     <ClInclude Include="include\dryad\score\score.h" />
-    <ClInclude Include="include\dryad\score\scorecommon.h" />
     <ClInclude Include="include\dryad\score\traits\scoretraits.h" />
     <ClInclude Include="include\dryad\score\traits\traitscorehierarchy.h" />
     <ClInclude Include="include\dryad\score\traits\traitscorewritable.h" />
     <ClInclude Include="include\dryad\crtphelper.h" />
+    <ClInclude Include="include\dryad\score\traits\traitsutils.h" />
     <ClInclude Include="include\dryad\types.h" />
     <ClInclude Include="include\dryad\session.h" />
     <ClInclude Include="include\dryad\utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="include\dryad\utils.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

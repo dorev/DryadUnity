@@ -1,10 +1,12 @@
 #pragma once
 
-#include "dryad/score/scorecommon.h"
-#include "dryad/crtphelper.h"
+#include "dryad/score/traits/traitsutils.h"
 
 namespace Dryad
 {
+
+template <class T>
+class ScoreWritable;
 
 template <class T>
 class ScoreHierarchy : public CrtpHelper<T, ScoreHierarchy>
@@ -13,16 +15,12 @@ class ScoreHierarchy : public CrtpHelper<T, ScoreHierarchy>
 protected:
 
     // Only constructible through inheritance
-    ScoreHierarchy(ParentType<T>& parent)
-        : _parent(parent)
-        , _session(parent.reachSession())
+    ScoreHierarchy()
     {
     }
 
 public:
 
-    ScoreHierarchy() = delete;
-    
     virtual ~ScoreHierarchy()
     {
     }
@@ -37,18 +35,18 @@ public:
 
     Session& reachSession()
     {
-        return _session;
+        return CrtpBase::getCrtpChild()._parent.reachSession();
     }
 
-    template <U32 generation = 1>
+    template <U32 distance = 1>
     auto* getParent()
     {
-        if constexpr (generation == 0)
+        if constexpr (distance == 0)
             return this;
-        else if constexpr (generation == 1)
-            return &_parent;
+        else if constexpr (distance == 1)
+            return &CrtpBase::getCrtpChild()._parent;
         else
-            return getParent(--generation);
+            return getParent(--distance);
     }
 
     List<ChildType<T>>& getChildren()
@@ -61,14 +59,14 @@ public:
         return getParent()->ScoreHierarchy<ParentType<T>>::getChildren();
     }
 
-    template <U32 generation = 1>
+    template <U32 distance = 1>
     auto* getFirstChild()
     {
-        if constexpr (generation == 0)
+        if constexpr (distance == 0)
             return this;
         if constexpr (_typeId == ScoreElementTypeId::Note)
             return static_cast<Note*>(nullptr);
-        else if constexpr (generation == 1)
+        else if constexpr (distance == 1)
         {
             auto children = getChildren();
             if(children.empty())
@@ -77,13 +75,13 @@ public:
             return &*children.begin();
         }
         else
-            return getFirstChild(--generation);
+            return getFirstChild(--distance);
     }
 
-    template <ScoreElementTypeId relativeTypeId>
+    template <ScoreElementTypeId otherTypeId>
     auto* moveToHierarchy()
     {
-        constexpr S32 targetGeneration = GetGenerationDelta<_typeId, relativeTypeId>;
+        constexpr S32 targetGeneration = GetHierarchyDistance<_typeId, otherTypeId>;
 
         if constexpr (targetGeneration == 0)
             return this;
@@ -132,10 +130,10 @@ public:
     template <class IteratedScoreElementType>
     IteratedScoreElementType* prev()
     {
-        auto* targetRelative = moveToHierarchy<GetTypeId<IteratedScoreElementType>>();
+        auto* target = moveToHierarchy<GetTypeId<IteratedScoreElementType>>();
 
-        if(targetRelative != nullptr)
-            return targetRelative->prev();
+        if(target != nullptr)
+            return target->prev();
         else
             return nullptr;
     }
@@ -143,24 +141,18 @@ public:
     template <class IteratedScoreElementType>
     IteratedScoreElementType* next()
     {
-        auto* targetRelative = moveToHierarchy<GetTypeId<IteratedScoreElementType>>();
+        auto* target = moveToHierarchy<GetTypeId<IteratedScoreElementType>>();
 
-        if(targetRelative != nullptr)
-            return targetRelative->next();
+        if(target != nullptr)
+            return target->next();
         else
             return nullptr;
     }
 
-protected:
-
-    using ExplorableBase = typename ScoreHierarchy<T>;
-    ParentType<T>& _parent;
-    Session& _session;
-    static constexpr ScoreElementTypeId _typeId = GetTypeId<T>;
-
 private:
 
     using CrtpBase = typename CrtpHelper<T, ScoreHierarchy>;
+    static constexpr ScoreElementTypeId _typeId = GetTypeId<T>;
 };
 
 }

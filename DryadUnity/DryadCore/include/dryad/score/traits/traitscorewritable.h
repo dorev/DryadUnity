@@ -1,7 +1,6 @@
 #pragma once
 
-#include "dryad/score/scorecommon.h"
-#include "dryad/crtphelper.h"
+#include "dryad/score/traits/traitsutils.h"
 
 namespace Dryad
 {
@@ -9,6 +8,13 @@ namespace Dryad
 template<class T>
 class ScoreWritable : public CrtpHelper<T, ScoreWritable>
 {
+
+protected:
+
+    // Only constructible through inheritance
+    ScoreWritable()
+    {
+    }
 
 public:
 
@@ -35,9 +41,6 @@ public:
     {
         return getParent().appendChild(std::forward<T>(siblingToAppend));
     }
-protected:
-
-    using WritableBase = typename ScoreWritable<T>;
 
 private:
 
