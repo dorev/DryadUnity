@@ -7,7 +7,7 @@
 
 #include "dryad/harmony/harmonygraph.h"
 #include "dryad/harmony/motif.h"
-#include "dryad/harmony/composer.h"
+#include "dryad/harmony/harmonizer.h"
 
 #include "dryad/score/score.h"
 
@@ -17,6 +17,16 @@ namespace Dryad
 class ScoreReader
 {
 
+};
+
+enum class MotifInsertionStrategy
+{
+    NextStrongBeat
+};
+
+enum class MotifRemovalStrategy
+{
+    LetFinish
 };
 
 class Session
@@ -34,37 +44,69 @@ public:
     {
     }
 
-    using Frame = Vector<Pair<Note, TimestampMs>>;
 
-    Result<Frame> getScoreUntil(TimestampMs commitUntil)
+    void generateUntil(TimestampMs commitTimestamp)
     {
-    /*
-        if (commitUntil <= _currentTimestamp)
+    }
+
+    bool motifsChanged()
+    {
+        return true;
+    }
+
+    Vector<MotifDescriptor>& getRemovedMotifs()
+    {
+        return _motifsToRemove;
+    }
+
+    Vector<MotifDescriptor>& getAddedMotifs()
+    {
+        return _motifsToAdd;
+    }
+
+    void removeMotif(const MotifDescriptor& motif, MotifRemovalStrategy strategy = MotifRemovalStrategy::LetFinish)
+    {
+    }
+
+    void addMotif(const MotifDescriptor& motif, MotifInsertionStrategy strategy = MotifInsertionStrategy::NextStrongBeat)
+    {
+    }
+
+
+    Result<Frame> getScoreUntil(TimestampMs commitTimestamp)
+    {
+        if (commitTimestamp <= _currentTimestamp)
             return {ErrorCode::CannotCommitPastElements};
 
         if(_motifs.empty())
             return {ErrorCode::NoMotifAvailable};
 
         // Do we have two full phrases generated?
-        if (_score.uncommittedPhrasesCount() < 2)
+        if (_score.uncommittedPhraseCount() < 2)
         {
-            generateNextPhrase();
+            generateUntil(commitTimestamp);
             // generate only phrase with harmony nodes?
             // so we could wait to know how much of the motifs we have to produce
         }
 
         if (motifsChanged())
         {
-            for (MotifId& removedMotif : removedMotifs)
-                removePendingMotifsInstances(removedMotif);
+            for (MotifDescriptor& removedMotif : getRemovedMotifs())
+                removeMotif(removedMotif);
 
-            for (MotifId& addedMotif : addedMotifs)
-                addMotif(addedMotif, MotifInsertionStrategy::NextStrongBeat);
+            for (MotifDescriptor& addedMotif : getAddedMotifs())
+                addMotif(addedMotif);
 
-            harmonizeFrom(_score.lastCommittedPosition());
+            Position* lastUncommittedPosition = _score.lastUncommittedPosition();
+
+            if(lastUncommittedPosition == nullptr)
+                return {ErrorCode::InvalidPositionToHarmonize};
+
+            _harmonizer.harmonizeFrom(*lastUncommittedPosition);
         }
 
-        return uncommittedPositionsUntil(nextCommitRangeEnd);
+        return _score.commitPositionsUntil(commitTimestamp);
+    /*
     */
 
         // figure when generating, always generate for the full phrase and keep it on stand-by
@@ -84,7 +126,7 @@ public:
         return {};
     }
 
-    Session& reachSession()
+    Session& getSession()
     {
         return *this;
     }
@@ -151,10 +193,12 @@ private:
     TimestampMs _startTimestamp;
     TimestampMs _currentTimestamp;
     IdProvider _idProvider;
-    Composer _composer;
+    Harmonizer _harmonizer;
 
     Map<String, HarmonyGraph> _graphs;
     Map<String, Motif> _motifs;
+    Vector<MotifDescriptor> _motifsToRemove;
+    Vector<MotifDescriptor> _motifsToAdd;
 
     Map<String, U32> _activeMotifs;
     String _activeGraph;

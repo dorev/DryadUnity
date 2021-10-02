@@ -115,11 +115,6 @@ public:
     {
     }
 
-    U64 getNodeId() const
-    {
-        return _nodeId;
-    }
-
     U64 getId() const
     {
         return _nodeId;
@@ -139,6 +134,7 @@ public:
 
 private:
 
+    using BaseDescriptor::getId;
     U64 _nodeId;
 };
 

@@ -2,6 +2,7 @@
 
 #include "dryad/score/traits/scoretraits.h"
 #include "dryad/descriptors.h"
+#include "dryad/constants.h"
 
 namespace Dryad
 {
@@ -10,19 +11,15 @@ class Note
 {
 public:
 
-    Note(S64 offset = 0)
-        : committed(false)
-        , offset(offset)
-        , duration(0)
+    Note(S64 harmonyOffset = 0)
+        : harmonyOffset(harmonyOffset)
+        , duration(Constants::Duration::Quarter)
         , midi(0)
-        , accidental(Accidental::None)
     {}
 
-    bool committed;
-    S64 offset;
+    S64 harmonyOffset;
     ScoreTime duration;
     U8 midi;
-    Accidental accidental;
 
     VoiceDescriptor parentVoice;
     MotifDescriptor parentMotif;

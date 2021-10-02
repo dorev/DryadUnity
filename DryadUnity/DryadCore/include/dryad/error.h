@@ -30,6 +30,7 @@ public:
     static constexpr U64 CannotCommitPastElements = SessionCategory | 4;
     static constexpr U64 NoMotifAvailable = SessionCategory | 5;
     static constexpr U64 NoHarmonyNodeAvailable = SessionCategory | 6;
+    static constexpr U64 InvalidPositionToHarmonize = SessionCategory | 7;
 
     static constexpr U64 ScoreCategory = 3ULL << 32;
     static constexpr U64 PhraseDoesNotExist = ScoreCategory | 0;

@@ -13,8 +13,23 @@ public:
 
     Position(Measure& parent)
         : ScoreTraits(parent)
+        , _scoreTime(0)
     {
     }
+
+    void setScoreTime(ScoreTime scoreTime)
+    {
+        _scoreTime = scoreTime;
+    }
+
+    ScoreTime getScoreTime() const
+    {
+        return _scoreTime;
+    }
+
+private:
+
+    ScoreTime _scoreTime;
 };
 
 }

@@ -25,28 +25,39 @@ public:
     {
     }
 
-    Score& reachScore()
+    Score& getScore()
     {
         if constexpr(_typeId == ScoreElementTypeId::Score)
             return *this;
         else
-            return reachSession().getScore();
+            return getSession().getScore();
     }
 
-    Session& reachSession()
+    Session& getSession()
     {
-        return CrtpBase::getCrtpChild()._parent.reachSession();
+        return CrtpBase::getCrtpChild()._parent.getSession();
     }
 
-    template <U32 distance = 1>
-    auto* getParent()
+    ParentType<T>* getParent()
     {
-        if constexpr (distance == 0)
-            return this;
-        else if constexpr (distance == 1)
-            return &CrtpBase::getCrtpChild()._parent;
+        if constexpr (_typeId == ScoreElementTypeId::Score)
+            return nullptr;
         else
-            return getParent(--distance);
+            return &CrtpBase::getCrtpChild()._parent;
+    }
+
+    ChildType<T>* getLastUncommittedChild()
+    {
+        if(getChildren().empty())
+            return nullptr;
+
+        for (auto& child : getChildren())
+        {
+            if(!child.isCommitted())
+                return &child;
+        }
+
+        return nullptr;
     }
 
     List<ChildType<T>>& getChildren()
@@ -57,38 +68,6 @@ public:
     List<T>& getSiblings()
     {
         return getParent()->ScoreHierarchy<ParentType<T>>::getChildren();
-    }
-
-    template <U32 distance = 1>
-    auto* getFirstChild()
-    {
-        if constexpr (distance == 0)
-            return this;
-        if constexpr (_typeId == ScoreElementTypeId::Note)
-            return static_cast<Note*>(nullptr);
-        else if constexpr (distance == 1)
-        {
-            auto children = getChildren();
-            if(children.empty())
-                return static_cast<ChildType<T>*>(nullptr);
-
-            return &*children.begin();
-        }
-        else
-            return getFirstChild(--distance);
-    }
-
-    template <ScoreElementTypeId otherTypeId>
-    auto* moveToHierarchy()
-    {
-        constexpr S32 targetGeneration = GetHierarchyDistance<_typeId, otherTypeId>;
-
-        if constexpr (targetGeneration == 0)
-            return this;
-        else if constexpr (targetGeneration < 0)
-            return getParent<targetGeneration>();
-        else
-            return getFirstChild<targetGeneration>();
     }
 
     T* prev()
@@ -125,28 +104,6 @@ public:
         }
 
         return nullptr;
-    }
-
-    template <class IteratedScoreElementType>
-    IteratedScoreElementType* prev()
-    {
-        auto* target = moveToHierarchy<GetTypeId<IteratedScoreElementType>>();
-
-        if(target != nullptr)
-            return target->prev();
-        else
-            return nullptr;
-    }
-
-    template <class IteratedScoreElementType>
-    IteratedScoreElementType* next()
-    {
-        auto* target = moveToHierarchy<GetTypeId<IteratedScoreElementType>>();
-
-        if(target != nullptr)
-            return target->next();
-        else
-            return nullptr;
     }
 
 private:

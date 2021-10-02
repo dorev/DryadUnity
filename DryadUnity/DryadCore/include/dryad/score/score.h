@@ -6,6 +6,8 @@
 namespace Dryad
 {
 
+using Frame = Vector<Pair<Note, TimestampMs>>;
+
 class Score : public ScoreTraits<Score>
 {
 
@@ -15,6 +17,33 @@ public:
         : ScoreTraits(parent)
     {
     }
+
+
+    U32 uncommittedPhraseCount()
+    {
+        return 0;
+    }
+
+    Position* lastUncommittedPosition()
+    {
+        Phrase* lastUncommittedPhrase = getLastUncommittedChild();
+
+        if(lastUncommittedPhrase == nullptr)
+            return nullptr;
+
+        Measure* lastUncommittedMeasure = lastUncommittedPhrase->getLastUncommittedChild();
+
+        if(lastUncommittedMeasure == nullptr)
+            return nullptr;
+
+        return lastUncommittedMeasure->getLastUncommittedChild();
+    }
+
+    Frame commitPositionsUntil(TimestampMs commitTimestamp)
+    {
+        return {};
+    }
+
 };
 
 } // namespace Dryad

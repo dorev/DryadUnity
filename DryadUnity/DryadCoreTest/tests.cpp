@@ -40,12 +40,10 @@ TEST_F(DryadTests, Session)
     Phrase& phrase3 = phrase2.append();
     Phrase& phrase4 = phrase3.append({score});
 
-    phrase1.prev<Measure>();
-
     EXPECT_EQ(phrase1.next(), &phrase2);
     EXPECT_EQ(phrase2.prev(), &phrase1);
-    EXPECT_EQ(&(phrase2.reachScore()), &score);
-    EXPECT_EQ(&(phrase2.reachSession()), &session);
+    EXPECT_EQ(&(phrase2.getScore()), &score);
+    EXPECT_EQ(&(phrase2.getSession()), &session);
 }
 
 } // namespace Dryad

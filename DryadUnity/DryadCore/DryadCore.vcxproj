@@ -23,7 +23,7 @@
     <ClInclude Include="include\dryad\definitions.h" />
     <ClInclude Include="include\dryad\error.h" />
     <ClInclude Include="include\dryad\descriptors.h" />
-    <ClInclude Include="include\dryad\harmony\composer.h" />
+    <ClInclude Include="include\dryad\harmony\harmonizer.h" />
     <ClInclude Include="include\dryad\harmony\harmonygraph.h" />
     <ClInclude Include="include\dryad\harmony\harmonynode.h" />
     <ClInclude Include="include\dryad\harmony\motif.h" />

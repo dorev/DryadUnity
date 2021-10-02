@@ -20,41 +20,31 @@ public:
 
     ChildType<T>& appendChild()
     {
-        auto& children = getChildren();
+        auto& children = CrtpBase::getCrtpChild()._children;
         children.emplace_back(CrtpBase::getCrtpChild());
         return children.back();
     }
 
     ChildType<T>& appendChild(ChildType<T>&& childToAppend)
     {
-        auto& children = getChildren();
+        auto& children = CrtpBase::getCrtpChild()._children;
         children.emplace_back(childToAppend);
         return children.back();
     }
 
     T& append()
     {
-        return getParent().appendChild();
+        return CrtpBase::getCrtpChild()._parent.appendChild();
     }
 
     T& append(T&& siblingToAppend)
     {
-        return getParent().appendChild(std::forward<T>(siblingToAppend));
+        return CrtpBase::getCrtpChild()._parent.appendChild(std::forward<T>(siblingToAppend));
     }
 
 private:
 
     using CrtpBase = typename CrtpHelper<T, ScoreWritable>;
-
-    List<ChildType<T>>& getChildren()
-    {
-        return CrtpBase::getCrtpChild()._children;
-    }
-
-    ParentType<T>& getParent()
-    {
-        return CrtpBase::getCrtpChild()._parent;
-    }
 };
 
 }

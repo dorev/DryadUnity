@@ -67,7 +67,7 @@
     <ClInclude Include="include\dryad\harmony\scale.h">
       <Filter>dryad\harmony</Filter>
     </ClInclude>
-    <ClInclude Include="include\dryad\harmony\composer.h">
+    <ClInclude Include="include\dryad\harmony\harmonizer.h">
       <Filter>dryad\harmony</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\score\traits\traitsutils.h">

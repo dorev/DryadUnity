@@ -17,8 +17,9 @@ protected:
 
     // Only constructible through inheritance
     ScoreTraits(ParentType<T>& parent)
-        : _session(parent.reachSession())
+        : _session(parent.getSession())
         , _parent(parent)
+        , _committed(false)
     {
     }
 
@@ -28,10 +29,21 @@ public:
     {
     }
 
+    void commit()
+    {
+        _committed = true;
+    }
+
+    bool isCommitted()
+    {
+        return _committed;
+    }
+
 protected:
 
     Session& _session;
     ParentType<T>& _parent;
+    bool _committed;
     List<ChildType<T>> _children;
     friend class ScoreHierarchy<T>;
     friend class ScoreWritable<T>;
