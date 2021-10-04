@@ -1,34 +1,35 @@
 #pragma once
 
 #include "dryad/types.h"
+#include "dryad/error.h"
 #include "dryad/result.h"
 
 namespace Dryad
 {
 
-class Position;
 class Score;
+class HarmonyGraph;
 
-class Harmonizer
+class ProgressionWriter
 {
 
 public:
 
-    Harmonizer() = delete;
-    Harmonizer(Score& score)
+    ProgressionWriter() = delete;
+    ProgressionWriter(Score& score)
         : _score(score)
     {
     }
 
-    Result<> harmonizeFrom(Position& position)
+    Result<> transitionToGraph(const HarmonyGraph& graph)
     {
         return Success;
     }
 
+
 private:
 
     Score& _score;
-
 };
 
 } // namespace Dryad

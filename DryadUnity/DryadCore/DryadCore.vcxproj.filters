@@ -7,9 +7,6 @@
     <ClInclude Include="include\dryad\utils.h">
       <Filter>dryad</Filter>
     </ClInclude>
-    <ClInclude Include="include\dryad\session.h">
-      <Filter>dryad</Filter>
-    </ClInclude>
     <ClInclude Include="include\dryad\constants.h">
       <Filter>dryad</Filter>
     </ClInclude>
@@ -73,6 +70,18 @@
     <ClInclude Include="include\dryad\score\traits\traitsutils.h">
       <Filter>dryad\score\traits</Filter>
     </ClInclude>
+    <ClInclude Include="include\dryad\session.h">
+      <Filter>dryad</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\composer\motifwriter.h">
+      <Filter>dryad\composer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\composer\progressionwriter.h">
+      <Filter>dryad\composer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\composer\composer.h">
+      <Filter>dryad\composer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="dryad">
@@ -86,6 +95,9 @@
     </Filter>
     <Filter Include="dryad\harmony">
       <UniqueIdentifier>{bafe32e0-7440-4500-b2ae-d750ef26b92b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dryad\composer">
+      <UniqueIdentifier>{61cf8a0c-5d15-4c6f-8bcc-6fe635a6104e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

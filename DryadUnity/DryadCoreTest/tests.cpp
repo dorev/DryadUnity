@@ -35,7 +35,9 @@ TEST_F(DryadTests, Session)
     Phrase* previousPhrase = phrase.prev();
     EXPECT_EQ(previousPhrase, nullptr);
 
+    EXPECT_FALSE(score.hasChanged());
     Phrase& phrase1 = score.appendChild();
+    EXPECT_TRUE(score.hasChanged());
     Phrase& phrase2 = score.appendChild({score});
     Phrase& phrase3 = phrase2.append();
     Phrase& phrase4 = phrase3.append({score});

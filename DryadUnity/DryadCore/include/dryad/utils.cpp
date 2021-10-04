@@ -4,13 +4,6 @@
 namespace Dryad
 {
 
-bool Random::fiftyFifty()
-{
-    static thread_local std::mt19937 generator;
-    std::uniform_int_distribution<U64> distribution(0, 1);
-    return distribution(generator) > 0;
-}
-
 void getEquivalentDurationPairs(U64 duration, Vector<Pair<U64, U64>>& solutions)
 {
     solutions.clear();

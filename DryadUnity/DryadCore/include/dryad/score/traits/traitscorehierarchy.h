@@ -5,8 +5,9 @@
 namespace Dryad
 {
 
+
 template <class T>
-class ScoreWritable;
+class ScoreTraits;
 
 template <class T>
 class ScoreHierarchy : public CrtpHelper<T, ScoreHierarchy>
@@ -16,6 +17,7 @@ protected:
 
     // Only constructible through inheritance
     ScoreHierarchy()
+        : _lastUncommittedChildCache(nullptr)
     {
     }
 
@@ -51,10 +53,18 @@ public:
         if(getChildren().empty())
             return nullptr;
 
+        ScoreTraits<T>& scoreTraits = getScoreTraitsBase();
+
+        if(!scoreTraits.hasChanged())
+            return _lastUncommittedChildCache;
+
         for (auto& child : getChildren())
         {
-            if(!child.isCommitted())
+            if (!child.isCommitted())
+            {
+                _lastUncommittedChildCache = &child;
                 return &child;
+            }
         }
 
         return nullptr;
@@ -72,16 +82,32 @@ public:
 
     T* prev()
     {
-        List<T>& siblings = getSiblings();
-
-        for(auto sibling = siblings.begin(); sibling != siblings.end(); sibling++)
+        if constexpr (GetTypeId<T> != ScoreElementTypeId::Score)
         {
-            if (&*sibling == this)
+            List<T>& siblings = getSiblings();
+
+            for(auto sibling = siblings.begin(); sibling != siblings.end(); sibling++)
             {
-                if(sibling == siblings.begin())
-                    break;
-                else
-                    return &*(--sibling);
+                if (&*sibling == this)
+                {
+                    if (sibling == siblings.begin())
+                    {
+                        // Check previous parent last child
+                        ParentType<T>* parent = sibling->getParent();
+
+                        if(parent == nullptr)
+                            break;
+
+                        ParentType<T>* previousParent = parent->prev();
+
+                        if(previousParent == nullptr || previousParent->getChildren().empty())
+                            break;
+
+                        return &previousParent->getChildren().back();
+                    }
+                    else
+                        return &*(--sibling);
+                }
             }
         }
 
@@ -90,16 +116,31 @@ public:
 
     T* next()
     {
-        List<T>& siblings = getSiblings();
-
-        for(auto sibling = siblings.begin(); sibling != siblings.end(); sibling++)
+        if constexpr (GetTypeId<T> != ScoreElementTypeId::Score)
         {
-            if (&*sibling == this)
+            List<T>& siblings = getSiblings();
+
+            for(auto sibling = siblings.begin(); sibling != siblings.end(); sibling++)
             {
-                if(++sibling == siblings.end())
-                    break;
-                else
-                    return &*(sibling);
+                if (&*sibling == this)
+                {
+                    if (++sibling == siblings.end())
+                    {
+                        ParentType<T>* parent = sibling->getParent();
+
+                        if(parent == nullptr)
+                            break;
+
+                        ParentType<T>* nextParent = parent->prev();
+
+                        if(nextParent == nullptr || nextParent->getChildren().empty())
+                            break;
+
+                        return &nextParent->getChildren().front();
+                    }
+                    else
+                        return &*(sibling);
+                }
             }
         }
 
@@ -108,8 +149,14 @@ public:
 
 private:
 
+    ScoreTraits<T>& getScoreTraitsBase()
+    {
+        return static_cast<ScoreTraits<T>&>(CrtpBase::getCrtpChild());
+    }
+
     using CrtpBase = typename CrtpHelper<T, ScoreHierarchy>;
     static constexpr ScoreElementTypeId _typeId = GetTypeId<T>;
+    ChildType<T>* _lastUncommittedChildCache;
 };
 
 }

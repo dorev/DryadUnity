@@ -7,7 +7,11 @@
 namespace Dryad
 {
 
-static constexpr U64 Success = ErrorCode::NoError;
+static constexpr Error Success = Error{ErrorCode::NoError};
+
+#define RETURN_ON_ERROR(result) \
+if(result.hasError()) \
+    return result.getError()
 
 ///////////////////////////////////////////////////////////////////////////////
 // Result

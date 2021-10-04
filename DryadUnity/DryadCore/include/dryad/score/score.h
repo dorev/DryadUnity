@@ -1,5 +1,6 @@
 #pragma once
 
+#include "dryad/result.h"
 #include "dryad/score/traits/scoretraits.h"
 #include "dryad/score/phrase.h" // child type
 
@@ -15,34 +16,62 @@ public:
 
     Score(Session& parent)
         : ScoreTraits(parent)
+        , _lastUncommittedPositionCache(nullptr)
     {
     }
 
-
     U32 uncommittedPhraseCount()
     {
-        return 0;
+        U32 count = 0;
+
+        for (auto phraseIterator = getChildren().rbegin(); phraseIterator != getChildren().rend(); phraseIterator++)
+        {
+            if(phraseIterator->isCommitted())
+                break;
+
+            count++;
+        }
+
+        return count;
     }
 
     Position* lastUncommittedPosition()
     {
-        Phrase* lastUncommittedPhrase = getLastUncommittedChild();
+        if(!_lastUncommittedPositionChanged)
+            return _lastUncommittedPositionCache;
 
+        Phrase* lastUncommittedPhrase = getLastUncommittedChild();
         if(lastUncommittedPhrase == nullptr)
             return nullptr;
 
         Measure* lastUncommittedMeasure = lastUncommittedPhrase->getLastUncommittedChild();
-
         if(lastUncommittedMeasure == nullptr)
             return nullptr;
 
-        return lastUncommittedMeasure->getLastUncommittedChild();
+        _lastUncommittedPositionCache = lastUncommittedMeasure->getLastUncommittedChild();
+        return _lastUncommittedPositionCache;
     }
 
-    Frame commitPositionsUntil(TimestampMs commitTimestamp)
+    Result<> commitPositionsUntil(ScoreTime commitUntilScoreTime)
     {
-        return {};
+        Position* position = lastUncommittedPosition();
+
+        while (position != nullptr || (position->getScoreTime() > commitUntilScoreTime))
+        {
+            position->commit();
+            _lastUncommittedPositionChanged = true;
+            position = position->next();
+        }
+
+        return Success;
     }
+
+
+
+private:
+
+    bool _lastUncommittedPositionChanged;
+    Position* _lastUncommittedPositionCache;
 
 };
 

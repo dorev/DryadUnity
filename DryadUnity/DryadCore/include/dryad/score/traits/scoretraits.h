@@ -20,6 +20,7 @@ protected:
         : _session(parent.getSession())
         , _parent(parent)
         , _committed(false)
+        , _changed(false)
     {
     }
 
@@ -39,11 +40,22 @@ public:
         return _committed;
     }
 
+    bool hasChanged()
+    {
+        return _changed;
+    }
+
+    void setChanged(bool value = true)
+    {
+        _changed = value;
+    }
+
 protected:
 
     Session& _session;
     ParentType<T>& _parent;
     bool _committed;
+    bool _changed;
     List<ChildType<T>> _children;
     friend class ScoreHierarchy<T>;
     friend class ScoreWritable<T>;

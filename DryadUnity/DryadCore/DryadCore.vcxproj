@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\dryad\composer\composer.h" />
+    <ClInclude Include="include\dryad\composer\motifwriter.h" />
+    <ClInclude Include="include\dryad\composer\progressionwriter.h" />
     <ClInclude Include="include\dryad\constants.h" />
     <ClInclude Include="include\dryad\definitions.h" />
     <ClInclude Include="include\dryad\error.h" />
@@ -40,8 +43,8 @@
     <ClInclude Include="include\dryad\score\traits\traitscorewritable.h" />
     <ClInclude Include="include\dryad\crtphelper.h" />
     <ClInclude Include="include\dryad\score\traits\traitsutils.h" />
-    <ClInclude Include="include\dryad\types.h" />
     <ClInclude Include="include\dryad\session.h" />
+    <ClInclude Include="include\dryad\types.h" />
     <ClInclude Include="include\dryad\utils.h" />
   </ItemGroup>
   <ItemGroup>

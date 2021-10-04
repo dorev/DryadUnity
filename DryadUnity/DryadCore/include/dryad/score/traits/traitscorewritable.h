@@ -22,6 +22,7 @@ public:
     {
         auto& children = CrtpBase::getCrtpChild()._children;
         children.emplace_back(CrtpBase::getCrtpChild());
+        getScoreTraitsBase().setChanged(true);
         return children.back();
     }
 
@@ -29,6 +30,7 @@ public:
     {
         auto& children = CrtpBase::getCrtpChild()._children;
         children.emplace_back(childToAppend);
+        getScoreTraitsBase().setChanged(true);
         return children.back();
     }
 
@@ -43,6 +45,11 @@ public:
     }
 
 private:
+
+    ScoreTraits<T>& getScoreTraitsBase()
+    {
+        return static_cast<ScoreTraits<T>&>(CrtpBase::getCrtpChild());
+    }
 
     using CrtpBase = typename CrtpHelper<T, ScoreWritable>;
 };
