@@ -46,7 +46,7 @@
     <ClInclude Include="include\dryad\score\traits\scoretraits.h">
       <Filter>dryad\score\traits</Filter>
     </ClInclude>
-    <ClInclude Include="include\dryad\score\traits\traitscorehierarchy.h">
+    <ClInclude Include="include\dryad\score\traits\traitscoreexplorable.h">
       <Filter>dryad\score\traits</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\score\traits\traitscorewritable.h">
@@ -81,6 +81,9 @@
     </ClInclude>
     <ClInclude Include="include\dryad\composer\composer.h">
       <Filter>dryad\composer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\midinote.h">
+      <Filter>dryad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

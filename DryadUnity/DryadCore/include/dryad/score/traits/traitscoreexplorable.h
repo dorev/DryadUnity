@@ -5,31 +5,28 @@
 namespace Dryad
 {
 
-
 template <class T>
-class ScoreTraits;
-
-template <class T>
-class ScoreHierarchy : public CrtpHelper<T, ScoreHierarchy>
+class ScoreExplorable : public CrtpHelper<T, ScoreExplorable>
 {
 
 protected:
 
     // Only constructible through inheritance
-    ScoreHierarchy()
-        : _lastUncommittedChildCache(nullptr)
+    ScoreExplorable()
+        : _self(static_cast<T&>(*this))
+        , _lastUncommittedChildCache(nullptr)
     {
     }
 
 public:
 
-    virtual ~ScoreHierarchy()
+    virtual ~ScoreExplorable()
     {
     }
 
     Score& getScore()
     {
-        if constexpr(_typeId == ScoreElementTypeId::Score)
+        if constexpr(isType<Score>)
             return *this;
         else
             return getSession().getScore();
@@ -37,15 +34,15 @@ public:
 
     Session& getSession()
     {
-        return CrtpBase::getCrtpChild()._parent.getSession();
+        return _self._parent.getSession();
     }
 
     ParentType<T>* getParent()
     {
-        if constexpr (_typeId == ScoreElementTypeId::Score)
+        if constexpr (isType<Score>)
             return nullptr;
         else
-            return &CrtpBase::getCrtpChild()._parent;
+            return &_self._parent;
     }
 
     ChildType<T>* getLastUncommittedChild()
@@ -53,9 +50,7 @@ public:
         if(getChildren().empty())
             return nullptr;
 
-        ScoreTraits<T>& scoreTraits = getScoreTraitsBase();
-
-        if(!scoreTraits.hasChanged())
+        if(!_self.hasChanged())
             return _lastUncommittedChildCache;
 
         for (auto& child : getChildren())
@@ -72,17 +67,17 @@ public:
 
     List<ChildType<T>>& getChildren()
     {
-        return CrtpBase::getCrtpChild()._children;
+        return _self._children;
     }
 
     List<T>& getSiblings()
     {
-        return getParent()->ScoreHierarchy<ParentType<T>>::getChildren();
+        return getParent()->getChildren();
     }
 
     T* prev()
     {
-        if constexpr (GetTypeId<T> != ScoreElementTypeId::Score)
+        if constexpr (!isType<Score>)
         {
             List<T>& siblings = getSiblings();
 
@@ -116,7 +111,7 @@ public:
 
     T* next()
     {
-        if constexpr (GetTypeId<T> != ScoreElementTypeId::Score)
+        if constexpr (!isType<Score>)
         {
             List<T>& siblings = getSiblings();
 
@@ -149,14 +144,11 @@ public:
 
 private:
 
-    ScoreTraits<T>& getScoreTraitsBase()
-    {
-        return static_cast<ScoreTraits<T>&>(CrtpBase::getCrtpChild());
-    }
-
-    using CrtpBase = typename CrtpHelper<T, ScoreHierarchy>;
-    static constexpr ScoreElementTypeId _typeId = GetTypeId<T>;
+    T& _self;
     ChildType<T>* _lastUncommittedChildCache;
+
+    template <class U>
+    static constexpr bool isType = std::is_same<T, U>::value;
 };
 
 }

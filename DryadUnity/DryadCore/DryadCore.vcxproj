@@ -32,6 +32,7 @@
     <ClInclude Include="include\dryad\harmony\motif.h" />
     <ClInclude Include="include\dryad\harmony\scale.h" />
     <ClInclude Include="include\dryad\idprovider.h" />
+    <ClInclude Include="include\dryad\midinote.h" />
     <ClInclude Include="include\dryad\result.h" />
     <ClInclude Include="include\dryad\score\measure.h" />
     <ClInclude Include="include\dryad\score\note.h" />
@@ -39,7 +40,7 @@
     <ClInclude Include="include\dryad\score\position.h" />
     <ClInclude Include="include\dryad\score\score.h" />
     <ClInclude Include="include\dryad\score\traits\scoretraits.h" />
-    <ClInclude Include="include\dryad\score\traits\traitscorehierarchy.h" />
+    <ClInclude Include="include\dryad\score\traits\traitscoreexplorable.h" />
     <ClInclude Include="include\dryad\score\traits\traitscorewritable.h" />
     <ClInclude Include="include\dryad\crtphelper.h" />
     <ClInclude Include="include\dryad\score\traits\traitsutils.h" />

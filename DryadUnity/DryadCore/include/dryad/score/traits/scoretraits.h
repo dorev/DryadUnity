@@ -1,6 +1,6 @@
 #pragma once
 
-#include "dryad/score/traits/traitscorehierarchy.h"
+#include "dryad/score/traits/traitscoreexplorable.h"
 #include "dryad/score/traits/traitscorewritable.h"
 
 namespace Dryad
@@ -9,7 +9,7 @@ namespace Dryad
 template <class T>
 class ScoreTraits
     : public CrtpHelper<T, ScoreTraits>
-    , public ScoreHierarchy<T>
+    , public ScoreExplorable<T>
     , public ScoreWritable<T>
 {
 
@@ -48,17 +48,28 @@ public:
     void setChanged(bool value = true)
     {
         _changed = value;
+
+        if constexpr (!isType<Score>)
+        {
+            if(_changed)
+                _parent.setChanged(true);
+        }
     }
+
 
 protected:
 
+    friend class ScoreExplorable<T>;
+    friend class ScoreWritable<T>;
+
     Session& _session;
     ParentType<T>& _parent;
+    List<ChildType<T>> _children;
     bool _committed;
     bool _changed;
-    List<ChildType<T>> _children;
-    friend class ScoreHierarchy<T>;
-    friend class ScoreWritable<T>;
+
+    template <class U>
+    static constexpr bool isType = std::is_same<T, U>::value;
 };
 
 }
