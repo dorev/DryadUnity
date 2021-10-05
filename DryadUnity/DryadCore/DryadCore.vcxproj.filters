@@ -103,9 +103,4 @@
       <UniqueIdentifier>{61cf8a0c-5d15-4c6f-8bcc-6fe635a6104e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="include\dryad\utils.cpp">
-      <Filter>dryad</Filter>
-    </ClCompile>
-  </ItemGroup>
 </Project>

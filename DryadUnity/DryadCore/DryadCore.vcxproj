@@ -48,9 +48,6 @@
     <ClInclude Include="include\dryad\types.h" />
     <ClInclude Include="include\dryad\utils.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="include\dryad\utils.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

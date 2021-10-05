@@ -1,15 +1,15 @@
 #pragma once
 
-#include "dryad/types.h"
 #include "dryad/error.h"
 #include "dryad/result.h"
+#include "dryad/types.h"
+
+#include "dryad/composer/motifwriter.h"
+#include "dryad/composer/progressionwriter.h"
 
 #include "dryad/harmony/harmonygraph.h"
 #include "dryad/harmony/motif.h"
 #include "dryad/harmony/harmonizer.h"
-
-#include "dryad/composer/motifwriter.h"
-#include "dryad/composer/progressionwriter.h"
 
 #include "dryad/score/score.h"
 
@@ -29,9 +29,16 @@ public:
     {
     }
 
-    void generateNextPhraseProgression(U32 amount = 1)
+    Result<> generatePhrases(U32 amount = 1)
     {
         // extend using the current active harmony graph
+        return Success;
+    }
+
+    Result<> generateNotesUntil(ScoreTime scoreTime)
+    {
+        // extend all active motifs at least until scoreTime
+        return Success;
     }
 
     void transitionToGraph(const String& graphName)
@@ -49,22 +56,13 @@ public:
                 U32 amount = motifChange.second;
 
                 if (amount > 0)
-                {
                     _motifWriter.increaseMotifPresence(_motifs.at(motifName), amount);
-                }
                 else if (amount < 0)
-                {
                     _motifWriter.decreaseMotifPresence(_motifs.at(motifName), amount);
-                }
-
-                // change amount of 0 has no interest here
             }
         }
 
-        // be sure that we already have notes written (not committed!) on the score
-        // write the notes of the motif
-
-        return Success;
+        return generateNotesUntil(scoreTime);
     }
 
     Result<> removeMotif(const String& motifName)

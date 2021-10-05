@@ -2,6 +2,8 @@
 
 #include "dryad/definitions.h"
 #include "dryad/types.h"
+#include "dryad/result.h"
+#include "dryad/constants.h"
 #include <random>
 #include <utility>
 
@@ -10,30 +12,28 @@ namespace Dryad
 
 namespace Random
 {
-    template <class T, class U, class R = decltype(std::declval<T>() + std::declval<U>())>
-    auto range(T min, U max) -> R
-    {
-        if (min == max)
-        {
-            return min;
-        }
-        if (max < min)
-        {
-            std::swap(min, max);
-        }
 
-        static thread_local std::mt19937 generator(std::random_device{}());
-        std::uniform_int_distribution<R> distribution(min, max);
-        return distribution(generator);
-    }
+template <class T, class U, class R = decltype(std::declval<T>() + std::declval<U>())>
+auto range(T min, U max) -> R
+{
+    if (min == max)
+        return min;
+    if (max < min)
+        std::swap(min, max);
 
-    template <class T>
-    const auto& in(const T& container)
-    {
-        static thread_local std::mt19937 generator(std::random_device{}());
-        std::uniform_int_distribution<size_t> distribution(0, container.size() - 1);
-        return container[distribution(generator)];
-    }
+    static thread_local std::mt19937 generator(std::random_device{}());
+    std::uniform_int_distribution<R> distribution(min, max);
+    return distribution(generator);
+}
+
+template <class T>
+const auto& in(const T& container)
+{
+    static thread_local std::mt19937 generator(std::random_device{}());
+    std::uniform_int_distribution<size_t> distribution(0, container.size() - 1);
+    return container[distribution(generator)];
+}
+
 };
 
 template <class T>
@@ -42,9 +42,7 @@ bool contains(const Vector<T>& vector, const T& value)
     for (U64 i = 0; i < vector.size(); ++i)
     {
         if (value == vector[i])
-        {
             return true;
-        }
     }
 
     return false;
@@ -56,19 +54,46 @@ bool contains(const Map<T, U>& map, const T& value)
     return map.find(value) != map.end();
 }
 
-
-void getEquivalentDurationPairs(U64 duration, Vector<Pair<U64, U64>>& solutions);
-
-bool isPowerOf2(U64 value);
-
-
-/*
-ScoreTime timeMsToScoreTime(TimeMs durationMs, U32 tempo)
+inline TimestampMs scoreTimeToTimestamp(ScoreTime scoreTime, U32 tempo, TimestampMs startTimestamp)
 {
-    // Timestamp validity is already checked in the calling function
-    TimeMs beatDuration = tempo / 60 * 1000;
-    return durationMs / beatDuration * Constants::Duration::Quarter;
+    //TimeMs beatDurationMs = tempo * 1000 / 60;
+    //TimeMs timeElapsed = scoreTime * beatDurationMs / Constants::Duration::Quarter;
+    //return startTimestamp + timeElapsed;
+
+    return startTimestamp + (tempo * 1000 * scoreTime / 60 / Constants::Duration::Quarter);
 }
-*/
+
+inline Result<> getEquivalentDurationPairs(U64 duration, Vector<Pair<U64, U64>>& solutions)
+{
+    solutions.clear();
+
+    const auto& fractions = Constants::AllowedRythmicFractions;
+
+    // Inverted solutions duplicates are deliberatly preserved
+    for (U64 i = 0; i < fractions.size(); ++i)
+    {
+        for (U64 j = 0; j < fractions.size(); ++j)
+        {
+            if (fractions[i] + fractions[j] == duration)
+                solutions.emplace_back(fractions[i], fractions[j]);
+        }
+    }
+
+    if (solutions.empty())
+        return {ErrorCode::NoAvailableEquivalence};
+}
+
+inline bool isPowerOf2(U64 value)
+{
+    U64 setBits = 0;
+
+    for (U64 bit = 0; bit < (sizeof(U64) * 8); ++bit)
+    {
+        if (value & (1ULL << bit) && setBits++)
+            return false;
+    }
+
+    return true;
+}
 
 } // namespace Dryad

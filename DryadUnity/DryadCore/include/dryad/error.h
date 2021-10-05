@@ -31,12 +31,16 @@ public:
     static constexpr U64 NoMotifAvailable = SessionCategory | 5;
     static constexpr U64 NoHarmonyNodeAvailable = SessionCategory | 6;
     static constexpr U64 MotifAlreadyFullyDeactivated = SessionCategory | 7;
+    static constexpr U64 NoUpcomingNotesAvailable = SessionCategory | 8;
 
     static constexpr U64 ScoreCategory = 3ULL << 32;
     static constexpr U64 PhraseDoesNotExist = ScoreCategory | 0;
     static constexpr U64 MeasureDoesNotExist = ScoreCategory | 1;
     static constexpr U64 PositionDoesNotExist = ScoreCategory | 2;
     static constexpr U64 NoteDoesNotExist = ScoreCategory | 3;
+
+    static constexpr U64 TBD = 42ULL << 32;
+    static constexpr U64 NoAvailableEquivalence = TBD | 0;
 };
 
 

@@ -27,7 +27,7 @@ namespace Duration
     constexpr U64 ThirtySecondTriplet   = 2;
 };
 
-static const Vector<U64> allowedRythmicFractions =
+static const Vector<U64> AllowedRythmicFractions =
 {
     Duration::Sixteenth,
     Duration::Eighth,

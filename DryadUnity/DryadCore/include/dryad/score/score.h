@@ -7,8 +7,6 @@
 namespace Dryad
 {
 
-using Frame = Vector<Pair<Note, TimestampMs>>;
-
 class Score : public ScoreTraits<Score>
 {
 
@@ -16,6 +14,7 @@ public:
 
     Score(Session& parent)
         : ScoreTraits(parent)
+        , _lastUncommittedPositionChanged(false)
         , _lastUncommittedPositionCache(nullptr)
     {
     }
@@ -40,15 +39,15 @@ public:
         if(!_lastUncommittedPositionChanged)
             return _lastUncommittedPositionCache;
 
-        Phrase* lastUncommittedPhrase = getLastUncommittedChild();
-        if(lastUncommittedPhrase == nullptr)
+        Phrase* phrase = getLastUncommittedChild();
+        if(phrase == nullptr)
             return nullptr;
 
-        Measure* lastUncommittedMeasure = lastUncommittedPhrase->getLastUncommittedChild();
-        if(lastUncommittedMeasure == nullptr)
+        Measure* measure = phrase->getLastUncommittedChild();
+        if(measure == nullptr)
             return nullptr;
 
-        _lastUncommittedPositionCache = lastUncommittedMeasure->getLastUncommittedChild();
+        _lastUncommittedPositionCache = measure->getLastUncommittedChild();
         return _lastUncommittedPositionCache;
     }
 
@@ -56,7 +55,7 @@ public:
     {
         Position* position = lastUncommittedPosition();
 
-        while (position != nullptr || (position->getScoreTime() > commitUntilScoreTime))
+        while (position != nullptr && (position->getScoreTime() < commitUntilScoreTime))
         {
             position->commit();
             _lastUncommittedPositionChanged = true;
@@ -66,13 +65,10 @@ public:
         return Success;
     }
 
-
-
 private:
 
     bool _lastUncommittedPositionChanged;
     Position* _lastUncommittedPositionCache;
-
 };
 
 } // namespace Dryad

@@ -21,7 +21,6 @@ public:
 
     ChildType<T>& appendChild()
     {
-        //auto& children = _scoreElement._children;
         List<ChildType<T>>& children = _self._children;
         children.emplace_back(_self);
         _self.setChanged(true);

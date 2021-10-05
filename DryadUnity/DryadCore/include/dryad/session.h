@@ -1,13 +1,15 @@
 #pragma once
 
-#include "dryad/types.h"
 #include "dryad/error.h"
-#include "dryad/result.h"
 #include "dryad/idprovider.h"
+#include "dryad/midinote.h"
+#include "dryad/result.h"
+#include "dryad/types.h"
+#include "dryad/utils.h"
 
+#include "dryad/composer/composer.h"
 
 #include "dryad/score/score.h"
-#include "dryad/composer/composer.h"
 
 namespace Dryad
 {
@@ -17,12 +19,12 @@ class Session
 
 public:
 
-    Session()
-        : _tempo(0)
-        , _startTimestamp(0)
-        , _currentTimestamp(0)
-        , _pregeneratedNotesBufferDuration(Constants::Duration::Whole * 2)
-        , _pregeneratedPhrasesBufferCount(2)
+    Session(TimestampMs startTime = 0)
+        : _startTimestamp(startTime)
+        , _tempo(0)
+        , _latestTimestamp(0)
+        , _minPregeneratedNotesDuration(Constants::Duration::Whole * 2)
+        , _minPregeneratedPhrases(2)
         , _score(*this)
         , _composer(_score)
     {
@@ -30,57 +32,78 @@ public:
 
     Result<> update(TimestampMs currentTimestamp)
     {
-        // commits past notes and generating more music if necessary
-
-        if (currentTimestamp <= _currentTimestamp)
+        // Commit past notes
+        if (currentTimestamp <= _latestTimestamp)
             return {ErrorCode::CannotCommitPastElements};
 
-        Result<> commitResult = _score.commitPositionsUntil(currentTimestamp);
+        _latestTimestamp = currentTimestamp;
+
+        Result<> commitResult = _score.commitPositionsUntil(_latestTimestamp);
         if(commitResult.hasError())
             return commitResult.getError();
 
         // Do we have enough phrases progressions generated?
-        if (_score.uncommittedPhraseCount() <= _pregeneratedPhrasesBufferCount)
+        U32 uncommittedPhraseCount = _score.uncommittedPhraseCount();
+        U32 phraseDifference = _minPregeneratedPhrases - uncommittedPhraseCount;
+        if (phraseDifference > 1)
         {
-            _composer.generateNextPhraseProgression();
+            Result<> generateProgResult = _composer.generatePhrases(phraseDifference);
+            if(generateProgResult.hasError())
+                return generateProgResult.getError();
         }
 
-        Position* lastUncommittedPosition = _score.lastUncommittedPosition();
-        if(lastUncommittedPosition == nullptr)
+        // Do we have enough notes generated?
+        Position* position = _score.lastUncommittedPosition();
+        if(position == nullptr)
             return {ErrorCode::PositionDoesNotExist};
 
-        ScoreTime lastUncommittedScoreTime = lastUncommittedPosition->getScoreTime();
+        ScoreTime scoreTime = position->getScoreTime();
 
-        // Do we have enough notes generated?
-        Result<> notesAreWrittenResult = _composer.writeNotesUntil(lastUncommittedScoreTime + _pregeneratedNotesBufferDuration);
-        if(notesAreWrittenResult.hasError())
-            return notesAreWrittenResult.getError();
-
-        return Success;
+        return _composer.writeNotesUntil(scoreTime + _minPregeneratedNotesDuration);
     }
 
-    Result<Frame> fetchUpcomingNotes(TimestampMs currentTimestamp)
+    Result<Vector<MidiNote>> fetchUpcomingNotes(TimestampMs currentTimestamp)
     {
         Result<> updateResult = update(currentTimestamp);
         if(updateResult.hasError())
             return updateResult.getError();
 
-        Position* lastUncommittedPosition = _score.lastUncommittedPosition();
-        if(lastUncommittedPosition == nullptr)
+        Position* position = _score.lastUncommittedPosition();
+        if(position == nullptr)
             return {ErrorCode::PositionDoesNotExist};
 
-        Result<> harmonizeResult = _composer.harmonizeFrom(*lastUncommittedPosition);
+        Result<> harmonizeResult = _composer.harmonizeFrom(*position);
         if(harmonizeResult.hasError())
             return harmonizeResult.getError();
 
-        // get all notes currently generated and harmonized
+        // Return all notes currently generated and harmonized
+        Vector<MidiNote> result;
 
-        return Frame{};
-    }
+        while (position != nullptr)
+        {
+            List<Note>& notes = position->getChildren();
 
-    void start(TimestampMs startTime)
-    {
-        _startTimestamp = startTime;
+            if (!notes.empty())
+            {
+                TimestampMs timestamp = scoreTimeToTimestamp(
+                    position->getScoreTime(),
+                    _tempo,
+                    _startTimestamp);
+
+                for(const Note& note : notes)
+                    result.emplace_back(
+                        note.midi,
+                        note.duration,
+                        timestamp);
+            }
+
+            position = position->next();
+        }
+
+        if(result.empty())
+            return {ErrorCode::NoUpcomingNotesAvailable};
+
+        return result;
     }
 
     // Forwarding to composer
@@ -114,11 +137,11 @@ private:
 
     U32 _tempo;
     TimestampMs _startTimestamp;
-    TimestampMs _currentTimestamp;
+    TimestampMs _latestTimestamp;
     IdProvider _idProvider;
 
-    ScoreTime _pregeneratedNotesBufferDuration;
-    U32 _pregeneratedPhrasesBufferCount;
+    ScoreTime _minPregeneratedNotesDuration;
+    U32 _minPregeneratedPhrases;
 
 
     Score _score;

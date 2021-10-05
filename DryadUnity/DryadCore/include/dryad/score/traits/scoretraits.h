@@ -26,6 +26,7 @@ protected:
 
 public:
 
+    ScoreTraits() = delete;
     ~ScoreTraits()
     {
     }
@@ -55,7 +56,6 @@ public:
                 _parent.setChanged(true);
         }
     }
-
 
 protected:
 
