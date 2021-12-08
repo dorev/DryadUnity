@@ -23,6 +23,7 @@ public:
 
     Result<> decreaseMotifPresence(const Motif& motif, U32 amount = 1)
     {
+        // decrease presence vs removeMotif
         return Success;
     }
 

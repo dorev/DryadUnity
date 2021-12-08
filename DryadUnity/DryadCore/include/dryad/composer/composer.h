@@ -29,25 +29,26 @@ public:
     {
     }
 
-    Result<> generatePhrases(U32 amount = 1)
+    Result<> generatePhrases(U32 amount)
     {
+        if(amount == 0)
+            return {ErrorCode::UselessCall};
+
         // extend using the current active harmony graph
         return Success;
     }
 
     Result<> generateNotesUntil(ScoreTime scoreTime)
     {
-        // extend all active motifs at least until scoreTime
-        return Success;
-    }
+        Position* position = _score.getFirstUncommittedPosition();
+        if(position == nullptr)
+            return {ErrorCode::PositionDoesNotExist};
 
-    void transitionToGraph(const String& graphName)
-    {
-        // LATER!!
-    }
+        if(scoreTime < position->getScoreTime())
+            return {ErrorCode::CannotWritePastElements};
 
-    Result<> writeNotesUntil(ScoreTime scoreTime)
-    {
+        // FIND A WAY TO QUERY WHERE A MOTIF STARTS
+
         if (!motifsChanged())
         {
             for (auto& motifChange : _motifsChanges)
@@ -62,7 +63,14 @@ public:
             }
         }
 
-        return generateNotesUntil(scoreTime);
+        // extend all active motifs at least until scoreTime
+        // 
+        return Success;
+    }
+
+    void transitionToGraph(const String& graphName)
+    {
+        // LATER!!
     }
 
     Result<> removeMotif(const String& motifName)

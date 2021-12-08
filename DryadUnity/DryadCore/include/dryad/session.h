@@ -53,13 +53,13 @@ public:
         }
 
         // Do we have enough notes generated?
-        Position* position = _score.lastUncommittedPosition();
+        Position* position = _score.getFirstUncommittedPosition();
         if(position == nullptr)
             return {ErrorCode::PositionDoesNotExist};
 
         ScoreTime scoreTime = position->getScoreTime();
 
-        return _composer.writeNotesUntil(scoreTime + _minPregeneratedNotesDuration);
+        return _composer.generateNotesUntil(scoreTime + _minPregeneratedNotesDuration);
     }
 
     Result<Vector<MidiNote>> fetchUpcomingNotes(TimestampMs currentTimestamp)
@@ -68,7 +68,7 @@ public:
         if(updateResult.hasError())
             return updateResult.getError();
 
-        Position* position = _score.lastUncommittedPosition();
+        Position* position = _score.getFirstUncommittedPosition();
         if(position == nullptr)
             return {ErrorCode::PositionDoesNotExist};
 

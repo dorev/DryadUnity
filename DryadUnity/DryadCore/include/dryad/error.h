@@ -17,6 +17,8 @@ public:
     static constexpr U64 GenericCategory = 0ULL << 32;
     static constexpr U64 NoError = GenericCategory | 0;
     static constexpr U64 Undefined = GenericCategory | 1;
+    static constexpr U64 UselessCall = GenericCategory | 2;
+    static constexpr U64 NullPointer = GenericCategory | 3;
 
     static constexpr U64 ResultCategory = 1ULL << 32;
     static constexpr U64 UninitializedError = ResultCategory | 0;
@@ -38,6 +40,7 @@ public:
     static constexpr U64 MeasureDoesNotExist = ScoreCategory | 1;
     static constexpr U64 PositionDoesNotExist = ScoreCategory | 2;
     static constexpr U64 NoteDoesNotExist = ScoreCategory | 3;
+    static constexpr U64 CannotWritePastElements = ScoreCategory | 4;
 
     static constexpr U64 TBD = 42ULL << 32;
     static constexpr U64 NoAvailableEquivalence = TBD | 0;

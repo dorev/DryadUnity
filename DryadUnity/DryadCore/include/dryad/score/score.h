@@ -34,7 +34,7 @@ public:
         return count;
     }
 
-    Position* lastUncommittedPosition()
+    Position* getFirstUncommittedPosition()
     {
         if(!_lastUncommittedPositionChanged)
             return _lastUncommittedPositionCache;
@@ -53,7 +53,7 @@ public:
 
     Result<> commitPositionsUntil(ScoreTime commitUntilScoreTime)
     {
-        Position* position = lastUncommittedPosition();
+        Position* position = getFirstUncommittedPosition();
 
         while (position != nullptr && (position->getScoreTime() < commitUntilScoreTime))
         {

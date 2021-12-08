@@ -21,7 +21,6 @@ public:
     ScoreTime duration;
     U8 midi;
 
-    VoiceDescriptor parentVoice;
     MotifDescriptor parentMotif;
 };
 

@@ -36,8 +36,8 @@ public:
 
 protected:
 
-    const U64 _id;
-    const String _name;
+    U64 _id;
+    String _name;
 };
 
 class VoiceDescriptor : public BaseDescriptor
