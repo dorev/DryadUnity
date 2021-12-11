@@ -4,56 +4,89 @@ using UnityEngine;
 
 public class DryadListener : MonoBehaviour
 {
-    Dictionary<DryadMotif, uint> _motifsCache = new Dictionary<DryadMotif, uint>();
+    List<DryadMotif> _motifs = new List<DryadMotif>();
     DryadGlobal _global;
+    DryadLandscape _currentLandscape;
+    DryadLandscape _previousLandscape;
 
-    // Start is called before the first frame update
+    [SerializeField]
+    public string Name { get; set; }
+
+    public DryadLandscape GetCurrentLandscape()
+    {
+        return _currentLandscape;
+    }
+
+    public DryadLandscape GetPreviousLandscape()
+    {
+        return _previousLandscape;
+    }
+
+
     void Start()
     {
+        if (Name == null)
+            Name = "Paul";
+
         _global = DryadGlobal.GetInstance();
         if (_global == null)
             Debug.LogError("No DryadGlobal accessible!");
-        _global.Register(this);
+        else
+            _global.Register(this);
     }
 
     void OnDestroy()
     {
-        _global.Unregister(this);
+        if(_global != null)
+            _global.Unregister(this);
     }
 
     void Update()
     {
-        foreach(KeyValuePair<DryadMotif, uint> item in _motifsCache)
-        {
-            if (item.Value > 0)
-                Debug.DrawLine(transform.position, item.Key.transform.position);
-        }
+        foreach(DryadMotif motif in _motifs)
+            Debug.DrawLine(transform.position, motif.transform.position);
     }
 
-    public void ResetMotifCounts()
+    public void ClearMotifs()
     {
-        List<DryadMotif> keys = new List<DryadMotif>(_motifsCache.Keys);
-        foreach(var key in keys)
-            _motifsCache[key] = 0;
+        _motifs.Clear();
     }
 
-    public void IncrementMotifCount(DryadMotif motif, uint amount = 1)
+    public void AddMotif(DryadMotif motif)
     {
-        if (!_motifsCache.ContainsKey(motif))
-            _motifsCache.Add(motif, 0);
-        _motifsCache[motif] += amount;
-        Debug.Log($"Set motif {motif.Name} count to {_motifsCache[motif]}");
+        _motifs.Add(motif);
     }
 
-    public void DecrementMotifCount(DryadMotif motif, uint amount = 1)
+    public void RemoveMotif(DryadMotif motif)
     {
-        uint currentCount = _motifsCache[motif];
-        if (amount > currentCount)
-        {
-            _motifsCache[motif] = 0;
-            Debug.LogError($"Motif {motif.Name} count underflow");
-        }
+        if (_motifs.Contains(motif))
+            _motifs.Remove(motif);
         else
-            _motifsCache[motif] -= amount;
+            Debug.LogError($"Motif {motif.Name} note present in listener");
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        DryadLandscape landscape = other.gameObject.GetComponent<DryadLandscape>();
+        if (landscape != null && landscape != _currentLandscape)
+        {
+            _previousLandscape = _currentLandscape;
+            _currentLandscape = landscape;
+        }
+    }
+
+    /*
+    private void OnTriggerExit(Collider other)
+    {
+        DryadLandscape landscape = other.gameObject.GetComponent<DryadLandscape>();
+        if (landscape != null)
+            _previousLandscape = landscape;
+    }
+    */
+
+    public List<DryadMotif> GetMotifs()
+    {
+        return _motifs;
+    }
+
 }

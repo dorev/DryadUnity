@@ -10,12 +10,38 @@ public class MotifNote
 
 public class DryadMotif : MonoBehaviour
 {
-    public float Range { get; set; }
-    public string Name { get; set; }
-    public string Voice { get; set; }
+    // https://unity3d.college/2017/05/22/unity-attributes/
+
+    public float Range = 5f;
+    public string Name = "NoMotifName";
+    public string Voice = "NoVoiceName";
 
     public DryadMotif()
     {
-        Range = 3.0f;
+    }
+
+    public override int GetHashCode()
+    {
+        return 42
+            ^ Range.GetHashCode()
+            ^ Name.GetHashCode()
+            ^ Voice.GetHashCode();
+    }
+
+    public override bool Equals(object other)
+    {
+        if(other.GetType() != typeof(DryadMotif))
+            return false;
+        if (object.ReferenceEquals(other, this))
+            return true;
+
+        return Equals(other as DryadMotif);
+    }
+
+    public bool Equals(DryadMotif other)
+    {
+        return Range == other.Range 
+            && Name == other.Name
+            && Voice == other.Voice;
     }
 }
