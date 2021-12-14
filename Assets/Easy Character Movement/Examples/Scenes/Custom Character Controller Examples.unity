@@ -603,7 +603,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052aac40df857a34e93a2aa4ee59cc38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
+  Name: 6-2-4-5 (green)
+  Nodes:
+  - Degree: 6
+    Edges: 0200000004000000
+  - Degree: 2
+    Edges: 05000000
+  - Degree: 4
+    Edges: 0600000005000000
+  - Degree: 5
+    Edges: 06000000
 --- !u!1 &1099185332
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,7 +891,7 @@ GameObject:
   - component: {fileID: 1209067766}
   - component: {fileID: 1209067770}
   m_Layer: 0
-  m_Name: MotifSourceYellow
+  m_Name: MotifYellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1059,6 +1068,7 @@ GameObject:
   - component: {fileID: 1676059073}
   - component: {fileID: 1676059072}
   - component: {fileID: 1676059071}
+  - component: {fileID: 1676059075}
   m_Layer: 0
   m_Name: LandscapeBlue
   m_TagString: Untagged
@@ -1143,6 +1153,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1676059075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676059070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052aac40df857a34e93a2aa4ee59cc38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 1-4-5-1 (blue)
+  Nodes:
+  - Degree: 1
+    Edges: 0400000005000000
+  - Degree: 4
+    Edges: 0500000001000000
+  - Degree: 5
+    Edges: 01000000
 --- !u!1 &1878205352
 GameObject:
   m_ObjectHideFlags: 0

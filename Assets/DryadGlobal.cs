@@ -6,8 +6,22 @@ using UnityEngine.UI;
 
 public class DryadGlobal : MonoBehaviour
 {
+    [SerializeField]
+    public float RefreshPeriod
+    {
+        get
+        {
+            return RefreshPeriod;
+        }
+        set
+        {
+            RefreshPeriod = value;
+            _slowPeriod = new WaitForSeconds(value);
+        }
+    }
+
     static DryadGlobal _instance;
-    WaitForSeconds _slowPeriod = new WaitForSeconds(1f);
+    WaitForSeconds _slowPeriod;
     List<DryadListener> _listeners = new List<DryadListener>();
 
     enum Status
@@ -23,6 +37,8 @@ public class DryadGlobal : MonoBehaviour
         return _instance;
     }
 
+
+
     void Awake()
     {
         // Prefab/Singleton check
@@ -35,6 +51,7 @@ public class DryadGlobal : MonoBehaviour
     void Start()
     {
         _status = Status.Init;
+        _slowPeriod = new WaitForSeconds(RefreshPeriod);
         StartCoroutine(SlowPeriodicWork());
         _status = Status.Running;
 

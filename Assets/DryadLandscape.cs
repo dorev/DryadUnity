@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEditor;
 
 namespace Dryad
 {
@@ -18,15 +17,12 @@ public class DryadLandscape : MonoBehaviour
     public string Name;
     public List<Dryad.HarmonyNode> Nodes;
 
-    // Start is called before the first frame update
-    void Start()
+    public delegate void OpenGraphEditorDelegate();
+    public static OpenGraphEditorDelegate OnOpenGraphEditor;
+     
+    public void OpenGraphEditor()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (OnOpenGraphEditor != null)
+            OnOpenGraphEditor();
     }
 }
