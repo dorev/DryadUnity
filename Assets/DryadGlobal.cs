@@ -6,19 +6,7 @@ using UnityEngine.UI;
 
 public class DryadGlobal : MonoBehaviour
 {
-    [SerializeField]
-    public float RefreshPeriod
-    {
-        get
-        {
-            return RefreshPeriod;
-        }
-        set
-        {
-            RefreshPeriod = value;
-            _slowPeriod = new WaitForSeconds(value);
-        }
-    }
+    public float RefreshPeriod;
 
     static DryadGlobal _instance;
     WaitForSeconds _slowPeriod;
@@ -54,13 +42,13 @@ public class DryadGlobal : MonoBehaviour
         _slowPeriod = new WaitForSeconds(RefreshPeriod);
         StartCoroutine(SlowPeriodicWork());
         _status = Status.Running;
-
         SetupDebugUI();
     }
 
     void Update()
     {
-        UpdateDebugUI();
+         UpdateDebugUI();
+        _slowPeriod = new WaitForSeconds(RefreshPeriod);
     }
 
     void Shutdown()

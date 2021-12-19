@@ -3,15 +3,15 @@ using UnityEngine;
 
 public enum ConnectionPointType { In, Out }
 
-public class ConnectionPoint
+public class DryadLandscapeConnectionPoint
 {
     public Rect rect;
     public ConnectionPointType type;
-    public Node node;
+    public DryadLandscapeNode node;
     public GUIStyle style;
-    public Action<ConnectionPoint> OnClickConnectionPoint;
+    public Action<DryadLandscapeConnectionPoint> OnClickConnectionPoint;
 
-    public ConnectionPoint(Node node, ConnectionPointType type, GUIStyle style, Action<ConnectionPoint> OnClickConnectionPoint)
+    public DryadLandscapeConnectionPoint(DryadLandscapeNode node, ConnectionPointType type, GUIStyle style, Action<DryadLandscapeConnectionPoint> OnClickConnectionPoint)
     {
         this.node = node;
         this.type = type;
