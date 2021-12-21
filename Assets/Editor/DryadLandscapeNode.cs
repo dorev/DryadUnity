@@ -1,62 +1,47 @@
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 public class DryadLandscapeNode
 {
-    public Rect rect;
-    Rect controlsRect;
-    public string title = "Node title";
+    public Rect Rect;
     public bool isDragged;
     public bool isSelected;
-    public readonly uint nodeId;
-
-    public DryadLandscapeConnectionPoint inPoint;
-    public DryadLandscapeConnectionPoint outPoint;
-
-    GUIStyle style;
-    GUIStyle defaultNodeStyle;
-    GUIStyle selectedNodeStyle;
-    GUIStyle titleStyle;
-
+    public readonly uint Id;
+    public List<uint> Edges = new List<uint>();
+    public Dryad.Chord Chord;
+    public GUIStyle Style;
     Action<DryadLandscapeNode> OnRemoveNode;
+    Action<DryadLandscapeNode> OnCreateLink;
+    Action<DryadLandscapeNode> OnNodeClicked;
 
-    public static readonly float width = 230;
-    public static readonly float height = 145;
+    static GUIStyle defaultNodeStyle;
+    static GUIStyle selectedNodeStyle;
+    static GUIStyle titleStyle;
+    static readonly float width = 230;
+    static readonly float height = 145;
     static readonly float spacing = EditorGUIUtility.standardVerticalSpacing;
     static readonly float lineHeight = EditorGUIUtility.singleLineHeight;
     static readonly float labelWidthValue = 70;
     static readonly float valueWidthValue = 110;
     static readonly GUILayoutOption labelWidth = GUILayout.Width(labelWidthValue);
     static readonly GUILayoutOption valueWidth = GUILayout.Width(valueWidthValue);
-    static uint ID = 0;
+    static uint staticIdSource = 0;
 
-    Dryad.TriadVoicing Voicing;
-    Dryad.Extension Extension;
-    int Inversion = 0;
-    int Shift = 0;
-
-    public DryadLandscapeNode(
-        Vector2 position,
-        Action<DryadLandscapeConnectionPoint> OnClickInPoint,
-        Action<DryadLandscapeConnectionPoint> OnClickOutPoint,
-        Action<DryadLandscapeNode> OnClickRemoveNode)
+    static DryadLandscapeNode()
     {
-        nodeId = ID++;
-        rect = new Rect(position.x, position.y, width, height);
-        controlsRect = new Rect(rect.x + 20, rect.y, rect.width - 20, rect.height - 20);
+        defaultNodeStyle = new GUIStyle();
+        defaultNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1.png") as Texture2D;
+        defaultNodeStyle.border = new RectOffset(12, 12, 12, 12);
+        defaultNodeStyle.padding = new RectOffset(12, 0, 4, 0);
+        defaultNodeStyle.alignment = TextAnchor.MiddleCenter;
 
-        defaultNodeStyle = style;
-        OnRemoveNode = OnClickRemoveNode;
-
-        style = new GUIStyle();
-        style.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1.png") as Texture2D;
-        style.border = new RectOffset(12, 12, 12, 12);
-        style.padding = new RectOffset(12, 0, 4, 0);
-
-        //selectedNodeStyle = new GUIStyle();
-        //selectedNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1 on.png") as Texture2D;
-        //selectedNodeStyle.border = new RectOffset(12, 12, 12, 12);
+        selectedNodeStyle = new GUIStyle();
+        selectedNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1 on.png") as Texture2D;
+        selectedNodeStyle.border = new RectOffset(12, 12, 12, 12);
+        selectedNodeStyle.padding = new RectOffset(12, 0, 4, 0);
+        selectedNodeStyle.alignment = TextAnchor.MiddleCenter;
 
         titleStyle = new GUIStyle();
         titleStyle.normal.textColor = Color.white;
@@ -65,48 +50,74 @@ public class DryadLandscapeNode
         titleStyle.fontSize = 16;
     }
 
+    public DryadLandscapeNode(
+        Dryad.Chord chord,
+        Vector2 position,
+        Action<DryadLandscapeNode> OnClickCreateLink,
+        Action<DryadLandscapeNode> OnClickInNode,
+        Action<DryadLandscapeNode> OnClickRemoveNode)
+    {
+        Id = staticIdSource++;
+        Chord = chord;
+        Rect = new Rect(position.x, position.y, width, height);
+
+        Style = defaultNodeStyle;
+        OnRemoveNode = OnClickRemoveNode;
+        OnCreateLink = OnClickCreateLink;
+        OnNodeClicked = OnClickInNode;
+    }
+
+    public DryadLandscapeNode(
+        LandscapeNodeData nodeData,
+        Action<DryadLandscapeNode> OnClickCreateLink,
+        Action<DryadLandscapeNode> OnClickInNode,
+        Action<DryadLandscapeNode> OnClickRemoveNode)
+    {
+        Id = nodeData.Id;
+        Chord = nodeData.Chord;
+        Rect = nodeData.Rect;
+        Edges = nodeData.Edges;
+
+        Style = defaultNodeStyle;
+        OnRemoveNode = OnClickRemoveNode;
+        OnCreateLink = OnClickCreateLink;
+        OnNodeClicked = OnClickInNode;
+    }
+
     public void Drag(Vector2 delta)
     {
-        rect.position += delta;
-        controlsRect.position += delta;
-    }
-    public static GUIStyle GetStyle(Color color)
-    {
-        GUIStyle style = new GUIStyle();
-        Texture2D texture = new Texture2D(1, 1);
-        texture.SetPixel(0, 0, color);
-        texture.Apply();
-        style.normal.background = texture;
-        return style;
+        Rect.position += delta;
     }
 
     public void Draw()
     {
-        GUILayout.BeginArea(controlsRect, style);
+        GUILayout.BeginArea(Rect, Style);
+
         GUILayout.Space(5);
-        GUILayout.Label(title, titleStyle, GUILayout.Width(labelWidthValue + valueWidthValue + 20));
+        GUILayout.Label(Chord.Name, titleStyle, GUILayout.Width(labelWidthValue + valueWidthValue));
         GUILayout.Space(5);
-        AddEnum("Voicing", ref Voicing);
-        AddEnum("Extension", ref Extension);
-        AddSlider("Inversion", ref Inversion, 0, 3);
-        AddSlider("Shift", ref Shift, -2, 2);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Voicing", labelWidth);
+        Chord.TriadVoicing = (Dryad.TriadVoicing)EditorGUILayout.EnumPopup(Chord.TriadVoicing, valueWidth);
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Extension", labelWidth);
+        Chord.Extension = (Dryad.Extension)EditorGUILayout.EnumPopup(Chord.Extension, valueWidth);
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Inversion", labelWidth);
+        Chord.Inversion = EditorGUILayout.IntSlider(Chord.Inversion, 0, 3, valueWidth);
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Shift", labelWidth);
+        Chord.Shift= EditorGUILayout.IntSlider(Chord.Shift, -2, 2, valueWidth);
+        GUILayout.EndHorizontal();
+
         GUILayout.EndArea();
-    }
-
-    void AddEnum<Enum>(string label, ref Enum enumObject) where Enum : System.Enum
-    {
-        GUILayout.BeginHorizontal();
-        GUILayout.Label(label, labelWidth);
-        enumObject = (Enum)EditorGUILayout.EnumPopup(enumObject, valueWidth);
-        GUILayout.EndHorizontal();
-    }
-
-    void AddSlider(string label, ref int value, int min, int max)
-    {
-        GUILayout.BeginHorizontal();
-        GUILayout.Label(label, labelWidth);
-        value = EditorGUILayout.IntSlider(value, min, max, valueWidth);
-        GUILayout.EndHorizontal();
     }
 
     public bool ProcessEvents(Event e)
@@ -116,21 +127,23 @@ public class DryadLandscapeNode
             case EventType.MouseDown:
                 if (e.button == 0)
                 {
-                    if (rect.Contains(e.mousePosition))
+                    if (Rect.Contains(e.mousePosition))
                     {
                         isDragged = true;
                         GUI.changed = true;
                         isSelected = true;
-                        //style = selectedNodeStyle;
+                        Style = selectedNodeStyle;
+                        if (OnNodeClicked != null)
+                            OnNodeClicked(this);
                     }
                     else
                     {
                         GUI.changed = true;
                         isSelected = false;
-                        //style = defaultNodeStyle;
+                        Style = defaultNodeStyle;
                     }
                 }
-                if (e.button == 1 /* && isSelected */ && rect.Contains(e.mousePosition))
+                if (e.button == 1 /* && isSelected */ && Rect.Contains(e.mousePosition))
                 {
                     ProcessContextMenu();
                     e.Use();
@@ -158,12 +171,19 @@ public class DryadLandscapeNode
     {
         GenericMenu genericMenu = new GenericMenu();
         genericMenu.AddItem(new GUIContent("Remove node"), false, OnClickRemoveNode);
+        genericMenu.AddItem(new GUIContent("Create directional link"), false, OnClickCreateLink);
         genericMenu.ShowAsContext();
     }
- 
+
     private void OnClickRemoveNode()
     {
         if (OnRemoveNode != null)
             OnRemoveNode(this);
+    }
+
+    private void OnClickCreateLink()
+    {
+        if (OnCreateLink != null)
+            OnCreateLink(this);
     }
 }

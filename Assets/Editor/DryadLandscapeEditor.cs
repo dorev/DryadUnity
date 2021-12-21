@@ -4,50 +4,47 @@ using UnityEngine;
 using UnityEditor;
 
 
-class NodeSlice
-{
-    uint height;
-    GUIStyle style;
-    DryadLandscapeNode parent; // for width
-}
-
 public class DryadLandscapeEditor : EditorWindow
 {
-    string graphName = "";
-    List<DryadLandscapeNode> nodes;
+    [SerializeField]
+    public DryadLandscape Landscape;
 
-    private DryadLandscape dryadLandscape;
-    private List<DryadLandscapeConnectionLine> connections;
+    private List<DryadLandscapeNode> nodes = new List<DryadLandscapeNode>();
+    private List<DryadLandscapeEdge> edges = new List<DryadLandscapeEdge>();
+    private bool dataHasChanged = false;
 
-    private GUIStyle nodeStyle;
-    private List<NodeSlice> nodeSlices;
-    private GUIStyle selectedNodeStyle;
-    private GUIStyle inPointStyle;
-    private GUIStyle outPointStyle;
-
-    private DryadLandscapeConnectionPoint selectedInPoint;
-    private DryadLandscapeConnectionPoint selectedOutPoint;
-
+    private DryadLandscapeNode selectedEdgeSourceNode;
     private Vector2 drag;
     private Vector2 offset;
-
-    private void OnEnable()
-    {
-
-    }
 
     public static void ShowWindow(DryadLandscape landscape)
     {
         DryadLandscapeEditor window = GetWindow<DryadLandscapeEditor>();
-        window.SetLandscape(landscape);
+        window.InitLandscapeGraph(landscape);
         window.titleContent = new GUIContent("Landscape Graph Editor");
     }
 
-    private void SetLandscape(DryadLandscape landscape)
+    private void InitLandscapeGraph(DryadLandscape landscape)
     {
-        dryadLandscape = landscape;
-        // get scale degrees
-        // setup all nodes and connections
+        Landscape = landscape;
+
+        // Add all nodes
+        foreach(LandscapeNodeData nodeData in Landscape.NodesData)
+            OnClickAddNode(nodeData);
+
+        // Add all edges
+        DryadLandscapeNode destinationNode;
+        foreach (DryadLandscapeNode node in nodes.ToArray())
+        {
+            if(node.Edges.Count > 0)
+            {
+                foreach (uint edgeId in node.Edges.ToArray())
+                {
+                    if (FindNodeById(edgeId, out destinationNode))
+                        CreateEdge(node, destinationNode);
+                }
+            }
+        }
     }
 
     [InitializeOnLoadMethod]
@@ -58,34 +55,45 @@ public class DryadLandscapeEditor : EditorWindow
 
     private void OnGUI()
     {
+        if (dataHasChanged)
+            SaveLandscapeData();
+
         DrawGrid(20, 0.2f, Color.gray);
         DrawGrid(100, 0.4f, Color.gray);
-        GUILayout.Label(dryadLandscape.Name, EditorStyles.boldLabel);
-        
+
+        if (Landscape == null)
+        {
+            EditorGUILayout.HelpBox(
+                "No DryadLandscape selected\n" +
+                "Select a DryadLanscape from the inspector\n" +
+                "and click Open Landscape Graph Editor.",
+                MessageType.Warning);
+            return;
+        }
+
+        GUILayout.Label(Landscape.Name, EditorStyles.boldLabel);
+
+        // Links are under the nodes
+        DrawEdge(Event.current);
+        DrawLinks();
         DrawNodes();
-        DrawConnections();
-        DrawConnectionLine(Event.current);
 
         ProcessNodeEvents(Event.current);
         ProcessEvents(Event.current);
+
         if (GUI.changed)
             Repaint();
     }
 
-    void DrawNodes()
+    void SaveLandscapeData()
     {
-        if (nodes == null)
-            return;
-        foreach(DryadLandscapeNode node in nodes)
-            node.Draw();
-    }
+        Landscape.NodesData.Clear();
 
-    void DrawConnections()
-    {
-        if (connections == null)
-            return;
-        foreach (DryadLandscapeConnectionLine connection in connections)
-            connection.Draw();
+        foreach(DryadLandscapeNode node in nodes)
+            Landscape.NodesData.Add(new LandscapeNodeData(node.Id, node.Chord, node.Edges, node.Rect));
+
+        EditorUtility.SetDirty(Landscape);
+        dataHasChanged = false;
     }
 
     void ProcessEvents(Event e)
@@ -96,7 +104,7 @@ public class DryadLandscapeEditor : EditorWindow
         {
             case EventType.MouseDown:
                 if (e.button == 0)
-                    ClearConnectionSelection();
+                    ClearNodeSelection();
                 else if (e.button == 1)
                     ProcessContextMenu(e.mousePosition);
                 break;
@@ -108,9 +116,6 @@ public class DryadLandscapeEditor : EditorWindow
     }
     private void ProcessNodeEvents(Event e)
     {
-        if (nodes == null)
-            return;
-
         foreach (DryadLandscapeNode node in nodes) // might need to do the iteration backward to redraw in order of addition
         {
             if (node.ProcessEvents(e))
@@ -121,85 +126,106 @@ public class DryadLandscapeEditor : EditorWindow
     private void ProcessContextMenu(Vector2 mousePosition)
     {
         GenericMenu genericMenu = new GenericMenu();
-        genericMenu.AddItem(new GUIContent("Add root"), false, () => OnClickAddNode(mousePosition));
-        genericMenu.AddItem(new GUIContent("Add second"), false, () => OnClickAddNode(mousePosition));
-        genericMenu.AddItem(new GUIContent("Add third"), false, () => OnClickAddNode(mousePosition));
-        genericMenu.AddItem(new GUIContent("Add fourth"), false, () => OnClickAddNode(mousePosition));
-        genericMenu.AddItem(new GUIContent("Add fifth"), false, () => OnClickAddNode(mousePosition));
-        genericMenu.AddItem(new GUIContent("Add sixth"), false, () => OnClickAddNode(mousePosition));
-        genericMenu.AddItem(new GUIContent("Add seventh"), false, () => OnClickAddNode(mousePosition));
+        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Tonic.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Tonic));
+        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Second.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Second));
+        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Third.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Third));
+        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Fourth.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Fourth));
+        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Fifth.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Fifth));
+        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Sixth.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Sixth));
+        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Seventh.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Seventh));
         genericMenu.ShowAsContext();
     }
 
-    private void OnClickAddNode(Vector2 mousePosition)
+    private void CreateEdge(DryadLandscapeNode sourceNode, DryadLandscapeNode destinationNode)
     {
-        if (nodes == null)
-            nodes = new List<DryadLandscapeNode>();
-
-        nodes.Add(new DryadLandscapeNode(mousePosition, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode));
+        edges.Add(new DryadLandscapeEdge(sourceNode, destinationNode, OnClickRemoveEdge));
+        sourceNode.Edges.Add(destinationNode.Id);
+        ClearNodeSelection();
+        dataHasChanged = true;
     }
 
-    private void OnClickInPoint(DryadLandscapeConnectionPoint inPoint)
+    bool FindNodeById(uint id, out DryadLandscapeNode nodeFound)
     {
-        selectedInPoint = inPoint;
-
-        if (selectedOutPoint != null)
+        foreach(DryadLandscapeNode node in nodes)
         {
-            if (selectedOutPoint.node != selectedInPoint.node)
+            if (node.Id == id)
             {
-                CreateConnection();
-                ClearConnectionSelection();
-            }
-            else
-            {
-                ClearConnectionSelection();
+                nodeFound = node;
+                return true;
             }
         }
+
+        nodeFound = null;
+        return false;
     }
 
-    private void OnClickOutPoint(DryadLandscapeConnectionPoint outPoint)
+    private void ClearNodeSelection()
     {
-        selectedOutPoint = outPoint;
-
-        if (selectedInPoint != null)
-        {
-            if (selectedOutPoint.node != selectedInPoint.node)
-            {
-                CreateConnection();
-                ClearConnectionSelection();
-            }
-            else
-            {
-                ClearConnectionSelection();
-            }
-        }
+        selectedEdgeSourceNode = null;
     }
 
-    private void OnClickRemoveConnection(DryadLandscapeConnectionLine connection)
+    void DrawEdge(Event e)
     {
-        connections.Remove(connection);
+        if (selectedEdgeSourceNode == null)
+            return;
+
+        Handles.DrawLine(selectedEdgeSourceNode.Rect.center, e.mousePosition, 2f);
+        GUI.changed = true;
+    }
+
+    private void OnClickAddNode(Vector2 mousePosition, Dryad.Chord chord)
+    {
+        nodes.Add(new DryadLandscapeNode(new Dryad.Chord(chord), mousePosition, OnClickInitNewEdge, OnClickInNode, OnClickRemoveNode));
+        dataHasChanged = true;
+    }
+    
+    private void OnClickAddNode(LandscapeNodeData nodeData)
+    {
+        nodes.Add(new DryadLandscapeNode(nodeData, OnClickInitNewEdge, OnClickInNode, OnClickRemoveNode));
+        dataHasChanged = true;
+    }
+
+    private void OnClickInitNewEdge(DryadLandscapeNode node)
+    {
+        selectedEdgeSourceNode = node;
+    }
+
+    private void OnClickInNode(DryadLandscapeNode destinationNode)
+    {
+        if (selectedEdgeSourceNode == null)
+            return;
+
+        if (selectedEdgeSourceNode != destinationNode)
+            CreateEdge(selectedEdgeSourceNode, destinationNode);
+    }
+
+    private void OnClickRemoveEdge(DryadLandscapeEdge edge)
+    {
+        edges.Remove(edge);
+        edge.sourceNode.Edges.Remove(edge.destinationNode.Id);
+        dataHasChanged = true;
     }
 
     private void OnClickRemoveNode(DryadLandscapeNode node)
     {
-        if (connections != null)
+        if (edges.Count > 0)
         {
-            List<DryadLandscapeConnectionLine> connectionsToRemove = new List<DryadLandscapeConnectionLine>();
+            List<DryadLandscapeEdge> edgesToRemove = new List<DryadLandscapeEdge>();
  
-            foreach(DryadLandscapeConnectionLine connection in connections)
+            foreach(DryadLandscapeEdge edge in edges)
             {
-                if (connection.inPoint == node.inPoint || connection.outPoint == node.outPoint)
-                    connectionsToRemove.Add(connection);
+                if (edge.sourceNode == node || edge.destinationNode == node)
+                    edgesToRemove.Add(edge);
             }
  
-            foreach(DryadLandscapeConnectionLine connection in connectionsToRemove)
-                connections.Remove(connection);
- 
-            connectionsToRemove = null;
+            foreach(DryadLandscapeEdge link in edgesToRemove)
+                edges.Remove(link);
         }
  
         nodes.Remove(node);
+        dataHasChanged = true;
     }
+
     private void OnDrag(Vector2 delta)
     {
         drag = delta;
@@ -213,50 +239,16 @@ public class DryadLandscapeEditor : EditorWindow
         GUI.changed = true;
     }
 
-    private void CreateConnection()
+    void DrawNodes()
     {
-        if (connections == null)
-            connections = new List<DryadLandscapeConnectionLine>();
-
-        connections.Add(new DryadLandscapeConnectionLine(selectedInPoint, selectedOutPoint, OnClickRemoveConnection));
+        foreach (DryadLandscapeNode node in nodes)
+            node.Draw();
     }
 
-    private void ClearConnectionSelection()
+    void DrawLinks()
     {
-        selectedInPoint = null;
-        selectedOutPoint = null;
-    }
-
-    private void DrawConnectionLine(Event e)
-    {
-        if (selectedInPoint != null && selectedOutPoint == null)
-        {
-            Handles.DrawBezier(
-                selectedInPoint.rect.center,
-                e.mousePosition,
-                selectedInPoint.rect.center + Vector2.left * 25f,
-                e.mousePosition - Vector2.left * 25f,
-                Color.white,
-                null,
-                2f
-            );
- 
-            GUI.changed = true;
-        }
-        else if (selectedOutPoint != null && selectedInPoint == null)
-        {
-            Handles.DrawBezier(
-                selectedOutPoint.rect.center,
-                e.mousePosition,
-                selectedOutPoint.rect.center - Vector2.left * 25f,
-                e.mousePosition + Vector2.left * 25f,
-                Color.white,
-                null,
-                2f
-            );
- 
-            GUI.changed = true;
-        }
+        foreach (DryadLandscapeEdge edge in edges.ToArray())
+            edge.Draw();
     }
 
     private void DrawGrid(float gridSpacing, float gridOpacity, Color gridColor)
