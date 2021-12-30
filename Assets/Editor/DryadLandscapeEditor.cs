@@ -92,8 +92,7 @@ public class DryadLandscapeEditor : EditorWindow
                 }
             }
         }
-    }
- 
+    } 
 
     private void OnGUI()
     {
@@ -152,6 +151,7 @@ public class DryadLandscapeEditor : EditorWindow
                 break;
         }
     }
+
     private void ProcessNodeEvents(Event e)
     {
         foreach (DryadLandscapeNode node in nodes) // might need to do the iteration backward to redraw in order of addition
