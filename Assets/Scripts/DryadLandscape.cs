@@ -93,6 +93,7 @@ namespace Dryad
         public Extension Extension;
         public int Inversion;
         public int Shift;
+        public bool Entry;
         public string Name
         {
             get
@@ -112,6 +113,7 @@ namespace Dryad
             Extension = Extension.None;
             Inversion = 0;
             Shift = 0;
+            Entry = false;
             EvaluateTriadVoicing();
         }
 
@@ -122,6 +124,8 @@ namespace Dryad
             Extension = other.Extension;
             Inversion = other.Inversion;
             Shift = other.Shift;
+            Entry = other.Entry;
+            TriadVoicing = other.TriadVoicing;
         }
 
         void EvaluateTriadVoicing()
@@ -230,7 +234,7 @@ public class DryadLandscape : MonoBehaviour
     public delegate void OpenGraphEditorDelegate(DryadLandscape landscape);
     public static OpenGraphEditorDelegate OnOpenGraphEditor;
      
-    public void OpenGraphEditor()
+    public void OpenLandscapeEditor()
     {
         if (NodesData == null)
             NodesData = new List<LandscapeNodeData>();

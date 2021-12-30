@@ -2,19 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class MotifNote
 {
-    float Duration { get; set; }
-    int Offset { get; set; }
+    uint OnScoreTime;
+    uint OffScoreTime;
+    int ScaleOffset;
 }
 
 public class DryadMotif : MonoBehaviour
 {
     // https://unity3d.college/2017/05/22/unity-attributes/
 
-    public float Range = 5f;
     public string Name = "NoMotifName";
     public string Voice = "NoVoiceName";
+    public float BroadcastRange = 5f;
+
+    [HideInInspector]
+    public List<MotifNote> Notes;
+
+    // Delegate required because of compilation order
+    public delegate void OpenMotifEditorDelegate(DryadMotif landscape);
+    public static OpenMotifEditorDelegate OnOpenMotifEditor;
+
+    public void OpenMotifEditor()
+    {
+        if (Notes == null)
+            Notes = new List<MotifNote>();
+
+        if (OnOpenMotifEditor != null)
+            OnOpenMotifEditor(this);
+    }
 
     public DryadMotif()
     {
@@ -23,7 +41,7 @@ public class DryadMotif : MonoBehaviour
     public override int GetHashCode()
     {
         return 42
-            ^ Range.GetHashCode()
+            ^ BroadcastRange.GetHashCode()
             ^ Name.GetHashCode()
             ^ Voice.GetHashCode();
     }
@@ -40,7 +58,7 @@ public class DryadMotif : MonoBehaviour
 
     public bool Equals(DryadMotif other)
     {
-        return Range == other.Range 
+        return BroadcastRange == other.BroadcastRange
             && Name == other.Name
             && Voice == other.Voice;
     }

@@ -448,9 +448,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9457550788a95224b85fededc8ebd736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 5
   Name: MotifRed
   Voice: VoiceRed
+  BroadcastRange: 5
+  Notes: []
 --- !u!1 &817883385
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,10 +607,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 6-2-4-5 (green)
   Scale:
-    Intervals: 
-    RootNote: 0
-    FlatOrSharp: 0
-  NodesData: []
+    Intervals: 0000000002000000040000000500000007000000090000000b000000
+    RootNote: 48
+    FlatOrSharp: 1
+  NodesData:
+  - Id: 0
+    Chord:
+      Scale:
+        Intervals: 0000000002000000040000000500000007000000090000000b000000
+        RootNote: 48
+        FlatOrSharp: 1
+      Degree: 2
+      TriadVoicing: 1
+      Extension: 0
+      Inversion: 0
+      Shift: 0
+      Entry: 0
+    Edges: 
+    Rect:
+      serializedVersion: 2
+      x: 248
+      y: 57
+      width: 230
+      height: 145
+  - Id: 1
+    Chord:
+      Scale:
+        Intervals: 0000000002000000040000000500000007000000090000000b000000
+        RootNote: 48
+        FlatOrSharp: 1
+      Degree: 5
+      TriadVoicing: 0
+      Extension: 0
+      Inversion: 0
+      Shift: 0
+      Entry: 0
+    Edges: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    Rect:
+      serializedVersion: 2
+      x: -65
+      y: 117
+      width: 230
+      height: 145
 --- !u!1 &1099185332
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,9 +1022,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9457550788a95224b85fededc8ebd736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 5
   Name: MotifYellow
   Voice: VoiceYellow
+  BroadcastRange: 5
+  Notes: []
 --- !u!850595691 &1215814383
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -1167,79 +1207,7 @@ MonoBehaviour:
     Intervals: 0000000002000000040000000500000007000000090000000b000000
     RootNote: 48
     FlatOrSharp: 1
-  NodesData:
-  - Id: 0
-    Chord:
-      Scale:
-        Intervals: 0000000002000000040000000500000007000000090000000b000000
-        RootNote: 48
-        FlatOrSharp: 1
-      Degree: 1
-      TriadVoicing: 0
-      Extension: 0
-      Inversion: 0
-      Shift: 0
-    Edges: 01000000
-    Rect:
-      serializedVersion: 2
-      x: 117
-      y: 17
-      width: 230
-      height: 145
-  - Id: 1
-    Chord:
-      Scale:
-        Intervals: 0000000002000000040000000500000007000000090000000b000000
-        RootNote: 48
-        FlatOrSharp: 1
-      Degree: 4
-      TriadVoicing: 0
-      Extension: 0
-      Inversion: 1
-      Shift: 0
-    Edges: 0200000003000000
-    Rect:
-      serializedVersion: 2
-      x: 674
-      y: 33
-      width: 230
-      height: 145
-  - Id: 2
-    Chord:
-      Scale:
-        Intervals: 0000000002000000040000000500000007000000090000000b000000
-        RootNote: 48
-        FlatOrSharp: 1
-      Degree: 5
-      TriadVoicing: 0
-      Extension: 0
-      Inversion: 0
-      Shift: 0
-    Edges: 00000000
-    Rect:
-      serializedVersion: 2
-      x: 450
-      y: 218
-      width: 230
-      height: 145
-  - Id: 3
-    Chord:
-      Scale:
-        Intervals: 0000000002000000040000000500000007000000090000000b000000
-        RootNote: 48
-        FlatOrSharp: 1
-      Degree: 5
-      TriadVoicing: 1
-      Extension: 0
-      Inversion: 0
-      Shift: 0
-    Edges: 00000000
-    Rect:
-      serializedVersion: 2
-      x: 433
-      y: 382
-      width: 230
-      height: 145
+  NodesData: []
 --- !u!1 &1878205352
 GameObject:
   m_ObjectHideFlags: 0

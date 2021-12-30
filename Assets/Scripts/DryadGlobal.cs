@@ -25,8 +25,6 @@ public class DryadGlobal : MonoBehaviour
         return _instance;
     }
 
-
-
     void Awake()
     {
         // Prefab/Singleton check
@@ -93,7 +91,7 @@ public class DryadGlobal : MonoBehaviour
             foreach(DryadMotif motif in FindObjectsOfType<DryadMotif>())
             {
                 float distance = Vector3.Distance(listener.transform.position, motif.transform.position);
-                if (distance < motif.Range)
+                if (distance < motif.BroadcastRange)
                     listener.AddMotif(motif);
             }
         }

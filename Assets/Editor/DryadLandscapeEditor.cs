@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+/*
+ * Complete motif
+ *  - midi like UI?
+ *  - data persistence
+ * IDryadPlayer / DryadGlobalTick
+ * Test audio output with MPTK
+ * C++ interop
+ */
 
 public class DryadLandscapeEditor : EditorWindow
 {
@@ -17,15 +25,54 @@ public class DryadLandscapeEditor : EditorWindow
     private Vector2 drag;
     private Vector2 offset;
 
+    [InitializeOnLoadMethod]
+    static void StaticInit()
+    {
+        DryadLandscape.OnOpenGraphEditor = ShowWindow;
+    }
+
     public static void ShowWindow(DryadLandscape landscape)
     {
         DryadLandscapeEditor window = GetWindow<DryadLandscapeEditor>();
-        window.InitLandscapeGraph(landscape);
+        window.InitLandscapeEditor(landscape);
         window.titleContent = new GUIContent("Landscape Graph Editor");
     }
 
-    private void InitLandscapeGraph(DryadLandscape landscape)
+    private void OnSelectionChange()
     {
+        if (Selection.activeTransform == null)
+            return;
+
+        GameObject obj = Selection.activeTransform.gameObject;
+
+        if (obj == null)
+            return;
+
+        DryadLandscape landscapeSelected = obj.GetComponent<DryadLandscape>();
+
+        if(landscapeSelected != null && landscapeSelected != Landscape)
+        {
+            if(Landscape != null)
+            {
+                SaveLandscapeData();
+                ClearLandscapeEditor();
+            }
+            InitLandscapeEditor(landscapeSelected);
+            Repaint();
+        }
+    }
+
+    void ClearLandscapeEditor()
+    {
+        nodes.Clear();
+        edges.Clear();
+    }
+
+    private void InitLandscapeEditor(DryadLandscape landscape)
+    {
+        if (landscape == null)
+            throw new System.Exception("Null landscape provided to editor initializer");
+
         Landscape = landscape;
 
         // Add all nodes
@@ -46,12 +93,7 @@ public class DryadLandscapeEditor : EditorWindow
             }
         }
     }
-
-    [InitializeOnLoadMethod]
-    static void Init()
-    {
-        DryadLandscape.OnOpenGraphEditor = ShowWindow; // note: there is no () on this
-    }   
+ 
 
     private void OnGUI()
     {
@@ -63,11 +105,7 @@ public class DryadLandscapeEditor : EditorWindow
 
         if (Landscape == null)
         {
-            EditorGUILayout.HelpBox(
-                "No DryadLandscape selected\n" +
-                "Select a DryadLanscape from the inspector\n" +
-                "and click Open Landscape Graph Editor.",
-                MessageType.Warning);
+            EditorGUILayout.HelpBox("No DryadLandscape selected",MessageType.Warning);
             return;
         }
 

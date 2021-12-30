@@ -114,7 +114,12 @@ public class DryadLandscapeNode
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Shift", labelWidth);
-        Chord.Shift= EditorGUILayout.IntSlider(Chord.Shift, -2, 2, valueWidth);
+        Chord.Shift = EditorGUILayout.IntSlider(Chord.Shift, -2, 2, valueWidth);
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Entry", labelWidth);
+        Chord.Entry = EditorGUILayout.Toggle(Chord.Entry, valueWidth);
         GUILayout.EndHorizontal();
 
         GUILayout.EndArea();

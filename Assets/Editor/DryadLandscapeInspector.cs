@@ -36,11 +36,7 @@ public class DryadLandscapeInspector : Editor
     {
         base.OnInspectorGUI();
         
-        serializedObject.Update();
-        DryadLandscape castedTarget = target as DryadLandscape;
-
         script.Name = EditorGUILayout.TextField("Name", script.Name);
-        //EditorGUILayout.PropertyField(serializedObject.FindProperty("Name"));
 
         landscapeScaleRoot = (Dryad.Note)EditorGUILayout.EnumPopup("Root", landscapeScaleRoot);
         landscapeScale = (LandscapeScale)EditorGUILayout.EnumPopup("Scale", landscapeScale);
@@ -70,8 +66,9 @@ public class DryadLandscapeInspector : Editor
 
                 if(!CustomScaleHasError())
                     script.Scale = new Dryad.Scale(
-                        new uint[6]
+                        new uint[7]
                         {
+                            0,
                             (uint)customSecondInterval,
                             (uint)customThirdInterval,
                             (uint)customFourthInterval,
@@ -85,16 +82,14 @@ public class DryadLandscapeInspector : Editor
         }
 
         EditorGUI.BeginDisabledGroup(CustomScaleHasError());
-        if (GUILayout.Button("Open Landscape Graph Editor"))
-            script.OpenGraphEditor();
+        if (GUILayout.Button("Open Landscape Editor"))
+            script.OpenLandscapeEditor();
 
         EditorGUI.EndDisabledGroup();
         AddWarningsToGUI();
 
-        //serializedObject.ApplyModifiedProperties();
-
         if (GUI.changed)
-            EditorUtility.SetDirty(castedTarget);
+            EditorUtility.SetDirty(script);
     }
 
     bool CustomScaleHasError()
