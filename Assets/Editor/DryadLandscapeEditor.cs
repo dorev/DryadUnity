@@ -12,23 +12,20 @@ using UnityEditor;
  * C++ interop
  */
 
-public class DryadLandscapeEditor : EditorWindow
+public class DryadLandscapeEditor : DryadEditorBase
 {
     [SerializeField]
     public DryadLandscape Landscape;
 
     private List<DryadLandscapeNode> nodes = new List<DryadLandscapeNode>();
     private List<DryadLandscapeEdge> edges = new List<DryadLandscapeEdge>();
-    private bool dataHasChanged = false;
 
     private DryadLandscapeNode selectedEdgeSourceNode;
-    private Vector2 drag;
-    private Vector2 offset;
 
     [InitializeOnLoadMethod]
     static void StaticInit()
     {
-        DryadLandscape.OnOpenGraphEditor = ShowWindow;
+        DryadLandscape.OnOpenLandscapeEditor = ShowWindow;
     }
 
     public static void ShowWindow(DryadLandscape landscape)
@@ -40,15 +37,7 @@ public class DryadLandscapeEditor : EditorWindow
 
     private void OnSelectionChange()
     {
-        if (Selection.activeTransform == null)
-            return;
-
-        GameObject obj = Selection.activeTransform.gameObject;
-
-        if (obj == null)
-            return;
-
-        DryadLandscape landscapeSelected = obj.GetComponent<DryadLandscape>();
+        DryadLandscape landscapeSelected = GetGameObjectFromSelection<DryadLandscape>();
 
         if(landscapeSelected != null && landscapeSelected != Landscape)
         {
@@ -64,8 +53,11 @@ public class DryadLandscapeEditor : EditorWindow
 
     void ClearLandscapeEditor()
     {
+        ClearNodeSelection();
         nodes.Clear();
         edges.Clear();
+        Landscape = null;
+        Repaint();
     }
 
     private void InitLandscapeEditor(DryadLandscape landscape)
@@ -146,7 +138,7 @@ public class DryadLandscapeEditor : EditorWindow
                     ProcessContextMenu(e.mousePosition);
                 break;
             case EventType.MouseDrag:
-                if (e.button == 0)
+                if (e.button == 2)
                     OnDrag(e.delta);
                 break;
         }
@@ -163,6 +155,14 @@ public class DryadLandscapeEditor : EditorWindow
 
     private void ProcessContextMenu(Vector2 mousePosition)
     {
+        /*
+        if(GetGameObjectFromSelection<DryadLandscape>() == null)
+        {
+            ClearLandscapeEditor();
+            return;
+        }
+        */
+
         GenericMenu genericMenu = new GenericMenu();
         genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Tonic.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Tonic));
         genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Second.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Second));
@@ -289,23 +289,23 @@ public class DryadLandscapeEditor : EditorWindow
             edge.Draw();
     }
 
-    private void DrawGrid(float gridSpacing, float gridOpacity, Color gridColor)
+    protected void DrawGrid(float gridSpacing, float gridOpacity, Color gridColor)
     {
         int widthDivs = Mathf.CeilToInt(position.width / gridSpacing);
         int heightDivs = Mathf.CeilToInt(position.height / gridSpacing);
- 
+
         Handles.BeginGUI();
         Handles.color = new Color(gridColor.r, gridColor.g, gridColor.b, gridOpacity);
- 
+
         offset += drag * 0.5f;
         Vector3 newOffset = new Vector3(offset.x % gridSpacing, offset.y % gridSpacing, 0);
- 
+
         for (int i = 0; i < widthDivs; i++)
             Handles.DrawLine(new Vector3(gridSpacing * i, -gridSpacing, 0) + newOffset, new Vector3(gridSpacing * i, position.height, 0f) + newOffset);
- 
+
         for (int j = 0; j < heightDivs; j++)
             Handles.DrawLine(new Vector3(-gridSpacing, gridSpacing * j, 0) + newOffset, new Vector3(position.width, gridSpacing * j, 0f) + newOffset);
- 
+
         Handles.color = Color.white;
         Handles.EndGUI();
     }

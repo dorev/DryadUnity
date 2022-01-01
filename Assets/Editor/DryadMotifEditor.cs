@@ -3,16 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-/*
- * Complete motif
- *  - midi like UI?
- *  - data persistence
- * IDryadPlayer / DryadGlobalTick
- * Test audio output with MPTK
- * C++ interop
- */
-
-class DryadMotifNote
+public class DryadMotifNote
 {
     public void Drag(Vector2 delta)
     {
@@ -20,15 +11,16 @@ class DryadMotifNote
     }
 }
 
-public class DryadMotifEditor : EditorWindow
+public class DryadMotifGridRectangle
+{
+
+}
+
+public class DryadMotifEditor : DryadEditorBase
 {
     [SerializeField]
     public DryadMotif Motif;
 
-    private bool dataHasChanged = false;
-
-    private Vector2 drag;
-    private Vector2 offset;
     private float GridUnitSize = 24;
     private float MinGridUnitSize = 12;
     private float MaxGridUnitSize = 48;
@@ -63,7 +55,7 @@ public class DryadMotifEditor : EditorWindow
         if (obj == null)
             return;
 
-        DryadMotif motifSelected = obj.GetComponent<DryadMotif>();
+        DryadMotif motifSelected = GetGameObjectFromSelection<DryadMotif>(); ;
 
         if(motifSelected != null && motifSelected != Motif)
         {
@@ -87,8 +79,8 @@ public class DryadMotifEditor : EditorWindow
 
     }
 
-    // Create relative-staff with offset numbers
-    // Block drag on left beyond staff beginning
+
+    // Add MotifLength line
     // Motif notes
     //  - Shape must "snap" to grid
     //  - Must be able to stretch notes (draggable "On" and "Off" regions)
@@ -118,6 +110,7 @@ public class DryadMotifEditor : EditorWindow
 
     void DrawGrid()
     {
+        // Grid indicating measures and octaves
         DrawHorizontalGrid(8 * GridUnitSize, 0.8f, Color.gray);
         DrawHorizontalGrid(8 * GridUnitSize, 0.8f, Color.gray, 1 * GridUnitSize);
         DrawHorizontalGrid(1 * GridUnitSize, 0.2f, Color.gray);
@@ -125,7 +118,14 @@ public class DryadMotifEditor : EditorWindow
         DrawVerticalGrid(4 * GridUnitSize, 0.4f, Color.gray);
         DrawVerticalGrid(1 * GridUnitSize, 0.2f, Color.gray);
 
+        // Line indicating the beginning and center of the motif
         DrawVerticalLine(0, 1.0f, Color.red);
+        DrawHorizontalLine(0, 1.0f, Color.red);
+        DrawHorizontalLine(GridUnitSize, 1.0f, Color.red);
+
+        // Scale offset labels
+        DrawLabels(Color.white);
+        GUI.Label(DefaultLabelRect(0, 0), $"Offset: {offset.ToString()}");
     }
 
     void ProcessEvents(Event e)
@@ -139,7 +139,7 @@ public class DryadMotifEditor : EditorWindow
                     AddNote(e.mousePosition);
                 break;
             case EventType.MouseDrag:
-                if (e.button == 0)
+                if (e.button == 2)
                     OnDrag(e.delta);
                 break;
             case EventType.ScrollWheel:
@@ -189,9 +189,27 @@ public class DryadMotifEditor : EditorWindow
 
         offset += drag * 0.5f;
 
+        if (offset.x > GridUnitSize)
+            offset.x = GridUnitSize;
+
         Vector3 newOffset = new Vector3(offset.x, offset.y, 0);
 
         Handles.DrawLine(new Vector3(x + newOffset.x, 0.0f, 0.0f), new Vector3(x + newOffset.x, position.height, 0.0f));
+
+        Handles.color = Color.white;
+        Handles.EndGUI();
+    }
+
+    private void DrawHorizontalLine(float y, float lineOpacity, Color lineColor)
+    {
+        Handles.BeginGUI();
+        Handles.color = new Color(lineColor.r, lineColor.g, lineColor.b, lineOpacity);
+
+        offset += drag * 0.5f;
+
+        Vector3 newOffset = new Vector3(offset.x, offset.y, 0);
+
+        Handles.DrawLine(new Vector3(0.0f, y + newOffset.y, 0.0f), new Vector3(position.width, y + newOffset.y, 0.0f));
 
         Handles.color = Color.white;
         Handles.EndGUI();
@@ -224,6 +242,9 @@ public class DryadMotifEditor : EditorWindow
 
         offset += drag * 0.5f;
 
+        if (offset.x > GridUnitSize)
+            offset.x = GridUnitSize;
+
         Vector3 newOffset = new Vector3(offset.x % gridSpacing, offset.y % gridSpacing, 0.0f);
 
         for (int i = 0; i < widthDivs; i++)
@@ -231,5 +252,22 @@ public class DryadMotifEditor : EditorWindow
 
         Handles.color = Color.white;
         Handles.EndGUI();
+    }
+
+    void DrawLabels(Color labelColor)
+    {
+
+        int labelCount = Mathf.FloorToInt(position.height / GridUnitSize);
+        offset += drag * 0.5f;
+        int topLabel = Mathf.FloorToInt(offset.y / GridUnitSize);
+
+        for (int i = 0; i < labelCount; ++i)
+        {
+            float nudge= GridUnitSize / 4;
+            float y = i * GridUnitSize + (offset.y % GridUnitSize) + nudge;
+
+            Rect labelRect = new Rect(nudge, y, EditorGUIUtility.labelWidth, EditorGUIUtility.singleLineHeight);
+            GUI.Label(labelRect, (topLabel - i).ToString());
+        }
     }
 }

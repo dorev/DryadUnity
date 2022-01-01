@@ -232,14 +232,14 @@ public class DryadLandscape : MonoBehaviour
 
     // Delegate required because of compilation order
     public delegate void OpenGraphEditorDelegate(DryadLandscape landscape);
-    public static OpenGraphEditorDelegate OnOpenGraphEditor;
+    public static OpenGraphEditorDelegate OnOpenLandscapeEditor;
      
     public void OpenLandscapeEditor()
     {
         if (NodesData == null)
             NodesData = new List<LandscapeNodeData>();
 
-        if (OnOpenGraphEditor != null)
-            OnOpenGraphEditor(this);
+        if (OnOpenLandscapeEditor != null)
+            OnOpenLandscapeEditor(this);
     }
 }
