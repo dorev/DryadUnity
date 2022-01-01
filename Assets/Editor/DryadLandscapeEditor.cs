@@ -37,7 +37,7 @@ public class DryadLandscapeEditor : DryadEditorBase
 
     private void OnSelectionChange()
     {
-        DryadLandscape landscapeSelected = GetGameObjectFromSelection<DryadLandscape>();
+        DryadLandscape landscapeSelected = GetComponentFromSelection<DryadLandscape>();
 
         if(landscapeSelected != null && landscapeSelected != Landscape)
         {

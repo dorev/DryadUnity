@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class DryadLandscapeNode
+public class DryadLandscapeNode : DryadEditorObjectBase
 {
-    public Rect Rect;
-    public bool isDragged;
-    public bool isSelected;
-    public readonly uint Id;
     public List<uint> Edges = new List<uint>();
     public Dryad.Chord Chord;
     public GUIStyle Style;
@@ -21,8 +17,6 @@ public class DryadLandscapeNode
     static GUIStyle titleStyle;
     static readonly float width = 230;
     static readonly float height = 145;
-    static readonly float spacing = EditorGUIUtility.standardVerticalSpacing;
-    static readonly float lineHeight = EditorGUIUtility.singleLineHeight;
     static readonly float labelWidthValue = 70;
     static readonly float valueWidthValue = 110;
     static readonly GUILayoutOption labelWidth = GUILayout.Width(labelWidthValue);
@@ -56,8 +50,8 @@ public class DryadLandscapeNode
         Action<DryadLandscapeNode> OnClickCreateLink,
         Action<DryadLandscapeNode> OnClickInNode,
         Action<DryadLandscapeNode> OnClickRemoveNode)
+        : base(staticIdSource++)
     {
-        Id = staticIdSource++;
         Chord = chord;
         Rect = new Rect(position.x, position.y, width, height);
 
@@ -72,8 +66,8 @@ public class DryadLandscapeNode
         Action<DryadLandscapeNode> OnClickCreateLink,
         Action<DryadLandscapeNode> OnClickInNode,
         Action<DryadLandscapeNode> OnClickRemoveNode)
+        : base(nodeData.Id)
     {
-        Id = nodeData.Id;
         Chord = nodeData.Chord;
         Rect = nodeData.Rect;
         Edges = nodeData.Edges;
@@ -82,11 +76,6 @@ public class DryadLandscapeNode
         OnRemoveNode = OnClickRemoveNode;
         OnCreateLink = OnClickCreateLink;
         OnNodeClicked = OnClickInNode;
-    }
-
-    public void Drag(Vector2 delta)
-    {
-        Rect.position += delta;
     }
 
     public void Draw()
@@ -138,8 +127,7 @@ public class DryadLandscapeNode
                         GUI.changed = true;
                         isSelected = true;
                         Style = selectedNodeStyle;
-                        if (OnNodeClicked != null)
-                            OnNodeClicked(this);
+                        OnNodeClicked?.Invoke(this);
                     }
                     else
                     {
@@ -148,7 +136,7 @@ public class DryadLandscapeNode
                         Style = defaultNodeStyle;
                     }
                 }
-                if (e.button == 1 /* && isSelected */ && Rect.Contains(e.mousePosition))
+                if (e.button == 1 && Rect.Contains(e.mousePosition))
                 {
                     ProcessContextMenu();
                     e.Use();
@@ -182,13 +170,11 @@ public class DryadLandscapeNode
 
     private void OnClickRemoveNode()
     {
-        if (OnRemoveNode != null)
-            OnRemoveNode(this);
+        OnRemoveNode?.Invoke(this);
     }
 
     private void OnClickCreateLink()
     {
-        if (OnCreateLink != null)
-            OnCreateLink(this);
+        OnCreateLink?.Invoke(this);
     }
 }

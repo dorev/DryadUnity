@@ -12,20 +12,20 @@ public class DryadEditorBase : EditorWindow
     protected Vector2 offset;
     protected bool dataHasChanged = false;
 
-    protected GameObjectType GetGameObjectFromSelection<GameObjectType>()
+    static protected GameObjectType GetComponentFromSelection<GameObjectType>()
     {
         if (Selection.activeTransform == null)
             return default(GameObjectType);
 
-        GameObject obj = Selection.activeTransform.gameObject;
+        GameObject gameObject = Selection.activeTransform.gameObject;
 
-        if (obj == null)
+        if (gameObject == null)
             return default(GameObjectType);
 
-        return obj.GetComponent<GameObjectType>();
+        return gameObject.GetComponent<GameObjectType>();
     }
 
-    protected Rect DefaultLabelRect(float x, float y)
+    static protected Rect DefaultLabelRect(float x, float y)
     {
         return new Rect(x, y, EditorGUIUtility.labelWidth, EditorGUIUtility.singleLineHeight);
     }

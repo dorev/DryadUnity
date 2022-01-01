@@ -3,19 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class DryadMotifNote
-{
-    public void Drag(Vector2 delta)
-    {
-
-    }
-}
-
-public class DryadMotifGridRectangle
-{
-
-}
-
 public class DryadMotifEditor : DryadEditorBase
 {
     [SerializeField]
@@ -55,7 +42,7 @@ public class DryadMotifEditor : DryadEditorBase
         if (obj == null)
             return;
 
-        DryadMotif motifSelected = GetGameObjectFromSelection<DryadMotif>(); ;
+        DryadMotif motifSelected = GetComponentFromSelection<DryadMotif>(); ;
 
         if(motifSelected != null && motifSelected != Motif)
         {
