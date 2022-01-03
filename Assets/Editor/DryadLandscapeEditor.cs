@@ -14,13 +14,18 @@ using UnityEditor;
 
 public class DryadLandscapeEditor : DryadEditorBase
 {
+    #region Members
+
     [SerializeField]
     public DryadLandscape Landscape;
 
     private List<DryadLandscapeNode> nodes = new List<DryadLandscapeNode>();
     private List<DryadLandscapeEdge> edges = new List<DryadLandscapeEdge>();
-
     private DryadLandscapeNode selectedEdgeSourceNode;
+
+    #endregion
+
+    #region Initialization
 
     [InitializeOnLoadMethod]
     static void StaticInit()
@@ -32,32 +37,7 @@ public class DryadLandscapeEditor : DryadEditorBase
     {
         DryadLandscapeEditor window = GetWindow<DryadLandscapeEditor>();
         window.InitLandscapeEditor(landscape);
-        window.titleContent = new GUIContent("Landscape Graph Editor");
-    }
-
-    private void OnSelectionChange()
-    {
-        DryadLandscape landscapeSelected = GetComponentFromSelection<DryadLandscape>();
-
-        if(landscapeSelected != null && landscapeSelected != Landscape)
-        {
-            if(Landscape != null)
-            {
-                SaveLandscapeData();
-                ClearLandscapeEditor();
-            }
-            InitLandscapeEditor(landscapeSelected);
-            Repaint();
-        }
-    }
-
-    void ClearLandscapeEditor()
-    {
-        ClearNodeSelection();
-        nodes.Clear();
-        edges.Clear();
-        Landscape = null;
-        Repaint();
+        window.titleContent = new GUIContent("Landscape Editor");
     }
 
     private void InitLandscapeEditor(DryadLandscape landscape)
@@ -80,11 +60,15 @@ public class DryadLandscapeEditor : DryadEditorBase
                 foreach (uint edgeId in node.Edges.ToArray())
                 {
                     if (FindNodeById(edgeId, out destinationNode))
-                        CreateEdge(node, destinationNode);
+                        OnAddEdge(node, destinationNode);
                 }
             }
         }
     } 
+
+    #endregion
+
+    #region Drawing
 
     private void OnGUI()
     {
@@ -114,16 +98,70 @@ public class DryadLandscapeEditor : DryadEditorBase
             Repaint();
     }
 
-    void SaveLandscapeData()
+    private void ProcessContextMenu(Vector2 mousePosition)
     {
-        Landscape.NodesData.Clear();
+        /*if(GetGameObjectFromSelection<DryadLandscape>() == null)
+        {
+            ClearLandscapeEditor();
+            return;
+        }*/
 
-        foreach(DryadLandscapeNode node in nodes)
-            Landscape.NodesData.Add(new LandscapeNodeData(node.Id, node.Chord, node.Edges, node.Rect));
-
-        EditorUtility.SetDirty(Landscape);
-        dataHasChanged = false;
+        GenericMenu genericMenu = new GenericMenu();
+        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Tonic.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Tonic));
+        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Second.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Second));
+        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Third.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Third));
+        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Fourth.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Fourth));
+        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Fifth.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Fifth));
+        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Sixth.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Sixth));
+        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Seventh.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Seventh));
+        genericMenu.ShowAsContext();
     }
+
+    void DrawNodes()
+    {
+        foreach (DryadLandscapeNode node in nodes)
+            node.Draw();
+    }
+
+    void DrawEdge(Event e)
+    {
+        if (selectedEdgeSourceNode == null)
+            return;
+
+        Handles.DrawLine(selectedEdgeSourceNode.PositionRect.center, e.mousePosition, 2f);
+        GUI.changed = true;
+    }
+
+    void DrawLinks()
+    {
+        foreach (DryadLandscapeEdge edge in edges.ToArray())
+            edge.Draw();
+    }
+
+    protected void DrawGrid(float gridSpacing, float gridOpacity, Color gridColor)
+    {
+        int widthDivs = Mathf.CeilToInt(position.width / gridSpacing);
+        int heightDivs = Mathf.CeilToInt(position.height / gridSpacing);
+
+        Handles.BeginGUI();
+        Handles.color = new Color(gridColor.r, gridColor.g, gridColor.b, gridOpacity);
+
+        offset += drag * 0.5f;
+        Vector3 newOffset = new Vector3(offset.x % gridSpacing, offset.y % gridSpacing, 0);
+
+        for (int i = 0; i < widthDivs; i++)
+            Handles.DrawLine(new Vector3(gridSpacing * i, -gridSpacing, 0) + newOffset, new Vector3(gridSpacing * i, position.height, 0f) + newOffset);
+
+        for (int j = 0; j < heightDivs; j++)
+            Handles.DrawLine(new Vector3(-gridSpacing, gridSpacing * j, 0) + newOffset, new Vector3(position.width, gridSpacing * j, 0f) + newOffset);
+
+        Handles.color = Color.white;
+        Handles.EndGUI();
+    }
+
+    #endregion
+
+    #region Events
 
     void ProcessEvents(Event e)
     {
@@ -137,6 +175,7 @@ public class DryadLandscapeEditor : DryadEditorBase
                 else if (e.button == 1)
                     ProcessContextMenu(e.mousePosition);
                 break;
+
             case EventType.MouseDrag:
                 if (e.button == 2)
                     OnDrag(e.delta);
@@ -153,62 +192,12 @@ public class DryadLandscapeEditor : DryadEditorBase
         }
     }
 
-    private void ProcessContextMenu(Vector2 mousePosition)
-    {
-        /*
-        if(GetGameObjectFromSelection<DryadLandscape>() == null)
-        {
-            ClearLandscapeEditor();
-            return;
-        }
-        */
-
-        GenericMenu genericMenu = new GenericMenu();
-        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Tonic.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Tonic));
-        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Second.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Second));
-        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Third.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Third));
-        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Fourth.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Fourth));
-        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Fifth.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Fifth));
-        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Sixth.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Sixth));
-        genericMenu.AddItem(new GUIContent($"Add {Landscape.Scale.Seventh.Name}"), false, () => OnClickAddNode(mousePosition, Landscape.Scale.Seventh));
-        genericMenu.ShowAsContext();
-    }
-
-    private void CreateEdge(DryadLandscapeNode sourceNode, DryadLandscapeNode destinationNode)
+    private void OnAddEdge(DryadLandscapeNode sourceNode, DryadLandscapeNode destinationNode)
     {
         edges.Add(new DryadLandscapeEdge(sourceNode, destinationNode, OnClickRemoveEdge));
         sourceNode.Edges.Add(destinationNode.Id);
         ClearNodeSelection();
         dataHasChanged = true;
-    }
-
-    bool FindNodeById(uint id, out DryadLandscapeNode nodeFound)
-    {
-        foreach(DryadLandscapeNode node in nodes)
-        {
-            if (node.Id == id)
-            {
-                nodeFound = node;
-                return true;
-            }
-        }
-
-        nodeFound = null;
-        return false;
-    }
-
-    private void ClearNodeSelection()
-    {
-        selectedEdgeSourceNode = null;
-    }
-
-    void DrawEdge(Event e)
-    {
-        if (selectedEdgeSourceNode == null)
-            return;
-
-        Handles.DrawLine(selectedEdgeSourceNode.Rect.center, e.mousePosition, 2f);
-        GUI.changed = true;
     }
 
     private void OnClickAddNode(Vector2 mousePosition, Dryad.Chord chord)
@@ -230,11 +219,8 @@ public class DryadLandscapeEditor : DryadEditorBase
 
     private void OnClickInNode(DryadLandscapeNode destinationNode)
     {
-        if (selectedEdgeSourceNode == null)
-            return;
-
-        if (selectedEdgeSourceNode != destinationNode)
-            CreateEdge(selectedEdgeSourceNode, destinationNode);
+        if (selectedEdgeSourceNode != null && selectedEdgeSourceNode != destinationNode)
+            OnAddEdge(selectedEdgeSourceNode, destinationNode);
     }
 
     private void OnClickRemoveEdge(DryadLandscapeEdge edge)
@@ -268,45 +254,72 @@ public class DryadLandscapeEditor : DryadEditorBase
     {
         drag = delta;
 
-        if (nodes != null)
-        {
-            foreach(DryadLandscapeNode node in nodes)
-                node.Drag(delta);
-        }
+        foreach(DryadLandscapeNode node in nodes)
+            node.Drag(delta);
 
         GUI.changed = true;
     }
 
-    void DrawNodes()
+    #endregion
+
+    #region Utilities
+
+    private void OnSelectionChange()
+    {
+        DryadLandscape landscapeSelected = GetComponentFromSelection<DryadLandscape>();
+
+        if (landscapeSelected != null && landscapeSelected != Landscape)
+        {
+            if (Landscape != null)
+            {
+                SaveLandscapeData();
+                ClearLandscapeEditor();
+            }
+            InitLandscapeEditor(landscapeSelected);
+            Repaint();
+        }
+    }
+
+    private void ClearNodeSelection()
+    {
+        selectedEdgeSourceNode = null;
+    }
+
+    void ClearLandscapeEditor()
+    {
+        ClearNodeSelection();
+        nodes.Clear();
+        edges.Clear();
+        Landscape = null;
+        Repaint();
+    }
+
+    void SaveLandscapeData()
+    {
+        Landscape.NodesData.Clear();
+
+        foreach (DryadLandscapeNode node in nodes)
+            Landscape.NodesData.Add(new LandscapeNodeData(node.Id, node.Chord, node.Edges, node.PositionRect));
+
+        EditorUtility.SetDirty(Landscape);
+        dataHasChanged = false;
+    }
+
+    bool FindNodeById(uint id, out DryadLandscapeNode nodeFound)
     {
         foreach (DryadLandscapeNode node in nodes)
-            node.Draw();
+        {
+            if (node.Id == id)
+            {
+                nodeFound = node;
+                return true;
+            }
+        }
+
+        nodeFound = null;
+        return false;
     }
 
-    void DrawLinks()
-    {
-        foreach (DryadLandscapeEdge edge in edges.ToArray())
-            edge.Draw();
-    }
+    #endregion
 
-    protected void DrawGrid(float gridSpacing, float gridOpacity, Color gridColor)
-    {
-        int widthDivs = Mathf.CeilToInt(position.width / gridSpacing);
-        int heightDivs = Mathf.CeilToInt(position.height / gridSpacing);
-
-        Handles.BeginGUI();
-        Handles.color = new Color(gridColor.r, gridColor.g, gridColor.b, gridOpacity);
-
-        offset += drag * 0.5f;
-        Vector3 newOffset = new Vector3(offset.x % gridSpacing, offset.y % gridSpacing, 0);
-
-        for (int i = 0; i < widthDivs; i++)
-            Handles.DrawLine(new Vector3(gridSpacing * i, -gridSpacing, 0) + newOffset, new Vector3(gridSpacing * i, position.height, 0f) + newOffset);
-
-        for (int j = 0; j < heightDivs; j++)
-            Handles.DrawLine(new Vector3(-gridSpacing, gridSpacing * j, 0) + newOffset, new Vector3(position.width, gridSpacing * j, 0f) + newOffset);
-
-        Handles.color = Color.white;
-        Handles.EndGUI();
-    }
 }

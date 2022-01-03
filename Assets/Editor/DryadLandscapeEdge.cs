@@ -121,8 +121,8 @@ public class DryadLandscapeEdge
 
     Vector2 DestinationNodeLinkIntersection()
     {
-        Rect sourceNode = this.sourceNode.Rect;
-        Rect destinationNode = this.destinationNode.Rect;
+        Rect sourceNode = this.sourceNode.PositionRect;
+        Rect destinationNode = this.destinationNode.PositionRect;
 
         Vector2 topSideCrossingPoint;
         LineIntersection(
@@ -204,7 +204,7 @@ public class DryadLandscapeEdge
     {
         Vector2 linkEndPoint = DestinationNodeLinkIntersection();
 
-        Handles.DrawLine(sourceNode.Rect.center, linkEndPoint, 1f);
+        Handles.DrawLine(sourceNode.PositionRect.center, linkEndPoint, 1f);
 
         if(Handles.Button(linkEndPoint, Quaternion.identity, 4, 8, Handles.RectangleHandleCap) && OnRemoveEdge != null)
             OnRemoveEdge(this);

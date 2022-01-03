@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DryadLandscapeNode : DryadEditorObjectBase
 {
+    #region Members
+
     public List<uint> Edges = new List<uint>();
     public Dryad.Chord Chord;
     public GUIStyle Style;
@@ -22,6 +24,10 @@ public class DryadLandscapeNode : DryadEditorObjectBase
     static readonly GUILayoutOption labelWidth = GUILayout.Width(labelWidthValue);
     static readonly GUILayoutOption valueWidth = GUILayout.Width(valueWidthValue);
     static uint staticIdSource = 0;
+
+    #endregion
+
+    #region Initialization
 
     static DryadLandscapeNode()
     {
@@ -53,7 +59,7 @@ public class DryadLandscapeNode : DryadEditorObjectBase
         : base(staticIdSource++)
     {
         Chord = chord;
-        Rect = new Rect(position.x, position.y, width, height);
+        PositionRect = new Rect(position.x, position.y, width, height);
 
         Style = defaultNodeStyle;
         OnRemoveNode = OnClickRemoveNode;
@@ -69,7 +75,7 @@ public class DryadLandscapeNode : DryadEditorObjectBase
         : base(nodeData.Id)
     {
         Chord = nodeData.Chord;
-        Rect = nodeData.Rect;
+        PositionRect = nodeData.Rect;
         Edges = nodeData.Edges;
 
         Style = defaultNodeStyle;
@@ -78,9 +84,13 @@ public class DryadLandscapeNode : DryadEditorObjectBase
         OnNodeClicked = OnClickInNode;
     }
 
+    #endregion
+
+    #region Drawing
+
     public void Draw()
     {
-        GUILayout.BeginArea(Rect, Style);
+        GUILayout.BeginArea(PositionRect, Style);
 
         GUILayout.Space(5);
         GUILayout.Label(Chord.Name, titleStyle, GUILayout.Width(labelWidthValue + valueWidthValue));
@@ -114,6 +124,18 @@ public class DryadLandscapeNode : DryadEditorObjectBase
         GUILayout.EndArea();
     }
 
+    private void ProcessContextMenu()
+    {
+        GenericMenu genericMenu = new GenericMenu();
+        genericMenu.AddItem(new GUIContent("Remove node"), false, OnClickRemoveNode);
+        genericMenu.AddItem(new GUIContent("Create directional link"), false, OnClickCreateLink);
+        genericMenu.ShowAsContext();
+    }
+
+    #endregion
+
+    #region Events
+
     public bool ProcessEvents(Event e)
     {
         switch (e.type)
@@ -121,7 +143,7 @@ public class DryadLandscapeNode : DryadEditorObjectBase
             case EventType.MouseDown:
                 if (e.button == 0)
                 {
-                    if (Rect.Contains(e.mousePosition))
+                    if (PositionRect.Contains(e.mousePosition))
                     {
                         isDragged = true;
                         GUI.changed = true;
@@ -136,7 +158,7 @@ public class DryadLandscapeNode : DryadEditorObjectBase
                         Style = defaultNodeStyle;
                     }
                 }
-                if (e.button == 1 && Rect.Contains(e.mousePosition))
+                if (e.button == 1 && PositionRect.Contains(e.mousePosition))
                 {
                     ProcessContextMenu();
                     e.Use();
@@ -160,14 +182,6 @@ public class DryadLandscapeNode : DryadEditorObjectBase
         return false;
     }
 
-    private void ProcessContextMenu()
-    {
-        GenericMenu genericMenu = new GenericMenu();
-        genericMenu.AddItem(new GUIContent("Remove node"), false, OnClickRemoveNode);
-        genericMenu.AddItem(new GUIContent("Create directional link"), false, OnClickCreateLink);
-        genericMenu.ShowAsContext();
-    }
-
     private void OnClickRemoveNode()
     {
         OnRemoveNode?.Invoke(this);
@@ -177,4 +191,7 @@ public class DryadLandscapeNode : DryadEditorObjectBase
     {
         OnCreateLink?.Invoke(this);
     }
+
+    #endregion
+
 }

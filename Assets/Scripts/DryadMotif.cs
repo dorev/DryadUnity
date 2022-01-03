@@ -10,6 +10,22 @@ public class MotifNote
     int ScaleOffset;
 }
 
+[System.Serializable]
+public class MotifNoteData
+{
+    public uint Id;
+    public uint ScoreTime;
+    public int TonicOffset;
+    public uint Duration;
+
+    public MotifNoteData(uint id, uint scoreTime, int tonicOffset, uint duration)
+    {
+        Id = id;
+        ScoreTime = scoreTime;
+        TonicOffset = tonicOffset;
+        Duration = duration;
+    }
+}
 public class DryadMotif : MonoBehaviour
 {
     // https://unity3d.college/2017/05/22/unity-attributes/

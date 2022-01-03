@@ -5,10 +5,12 @@ using UnityEditor;
 
 public class DryadEditorObjectBase
 {
-    public Rect Rect;
+    public Rect PositionRect;
     public bool isDragged;
     public bool isSelected;
     public readonly uint Id;
+    public Vector2 debugDrag;
+    public Vector2 debugOffset = Vector2.zero;
 
     // Only constructible through inheritance
     protected DryadEditorObjectBase() { }
@@ -18,9 +20,11 @@ public class DryadEditorObjectBase
         Id = id;
     }
 
-    public void Drag(Vector2 delta)
+    public virtual void Drag(Vector2 delta)
     {
-        Rect.position += delta;
+        debugDrag = delta;
+        debugOffset += delta;
+        PositionRect.position += delta;
     }
 
     static protected Texture2D MakeTextureColor(Color color)
