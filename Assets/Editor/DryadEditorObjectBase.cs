@@ -27,7 +27,7 @@ public class DryadEditorObjectBase
         PositionRect.position += delta;
     }
 
-    static protected Texture2D MakeTextureColor(Color color)
+    protected Texture2D MakeTextureColor(Color color)
     {
         Texture2D result = new Texture2D(1, 1);
         result.SetPixel(0,0,color);

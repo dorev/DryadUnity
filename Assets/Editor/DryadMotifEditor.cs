@@ -13,12 +13,11 @@ public class DryadMotifEditor : DryadEditorBase
 {
     #region Members
 
-    [SerializeField]
     public DryadMotif Motif;
 
-    private float GridUnitSize = 24;
-    private float MinGridUnitSize = 12;
-    private float MaxGridUnitSize = 48;
+    public float GridUnitSize = 24;
+    public float MinGridUnitSize = 12;
+    public float MaxGridUnitSize = 48;
     public Vector2 debugDrag;
 
     private List<DryadMotifNote> notes = new List<DryadMotifNote>();
@@ -38,6 +37,8 @@ public class DryadMotifEditor : DryadEditorBase
         DryadMotifEditor window = GetWindow<DryadMotifEditor>();
         window.InitMotifEditor(motif);
         window.titleContent = new GUIContent("Motif Editor");
+        window.minSize = new Vector2(100, 100);
+        window.position = new Rect(0, 0, 100, 100);
     }
 
     private void InitMotifEditor(DryadMotif motif)
@@ -66,7 +67,7 @@ public class DryadMotifEditor : DryadEditorBase
             return;
         }
 
-        GUILayout.Label(Motif.Name, EditorStyles.boldLabel);
+        GUI.Label(new Rect(GridUnitSize, 0, 500, EditorGUIUtility.singleLineHeight), Motif.Name, EditorStyles.boldLabel);
 
         DrawNotes();
 
@@ -102,7 +103,7 @@ public class DryadMotifEditor : DryadEditorBase
     void DrawNotes()
     {
         foreach (DryadMotifNote note in notes)
-            note.Draw(GridUnitSize);
+            note.Draw();
     }
 
     private void DrawVerticalLine(float x, float lineOpacity, Color lineColor)
@@ -238,8 +239,8 @@ public class DryadMotifEditor : DryadEditorBase
         (uint scoreTime, int tonicOffset) data = PositionToScoreTimeAndTonicOffset(mousePosition);
 
         notes.Add(new DryadMotifNote(
+            this,
             SnapToGrid(mousePosition),
-            GridUnitSize,
             DryadMotifNote.Quarter,
             data.scoreTime,
             data.tonicOffset
@@ -252,9 +253,7 @@ public class DryadMotifEditor : DryadEditorBase
         drag = delta;
 
         if ((drag.x + offset.x) > GridUnitSize)
-        {
             drag.x = 0;
-        }
 
         debugDrag = drag;
 
@@ -289,30 +288,43 @@ public class DryadMotifEditor : DryadEditorBase
         }
     }
 
-    void SaveMotifData()
+    private void SaveMotifData()
     {
         EditorUtility.SetDirty(Motif);
         dataHasChanged = false;
     }
 
-    private Vector2 SnapToGrid(Vector2 position)
+    public Vector2 SnapToGrid(Vector2 position)
     {
         float x = position.x - (position.x % GridUnitSize) + (offset.x % GridUnitSize);
         float y = position.y - (position.y % GridUnitSize) + (offset.y % GridUnitSize);
         return new Vector2(x, y);
     }
 
-    private (uint scoreTime, int tonicOffset) PositionToScoreTimeAndTonicOffset(Vector2 position)
+    public (uint scoreTime, int tonicOffset) PositionToScoreTimeAndTonicOffset(Vector2 position)
     {
         Vector2 snapPosition = SnapToGrid(position);
 
-        int topTonicOffset = Mathf.FloorToInt(offset.y / GridUnitSize);
+        int topmostTonicOffset = Mathf.FloorToInt(offset.y / GridUnitSize);
         int deltaTonicOffset = Mathf.FloorToInt(snapPosition.y / GridUnitSize);
-        int tonicOffset = topTonicOffset - deltaTonicOffset;
+        int tonicOffset = topmostTonicOffset - deltaTonicOffset;
 
-        uint scoreTime = (uint) Mathf.FloorToInt((offset.x + snapPosition.x) / GridUnitSize);
+        // Removing 1 because the first grid contains the labels
+        uint scoreTime = (uint) (Mathf.FloorToInt(snapPosition.x / GridUnitSize) - 1);
+        scoreTime *= DryadMotifNote.Sixteenth;
+
+        // Correct scoreTime to match grid expected value
+        if (scoreTime % DryadMotifNote.Sixteenth != 0)
+            scoreTime -= scoreTime % DryadMotifNote.Sixteenth;
 
         return (scoreTime, tonicOffset);
+    }
+
+    public Vector2 ScoreTimeAndTonicOffsetToPosition(uint scoreTime, int tonicOffset)
+    {
+        float x = scoreTime / DryadMotifNote.Sixteenth * GridUnitSize;
+        float y = tonicOffset * -1.0f * GridUnitSize;
+        return new Vector2(x, y) + offset;
     }
 
     #endregion

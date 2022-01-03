@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+// Snap breaks when zooming in... lock zoom???
+// Add notedata in rectangles for debug
+// Add contour to notes
+// Capability to stretch notes
 
 public class DryadMotifNote : DryadEditorObjectBase
 {
@@ -38,13 +42,16 @@ public class DryadMotifNote : DryadEditorObjectBase
     public uint ScoreTime;
     public uint NoteDuration;
 
+    private DryadMotifEditor motifEditor;
+
 
     #endregion
 
     #region Initialization
 
-    static DryadMotifNote()
+    private void SetupStyles()
     {
+        
         defaultNoteStyle = new GUIStyle();
         defaultNoteStyle.normal.background = MakeTextureColor(Color.green);
         defaultNoteStyle.border = new RectOffset(12, 12, 12, 12);
@@ -54,35 +61,36 @@ public class DryadMotifNote : DryadEditorObjectBase
         selectedNoteStyle.normal.background = MakeTextureColor(Color.blue); ;
         selectedNoteStyle.border = new RectOffset(12, 12, 12, 12);
         selectedNoteStyle.padding = new RectOffset(12, 0, 4, 0);
+        
+        Style = defaultNoteStyle;
     }
 
-    public DryadMotifNote(Vector2 position, float gridUnitSize, uint duration, uint scoreTime, int tonicOffset)
+    public DryadMotifNote(DryadMotifEditor editor, Vector2 position, uint duration, uint scoreTime, int tonicOffset)
         : base(staticIdSource++)
     {
-        Style = defaultNoteStyle;
+        SetupStyles();
+        motifEditor = editor;
         NoteDuration = duration;
         ScoreTime = scoreTime;
         TonicOffset = tonicOffset;
-        PositionRect = new Rect(position, new Vector2( duration / Sixteenth * gridUnitSize, gridUnitSize ));
+        PositionRect = new Rect(position, new Vector2( duration / Sixteenth * EditorGridUnitSize(), EditorGridUnitSize()));
     }
 
     #endregion
 
     #region Drawing
 
-    public void Draw(float gridUnitSize)
+    public void Draw()
     {
-        PositionRect.width = NoteDuration / Sixteenth * gridUnitSize;
-        PositionRect.height = gridUnitSize;
-        
+        if(!isDragged)
+        {
+            PositionRect.width = NoteDuration / Sixteenth * EditorGridUnitSize();
+            PositionRect.height = EditorGridUnitSize();
+            UpdatePositionInEditorFromNoteData();
+        }
+
         GUILayout.BeginArea(PositionRect, Style);
         GUILayout.EndArea();
-
-        Color defaultColor = GUI.contentColor;
-        GUI.contentColor = Color.red;
-        GUI.Label(new Rect(PositionRect.x, PositionRect.y, 500, EditorGUIUtility.singleLineHeight),
-            $"Offset: {debugOffset}  Drag: {debugDrag}");
-        GUI.contentColor = defaultColor;
     }
 
     void ProcessContextMenu()
@@ -115,7 +123,6 @@ public class DryadMotifNote : DryadEditorObjectBase
                     {
                         GUI.changed = true;
                         isSelected = false;
-                        Style = defaultNoteStyle;
                     }
                 }
                 if (e.button == 1 && PositionRect.Contains(e.mousePosition))
@@ -126,6 +133,14 @@ public class DryadMotifNote : DryadEditorObjectBase
                 break;
 
             case EventType.MouseUp:
+
+                if (isDragged)
+                {
+                    UpdateNoteDataFromPosition();
+                    GUI.changed = true;
+                }
+
+                Style = defaultNoteStyle;
                 isDragged = false;
                 break;
 
@@ -145,6 +160,21 @@ public class DryadMotifNote : DryadEditorObjectBase
     void OnClickRemoveNote()
     {
         OnRemoveNote?.Invoke(this);
+    }
+
+    float EditorGridUnitSize()
+    {
+        return motifEditor.GridUnitSize;
+    }
+
+    void UpdatePositionInEditorFromNoteData()
+    {
+        PositionRect.position = motifEditor.ScoreTimeAndTonicOffsetToPosition(ScoreTime, TonicOffset);
+    }
+
+    void UpdateNoteDataFromPosition()
+    {
+        (ScoreTime, TonicOffset) = motifEditor.PositionToScoreTimeAndTonicOffset(PositionRect.position);
     }
 
     #endregion
