@@ -128,7 +128,7 @@ public class DryadLandscapeEditor : DryadEditorBase
         if (selectedEdgeSourceNode == null)
             return;
 
-        Handles.DrawLine(selectedEdgeSourceNode.PositionRect.center, e.mousePosition, 2f);
+        Handles.DrawLine(selectedEdgeSourceNode.Rect.center, e.mousePosition, 2f);
         GUI.changed = true;
     }
 
@@ -299,7 +299,7 @@ public class DryadLandscapeEditor : DryadEditorBase
         Landscape.NodesData.Clear();
 
         foreach (DryadLandscapeNode node in nodes)
-            Landscape.NodesData.Add(new LandscapeNodeData(node.Id, node.Chord, node.Edges, node.PositionRect));
+            Landscape.NodesData.Add(new LandscapeNodeData(node.Id, node.Chord, node.Edges, node.Rect));
 
         EditorUtility.SetDirty(Landscape);
         dataHasChanged = false;

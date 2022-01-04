@@ -59,7 +59,7 @@ public class DryadLandscapeNode : DryadEditorObjectBase
         : base(staticIdSource++)
     {
         Chord = chord;
-        PositionRect = new Rect(position.x, position.y, width, height);
+        Rect = new Rect(position.x, position.y, width, height);
 
         Style = defaultNodeStyle;
         OnRemoveNode = OnClickRemoveNode;
@@ -75,7 +75,7 @@ public class DryadLandscapeNode : DryadEditorObjectBase
         : base(nodeData.Id)
     {
         Chord = nodeData.Chord;
-        PositionRect = nodeData.Rect;
+        Rect = nodeData.Rect;
         Edges = nodeData.Edges;
 
         Style = defaultNodeStyle;
@@ -90,7 +90,7 @@ public class DryadLandscapeNode : DryadEditorObjectBase
 
     public void Draw()
     {
-        GUILayout.BeginArea(PositionRect, Style);
+        GUILayout.BeginArea(Rect, Style);
 
         GUILayout.Space(5);
         GUILayout.Label(Chord.Name, titleStyle, GUILayout.Width(labelWidthValue + valueWidthValue));
@@ -143,7 +143,7 @@ public class DryadLandscapeNode : DryadEditorObjectBase
             case EventType.MouseDown:
                 if (e.button == 0)
                 {
-                    if (PositionRect.Contains(e.mousePosition))
+                    if (Rect.Contains(e.mousePosition))
                     {
                         isDragged = true;
                         GUI.changed = true;
@@ -158,7 +158,7 @@ public class DryadLandscapeNode : DryadEditorObjectBase
                         Style = defaultNodeStyle;
                     }
                 }
-                if (e.button == 1 && PositionRect.Contains(e.mousePosition))
+                if (e.button == 1 && Rect.Contains(e.mousePosition))
                 {
                     ProcessContextMenu();
                     e.Use();

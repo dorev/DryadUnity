@@ -13,11 +13,13 @@ public class DryadMotifEditor : DryadEditorBase
 {
     #region Members
 
+    [SerializeField]
     public DryadMotif Motif;
 
     public float GridUnitSize = 24;
-    public float MinGridUnitSize = 12;
-    public float MaxGridUnitSize = 48;
+    // Min/Max values disabled because zooming was removed from MVP
+    //public float MinGridUnitSize = 12;
+    //public float MaxGridUnitSize = 48;
     public Vector2 debugDrag;
 
     private List<DryadMotifNote> notes = new List<DryadMotifNote>();
@@ -37,8 +39,8 @@ public class DryadMotifEditor : DryadEditorBase
         DryadMotifEditor window = GetWindow<DryadMotifEditor>();
         window.InitMotifEditor(motif);
         window.titleContent = new GUIContent("Motif Editor");
-        window.minSize = new Vector2(100, 100);
-        window.position = new Rect(0, 0, 100, 100);
+        //window.minSize = new Vector2(100, 100);
+        //window.position = new Rect(0, 0, 100, 100);
     }
 
     private void InitMotifEditor(DryadMotif motif)
@@ -47,7 +49,6 @@ public class DryadMotifEditor : DryadEditorBase
             throw new System.Exception("Null motif provided to editor initializer");
 
         Motif = motif;
-
     }
 
     #endregion
@@ -226,26 +227,35 @@ public class DryadMotifEditor : DryadEditorBase
 
     void OnMouseScroll(float delta)
     {
+        /* Zoom disabled because it is a little bit problematic and not necessarily relevant for MVP
+
         if ((GridUnitSize < MinGridUnitSize && delta > 0)
         ||  (GridUnitSize > MaxGridUnitSize && delta < 0))
             return;
 
         GridUnitSize -= delta;
         GUI.changed = true;
+        */
     }
 
     void OnAddNote(Vector2 mousePosition)
     {
-        (uint scoreTime, int tonicOffset) data = PositionToScoreTimeAndTonicOffset(mousePosition);
+        (uint scoreTime, int tonicOffset) noteData = PositionToScoreTimeAndTonicOffset(mousePosition);
 
         notes.Add(new DryadMotifNote(
             this,
-            SnapToGrid(mousePosition),
             DryadMotifNote.Quarter,
-            data.scoreTime,
-            data.tonicOffset
+            noteData.scoreTime,
+            noteData.tonicOffset,
+            OnClickRemoveNote
         ));
+
         GUI.changed = true;
+    }
+
+    private void OnClickRemoveNote(DryadMotifNote note)
+    {
+        notes?.Remove(note);
     }
 
     private void OnDrag(Vector2 delta)
@@ -254,8 +264,6 @@ public class DryadMotifEditor : DryadEditorBase
 
         if ((drag.x + offset.x) > GridUnitSize)
             drag.x = 0;
-
-        debugDrag = drag;
 
         foreach (DryadMotifNote note in notes)
             note.Drag(drag * 5.0f);
@@ -269,7 +277,6 @@ public class DryadMotifEditor : DryadEditorBase
 
     void ClearMotifEditor()
     {
-
     }
 
     private void OnSelectionChange()

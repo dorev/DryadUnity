@@ -5,7 +5,7 @@ using UnityEditor;
 
 public class DryadEditorObjectBase
 {
-    public Rect PositionRect;
+    public Rect Rect;
     public bool isDragged;
     public bool isSelected;
     public readonly uint Id;
@@ -24,14 +24,22 @@ public class DryadEditorObjectBase
     {
         debugDrag = delta;
         debugOffset += delta;
-        PositionRect.position += delta;
+        Rect.position += delta;
     }
 
-    protected Texture2D MakeTextureColor(Color color)
+    protected Texture2D MakeTextureColor(Color color, float opacity = 1)
     {
         Texture2D result = new Texture2D(1, 1);
-        result.SetPixel(0,0,color);
+        result.SetPixel(0,0, new Color(color.r, color.g, color.b, opacity));
         result.Apply();
         return result;
+    }
+
+    protected void DebugLabel(string debugText)
+    {
+        Color defaultColor = GUI.color;
+        GUI.color = Color.red;
+        GUI.Label(new Rect(Rect.position, new Vector2(500, EditorGUIUtility.singleLineHeight)), debugText);
+        GUI.color = defaultColor;
     }
 }
