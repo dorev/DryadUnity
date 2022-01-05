@@ -3,30 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-// Add contour to notes
-// Capability to stretch notes
-
 public class DryadMotifNote : DryadEditorObjectBase
 {
 
     #region Members
-
-    // DryadCore note duration sizes
-    static public readonly uint WholeDotted = 144;
-    static public readonly uint Whole = 96;
-    static public readonly uint HalfDotted = 72;
-    static public readonly uint Half = 48;
-    static public readonly uint QuarterDotted = 36;
-    static public readonly uint HalfTriplet = 32;
-    static public readonly uint Quarter = 24;
-    static public readonly uint EighthDotted = 18;
-    static public readonly uint QuarterTriplet = 16;
-    static public readonly uint Eighth = 12;
-    static public readonly uint EighthTriplet = 8;
-    static public readonly uint Sixteenth = 6;
-    static public readonly uint SixteenthTriplet = 4;
-    static public readonly uint ThirtySecond = 3;
-    static public readonly uint ThirtySecondTriplet = 2;
 
     private static uint staticIdSource = 0;
 
@@ -36,6 +16,14 @@ public class DryadMotifNote : DryadEditorObjectBase
     static GUIStyle selectedStyle;
 
     public bool isStretched;
+    private enum StretchDirection
+    {
+        None,
+        Front,
+        Back
+    };
+
+    private StretchDirection StretchedDirection = StretchDirection.None;
 
     private Rect FrontStretcherRect;
     private Rect BackStretcherRect;
@@ -48,7 +36,6 @@ public class DryadMotifNote : DryadEditorObjectBase
     public uint NoteDuration;
 
     private DryadMotifEditor motifEditor;
-
 
     #endregion
 
@@ -73,10 +60,10 @@ public class DryadMotifNote : DryadEditorObjectBase
     private void SetupStyles()
     {
         defaultStyle = new GUIStyle();
-        defaultStyle.normal.background = MakeTextureColor(Color.green, 0.5f);
+        defaultStyle.normal.background = DryadEditorUtility.ColorTexture(Color.green, 0.5f);
 
         selectedStyle = new GUIStyle();
-        selectedStyle.normal.background = MakeTextureColor(Color.green, 0.2f);
+        selectedStyle.normal.background = DryadEditorUtility.ColorTexture(Color.green, 0.2f);
 
         Style = defaultStyle;
         StretcherStyle = defaultStyle;
@@ -88,12 +75,8 @@ public class DryadMotifNote : DryadEditorObjectBase
 
     public void Draw()
     {
-        if(!isDragged)
-        {
-            Rect.width = NoteDuration / Sixteenth * EditorGridUnitSize();
-            Rect.height = EditorGridUnitSize();
+        if(!(isDragged || isStretched))
             UpdatePositionInEditorFromNoteData();
-        }
 
         GUI.Box(Rect, "", Style);
 
@@ -128,18 +111,21 @@ public class DryadMotifNote : DryadEditorObjectBase
             case EventType.MouseDown:
                 if (e.button == 0)
                 {
-                    if (isSelected 
-                    && (FrontStretcherRect.Contains(e.mousePosition) || BackStretcherRect.Contains(e.mousePosition)))
+                    if (FrontStretcherRect.Contains(e.mousePosition))
                     {
+                        StretchedDirection = StretchDirection.Front;
                         isStretched = true;
-                        GUI.changed = true;
-                        StretcherStyle = selectedStyle;
+                    }
+                    else if (BackStretcherRect.Contains(e.mousePosition))
+                    {
+                        StretchedDirection = StretchDirection.Back;
+                        isStretched = true;
                     }
                     else if (Rect.Contains(e.mousePosition))
                     {
                         isDragged = true;
-                        GUI.changed = true;
                         isSelected = true;
+                        GUI.changed = true;
                         Style = selectedStyle;
                     }
                     else
@@ -159,14 +145,20 @@ public class DryadMotifNote : DryadEditorObjectBase
 
                 if (isDragged)
                 {
-                    UpdateNoteDataFromPosition();
+                    UpdateNoteDataFromRect();
                     GUI.changed = true;
                 }
 
-                Style = defaultStyle;
-                StretcherStyle = defaultStyle;
+                if(isStretched)
+                {
+                    UpdateNoteDataFromRect();
+                    StretchedDirection = StretchDirection.None;
+                    GUI.changed = true;
+                }
+
                 isDragged = false;
                 isStretched = false;
+                Style = defaultStyle;
                 break;
 
             case EventType.MouseDrag:
@@ -193,7 +185,20 @@ public class DryadMotifNote : DryadEditorObjectBase
 
     void Stretch(Vector2 delta)
     {
-        Rect.width += delta.x;
+        switch(StretchedDirection)
+        {
+            case StretchDirection.Front:
+                Rect.x += delta.x;
+                Rect.width -= delta.x;
+                break;
+
+            case StretchDirection.Back:
+                Rect.width += delta.x;
+                break;
+
+            case StretchDirection.None:
+                break;
+        }
     }
 
     void OnClickRemoveNote()
@@ -209,11 +214,14 @@ public class DryadMotifNote : DryadEditorObjectBase
     void UpdatePositionInEditorFromNoteData()
     {
         Rect.position = motifEditor.ScoreTimeAndTonicOffsetToPosition(ScoreTime, TonicOffset);
+        Rect.width = NoteDuration / Dryad.Duration.Sixteenth * EditorGridUnitSize();
+        Rect.height = EditorGridUnitSize();
     }
 
-    void UpdateNoteDataFromPosition()
+    void UpdateNoteDataFromRect()
     {
         (ScoreTime, TonicOffset) = motifEditor.PositionToScoreTimeAndTonicOffset(Rect.position);
+        NoteDuration = (uint) Mathf.RoundToInt(Rect.width / EditorGridUnitSize()) * Dryad.Duration.Sixteenth;
     }
 
     #endregion

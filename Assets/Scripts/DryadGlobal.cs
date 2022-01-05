@@ -3,81 +3,305 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+namespace Dryad
+{
+
+    static public class Duration
+    {
+        // DryadCore note duration sizes
+        static public readonly uint WholeDotted = 144;
+        static public readonly uint Whole = 96;
+        static public readonly uint HalfDotted = 72;
+        static public readonly uint Half = 48;
+        static public readonly uint QuarterDotted = 36;
+        static public readonly uint HalfTriplet = 32;
+        static public readonly uint Quarter = 24;
+        static public readonly uint EighthDotted = 18;
+        static public readonly uint QuarterTriplet = 16;
+        static public readonly uint Eighth = 12;
+        static public readonly uint EighthTriplet = 8;
+        static public readonly uint Sixteenth = 6;
+        static public readonly uint SixteenthTriplet = 4;
+        static public readonly uint ThirtySecond = 3;
+        static public readonly uint ThirtySecondTriplet = 2;
+    }
+
+    [System.Serializable]
+    public enum FlatOrSharp
+    {
+        Flat,
+        Sharp,
+        Unspecified
+    }
+
+    [System.Serializable]
+    public enum Note
+    {
+        C = 0,
+        Db = 1,
+        D = 2,
+        Eb = 3,
+        E = 4,
+        F = 5,
+        Gb = 6,
+        G = 7,
+        Ab = 8,
+        A = 9,
+        Bb = 10,
+        B = 11
+    }
+
+    [System.Serializable]
+    public enum TriadVoicing
+    {
+        Major,
+        Minor,
+        Dim,
+        Aug
+    }
+
+    [System.Serializable]
+    public enum Extension
+    {
+        None,
+        Seventh,
+        MajorSeventh,
+        Ninth
+    }
+
+    [System.Serializable]
+    public class Scale
+    {
+        public static readonly Scale Major = new Scale(new uint[7] { 0, 2, 4, 5, 7, 9, 11 });
+        public static readonly Scale MinorNatural = new Scale(new uint[7] { 0, 2, 3, 5, 7, 8, 10 });
+        public static readonly Scale MinorMelodic = new Scale(new uint[7] { 0, 2, 3, 5, 7, 9, 11 });
+        public uint[] Intervals;
+        public uint RootNote;
+        public FlatOrSharp FlatOrSharp;
+
+        public Scale(uint[] intervals, uint rootNote = 48, FlatOrSharp flatOrSharp = FlatOrSharp.Unspecified)
+        {
+            // check that intervals is 6 long
+            Intervals = intervals;
+            RootNote = rootNote;
+            FlatOrSharp = (flatOrSharp == FlatOrSharp.Unspecified)
+                ? FlatOrSharp.Sharp
+                : flatOrSharp;
+
+            Tonic = new Chord(this, 1);
+            Second = new Chord(this, 2);
+            Third = new Chord(this, 3);
+            Fourth = new Chord(this, 4);
+            Fifth = new Chord(this, 5);
+            Sixth = new Chord(this, 6);
+            Seventh = new Chord(this, 7);
+        }
+
+        public readonly Chord Tonic;
+        public readonly Chord Second;
+        public readonly Chord Third;
+        public readonly Chord Fourth;
+        public readonly Chord Fifth;
+        public readonly Chord Sixth;
+        public readonly Chord Seventh;
+    }
+
+    [System.Serializable]
+    public class Chord
+    {
+        public Scale Scale;
+        public uint Degree;
+        public TriadVoicing TriadVoicing;
+        public Extension Extension;
+        public int Inversion;
+        public int Shift;
+        public bool Entry;
+        public string Name
+        {
+            get
+            {
+                return EvaluateName();
+            }
+            private set
+            {
+                Name = value;
+            }
+        }
+
+        public Chord(Scale scale, uint degree)
+        {
+            Scale = scale;
+            Degree = degree;
+            Extension = Extension.None;
+            Inversion = 0;
+            Shift = 0;
+            Entry = false;
+            EvaluateTriadVoicing();
+        }
+
+        public Chord(Chord other)
+        {
+            Scale = other.Scale;
+            Degree = other.Degree;
+            Extension = other.Extension;
+            Inversion = other.Inversion;
+            Shift = other.Shift;
+            Entry = other.Entry;
+            TriadVoicing = other.TriadVoicing;
+        }
+
+        void EvaluateTriadVoicing()
+        {
+            uint root = Scale.Intervals[Degree - 1];
+            uint third = Scale.Intervals[(Degree + 1) % 7];
+            uint fifth = Scale.Intervals[(Degree + 3) % 7];
+            if (third < root)
+                third += 12;
+            if (fifth < third)
+                fifth += 12;
+
+            if (third - root == 4 && fifth - third == 3)
+                TriadVoicing = TriadVoicing.Major;
+            else if (third - root == 3 && fifth - third == 4)
+                TriadVoicing = TriadVoicing.Minor;
+            else if (third - root == 3 && fifth - third == 3)
+                TriadVoicing = TriadVoicing.Dim;
+            else if (third - root == 4 && fifth - third == 4)
+                TriadVoicing = TriadVoicing.Aug;
+            else
+                throw new System.Exception("Unexpected chord triad deduced");
+        }
+
+        string EvaluateName()
+        {
+            string result;
+            switch (Degree)
+            {
+                case 1: result = "I"; break;
+                case 2: result = "II"; break;
+                case 3: result = "III"; break;
+                case 4: result = "IV"; break;
+                case 5: result = "V"; break;
+                case 6: result = "VI"; break;
+                case 7: result = "VII"; break;
+                default:
+                    throw new System.Exception($"Impossible chord degree value: {Degree}");
+            }
+
+            switch (TriadVoicing)
+            {
+                case TriadVoicing.Major: break;
+                case TriadVoicing.Minor: result = result.ToLower(); break;
+                case TriadVoicing.Aug: result += "+"; break;
+                case TriadVoicing.Dim: result = result.ToLower() + "°"; break;
+                default:
+                    throw new System.Exception($"Impossible chord voicing value: {TriadVoicing}");
+            }
+
+            switch (Shift)
+            {
+                case -2: result += "bb"; break;
+                case -1: result += "b"; break;
+                case 0: break;
+                case 1: result += "#"; break;
+                case 2: result += "##"; break;
+                default:
+                    throw new System.Exception($"Impossible chord shift value: {Shift}");
+            }
+
+            switch (Extension)
+            {
+                case Extension.None: break;
+                case Extension.Seventh: result += "7"; break;
+                case Extension.MajorSeventh: result += "M7"; break;
+                case Extension.Ninth: result += "9"; break;
+                default:
+                    throw new System.Exception($"Impossible chord extension value: {Extension}");
+            }
+
+            return result;
+        }
+
+    }
+
+}
+
 
 public class DryadGlobal : MonoBehaviour
 {
     public float RefreshPeriod;
 
-    static DryadGlobal _instance;
-    WaitForSeconds _slowPeriod;
-    List<DryadListener> _listeners = new List<DryadListener>();
+    static DryadGlobal Instance;
+    WaitForSeconds SlowPeriod;
+    List<DryadListener> Listeners = new List<DryadListener>();
 
-    enum Status
+    enum GlobalStatus
     {
         Init,
         Running,
         ShuttingDown
     };
-    Status _status;
+
+    GlobalStatus Status;
 
     public static DryadGlobal GetInstance()
     {
-        return _instance;
+        return Instance;
     }
 
     void Awake()
     {
         // Prefab/Singleton check
-        if(_instance != null && _instance != this)
+        if(Instance != null && Instance != this)
             Destroy(this.gameObject);
         else
-            _instance = this;
+            Instance = this;
     }
 
     void Start()
     {
-        _status = Status.Init;
-        _slowPeriod = new WaitForSeconds(RefreshPeriod);
+        Status = GlobalStatus.Init;
+        SlowPeriod = new WaitForSeconds(RefreshPeriod);
         StartCoroutine(SlowPeriodicWork());
-        _status = Status.Running;
+        Status = GlobalStatus.Running;
         SetupDebugUI();
     }
 
     void Update()
     {
-         UpdateDebugUI();
-        _slowPeriod = new WaitForSeconds(RefreshPeriod);
+        UpdateDebugUI();
+        SlowPeriod = new WaitForSeconds(RefreshPeriod);
     }
 
     void Shutdown()
     {
-        _status = Status.ShuttingDown;
+        Status = GlobalStatus.ShuttingDown;
         StopCoroutine(SlowPeriodicWork());
     }
 
      IEnumerator SlowPeriodicWork()
      {
-         while (_status != Status.ShuttingDown)
+         while (Status != GlobalStatus.ShuttingDown)
          {
             UpdateListenersMotifs();
-            yield return _slowPeriod;
+            yield return SlowPeriod;
          }
      }
 
      public void Register(DryadListener listener)
      {
-        if(!_listeners.Contains(listener))
+        if(!Listeners.Contains(listener))
         {
-            _listeners.Add(listener);
+            Listeners.Add(listener);
             Debug.Log("Added listener");
         }
      }
 
      public void Unregister(DryadListener listener)
      {
-        if (_listeners.Contains(listener))
+        if (Listeners.Contains(listener))
         {
-            _listeners.Remove(listener);
+            Listeners.Remove(listener);
             Debug.Log("Added listener");
         }
      }
@@ -85,7 +309,7 @@ public class DryadGlobal : MonoBehaviour
      void UpdateListenersMotifs()
      {
         // Check what motifs are in range of listeners
-        foreach(DryadListener listener in _listeners)
+        foreach(DryadListener listener in Listeners)
         {
             listener.ClearMotifs();
             foreach(DryadMotif motif in FindObjectsOfType<DryadMotif>())
@@ -99,52 +323,53 @@ public class DryadGlobal : MonoBehaviour
 
     // Debug ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    GameObject _canvasContainer;
-    Canvas _canvas;
-    GameObject _debugContainer;
-    Text _debugText;
-    RectTransform _debugTransform;
+    GameObject canvasContainer;
+    Canvas canvas;
+    GameObject debugContainer;
+    Text debugText;
+    RectTransform debugTransform;
     void SetupDebugUI()
     {
-        _canvasContainer = new GameObject();
-        _canvasContainer.name = "DryadDebugUI";
-        _canvas = _canvasContainer.AddComponent<Canvas>();
-        _canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        _canvasContainer.AddComponent<CanvasScaler>();
-        _canvasContainer.AddComponent<GraphicRaycaster>();
+        canvasContainer = new GameObject();
+        canvasContainer.name = "DryadDebugUI";
+        canvas = canvasContainer.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvasContainer.AddComponent<CanvasScaler>();
+        canvasContainer.AddComponent<GraphicRaycaster>();
 
-        _debugContainer = new GameObject();
-        _debugContainer.name = "Debug";
-        _debugContainer.transform.parent = _canvasContainer.transform;
-        _debugText = _debugContainer.AddComponent<Text>();
-        _debugText.text = "debug debug debug";
-        _debugText.font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
-        _debugText.fontSize = 14;
-        _debugTransform = _debugText.GetComponent<RectTransform>();
-        _debugTransform.localPosition = new Vector3(-300, 100, 0);
-        _debugTransform.sizeDelta = new Vector2(400, 200);
+        debugContainer = new GameObject();
+        debugContainer.name = "Debug";
+        debugContainer.transform.parent = canvasContainer.transform;
+        debugText = debugContainer.AddComponent<Text>();
+        debugText.text = "debug debug debug";
+        debugText.font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
+        debugText.fontSize = 14;
+        debugTransform = debugText.GetComponent<RectTransform>();
+        debugTransform.localPosition = new Vector3(-300, 100, 0);
+        debugTransform.sizeDelta = new Vector2(400, 200);
     }
 
     void UpdateDebugUI()
     {
-        if (_canvasContainer == null)
+        if (canvasContainer == null)
             return;
-        _debugText.text = "";
 
-        foreach (DryadListener listener in _listeners)
+        debugText.text = "";
+
+        foreach (DryadListener listener in Listeners)
         {
-            _debugText.text += $"Listener {listener.Name}\n";
+            debugText.text += $"Listener {listener.Name}\n";
 
             if (listener.GetCurrentLandscape())
-                _debugText.text += $"Current landscape: {listener.GetCurrentLandscape()?.Name}\n";
+                debugText.text += $"Current landscape: {listener.GetCurrentLandscape()?.Name}\n";
 
             if (listener.GetPreviousLandscape())
-                _debugText.text += $"Previous landscape: {listener.GetPreviousLandscape()?.Name}\n";
+                debugText.text += $"Previous landscape: {listener.GetPreviousLandscape()?.Name}\n";
 
-            _debugText.text += $"Motifs:\n";
+            debugText.text += $"Motifs:\n";
 
             foreach (DryadMotif motif in listener.GetMotifs())
-                _debugText.text += $"  - {motif.Name}\n";
+                debugText.text += $"  - {motif.Name}\n";
         }
     }
 }

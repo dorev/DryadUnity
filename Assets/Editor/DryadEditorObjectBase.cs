@@ -27,14 +27,6 @@ public class DryadEditorObjectBase
         Rect.position += delta;
     }
 
-    protected Texture2D MakeTextureColor(Color color, float opacity = 1)
-    {
-        Texture2D result = new Texture2D(1, 1);
-        result.SetPixel(0,0, new Color(color.r, color.g, color.b, opacity));
-        result.Apply();
-        return result;
-    }
-
     protected void DebugLabel(string debugText)
     {
         Color defaultColor = GUI.color;

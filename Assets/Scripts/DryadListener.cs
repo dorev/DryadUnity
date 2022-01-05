@@ -4,63 +4,62 @@ using UnityEngine;
 
 public class DryadListener : MonoBehaviour
 {
-    List<DryadMotif> _motifs = new List<DryadMotif>();
-    DryadGlobal _global;
-    DryadLandscape _currentLandscape;
-    DryadLandscape _previousLandscape;
+    List<DryadMotif> motifs = new List<DryadMotif>();
+    DryadGlobal global;
+    DryadLandscape currentLandscape;
+    DryadLandscape previousLandscape;
 
     [SerializeField]
     public string Name { get; set; }
 
     public DryadLandscape GetCurrentLandscape()
     {
-        return _currentLandscape;
+        return currentLandscape;
     }
 
     public DryadLandscape GetPreviousLandscape()
     {
-        return _previousLandscape;
+        return previousLandscape;
     }
-
 
     void Start()
     {
         if (Name == null)
             Name = "Paul";
 
-        _global = DryadGlobal.GetInstance();
-        if (_global == null)
+        global = DryadGlobal.GetInstance();
+        if (global == null)
             Debug.LogError("No DryadGlobal accessible!");
         else
-            _global.Register(this);
+            global.Register(this);
     }
 
     void OnDestroy()
     {
-        if(_global != null)
-            _global.Unregister(this);
+        if(global != null)
+            global.Unregister(this);
     }
 
     void Update()
     {
-        foreach(DryadMotif motif in _motifs)
+        foreach(DryadMotif motif in motifs)
             Debug.DrawLine(transform.position, motif.transform.position);
     }
 
     public void ClearMotifs()
     {
-        _motifs.Clear();
+        motifs.Clear();
     }
 
     public void AddMotif(DryadMotif motif)
     {
-        _motifs.Add(motif);
+        motifs.Add(motif);
     }
 
     public void RemoveMotif(DryadMotif motif)
     {
-        if (_motifs.Contains(motif))
-            _motifs.Remove(motif);
+        if (motifs.Contains(motif))
+            motifs.Remove(motif);
         else
             Debug.LogError($"Motif {motif.Name} note present in listener");
     }
@@ -68,25 +67,16 @@ public class DryadListener : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         DryadLandscape landscape = other.gameObject.GetComponent<DryadLandscape>();
-        if (landscape != null && landscape != _currentLandscape)
+        if (landscape != null && landscape != currentLandscape)
         {
-            _previousLandscape = _currentLandscape;
-            _currentLandscape = landscape;
+            previousLandscape = currentLandscape;
+            currentLandscape = landscape;
         }
     }
 
-    /*
-    private void OnTriggerExit(Collider other)
-    {
-        DryadLandscape landscape = other.gameObject.GetComponent<DryadLandscape>();
-        if (landscape != null)
-            _previousLandscape = landscape;
-    }
-    */
-
     public List<DryadMotif> GetMotifs()
     {
-        return _motifs;
+        return motifs;
     }
 
 }

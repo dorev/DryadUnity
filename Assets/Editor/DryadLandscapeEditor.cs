@@ -177,7 +177,7 @@ public class DryadLandscapeEditor : DryadEditorBase
                 break;
 
             case EventType.MouseDrag:
-                if (e.button == 2)
+                if (e.button == 0)
                     OnDrag(e.delta);
                 break;
         }
@@ -266,7 +266,7 @@ public class DryadLandscapeEditor : DryadEditorBase
 
     private void OnSelectionChange()
     {
-        DryadLandscape landscapeSelected = GetComponentFromSelection<DryadLandscape>();
+        DryadLandscape landscapeSelected = DryadEditorUtility.GetComponentFromSelection<DryadLandscape>();
 
         if (landscapeSelected != null && landscapeSelected != Landscape)
         {

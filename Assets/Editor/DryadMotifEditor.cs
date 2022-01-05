@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-// Add MotifLength line
-// Motif notes
-//  - Shape must "snap" to grid
-//  - Must be able to stretch notes (draggable "On" and "Off" regions)
-//  - Right-click to create or delete note ('C' and 'D' shortcuts?)
+// NEED TO CLARIFY THE MOTIF DURATION (if it's longer than just up to the end of it's last note)
 
 public class DryadMotifEditor : DryadEditorBase
 {
@@ -17,10 +13,10 @@ public class DryadMotifEditor : DryadEditorBase
     public DryadMotif Motif;
 
     public float GridUnitSize = 24;
-    // Min/Max values disabled because zooming was removed from MVP
-    //public float MinGridUnitSize = 12;
-    //public float MaxGridUnitSize = 48;
-    public Vector2 debugDrag;
+
+    public Rect MotifDurationRect;
+    public GUIStyle MotifDurationStyle;
+    public bool isDraggingMotifDuration;
 
     private List<DryadMotifNote> notes = new List<DryadMotifNote>();
 
@@ -39,8 +35,6 @@ public class DryadMotifEditor : DryadEditorBase
         DryadMotifEditor window = GetWindow<DryadMotifEditor>();
         window.InitMotifEditor(motif);
         window.titleContent = new GUIContent("Motif Editor");
-        //window.minSize = new Vector2(100, 100);
-        //window.position = new Rect(0, 0, 100, 100);
     }
 
     private void InitMotifEditor(DryadMotif motif)
@@ -49,6 +43,14 @@ public class DryadMotifEditor : DryadEditorBase
             throw new System.Exception("Null motif provided to editor initializer");
 
         Motif = motif;
+        MotifDurationStyle = new GUIStyle();
+        MotifDurationStyle.normal.background = DryadEditorUtility.ColorTexture(Color.white, 0.5f);
+        MotifDurationRect = new Rect(0, 0, GridUnitSize, Screen.height);
+
+        MotifDurationRect.x = (Motif.Duration + 1) / Dryad.Duration.Sixteenth * GridUnitSize;
+        MotifDurationRect.y = 0;
+        MotifDurationRect.width = GridUnitSize;
+        MotifDurationRect.height = Screen.height;
     }
 
     #endregion
@@ -75,8 +77,10 @@ public class DryadMotifEditor : DryadEditorBase
         ProcessNoteEvents(Event.current);
         ProcessEvents(Event.current);
 
-        GUI.Label(new Rect(GridUnitSize, GridUnitSize, 500, EditorGUIUtility.singleLineHeight),
-            $"Offset: {offset}   Drag: {debugDrag}");
+        if (Motif != null)
+            DrawMotifDurationEnd();
+        
+        GUI.Label(DryadEditorUtility.DefaultLabelRect(GridUnitSize, GridUnitSize), $"Offset: {offset}");
 
         if (GUI.changed)
             Repaint();
@@ -84,6 +88,10 @@ public class DryadMotifEditor : DryadEditorBase
 
     void DrawGrid()
     {
+        // Force limit on dragging right
+        if (offset.x > GridUnitSize)
+            offset.x = GridUnitSize;
+
         // Grid indicating measures and octaves
         DrawHorizontalGrid(8 * GridUnitSize, 0.8f, Color.gray);
         DrawHorizontalGrid(8 * GridUnitSize, 0.8f, Color.gray, 1 * GridUnitSize);
@@ -105,6 +113,30 @@ public class DryadMotifEditor : DryadEditorBase
     {
         foreach (DryadMotifNote note in notes)
             note.Draw();
+    }
+
+    void DrawMotifDurationEnd()
+    {
+        if(!isDraggingMotifDuration)
+        {
+            uint lastNoteEndTime = 0;
+            foreach (DryadMotifNote note in notes)
+            {
+                uint noteEndTime = note.ScoreTime + note.NoteDuration;
+                if (noteEndTime > lastNoteEndTime)
+                    lastNoteEndTime = noteEndTime;
+            }
+
+            if (Motif.Duration < lastNoteEndTime)
+                Motif.Duration = lastNoteEndTime;
+
+            MotifDurationRect.x = Motif.Duration / Dryad.Duration.Sixteenth * GridUnitSize + offset.x;
+        }
+
+        MotifDurationRect.y = 0;
+        MotifDurationRect.width = GridUnitSize;
+        MotifDurationRect.height = Screen.height;
+        GUI.Box(MotifDurationRect, "", MotifDurationStyle);
     }
 
     private void DrawVerticalLine(float x, float lineOpacity, Color lineColor)
@@ -203,15 +235,31 @@ public class DryadMotifEditor : DryadEditorBase
             case EventType.MouseDown:
                 if (e.button == 1)
                     OnAddNote(e.mousePosition);
+                else if (e.button == 0)
+                {
+                    if (MotifDurationRect.Contains(e.mousePosition))
+                        isDraggingMotifDuration = true;
+                    else if (e.clickCount == 2)
+                        OnCenterEditor();
+                }
+                break;
+
+            case EventType.MouseUp:
+                if (isDraggingMotifDuration)
+                {
+                    UpdateMotifDurationAfterDrag();
+                    isDraggingMotifDuration = false;
+                }
                 break;
 
             case EventType.MouseDrag:
-                if (e.button == 2)
-                    OnDrag(e.delta);
-                break;
-
-            case EventType.ScrollWheel:
-                OnMouseScroll(e.delta.y);
+                if (e.button == 0)
+                {
+                    if (isDraggingMotifDuration)
+                        OnDragMotifDuration(e.delta);
+                    else
+                        OnDragGrid(e.delta);
+                }
                 break;
         }
     }
@@ -225,17 +273,17 @@ public class DryadMotifEditor : DryadEditorBase
         }
     }
 
-    void OnMouseScroll(float delta)
+    void OnCenterEditor()
     {
-        /* Zoom disabled because it is a little bit problematic and not necessarily relevant for MVP
-
-        if ((GridUnitSize < MinGridUnitSize && delta > 0)
-        ||  (GridUnitSize > MaxGridUnitSize && delta < 0))
-            return;
-
-        GridUnitSize -= delta;
+        offset.x = GridUnitSize;
+        offset.y = Screen.height / 2.0f;
         GUI.changed = true;
-        */
+    }
+
+    void OnDragMotifDuration(Vector2 delta)
+    {
+        MotifDurationRect.position += delta;
+        GUI.changed = true;
     }
 
     void OnAddNote(Vector2 mousePosition)
@@ -244,7 +292,7 @@ public class DryadMotifEditor : DryadEditorBase
 
         notes.Add(new DryadMotifNote(
             this,
-            DryadMotifNote.Quarter,
+            Dryad.Duration.Quarter,
             noteData.scoreTime,
             noteData.tonicOffset,
             OnClickRemoveNote
@@ -258,7 +306,7 @@ public class DryadMotifEditor : DryadEditorBase
         notes?.Remove(note);
     }
 
-    private void OnDrag(Vector2 delta)
+    private void OnDragGrid(Vector2 delta)
     {
         drag = delta;
 
@@ -281,7 +329,7 @@ public class DryadMotifEditor : DryadEditorBase
 
     private void OnSelectionChange()
     {
-        DryadMotif motifSelected = GetComponentFromSelection<DryadMotif>();
+        DryadMotif motifSelected = DryadEditorUtility.GetComponentFromSelection<DryadMotif>();
 
         if (motifSelected != null && motifSelected != Motif)
         {
@@ -318,20 +366,33 @@ public class DryadMotifEditor : DryadEditorBase
 
         // Removing 1 because the first grid contains the labels
         uint scoreTime = (uint) (Mathf.FloorToInt(snapPosition.x / GridUnitSize) - 1);
-        scoreTime *= DryadMotifNote.Sixteenth;
+        scoreTime *= Dryad.Duration.Sixteenth;
 
-        // Correct scoreTime to match grid expected value
-        if (scoreTime % DryadMotifNote.Sixteenth != 0)
-            scoreTime -= scoreTime % DryadMotifNote.Sixteenth;
+        NormalizeScoreTime(ref scoreTime);
 
         return (scoreTime, tonicOffset);
     }
 
     public Vector2 ScoreTimeAndTonicOffsetToPosition(uint scoreTime, int tonicOffset)
     {
-        float x = scoreTime / DryadMotifNote.Sixteenth * GridUnitSize;
+        float x = scoreTime / Dryad.Duration.Sixteenth * GridUnitSize;
         float y = tonicOffset * -1.0f * GridUnitSize;
         return new Vector2(x, y) + offset;
+    }
+
+    void NormalizeScoreTime(ref uint scoreTime)
+    {
+        // Fit to grid Dryad.Duration unit value
+        if (scoreTime % Dryad.Duration.Sixteenth != 0)
+            scoreTime -= scoreTime % Dryad.Duration.Sixteenth;
+    }
+
+    void UpdateMotifDurationAfterDrag()
+    {
+        MotifDurationRect.x -= MotifDurationRect.x % GridUnitSize;
+        Motif.Duration = (uint) Mathf.FloorToInt(MotifDurationRect.x / GridUnitSize) * Dryad.Duration.Sixteenth;
+        NormalizeScoreTime(ref Motif.Duration);
+        GUI.changed = true;
     }
 
     #endregion

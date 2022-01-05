@@ -3,14 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class MotifNote
-{
-    uint OnScoreTime;
-    uint OffScoreTime;
-    int ScaleOffset;
-}
-
-[System.Serializable]
 public class MotifNoteData
 {
     public uint Id;
@@ -26,16 +18,20 @@ public class MotifNoteData
         Duration = duration;
     }
 }
+
 public class DryadMotif : MonoBehaviour
 {
-    // https://unity3d.college/2017/05/22/unity-attributes/
-
+    [SerializeField]
     public string Name = "NoMotifName";
+    [SerializeField]
     public string Voice = "NoVoiceName";
+    [SerializeField]
     public float BroadcastRange = 5f;
+    [SerializeField]
+    public uint Duration = Dryad.Duration.Quarter;
 
     [HideInInspector]
-    public List<MotifNote> Notes;
+    public List<MotifNoteData> Notes;
 
     // Delegate required because of compilation order
     public delegate void OpenMotifEditorDelegate(DryadMotif landscape);
@@ -44,38 +40,12 @@ public class DryadMotif : MonoBehaviour
     public void OpenMotifEditor()
     {
         if (Notes == null)
-            Notes = new List<MotifNote>();
+            Notes = new List<MotifNoteData>();
 
-        if (OnOpenMotifEditor != null)
-            OnOpenMotifEditor(this);
+        OnOpenMotifEditor?.Invoke(this);
     }
 
     public DryadMotif()
     {
-    }
-
-    public override int GetHashCode()
-    {
-        return 42
-            ^ BroadcastRange.GetHashCode()
-            ^ Name.GetHashCode()
-            ^ Voice.GetHashCode();
-    }
-
-    public override bool Equals(object other)
-    {
-        if(other.GetType() != typeof(DryadMotif))
-            return false;
-        if (object.ReferenceEquals(other, this))
-            return true;
-
-        return Equals(other as DryadMotif);
-    }
-
-    public bool Equals(DryadMotif other)
-    {
-        return BroadcastRange == other.BroadcastRange
-            && Name == other.Name
-            && Voice == other.Voice;
     }
 }
