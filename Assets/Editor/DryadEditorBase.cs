@@ -10,5 +10,5 @@ public class DryadEditorBase : EditorWindow
 
     protected Vector2 drag;
     protected Vector2 offset;
-    protected bool dataHasChanged = false;
+    public bool dataHasChanged = false;
 }

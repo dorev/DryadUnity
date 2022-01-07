@@ -16,7 +16,7 @@ public class DryadMotifNote : DryadEditorObjectBase
     static GUIStyle selectedStyle;
 
     public bool isStretched;
-    private enum StretchDirection
+    public enum StretchDirection
     {
         None,
         Front,
@@ -28,12 +28,11 @@ public class DryadMotifNote : DryadEditorObjectBase
     private Rect FrontStretcherRect;
     private Rect BackStretcherRect;
 
-    Action<DryadMotifNote> OnFrontClicked;
-    Action<DryadMotifNote> OnBackClicked;
     Action<DryadMotifNote> OnRemoveNote;
+    Action<DryadMotifNote, StretchDirection, Vector2> OnStretchNote;
     public int TonicOffset;
     public uint ScoreTime;
-    public uint NoteDuration;
+    public uint Duration;
 
     private DryadMotifEditor motifEditor;
 
@@ -41,22 +40,50 @@ public class DryadMotifNote : DryadEditorObjectBase
 
     #region Initialization
 
-    public DryadMotifNote(DryadMotifEditor editor, uint duration, uint scoreTime, int tonicOffset, Action<DryadMotifNote> OnClickRemoveNote)
+    public DryadMotifNote(
+        DryadMotifEditor editor,
+        uint duration,
+        uint scoreTime,
+        int tonicOffset,
+        Action<DryadMotifNote> OnClickRemoveNote,
+        Action<DryadMotifNote, StretchDirection, Vector2> OnDragStretchNote)
         : base(staticIdSource++)
     {
-        SetupStyles();
-        motifEditor = editor;
-        NoteDuration = duration;
+        Duration = duration;
         ScoreTime = scoreTime;
         TonicOffset = tonicOffset;
-        OnRemoveNote = OnClickRemoveNote;
-        UpdatePositionInEditorFromNoteData();
+        Init(editor, OnClickRemoveNote, OnDragStretchNote);
+    }
 
+    public DryadMotifNote(
+        MotifNoteData noteData,
+        DryadMotifEditor editor,
+        Action<DryadMotifNote> OnClickRemoveNote,
+        Action<DryadMotifNote, StretchDirection, Vector2> OnDragStretchNote)
+        : base(staticIdSource++)
+    {
+        Duration = noteData.Duration;
+        ScoreTime = noteData.ScoreTime;
+        TonicOffset = noteData.TonicOffset;
+        Init(editor, OnClickRemoveNote, OnDragStretchNote);
+    }
+
+    void Init(
+        DryadMotifEditor editor,
+        Action<DryadMotifNote> OnClickRemoveNote,
+        Action<DryadMotifNote, StretchDirection, Vector2> OnDragStretchNote)
+    {
+        motifEditor = editor;
+        SetupStyles();
+        OnRemoveNote = OnClickRemoveNote;
+        OnStretchNote = OnDragStretchNote;
+        UpdatePositionInEditorFromNoteData();
         FrontStretcherRect.width = EditorGridUnitSize() * 0.5f;
         FrontStretcherRect.height = EditorGridUnitSize();
         BackStretcherRect.width = EditorGridUnitSize() * 0.5f;
         BackStretcherRect.height = EditorGridUnitSize();
     }
+
     private void SetupStyles()
     {
         defaultStyle = new GUIStyle();
@@ -90,7 +117,7 @@ public class DryadMotifNote : DryadEditorObjectBase
             GUI.Box(BackStretcherRect, "", StretcherStyle);
         }
 
-        DebugLabel($"Time: {ScoreTime}  Offset: {TonicOffset} Duration: {NoteDuration}");
+        DebugLabel($"Time: {ScoreTime}  Offset: {TonicOffset} Duration: {Duration}");
     }
 
     void ProcessContextMenu()
@@ -172,7 +199,7 @@ public class DryadMotifNote : DryadEditorObjectBase
                     }
                     else if(isStretched)
                     {
-                        Stretch(e.delta);
+                        OnStretch(e.delta);
                         e.Use();
                         return true;
                     }
@@ -183,22 +210,9 @@ public class DryadMotifNote : DryadEditorObjectBase
         return false;
     }
 
-    void Stretch(Vector2 delta)
+    void OnStretch(Vector2 delta)
     {
-        switch(StretchedDirection)
-        {
-            case StretchDirection.Front:
-                Rect.x += delta.x;
-                Rect.width -= delta.x;
-                break;
-
-            case StretchDirection.Back:
-                Rect.width += delta.x;
-                break;
-
-            case StretchDirection.None:
-                break;
-        }
+        OnStretchNote?.Invoke(this, StretchedDirection, delta);
     }
 
     void OnClickRemoveNote()
@@ -214,14 +228,14 @@ public class DryadMotifNote : DryadEditorObjectBase
     void UpdatePositionInEditorFromNoteData()
     {
         Rect.position = motifEditor.ScoreTimeAndTonicOffsetToPosition(ScoreTime, TonicOffset);
-        Rect.width = NoteDuration / Dryad.Duration.Sixteenth * EditorGridUnitSize();
+        Rect.width = Duration / Dryad.Duration.Sixteenth * EditorGridUnitSize();
         Rect.height = EditorGridUnitSize();
     }
 
     void UpdateNoteDataFromRect()
     {
         (ScoreTime, TonicOffset) = motifEditor.PositionToScoreTimeAndTonicOffset(Rect.position);
-        NoteDuration = (uint) Mathf.RoundToInt(Rect.width / EditorGridUnitSize()) * Dryad.Duration.Sixteenth;
+        Duration = (uint) Mathf.RoundToInt(Rect.width / EditorGridUnitSize()) * Dryad.Duration.Sixteenth;
     }
 
     #endregion

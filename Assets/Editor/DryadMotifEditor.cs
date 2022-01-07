@@ -17,6 +17,7 @@ public class DryadMotifEditor : DryadEditorBase
     public Rect MotifDurationRect;
     public GUIStyle MotifDurationStyle;
     public bool isDraggingMotifDuration;
+    public uint Duration = 0;
 
     private List<DryadMotifNote> notes = new List<DryadMotifNote>();
 
@@ -51,6 +52,14 @@ public class DryadMotifEditor : DryadEditorBase
         MotifDurationRect.y = 0;
         MotifDurationRect.width = GridUnitSize;
         MotifDurationRect.height = Screen.height;
+
+        Duration = motif.Duration;
+
+        foreach(MotifNoteData noteData in motif.NotesData)
+            notes.Add(new DryadMotifNote(noteData, this, OnClickRemoveNote, OnDragStretchNote));
+
+        GUI.changed = true;
+        dataHasChanged = true;
     }
 
     #endregion
@@ -72,18 +81,48 @@ public class DryadMotifEditor : DryadEditorBase
 
         GUI.Label(new Rect(GridUnitSize, 0, 500, EditorGUIUtility.singleLineHeight), Motif.Name, EditorStyles.boldLabel);
 
-        DrawNotes();
+        CheckAndFixGlitchedData();
 
+        DrawNotes();
         ProcessNoteEvents(Event.current);
         ProcessEvents(Event.current);
 
         if (Motif != null)
             DrawMotifDurationEnd();
         
-        GUI.Label(DryadEditorUtility.DefaultLabelRect(GridUnitSize, GridUnitSize), $"Offset: {offset}");
+        GUI.Label(DryadEditorUtility.DebugTextRect(GridUnitSize, GridUnitSize), $"Offset: {offset} Duration: {Duration}");
 
         if (GUI.changed)
             Repaint();
+    }
+
+    void CheckAndFixGlitchedData()
+    {
+        if (Duration > 9999)
+        {
+            Duration = 0;
+            dataHasChanged = true;
+            GUI.changed = true;
+        }
+
+        List<DryadMotifNote> notesToDelete = new List<DryadMotifNote>();
+        foreach(DryadMotifNote note in notes)
+        {
+            if (note.ScoreTime < 0
+            || note.ScoreTime > 9999
+            || note.Duration < 0
+            || note.Duration > 9999)
+                notesToDelete.Add(note);
+        }
+
+        foreach (DryadMotifNote note in notesToDelete)
+            notes.Remove(note);
+
+        if(notesToDelete.Count > 0)
+        {
+            dataHasChanged = true;
+            GUI.changed = true;
+        }
     }
 
     void DrawGrid()
@@ -117,20 +156,24 @@ public class DryadMotifEditor : DryadEditorBase
 
     void DrawMotifDurationEnd()
     {
+        // Check if newly stretched notes extented the motif duration
         if(!isDraggingMotifDuration)
         {
             uint lastNoteEndTime = 0;
             foreach (DryadMotifNote note in notes)
             {
-                uint noteEndTime = note.ScoreTime + note.NoteDuration;
+                uint noteEndTime = note.ScoreTime + note.Duration;
                 if (noteEndTime > lastNoteEndTime)
                     lastNoteEndTime = noteEndTime;
             }
 
-            if (Motif.Duration < lastNoteEndTime)
-                Motif.Duration = lastNoteEndTime;
+            if (Duration < lastNoteEndTime)
+            { 
+                Duration = lastNoteEndTime;
+                dataHasChanged = true;
+            }
 
-            MotifDurationRect.x = Motif.Duration / Dryad.Duration.Sixteenth * GridUnitSize + offset.x;
+            MotifDurationRect.x = Duration / Dryad.Duration.Sixteenth * GridUnitSize + offset.x;
         }
 
         MotifDurationRect.y = 0;
@@ -269,7 +312,10 @@ public class DryadMotifEditor : DryadEditorBase
         foreach (DryadMotifNote note in notes) // might need to do the iteration backward to redraw in order of addition
         {
             if (note.ProcessEvents(e))
+            {
                 GUI.changed = true;
+                dataHasChanged = true;
+            }
         }
     }
 
@@ -286,6 +332,26 @@ public class DryadMotifEditor : DryadEditorBase
         GUI.changed = true;
     }
 
+    void OnDragStretchNote(DryadMotifNote note, DryadMotifNote.StretchDirection stretchDirection, Vector2 delta)
+    {
+        switch (stretchDirection)
+        {
+            case DryadMotifNote.StretchDirection.Front:
+                note.Rect.x += delta.x;
+                note.Rect.width -= delta.x;
+                break;
+
+            case DryadMotifNote.StretchDirection.Back:
+                note.Rect.width += delta.x;
+                break;
+
+            case DryadMotifNote.StretchDirection.None:
+                break;
+        }
+
+        dataHasChanged = true;
+    }
+
     void OnAddNote(Vector2 mousePosition)
     {
         (uint scoreTime, int tonicOffset) noteData = PositionToScoreTimeAndTonicOffset(mousePosition);
@@ -295,10 +361,12 @@ public class DryadMotifEditor : DryadEditorBase
             Dryad.Duration.Quarter,
             noteData.scoreTime,
             noteData.tonicOffset,
-            OnClickRemoveNote
+            OnClickRemoveNote,
+            OnDragStretchNote
         ));
 
         GUI.changed = true;
+        dataHasChanged = true;
     }
 
     private void OnClickRemoveNote(DryadMotifNote note)
@@ -325,6 +393,11 @@ public class DryadMotifEditor : DryadEditorBase
 
     void ClearMotifEditor()
     {
+        notes.Clear();
+        Motif = null;
+        isDraggingMotifDuration = false;
+        Duration = 0;
+        Repaint();
     }
 
     private void OnSelectionChange()
@@ -346,6 +419,12 @@ public class DryadMotifEditor : DryadEditorBase
     private void SaveMotifData()
     {
         EditorUtility.SetDirty(Motif);
+        Motif.NotesData.Clear();
+
+        foreach(DryadMotifNote note in notes)
+            Motif.NotesData.Add(new MotifNoteData(note.Id, note.ScoreTime, note.TonicOffset, note.Duration));
+
+        Motif.Duration = Duration;
         dataHasChanged = false;
     }
 
@@ -390,9 +469,10 @@ public class DryadMotifEditor : DryadEditorBase
     void UpdateMotifDurationAfterDrag()
     {
         MotifDurationRect.x -= MotifDurationRect.x % GridUnitSize;
-        Motif.Duration = (uint) Mathf.FloorToInt(MotifDurationRect.x / GridUnitSize) * Dryad.Duration.Sixteenth;
-        NormalizeScoreTime(ref Motif.Duration);
+        Duration = (uint) Mathf.FloorToInt(MotifDurationRect.x / GridUnitSize) * Dryad.Duration.Sixteenth;
+        NormalizeScoreTime(ref Duration);
         GUI.changed = true;
+        dataHasChanged = true;
     }
 
     #endregion

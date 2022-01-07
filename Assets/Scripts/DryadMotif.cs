@@ -31,7 +31,8 @@ public class DryadMotif : MonoBehaviour
     public uint Duration = Dryad.Duration.Quarter;
 
     [HideInInspector]
-    public List<MotifNoteData> Notes;
+    [SerializeField]
+    public List<MotifNoteData> NotesData;
 
     // Delegate required because of compilation order
     public delegate void OpenMotifEditorDelegate(DryadMotif landscape);
@@ -39,8 +40,8 @@ public class DryadMotif : MonoBehaviour
 
     public void OpenMotifEditor()
     {
-        if (Notes == null)
-            Notes = new List<MotifNoteData>();
+        if (NotesData == null)
+            NotesData = new List<MotifNoteData>();
 
         OnOpenMotifEditor?.Invoke(this);
     }

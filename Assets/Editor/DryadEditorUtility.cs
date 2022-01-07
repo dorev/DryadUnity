@@ -18,9 +18,9 @@ static public class DryadEditorUtility
         return gameObject.GetComponent<GameObjectType>();
     }
 
-    static public Rect DefaultLabelRect(float x, float y)
+    static public Rect DebugTextRect(float x, float y, uint lines = 1)
     {
-        return new Rect(x, y, EditorGUIUtility.labelWidth, EditorGUIUtility.singleLineHeight);
+        return new Rect(x, y, 500, (EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing) * lines);
     }
 
     static public Texture2D ColorTexture(Color color, float opacity = 1)
