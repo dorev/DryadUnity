@@ -10,7 +10,6 @@ enum LandscapeScale
     Custom
 }
 
-
 [CustomEditor(typeof(DryadLandscape))]
 public class DryadLandscapeInspector : Editor
 {

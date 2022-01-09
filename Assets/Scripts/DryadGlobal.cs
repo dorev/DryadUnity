@@ -233,6 +233,7 @@ public class DryadGlobal : MonoBehaviour
 
     static DryadGlobal Instance;
     WaitForSeconds SlowPeriod;
+    uint Tempo = 120;
     List<DryadListener> Listeners = new List<DryadListener>();
 
     enum GlobalStatus
@@ -263,8 +264,9 @@ public class DryadGlobal : MonoBehaviour
         Status = GlobalStatus.Init;
         SlowPeriod = new WaitForSeconds(RefreshPeriod);
         StartCoroutine(SlowPeriodicWork());
-        Status = GlobalStatus.Running;
+        StartCoroutine(ScoreTickPeriodicWork());
         SetupDebugUI();
+        Status = GlobalStatus.Running;
     }
 
     void Update()
@@ -277,18 +279,72 @@ public class DryadGlobal : MonoBehaviour
     {
         Status = GlobalStatus.ShuttingDown;
         StopCoroutine(SlowPeriodicWork());
+        StopCoroutine(ScoreTickPeriodicWork());
     }
 
-     IEnumerator SlowPeriodicWork()
-     {
-         while (Status != GlobalStatus.ShuttingDown)
-         {
+    IEnumerator SlowPeriodicWork()
+    {
+        while (Status != GlobalStatus.ShuttingDown)
+        {
             UpdateListenersMotifs();
             yield return SlowPeriod;
-         }
-     }
+        }
+    }
 
-     public void Register(DryadListener listener)
+    IEnumerator ScoreTickPeriodicWork()
+    {
+        while (Status != GlobalStatus.ShuttingDown)
+        {
+
+            // MULTIPLE LISTENERS IS WEIRD!!
+
+            foreach(DryadListener listener in Listeners)
+            {
+                if (!listener.HasChanged)
+                {
+                    listener.HasChanged = false;
+                    // compute appropriate duration of considering new elements
+                }
+                else
+                {
+                    // still check if we must generate more measures
+                }
+            }
+
+            // play next notes from score
+
+            yield return ScoreTickPeriodFromTempo();
+        }
+    }
+
+    WaitForSeconds ScoreTickPeriodFromTempo()
+    {
+        float beatDuration = 60.0f / (float)Tempo;
+        float smallestScoreTimeDuration = beatDuration / (Dryad.Duration.Quarter / Dryad.Duration.ThirtySecondTriplet);
+        return new WaitForSeconds(smallestScoreTimeDuration);
+    }
+
+    void UpdateListenersMotifs()
+    {
+        // Check what motifs are in range of listeners
+        foreach (DryadListener listener in Listeners)
+        {
+            listener.ClearMotifs();
+
+            List<DryadMotif> motifsInRange = new List<DryadMotif>();
+
+            foreach (DryadMotif motif in FindObjectsOfType<DryadMotif>())
+            {
+                float distance = Vector3.Distance(listener.transform.position, motif.transform.position);
+                if (distance < motif.BroadcastRange)
+                    motifsInRange.Add(motif);
+            }
+
+            listener.CompareUpdateWithSurroundingMotifs(motifsInRange);
+        }
+    }
+
+    public void Register(DryadListener listener)
      {
         if(!Listeners.Contains(listener))
         {
@@ -306,22 +362,7 @@ public class DryadGlobal : MonoBehaviour
         }
      }
 
-     void UpdateListenersMotifs()
-     {
-        // Check what motifs are in range of listeners
-        foreach(DryadListener listener in Listeners)
-        {
-            listener.ClearMotifs();
-            foreach(DryadMotif motif in FindObjectsOfType<DryadMotif>())
-            {
-                float distance = Vector3.Distance(listener.transform.position, motif.transform.position);
-                if (distance < motif.BroadcastRange)
-                    listener.AddMotif(motif);
-            }
-        }
-     }
-
-    // Debug ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #region DebugUI
 
     GameObject canvasContainer;
     Canvas canvas;
@@ -372,4 +413,6 @@ public class DryadGlobal : MonoBehaviour
                 debugText.text += $"  - {motif.Name}\n";
         }
     }
+
+    #endregion
 }

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-// NEED TO CLARIFY THE MOTIF DURATION (if it's longer than just up to the end of it's last note)
-
 public class DryadMotifEditor : DryadEditorBase
 {
     #region Members
@@ -57,6 +55,8 @@ public class DryadMotifEditor : DryadEditorBase
 
         foreach(MotifNoteData noteData in motif.NotesData)
             notes.Add(new DryadMotifNote(noteData, this, OnClickRemoveNote, OnDragStretchNote));
+
+        OnCenterEditor();
 
         GUI.changed = true;
         dataHasChanged = true;
