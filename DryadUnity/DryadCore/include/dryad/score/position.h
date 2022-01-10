@@ -40,27 +40,27 @@ public:
         return _scoreTime;
     }
 
-    Map<String, U32> getActiveMotifs() const
+    Map<U32, U32> getActiveMotifs() const
     {
         return _activeMotifs;
     }
 
-    void addMotif(const String& motifName)
+    void addMotif(U32 motifId)
     {
-        if(_activeMotifs.find(motifName) == _activeMotifs.end())
-            _activeMotifs[motifName] = 1;
+        if(_activeMotifs.find(motifId) == _activeMotifs.end())
+            _activeMotifs[motifId] = 1;
         else
-            _activeMotifs[motifName]++;
+            _activeMotifs[motifId]++;
     }
 
-    Result<> removeMotif(const String& motifName)
+    Result<> removeMotif(U32 motifId)
     {
-        if(_activeMotifs.find(motifName) == _activeMotifs.end())
+        if(_activeMotifs.find(motifId) == _activeMotifs.end())
             return {ErrorCode::MotifDoesNotExist};
-        else if(_activeMotifs.at(motifName) == 0)
+        else if(_activeMotifs.at(motifId) == 0)
             return {ErrorCode::MotifAlreadyFullyDeactivated};
         else
-            _activeMotifs[motifName]--;
+            _activeMotifs[motifId]--;
     }
 
     Result<> addMotif(Motif* motif)
@@ -73,13 +73,13 @@ public:
         if(_motifsData.find(motif) == _motifsData.end())
             _motifsData[motif] = {1, true};
         else
-            _activeMotifs[motif->getDescriptor().getName()]++;
+            _activeMotifs[motif->getDescriptor().getId()]++;
     }
 
 private:
 
     ScoreTime _scoreTime;
-    Map<String, U32> _activeMotifs;
+    Map<U32, U32> _activeMotifs;
     Map<Motif*, MotifLocalData> _motifsData;
     HarmonyNode* _harmonyNode;
 };

@@ -38,9 +38,9 @@ public:
 
 private:
 
-    U64 _voiceId;
-    U64 _motifId;
-    U64 _harmonyGraphId;
+    U32 _voiceId;
+    U32 _motifId;
+    U32 _harmonyGraphId;
 };
 
 } // namespace Dryad

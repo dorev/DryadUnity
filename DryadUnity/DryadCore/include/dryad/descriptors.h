@@ -14,7 +14,7 @@ public:
     {
     }
 
-    BaseDescriptor(U64 id, const String& name)
+    BaseDescriptor(U32 id, const String& name)
         : _id(id)
         , _name(name)
     {
@@ -24,7 +24,7 @@ public:
     {
     }
 
-    U64 getId() const
+    U32 getId() const
     {
         return _id;
     }
@@ -36,7 +36,7 @@ public:
 
 protected:
 
-    U64 _id;
+    U32 _id;
     String _name;
 };
 
@@ -48,7 +48,7 @@ public:
     {
     }
 
-    VoiceDescriptor(U64 voiceId, const String& voiceName)
+    VoiceDescriptor(U32 voiceId, const String& voiceName)
         : BaseDescriptor(voiceId, voiceName)
     {
     }
@@ -67,7 +67,7 @@ public:
     {
     }
 
-    MotifDescriptor(U64 motifId, const String& motifName)
+    MotifDescriptor(U32 motifId, const String& motifName)
         : BaseDescriptor(motifId, motifName)
     {
     }
@@ -82,7 +82,7 @@ class HarmonyGraphDescriptor : public BaseDescriptor
 {
 public:
 
-    HarmonyGraphDescriptor(U64 graphId, const String& graphName)
+    HarmonyGraphDescriptor(U32 graphId, const String& graphName)
         : BaseDescriptor(graphId, graphName)
         , _nextNodeId(0)
     {
@@ -95,14 +95,14 @@ public:
 
 protected:
 
-    U64 nextNodeId()
+    U32 nextNodeId()
     {
         return ++_nextNodeId;
     }
 
 private:
 
-    U64 _nextNodeId;
+    U32 _nextNodeId;
 };
 
 class HarmonyNodeId : public HarmonyGraphDescriptor
@@ -115,7 +115,7 @@ public:
     {
     }
 
-    U64 getId() const
+    U32 getId() const
     {
         return _nodeId;
     }
@@ -135,7 +135,7 @@ public:
 private:
 
     using BaseDescriptor::getId;
-    U64 _nodeId;
+    U32 _nodeId;
 };
 
 } // namespace Dryad
