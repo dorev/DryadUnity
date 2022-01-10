@@ -7,8 +7,8 @@
 %include "std_vector.i"
 %include "dryadapi.h"
 
-%template(NodeVector) std::vector<Node>;
-%template(EdgeVector) std::vector<Edge>;
-%template(IntVector) std::vector<int>;
-%template(NoteConcreteVector) std::vector<NoteConcrete>;
-%template(NoteConceptVector) std::vector<NoteConcept>;
+%template(MotifList) std::vector<MotifNote>;
+%template(NodeList) std::vector<Node>;
+%template(EdgeList) std::vector<Edge>;
+%template(IntervalList) std::vector<unsigned>;
+%template(NoteToPlayList) std::vector<NoteToPlay>;

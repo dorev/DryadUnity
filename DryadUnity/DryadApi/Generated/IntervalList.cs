@@ -10,21 +10,21 @@
 
 namespace DryadUnity {
 
-public class EdgeVector : global::System.IDisposable, global::System.Collections.IEnumerable, global::System.Collections.Generic.IEnumerable<Edge>
+public class IntervalList : global::System.IDisposable, global::System.Collections.IEnumerable, global::System.Collections.Generic.IList<uint>
  {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
   protected bool swigCMemOwn;
 
-  internal EdgeVector(global::System.IntPtr cPtr, bool cMemoryOwn) {
+  internal IntervalList(global::System.IntPtr cPtr, bool cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
   }
 
-  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(EdgeVector obj) {
+  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(IntervalList obj) {
     return (obj == null) ? new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero) : obj.swigCPtr;
   }
 
-  ~EdgeVector() {
+  ~IntervalList() {
     Dispose(false);
   }
 
@@ -38,25 +38,25 @@ public class EdgeVector : global::System.IDisposable, global::System.Collections
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          DryadApiPINVOKE.delete_EdgeVector(swigCPtr);
+          DryadApiPINVOKE.delete_IntervalList(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public EdgeVector(global::System.Collections.IEnumerable c) : this() {
+  public IntervalList(global::System.Collections.IEnumerable c) : this() {
     if (c == null)
       throw new global::System.ArgumentNullException("c");
-    foreach (Edge element in c) {
+    foreach (uint element in c) {
       this.Add(element);
     }
   }
 
-  public EdgeVector(global::System.Collections.Generic.IEnumerable<Edge> c) : this() {
+  public IntervalList(global::System.Collections.Generic.IEnumerable<uint> c) : this() {
     if (c == null)
       throw new global::System.ArgumentNullException("c");
-    foreach (Edge element in c) {
+    foreach (uint element in c) {
       this.Add(element);
     }
   }
@@ -73,7 +73,7 @@ public class EdgeVector : global::System.IDisposable, global::System.Collections
     }
   }
 
-  public Edge this[int index]  {
+  public uint this[int index]  {
     get {
       return getitem(index);
     }
@@ -105,17 +105,17 @@ public class EdgeVector : global::System.IDisposable, global::System.Collections
     }
   }
 
-  public void CopyTo(Edge[] array)
+  public void CopyTo(uint[] array)
   {
     CopyTo(0, array, 0, this.Count);
   }
 
-  public void CopyTo(Edge[] array, int arrayIndex)
+  public void CopyTo(uint[] array, int arrayIndex)
   {
     CopyTo(0, array, arrayIndex, this.Count);
   }
 
-  public void CopyTo(int index, Edge[] array, int arrayIndex, int count)
+  public void CopyTo(int index, uint[] array, int arrayIndex, int count)
   {
     if (array == null)
       throw new global::System.ArgumentNullException("array");
@@ -133,22 +133,22 @@ public class EdgeVector : global::System.IDisposable, global::System.Collections
       array.SetValue(getitemcopy(index+i), arrayIndex+i);
   }
 
-  public Edge[] ToArray() {
-    Edge[] array = new Edge[this.Count];
+  public uint[] ToArray() {
+    uint[] array = new uint[this.Count];
     this.CopyTo(array);
     return array;
   }
 
-  global::System.Collections.Generic.IEnumerator<Edge> global::System.Collections.Generic.IEnumerable<Edge>.GetEnumerator() {
-    return new EdgeVectorEnumerator(this);
+  global::System.Collections.Generic.IEnumerator<uint> global::System.Collections.Generic.IEnumerable<uint>.GetEnumerator() {
+    return new IntervalListEnumerator(this);
   }
 
   global::System.Collections.IEnumerator global::System.Collections.IEnumerable.GetEnumerator() {
-    return new EdgeVectorEnumerator(this);
+    return new IntervalListEnumerator(this);
   }
 
-  public EdgeVectorEnumerator GetEnumerator() {
-    return new EdgeVectorEnumerator(this);
+  public IntervalListEnumerator GetEnumerator() {
+    return new IntervalListEnumerator(this);
   }
 
   // Type-safe enumerator
@@ -156,15 +156,15 @@ public class EdgeVector : global::System.IDisposable, global::System.Collections
   /// whenever the collection is modified. This has been done for changes in the size of the
   /// collection but not when one of the elements of the collection is modified as it is a bit
   /// tricky to detect unmanaged code that modifies the collection under our feet.
-  public sealed class EdgeVectorEnumerator : global::System.Collections.IEnumerator
-    , global::System.Collections.Generic.IEnumerator<Edge>
+  public sealed class IntervalListEnumerator : global::System.Collections.IEnumerator
+    , global::System.Collections.Generic.IEnumerator<uint>
   {
-    private EdgeVector collectionRef;
+    private IntervalList collectionRef;
     private int currentIndex;
     private object currentObject;
     private int currentSize;
 
-    public EdgeVectorEnumerator(EdgeVector collection) {
+    public IntervalListEnumerator(IntervalList collection) {
       collectionRef = collection;
       currentIndex = -1;
       currentObject = null;
@@ -172,7 +172,7 @@ public class EdgeVector : global::System.IDisposable, global::System.Collections
     }
 
     // Type-safe iterator Current
-    public Edge Current {
+    public uint Current {
       get {
         if (currentIndex == -1)
           throw new global::System.InvalidOperationException("Enumeration not started.");
@@ -180,7 +180,7 @@ public class EdgeVector : global::System.IDisposable, global::System.Collections
           throw new global::System.InvalidOperationException("Enumeration finished.");
         if (currentObject == null)
           throw new global::System.InvalidOperationException("Collection modified.");
-        return (Edge)currentObject;
+        return (uint)currentObject;
       }
     }
 
@@ -218,107 +218,126 @@ public class EdgeVector : global::System.IDisposable, global::System.Collections
   }
 
   public void Clear() {
-    DryadApiPINVOKE.EdgeVector_Clear(swigCPtr);
+    DryadApiPINVOKE.IntervalList_Clear(swigCPtr);
   }
 
-  public void Add(Edge x) {
-    DryadApiPINVOKE.EdgeVector_Add(swigCPtr, Edge.getCPtr(x));
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+  public void Add(uint x) {
+    DryadApiPINVOKE.IntervalList_Add(swigCPtr, x);
   }
 
   private uint size() {
-    uint ret = DryadApiPINVOKE.EdgeVector_size(swigCPtr);
+    uint ret = DryadApiPINVOKE.IntervalList_size(swigCPtr);
     return ret;
   }
 
   private uint capacity() {
-    uint ret = DryadApiPINVOKE.EdgeVector_capacity(swigCPtr);
+    uint ret = DryadApiPINVOKE.IntervalList_capacity(swigCPtr);
     return ret;
   }
 
   private void reserve(uint n) {
-    DryadApiPINVOKE.EdgeVector_reserve(swigCPtr, n);
+    DryadApiPINVOKE.IntervalList_reserve(swigCPtr, n);
   }
 
-  public EdgeVector() : this(DryadApiPINVOKE.new_EdgeVector__SWIG_0(), true) {
+  public IntervalList() : this(DryadApiPINVOKE.new_IntervalList__SWIG_0(), true) {
   }
 
-  public EdgeVector(EdgeVector other) : this(DryadApiPINVOKE.new_EdgeVector__SWIG_1(EdgeVector.getCPtr(other)), true) {
+  public IntervalList(IntervalList other) : this(DryadApiPINVOKE.new_IntervalList__SWIG_1(IntervalList.getCPtr(other)), true) {
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public EdgeVector(int capacity) : this(DryadApiPINVOKE.new_EdgeVector__SWIG_2(capacity), true) {
+  public IntervalList(int capacity) : this(DryadApiPINVOKE.new_IntervalList__SWIG_2(capacity), true) {
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  private Edge getitemcopy(int index) {
-    Edge ret = new Edge(DryadApiPINVOKE.EdgeVector_getitemcopy(swigCPtr, index), true);
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-    return ret;
-  }
-
-  private Edge getitem(int index) {
-    Edge ret = new Edge(DryadApiPINVOKE.EdgeVector_getitem(swigCPtr, index), false);
+  private uint getitemcopy(int index) {
+    uint ret = DryadApiPINVOKE.IntervalList_getitemcopy(swigCPtr, index);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  private void setitem(int index, Edge val) {
-    DryadApiPINVOKE.EdgeVector_setitem(swigCPtr, index, Edge.getCPtr(val));
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-  }
-
-  public void AddRange(EdgeVector values) {
-    DryadApiPINVOKE.EdgeVector_AddRange(swigCPtr, EdgeVector.getCPtr(values));
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-  }
-
-  public EdgeVector GetRange(int index, int count) {
-    global::System.IntPtr cPtr = DryadApiPINVOKE.EdgeVector_GetRange(swigCPtr, index, count);
-    EdgeVector ret = (cPtr == global::System.IntPtr.Zero) ? null : new EdgeVector(cPtr, true);
+  private uint getitem(int index) {
+    uint ret = DryadApiPINVOKE.IntervalList_getitem(swigCPtr, index);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public void Insert(int index, Edge x) {
-    DryadApiPINVOKE.EdgeVector_Insert(swigCPtr, index, Edge.getCPtr(x));
+  private void setitem(int index, uint val) {
+    DryadApiPINVOKE.IntervalList_setitem(swigCPtr, index, val);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public void InsertRange(int index, EdgeVector values) {
-    DryadApiPINVOKE.EdgeVector_InsertRange(swigCPtr, index, EdgeVector.getCPtr(values));
+  public void AddRange(IntervalList values) {
+    DryadApiPINVOKE.IntervalList_AddRange(swigCPtr, IntervalList.getCPtr(values));
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public IntervalList GetRange(int index, int count) {
+    global::System.IntPtr cPtr = DryadApiPINVOKE.IntervalList_GetRange(swigCPtr, index, count);
+    IntervalList ret = (cPtr == global::System.IntPtr.Zero) ? null : new IntervalList(cPtr, true);
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public void Insert(int index, uint x) {
+    DryadApiPINVOKE.IntervalList_Insert(swigCPtr, index, x);
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public void InsertRange(int index, IntervalList values) {
+    DryadApiPINVOKE.IntervalList_InsertRange(swigCPtr, index, IntervalList.getCPtr(values));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
   public void RemoveAt(int index) {
-    DryadApiPINVOKE.EdgeVector_RemoveAt(swigCPtr, index);
+    DryadApiPINVOKE.IntervalList_RemoveAt(swigCPtr, index);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
   public void RemoveRange(int index, int count) {
-    DryadApiPINVOKE.EdgeVector_RemoveRange(swigCPtr, index, count);
+    DryadApiPINVOKE.IntervalList_RemoveRange(swigCPtr, index, count);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public static EdgeVector Repeat(Edge value, int count) {
-    global::System.IntPtr cPtr = DryadApiPINVOKE.EdgeVector_Repeat(Edge.getCPtr(value), count);
-    EdgeVector ret = (cPtr == global::System.IntPtr.Zero) ? null : new EdgeVector(cPtr, true);
+  public static IntervalList Repeat(uint value, int count) {
+    global::System.IntPtr cPtr = DryadApiPINVOKE.IntervalList_Repeat(value, count);
+    IntervalList ret = (cPtr == global::System.IntPtr.Zero) ? null : new IntervalList(cPtr, true);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public void Reverse() {
-    DryadApiPINVOKE.EdgeVector_Reverse__SWIG_0(swigCPtr);
+    DryadApiPINVOKE.IntervalList_Reverse__SWIG_0(swigCPtr);
   }
 
   public void Reverse(int index, int count) {
-    DryadApiPINVOKE.EdgeVector_Reverse__SWIG_1(swigCPtr, index, count);
+    DryadApiPINVOKE.IntervalList_Reverse__SWIG_1(swigCPtr, index, count);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public void SetRange(int index, EdgeVector values) {
-    DryadApiPINVOKE.EdgeVector_SetRange(swigCPtr, index, EdgeVector.getCPtr(values));
+  public void SetRange(int index, IntervalList values) {
+    DryadApiPINVOKE.IntervalList_SetRange(swigCPtr, index, IntervalList.getCPtr(values));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public bool Contains(uint value) {
+    bool ret = DryadApiPINVOKE.IntervalList_Contains(swigCPtr, value);
+    return ret;
+  }
+
+  public int IndexOf(uint value) {
+    int ret = DryadApiPINVOKE.IntervalList_IndexOf(swigCPtr, value);
+    return ret;
+  }
+
+  public int LastIndexOf(uint value) {
+    int ret = DryadApiPINVOKE.IntervalList_LastIndexOf(swigCPtr, value);
+    return ret;
+  }
+
+  public bool Remove(uint value) {
+    bool ret = DryadApiPINVOKE.IntervalList_Remove(swigCPtr, value);
+    return ret;
   }
 
 }

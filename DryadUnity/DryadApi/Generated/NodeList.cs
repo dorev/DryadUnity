@@ -10,21 +10,21 @@
 
 namespace DryadUnity {
 
-public class NodeVector : global::System.IDisposable, global::System.Collections.IEnumerable, global::System.Collections.Generic.IEnumerable<Node>
+public class NodeList : global::System.IDisposable, global::System.Collections.IEnumerable, global::System.Collections.Generic.IEnumerable<SWIGTYPE_p_Node>
  {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
   protected bool swigCMemOwn;
 
-  internal NodeVector(global::System.IntPtr cPtr, bool cMemoryOwn) {
+  internal NodeList(global::System.IntPtr cPtr, bool cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
   }
 
-  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(NodeVector obj) {
+  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(NodeList obj) {
     return (obj == null) ? new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero) : obj.swigCPtr;
   }
 
-  ~NodeVector() {
+  ~NodeList() {
     Dispose(false);
   }
 
@@ -38,25 +38,25 @@ public class NodeVector : global::System.IDisposable, global::System.Collections
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          DryadApiPINVOKE.delete_NodeVector(swigCPtr);
+          DryadApiPINVOKE.delete_NodeList(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public NodeVector(global::System.Collections.IEnumerable c) : this() {
+  public NodeList(global::System.Collections.IEnumerable c) : this() {
     if (c == null)
       throw new global::System.ArgumentNullException("c");
-    foreach (Node element in c) {
+    foreach (SWIGTYPE_p_Node element in c) {
       this.Add(element);
     }
   }
 
-  public NodeVector(global::System.Collections.Generic.IEnumerable<Node> c) : this() {
+  public NodeList(global::System.Collections.Generic.IEnumerable<SWIGTYPE_p_Node> c) : this() {
     if (c == null)
       throw new global::System.ArgumentNullException("c");
-    foreach (Node element in c) {
+    foreach (SWIGTYPE_p_Node element in c) {
       this.Add(element);
     }
   }
@@ -73,7 +73,7 @@ public class NodeVector : global::System.IDisposable, global::System.Collections
     }
   }
 
-  public Node this[int index]  {
+  public SWIGTYPE_p_Node this[int index]  {
     get {
       return getitem(index);
     }
@@ -105,17 +105,17 @@ public class NodeVector : global::System.IDisposable, global::System.Collections
     }
   }
 
-  public void CopyTo(Node[] array)
+  public void CopyTo(SWIGTYPE_p_Node[] array)
   {
     CopyTo(0, array, 0, this.Count);
   }
 
-  public void CopyTo(Node[] array, int arrayIndex)
+  public void CopyTo(SWIGTYPE_p_Node[] array, int arrayIndex)
   {
     CopyTo(0, array, arrayIndex, this.Count);
   }
 
-  public void CopyTo(int index, Node[] array, int arrayIndex, int count)
+  public void CopyTo(int index, SWIGTYPE_p_Node[] array, int arrayIndex, int count)
   {
     if (array == null)
       throw new global::System.ArgumentNullException("array");
@@ -133,22 +133,22 @@ public class NodeVector : global::System.IDisposable, global::System.Collections
       array.SetValue(getitemcopy(index+i), arrayIndex+i);
   }
 
-  public Node[] ToArray() {
-    Node[] array = new Node[this.Count];
+  public SWIGTYPE_p_Node[] ToArray() {
+    SWIGTYPE_p_Node[] array = new SWIGTYPE_p_Node[this.Count];
     this.CopyTo(array);
     return array;
   }
 
-  global::System.Collections.Generic.IEnumerator<Node> global::System.Collections.Generic.IEnumerable<Node>.GetEnumerator() {
-    return new NodeVectorEnumerator(this);
+  global::System.Collections.Generic.IEnumerator<SWIGTYPE_p_Node> global::System.Collections.Generic.IEnumerable<SWIGTYPE_p_Node>.GetEnumerator() {
+    return new NodeListEnumerator(this);
   }
 
   global::System.Collections.IEnumerator global::System.Collections.IEnumerable.GetEnumerator() {
-    return new NodeVectorEnumerator(this);
+    return new NodeListEnumerator(this);
   }
 
-  public NodeVectorEnumerator GetEnumerator() {
-    return new NodeVectorEnumerator(this);
+  public NodeListEnumerator GetEnumerator() {
+    return new NodeListEnumerator(this);
   }
 
   // Type-safe enumerator
@@ -156,15 +156,15 @@ public class NodeVector : global::System.IDisposable, global::System.Collections
   /// whenever the collection is modified. This has been done for changes in the size of the
   /// collection but not when one of the elements of the collection is modified as it is a bit
   /// tricky to detect unmanaged code that modifies the collection under our feet.
-  public sealed class NodeVectorEnumerator : global::System.Collections.IEnumerator
-    , global::System.Collections.Generic.IEnumerator<Node>
+  public sealed class NodeListEnumerator : global::System.Collections.IEnumerator
+    , global::System.Collections.Generic.IEnumerator<SWIGTYPE_p_Node>
   {
-    private NodeVector collectionRef;
+    private NodeList collectionRef;
     private int currentIndex;
     private object currentObject;
     private int currentSize;
 
-    public NodeVectorEnumerator(NodeVector collection) {
+    public NodeListEnumerator(NodeList collection) {
       collectionRef = collection;
       currentIndex = -1;
       currentObject = null;
@@ -172,7 +172,7 @@ public class NodeVector : global::System.IDisposable, global::System.Collections
     }
 
     // Type-safe iterator Current
-    public Node Current {
+    public SWIGTYPE_p_Node Current {
       get {
         if (currentIndex == -1)
           throw new global::System.InvalidOperationException("Enumeration not started.");
@@ -180,7 +180,7 @@ public class NodeVector : global::System.IDisposable, global::System.Collections
           throw new global::System.InvalidOperationException("Enumeration finished.");
         if (currentObject == null)
           throw new global::System.InvalidOperationException("Collection modified.");
-        return (Node)currentObject;
+        return (SWIGTYPE_p_Node)currentObject;
       }
     }
 
@@ -218,106 +218,106 @@ public class NodeVector : global::System.IDisposable, global::System.Collections
   }
 
   public void Clear() {
-    DryadApiPINVOKE.NodeVector_Clear(swigCPtr);
+    DryadApiPINVOKE.NodeList_Clear(swigCPtr);
   }
 
-  public void Add(Node x) {
-    DryadApiPINVOKE.NodeVector_Add(swigCPtr, Node.getCPtr(x));
+  public void Add(SWIGTYPE_p_Node x) {
+    DryadApiPINVOKE.NodeList_Add(swigCPtr, SWIGTYPE_p_Node.getCPtr(x));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
   private uint size() {
-    uint ret = DryadApiPINVOKE.NodeVector_size(swigCPtr);
+    uint ret = DryadApiPINVOKE.NodeList_size(swigCPtr);
     return ret;
   }
 
   private uint capacity() {
-    uint ret = DryadApiPINVOKE.NodeVector_capacity(swigCPtr);
+    uint ret = DryadApiPINVOKE.NodeList_capacity(swigCPtr);
     return ret;
   }
 
   private void reserve(uint n) {
-    DryadApiPINVOKE.NodeVector_reserve(swigCPtr, n);
+    DryadApiPINVOKE.NodeList_reserve(swigCPtr, n);
   }
 
-  public NodeVector() : this(DryadApiPINVOKE.new_NodeVector__SWIG_0(), true) {
+  public NodeList() : this(DryadApiPINVOKE.new_NodeList__SWIG_0(), true) {
   }
 
-  public NodeVector(NodeVector other) : this(DryadApiPINVOKE.new_NodeVector__SWIG_1(NodeVector.getCPtr(other)), true) {
+  public NodeList(NodeList other) : this(DryadApiPINVOKE.new_NodeList__SWIG_1(NodeList.getCPtr(other)), true) {
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public NodeVector(int capacity) : this(DryadApiPINVOKE.new_NodeVector__SWIG_2(capacity), true) {
+  public NodeList(int capacity) : this(DryadApiPINVOKE.new_NodeList__SWIG_2(capacity), true) {
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  private Node getitemcopy(int index) {
-    Node ret = new Node(DryadApiPINVOKE.NodeVector_getitemcopy(swigCPtr, index), true);
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-    return ret;
-  }
-
-  private Node getitem(int index) {
-    Node ret = new Node(DryadApiPINVOKE.NodeVector_getitem(swigCPtr, index), false);
+  private SWIGTYPE_p_Node getitemcopy(int index) {
+    SWIGTYPE_p_Node ret = new SWIGTYPE_p_Node(DryadApiPINVOKE.NodeList_getitemcopy(swigCPtr, index), true);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  private void setitem(int index, Node val) {
-    DryadApiPINVOKE.NodeVector_setitem(swigCPtr, index, Node.getCPtr(val));
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-  }
-
-  public void AddRange(NodeVector values) {
-    DryadApiPINVOKE.NodeVector_AddRange(swigCPtr, NodeVector.getCPtr(values));
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-  }
-
-  public NodeVector GetRange(int index, int count) {
-    global::System.IntPtr cPtr = DryadApiPINVOKE.NodeVector_GetRange(swigCPtr, index, count);
-    NodeVector ret = (cPtr == global::System.IntPtr.Zero) ? null : new NodeVector(cPtr, true);
+  private SWIGTYPE_p_Node getitem(int index) {
+    SWIGTYPE_p_Node ret = new SWIGTYPE_p_Node(DryadApiPINVOKE.NodeList_getitem(swigCPtr, index), false);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public void Insert(int index, Node x) {
-    DryadApiPINVOKE.NodeVector_Insert(swigCPtr, index, Node.getCPtr(x));
+  private void setitem(int index, SWIGTYPE_p_Node val) {
+    DryadApiPINVOKE.NodeList_setitem(swigCPtr, index, SWIGTYPE_p_Node.getCPtr(val));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public void InsertRange(int index, NodeVector values) {
-    DryadApiPINVOKE.NodeVector_InsertRange(swigCPtr, index, NodeVector.getCPtr(values));
+  public void AddRange(NodeList values) {
+    DryadApiPINVOKE.NodeList_AddRange(swigCPtr, NodeList.getCPtr(values));
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public NodeList GetRange(int index, int count) {
+    global::System.IntPtr cPtr = DryadApiPINVOKE.NodeList_GetRange(swigCPtr, index, count);
+    NodeList ret = (cPtr == global::System.IntPtr.Zero) ? null : new NodeList(cPtr, true);
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public void Insert(int index, SWIGTYPE_p_Node x) {
+    DryadApiPINVOKE.NodeList_Insert(swigCPtr, index, SWIGTYPE_p_Node.getCPtr(x));
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public void InsertRange(int index, NodeList values) {
+    DryadApiPINVOKE.NodeList_InsertRange(swigCPtr, index, NodeList.getCPtr(values));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
   public void RemoveAt(int index) {
-    DryadApiPINVOKE.NodeVector_RemoveAt(swigCPtr, index);
+    DryadApiPINVOKE.NodeList_RemoveAt(swigCPtr, index);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
   public void RemoveRange(int index, int count) {
-    DryadApiPINVOKE.NodeVector_RemoveRange(swigCPtr, index, count);
+    DryadApiPINVOKE.NodeList_RemoveRange(swigCPtr, index, count);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public static NodeVector Repeat(Node value, int count) {
-    global::System.IntPtr cPtr = DryadApiPINVOKE.NodeVector_Repeat(Node.getCPtr(value), count);
-    NodeVector ret = (cPtr == global::System.IntPtr.Zero) ? null : new NodeVector(cPtr, true);
+  public static NodeList Repeat(SWIGTYPE_p_Node value, int count) {
+    global::System.IntPtr cPtr = DryadApiPINVOKE.NodeList_Repeat(SWIGTYPE_p_Node.getCPtr(value), count);
+    NodeList ret = (cPtr == global::System.IntPtr.Zero) ? null : new NodeList(cPtr, true);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public void Reverse() {
-    DryadApiPINVOKE.NodeVector_Reverse__SWIG_0(swigCPtr);
+    DryadApiPINVOKE.NodeList_Reverse__SWIG_0(swigCPtr);
   }
 
   public void Reverse(int index, int count) {
-    DryadApiPINVOKE.NodeVector_Reverse__SWIG_1(swigCPtr, index, count);
+    DryadApiPINVOKE.NodeList_Reverse__SWIG_1(swigCPtr, index, count);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public void SetRange(int index, NodeVector values) {
-    DryadApiPINVOKE.NodeVector_SetRange(swigCPtr, index, NodeVector.getCPtr(values));
+  public void SetRange(int index, NodeList values) {
+    DryadApiPINVOKE.NodeList_SetRange(swigCPtr, index, NodeList.getCPtr(values));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 

@@ -8,7 +8,12 @@
       "restore": {
         "projectUniqueName": "D:\\Git\\DryadUnity\\DryadUnity\\DryadApi\\DryadApi.vcxproj",
         "projectName": "DryadApi",
-        "projectPath": "D:\\Git\\DryadUnity\\DryadUnity\\DryadApi\\DryadApi.vcxproj"
+        "projectPath": "D:\\Git\\DryadUnity\\DryadUnity\\DryadApi\\DryadApi.vcxproj",
+        "frameworks": {
+          "native": {
+            "projectReferences": {}
+          }
+        }
       },
       "frameworks": {
         "native": {}
@@ -71,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -129,7 +134,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -193,563 +193,347 @@ class DryadApiPINVOKE {
   }
 
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcept_duration_set")]
-  public static extern void NoteConcept_duration_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_Clear")]
+  public static extern void MotifList_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcept_duration_get")]
-  public static extern int NoteConcept_duration_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_Add")]
+  public static extern void MotifList_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcept_value_set")]
-  public static extern void NoteConcept_value_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_size")]
+  public static extern uint MotifList_size(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcept_value_get")]
-  public static extern int NoteConcept_value_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_capacity")]
+  public static extern uint MotifList_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NoteConcept")]
-  public static extern global::System.IntPtr new_NoteConcept();
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_reserve")]
+  public static extern void MotifList_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_NoteConcept")]
-  public static extern void delete_NoteConcept(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_MotifList__SWIG_0")]
+  public static extern global::System.IntPtr new_MotifList__SWIG_0();
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcrete_duration_set")]
-  public static extern void NoteConcrete_duration_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_MotifList__SWIG_1")]
+  public static extern global::System.IntPtr new_MotifList__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcrete_duration_get")]
-  public static extern int NoteConcrete_duration_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_MotifList__SWIG_2")]
+  public static extern global::System.IntPtr new_MotifList__SWIG_2(int jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcrete_midi_set")]
-  public static extern void NoteConcrete_midi_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_getitemcopy")]
+  public static extern global::System.IntPtr MotifList_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcrete_midi_get")]
-  public static extern int NoteConcrete_midi_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_getitem")]
+  public static extern global::System.IntPtr MotifList_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcrete_velocity_set")]
-  public static extern void NoteConcrete_velocity_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_setitem")]
+  public static extern void MotifList_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcrete_velocity_get")]
-  public static extern int NoteConcrete_velocity_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_AddRange")]
+  public static extern void MotifList_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NoteConcrete")]
-  public static extern global::System.IntPtr new_NoteConcrete();
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_GetRange")]
+  public static extern global::System.IntPtr MotifList_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_NoteConcrete")]
-  public static extern void delete_NoteConcrete(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_Insert")]
+  public static extern void MotifList_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Motif_name_set")]
-  public static extern void Motif_name_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_InsertRange")]
+  public static extern void MotifList_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Motif_name_get")]
-  public static extern string Motif_name_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_RemoveAt")]
+  public static extern void MotifList_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Motif_notes_set")]
-  public static extern void Motif_notes_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_RemoveRange")]
+  public static extern void MotifList_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Motif_notes_get")]
-  public static extern global::System.IntPtr Motif_notes_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_Repeat")]
+  public static extern global::System.IntPtr MotifList_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_Motif")]
-  public static extern global::System.IntPtr new_Motif();
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_Reverse__SWIG_0")]
+  public static extern void MotifList_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_Motif")]
-  public static extern void delete_Motif(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_Reverse__SWIG_1")]
+  public static extern void MotifList_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Scale_name_set")]
-  public static extern void Scale_name_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_MotifList_SetRange")]
+  public static extern void MotifList_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Scale_name_get")]
-  public static extern string Scale_name_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_MotifList")]
+  public static extern void delete_MotifList(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Scale_intervals_set")]
-  public static extern void Scale_intervals_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_Clear")]
+  public static extern void NodeList_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Scale_intervals_get")]
-  public static extern global::System.IntPtr Scale_intervals_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_Add")]
+  public static extern void NodeList_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_Scale")]
-  public static extern global::System.IntPtr new_Scale();
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_size")]
+  public static extern uint NodeList_size(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_Scale")]
-  public static extern void delete_Scale(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_capacity")]
+  public static extern uint NodeList_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Node_id_set")]
-  public static extern void Node_id_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_reserve")]
+  public static extern void NodeList_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Node_id_get")]
-  public static extern int Node_id_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NodeList__SWIG_0")]
+  public static extern global::System.IntPtr new_NodeList__SWIG_0();
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Node_degree_set")]
-  public static extern void Node_degree_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NodeList__SWIG_1")]
+  public static extern global::System.IntPtr new_NodeList__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Node_degree_get")]
-  public static extern int Node_degree_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NodeList__SWIG_2")]
+  public static extern global::System.IntPtr new_NodeList__SWIG_2(int jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Node_inversion_set")]
-  public static extern void Node_inversion_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_getitemcopy")]
+  public static extern global::System.IntPtr NodeList_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Node_inversion_get")]
-  public static extern int Node_inversion_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_getitem")]
+  public static extern global::System.IntPtr NodeList_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Node_accidental_set")]
-  public static extern void Node_accidental_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_setitem")]
+  public static extern void NodeList_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Node_accidental_get")]
-  public static extern int Node_accidental_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_AddRange")]
+  public static extern void NodeList_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Node_chordVoicingFlags_set")]
-  public static extern void Node_chordVoicingFlags_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_GetRange")]
+  public static extern global::System.IntPtr NodeList_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Node_chordVoicingFlags_get")]
-  public static extern int Node_chordVoicingFlags_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_Insert")]
+  public static extern void NodeList_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_Node")]
-  public static extern global::System.IntPtr new_Node();
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_InsertRange")]
+  public static extern void NodeList_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_Node")]
-  public static extern void delete_Node(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_RemoveAt")]
+  public static extern void NodeList_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Edge_from_set")]
-  public static extern void Edge_from_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_RemoveRange")]
+  public static extern void NodeList_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Edge_from_get")]
-  public static extern int Edge_from_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_Repeat")]
+  public static extern global::System.IntPtr NodeList_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Edge_to_set")]
-  public static extern void Edge_to_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_Reverse__SWIG_0")]
+  public static extern void NodeList_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Edge_to_get")]
-  public static extern int Edge_to_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_Reverse__SWIG_1")]
+  public static extern void NodeList_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_Edge")]
-  public static extern global::System.IntPtr new_Edge();
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeList_SetRange")]
+  public static extern void NodeList_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_Edge")]
-  public static extern void delete_Edge(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_NodeList")]
+  public static extern void delete_NodeList(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_HarmonyGraph_scale_set")]
-  public static extern void HarmonyGraph_scale_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_Clear")]
+  public static extern void EdgeList_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_HarmonyGraph_scale_get")]
-  public static extern global::System.IntPtr HarmonyGraph_scale_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_Add")]
+  public static extern void EdgeList_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_HarmonyGraph_nodes_set")]
-  public static extern void HarmonyGraph_nodes_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_size")]
+  public static extern uint EdgeList_size(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_HarmonyGraph_nodes_get")]
-  public static extern global::System.IntPtr HarmonyGraph_nodes_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_capacity")]
+  public static extern uint EdgeList_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_HarmonyGraph_edges_set")]
-  public static extern void HarmonyGraph_edges_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_reserve")]
+  public static extern void EdgeList_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_HarmonyGraph_edges_get")]
-  public static extern global::System.IntPtr HarmonyGraph_edges_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_EdgeList__SWIG_0")]
+  public static extern global::System.IntPtr new_EdgeList__SWIG_0();
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_HarmonyGraph")]
-  public static extern global::System.IntPtr new_HarmonyGraph();
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_EdgeList__SWIG_1")]
+  public static extern global::System.IntPtr new_EdgeList__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_HarmonyGraph")]
-  public static extern void delete_HarmonyGraph(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_EdgeList__SWIG_2")]
+  public static extern global::System.IntPtr new_EdgeList__SWIG_2(int jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Event_flag_set")]
-  public static extern void Event_flag_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_getitemcopy")]
+  public static extern global::System.IntPtr EdgeList_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Event_flag_get")]
-  public static extern int Event_flag_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_getitem")]
+  public static extern global::System.IntPtr EdgeList_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Event_id_set")]
-  public static extern void Event_id_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_setitem")]
+  public static extern void EdgeList_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Event_id_get")]
-  public static extern int Event_id_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_AddRange")]
+  public static extern void EdgeList_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Event_time_set")]
-  public static extern void Event_time_set(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_GetRange")]
+  public static extern global::System.IntPtr EdgeList_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Event_time_get")]
-  public static extern double Event_time_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_Insert")]
+  public static extern void EdgeList_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Event_notes_set")]
-  public static extern void Event_notes_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_InsertRange")]
+  public static extern void EdgeList_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Event_notes_get")]
-  public static extern global::System.IntPtr Event_notes_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_RemoveAt")]
+  public static extern void EdgeList_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_Event")]
-  public static extern global::System.IntPtr new_Event();
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_RemoveRange")]
+  public static extern void EdgeList_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_Event")]
-  public static extern void delete_Event(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_Repeat")]
+  public static extern global::System.IntPtr EdgeList_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Engine_Start")]
-  public static extern void Engine_Start(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_Reverse__SWIG_0")]
+  public static extern void EdgeList_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Engine_SetTempo")]
-  public static extern void Engine_SetTempo(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_Reverse__SWIG_1")]
+  public static extern void EdgeList_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Engine_RegisterMotif")]
-  public static extern void Engine_RegisterMotif(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeList_SetRange")]
+  public static extern void EdgeList_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Engine_AddMotif")]
-  public static extern void Engine_AddMotif(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_EdgeList")]
+  public static extern void delete_EdgeList(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Engine_RemoveMotif")]
-  public static extern void Engine_RemoveMotif(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_Clear")]
+  public static extern void IntervalList_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Engine_RegisterHarmonyGraph")]
-  public static extern void Engine_RegisterHarmonyGraph(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_Add")]
+  public static extern void IntervalList_Add(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Engine_TransitionToHarmonyGraph")]
-  public static extern void Engine_TransitionToHarmonyGraph(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_size")]
+  public static extern uint IntervalList_size(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_Engine_GetUpcomingEvents")]
-  public static extern global::System.IntPtr Engine_GetUpcomingEvents(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_capacity")]
+  public static extern uint IntervalList_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_Engine")]
-  public static extern global::System.IntPtr new_Engine();
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_reserve")]
+  public static extern void IntervalList_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_Engine")]
-  public static extern void delete_Engine(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_IntervalList__SWIG_0")]
+  public static extern global::System.IntPtr new_IntervalList__SWIG_0();
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_Clear")]
-  public static extern void NodeVector_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_IntervalList__SWIG_1")]
+  public static extern global::System.IntPtr new_IntervalList__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_Add")]
-  public static extern void NodeVector_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_IntervalList__SWIG_2")]
+  public static extern global::System.IntPtr new_IntervalList__SWIG_2(int jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_size")]
-  public static extern uint NodeVector_size(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_getitemcopy")]
+  public static extern uint IntervalList_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_capacity")]
-  public static extern uint NodeVector_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_getitem")]
+  public static extern uint IntervalList_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_reserve")]
-  public static extern void NodeVector_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_setitem")]
+  public static extern void IntervalList_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, uint jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NodeVector__SWIG_0")]
-  public static extern global::System.IntPtr new_NodeVector__SWIG_0();
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_AddRange")]
+  public static extern void IntervalList_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NodeVector__SWIG_1")]
-  public static extern global::System.IntPtr new_NodeVector__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_GetRange")]
+  public static extern global::System.IntPtr IntervalList_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NodeVector__SWIG_2")]
-  public static extern global::System.IntPtr new_NodeVector__SWIG_2(int jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_Insert")]
+  public static extern void IntervalList_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, uint jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_getitemcopy")]
-  public static extern global::System.IntPtr NodeVector_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_InsertRange")]
+  public static extern void IntervalList_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_getitem")]
-  public static extern global::System.IntPtr NodeVector_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_RemoveAt")]
+  public static extern void IntervalList_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_setitem")]
-  public static extern void NodeVector_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_RemoveRange")]
+  public static extern void IntervalList_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_AddRange")]
-  public static extern void NodeVector_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_Repeat")]
+  public static extern global::System.IntPtr IntervalList_Repeat(uint jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_GetRange")]
-  public static extern global::System.IntPtr NodeVector_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_Reverse__SWIG_0")]
+  public static extern void IntervalList_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_Insert")]
-  public static extern void NodeVector_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_Reverse__SWIG_1")]
+  public static extern void IntervalList_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_InsertRange")]
-  public static extern void NodeVector_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_SetRange")]
+  public static extern void IntervalList_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_RemoveAt")]
-  public static extern void NodeVector_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_Contains")]
+  public static extern bool IntervalList_Contains(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_RemoveRange")]
-  public static extern void NodeVector_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_IndexOf")]
+  public static extern int IntervalList_IndexOf(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_Repeat")]
-  public static extern global::System.IntPtr NodeVector_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_LastIndexOf")]
+  public static extern int IntervalList_LastIndexOf(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_Reverse__SWIG_0")]
-  public static extern void NodeVector_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntervalList_Remove")]
+  public static extern bool IntervalList_Remove(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_Reverse__SWIG_1")]
-  public static extern void NodeVector_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_IntervalList")]
+  public static extern void delete_IntervalList(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NodeVector_SetRange")]
-  public static extern void NodeVector_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_Clear")]
+  public static extern void NoteToPlayList_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_NodeVector")]
-  public static extern void delete_NodeVector(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_Add")]
+  public static extern void NoteToPlayList_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_Clear")]
-  public static extern void EdgeVector_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_size")]
+  public static extern uint NoteToPlayList_size(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_Add")]
-  public static extern void EdgeVector_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_capacity")]
+  public static extern uint NoteToPlayList_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_size")]
-  public static extern uint EdgeVector_size(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_reserve")]
+  public static extern void NoteToPlayList_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_capacity")]
-  public static extern uint EdgeVector_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NoteToPlayList__SWIG_0")]
+  public static extern global::System.IntPtr new_NoteToPlayList__SWIG_0();
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_reserve")]
-  public static extern void EdgeVector_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NoteToPlayList__SWIG_1")]
+  public static extern global::System.IntPtr new_NoteToPlayList__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_EdgeVector__SWIG_0")]
-  public static extern global::System.IntPtr new_EdgeVector__SWIG_0();
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NoteToPlayList__SWIG_2")]
+  public static extern global::System.IntPtr new_NoteToPlayList__SWIG_2(int jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_EdgeVector__SWIG_1")]
-  public static extern global::System.IntPtr new_EdgeVector__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_getitemcopy")]
+  public static extern global::System.IntPtr NoteToPlayList_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_EdgeVector__SWIG_2")]
-  public static extern global::System.IntPtr new_EdgeVector__SWIG_2(int jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_getitem")]
+  public static extern global::System.IntPtr NoteToPlayList_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_getitemcopy")]
-  public static extern global::System.IntPtr EdgeVector_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_setitem")]
+  public static extern void NoteToPlayList_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_getitem")]
-  public static extern global::System.IntPtr EdgeVector_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_AddRange")]
+  public static extern void NoteToPlayList_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_setitem")]
-  public static extern void EdgeVector_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_GetRange")]
+  public static extern global::System.IntPtr NoteToPlayList_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_AddRange")]
-  public static extern void EdgeVector_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_Insert")]
+  public static extern void NoteToPlayList_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_GetRange")]
-  public static extern global::System.IntPtr EdgeVector_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_InsertRange")]
+  public static extern void NoteToPlayList_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_Insert")]
-  public static extern void EdgeVector_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_RemoveAt")]
+  public static extern void NoteToPlayList_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_InsertRange")]
-  public static extern void EdgeVector_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_RemoveRange")]
+  public static extern void NoteToPlayList_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_RemoveAt")]
-  public static extern void EdgeVector_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_Repeat")]
+  public static extern global::System.IntPtr NoteToPlayList_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_RemoveRange")]
-  public static extern void EdgeVector_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_Reverse__SWIG_0")]
+  public static extern void NoteToPlayList_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_Repeat")]
-  public static extern global::System.IntPtr EdgeVector_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_Reverse__SWIG_1")]
+  public static extern void NoteToPlayList_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_Reverse__SWIG_0")]
-  public static extern void EdgeVector_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteToPlayList_SetRange")]
+  public static extern void NoteToPlayList_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_Reverse__SWIG_1")]
-  public static extern void EdgeVector_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_EdgeVector_SetRange")]
-  public static extern void EdgeVector_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_EdgeVector")]
-  public static extern void delete_EdgeVector(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_Clear")]
-  public static extern void IntVector_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_Add")]
-  public static extern void IntVector_Add(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_size")]
-  public static extern uint IntVector_size(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_capacity")]
-  public static extern uint IntVector_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_reserve")]
-  public static extern void IntVector_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_IntVector__SWIG_0")]
-  public static extern global::System.IntPtr new_IntVector__SWIG_0();
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_IntVector__SWIG_1")]
-  public static extern global::System.IntPtr new_IntVector__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_IntVector__SWIG_2")]
-  public static extern global::System.IntPtr new_IntVector__SWIG_2(int jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_getitemcopy")]
-  public static extern int IntVector_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_getitem")]
-  public static extern int IntVector_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_setitem")]
-  public static extern void IntVector_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_AddRange")]
-  public static extern void IntVector_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_GetRange")]
-  public static extern global::System.IntPtr IntVector_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_Insert")]
-  public static extern void IntVector_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_InsertRange")]
-  public static extern void IntVector_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_RemoveAt")]
-  public static extern void IntVector_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_RemoveRange")]
-  public static extern void IntVector_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_Repeat")]
-  public static extern global::System.IntPtr IntVector_Repeat(int jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_Reverse__SWIG_0")]
-  public static extern void IntVector_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_Reverse__SWIG_1")]
-  public static extern void IntVector_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_SetRange")]
-  public static extern void IntVector_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_Contains")]
-  public static extern bool IntVector_Contains(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_IndexOf")]
-  public static extern int IntVector_IndexOf(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_LastIndexOf")]
-  public static extern int IntVector_LastIndexOf(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_IntVector_Remove")]
-  public static extern bool IntVector_Remove(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_IntVector")]
-  public static extern void delete_IntVector(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_Clear")]
-  public static extern void NoteConcreteVector_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_Add")]
-  public static extern void NoteConcreteVector_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_size")]
-  public static extern uint NoteConcreteVector_size(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_capacity")]
-  public static extern uint NoteConcreteVector_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_reserve")]
-  public static extern void NoteConcreteVector_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NoteConcreteVector__SWIG_0")]
-  public static extern global::System.IntPtr new_NoteConcreteVector__SWIG_0();
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NoteConcreteVector__SWIG_1")]
-  public static extern global::System.IntPtr new_NoteConcreteVector__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NoteConcreteVector__SWIG_2")]
-  public static extern global::System.IntPtr new_NoteConcreteVector__SWIG_2(int jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_getitemcopy")]
-  public static extern global::System.IntPtr NoteConcreteVector_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_getitem")]
-  public static extern global::System.IntPtr NoteConcreteVector_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_setitem")]
-  public static extern void NoteConcreteVector_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_AddRange")]
-  public static extern void NoteConcreteVector_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_GetRange")]
-  public static extern global::System.IntPtr NoteConcreteVector_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_Insert")]
-  public static extern void NoteConcreteVector_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_InsertRange")]
-  public static extern void NoteConcreteVector_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_RemoveAt")]
-  public static extern void NoteConcreteVector_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_RemoveRange")]
-  public static extern void NoteConcreteVector_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_Repeat")]
-  public static extern global::System.IntPtr NoteConcreteVector_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_Reverse__SWIG_0")]
-  public static extern void NoteConcreteVector_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_Reverse__SWIG_1")]
-  public static extern void NoteConcreteVector_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConcreteVector_SetRange")]
-  public static extern void NoteConcreteVector_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_NoteConcreteVector")]
-  public static extern void delete_NoteConcreteVector(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_Clear")]
-  public static extern void NoteConceptVector_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_Add")]
-  public static extern void NoteConceptVector_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_size")]
-  public static extern uint NoteConceptVector_size(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_capacity")]
-  public static extern uint NoteConceptVector_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_reserve")]
-  public static extern void NoteConceptVector_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NoteConceptVector__SWIG_0")]
-  public static extern global::System.IntPtr new_NoteConceptVector__SWIG_0();
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NoteConceptVector__SWIG_1")]
-  public static extern global::System.IntPtr new_NoteConceptVector__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_new_NoteConceptVector__SWIG_2")]
-  public static extern global::System.IntPtr new_NoteConceptVector__SWIG_2(int jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_getitemcopy")]
-  public static extern global::System.IntPtr NoteConceptVector_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_getitem")]
-  public static extern global::System.IntPtr NoteConceptVector_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_setitem")]
-  public static extern void NoteConceptVector_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_AddRange")]
-  public static extern void NoteConceptVector_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_GetRange")]
-  public static extern global::System.IntPtr NoteConceptVector_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_Insert")]
-  public static extern void NoteConceptVector_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_InsertRange")]
-  public static extern void NoteConceptVector_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_RemoveAt")]
-  public static extern void NoteConceptVector_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_RemoveRange")]
-  public static extern void NoteConceptVector_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_Repeat")]
-  public static extern global::System.IntPtr NoteConceptVector_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_Reverse__SWIG_0")]
-  public static extern void NoteConceptVector_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_Reverse__SWIG_1")]
-  public static extern void NoteConceptVector_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_NoteConceptVector_SetRange")]
-  public static extern void NoteConceptVector_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_NoteConceptVector")]
-  public static extern void delete_NoteConceptVector(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("DryadApi", EntryPoint="CSharp_DryadUnity_delete_NoteToPlayList")]
+  public static extern void delete_NoteToPlayList(global::System.Runtime.InteropServices.HandleRef jarg1);
 }
 
 }

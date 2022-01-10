@@ -313,6 +313,97 @@ SWIGEXPORT void SWIGSTDCALL SWIGRegisterStringCallback_DryadApi(SWIG_CSharpStrin
 #include <algorithm>
 #include <stdexcept>
 
+SWIGINTERN std::vector< MotifNote > *new_std_vector_Sl_MotifNote_Sg___SWIG_2(int capacity){
+        std::vector< MotifNote >* pv = 0;
+        if (capacity >= 0) {
+          pv = new std::vector< MotifNote >();
+          pv->reserve(capacity);
+       } else {
+          throw std::out_of_range("capacity");
+       }
+       return pv;
+      }
+SWIGINTERN MotifNote std_vector_Sl_MotifNote_Sg__getitemcopy(std::vector< MotifNote > *self,int index){
+        if (index>=0 && index<(int)self->size())
+          return (*self)[index];
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN std::vector< MotifNote >::value_type const &std_vector_Sl_MotifNote_Sg__getitem(std::vector< MotifNote > *self,int index){
+        if (index>=0 && index<(int)self->size())
+          return (*self)[index];
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_MotifNote_Sg__setitem(std::vector< MotifNote > *self,int index,MotifNote const &val){
+        if (index>=0 && index<(int)self->size())
+          (*self)[index] = val;
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_MotifNote_Sg__AddRange(std::vector< MotifNote > *self,std::vector< MotifNote > const &values){
+        self->insert(self->end(), values.begin(), values.end());
+      }
+SWIGINTERN std::vector< MotifNote > *std_vector_Sl_MotifNote_Sg__GetRange(std::vector< MotifNote > *self,int index,int count){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (count < 0)
+          throw std::out_of_range("count");
+        if (index >= (int)self->size()+1 || index+count > (int)self->size())
+          throw std::invalid_argument("invalid range");
+        return new std::vector< MotifNote >(self->begin()+index, self->begin()+index+count);
+      }
+SWIGINTERN void std_vector_Sl_MotifNote_Sg__Insert(std::vector< MotifNote > *self,int index,MotifNote const &x){
+        if (index>=0 && index<(int)self->size()+1)
+          self->insert(self->begin()+index, x);
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_MotifNote_Sg__InsertRange(std::vector< MotifNote > *self,int index,std::vector< MotifNote > const &values){
+        if (index>=0 && index<(int)self->size()+1)
+          self->insert(self->begin()+index, values.begin(), values.end());
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_MotifNote_Sg__RemoveAt(std::vector< MotifNote > *self,int index){
+        if (index>=0 && index<(int)self->size())
+          self->erase(self->begin() + index);
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_MotifNote_Sg__RemoveRange(std::vector< MotifNote > *self,int index,int count){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (count < 0)
+          throw std::out_of_range("count");
+        if (index >= (int)self->size()+1 || index+count > (int)self->size())
+          throw std::invalid_argument("invalid range");
+        self->erase(self->begin()+index, self->begin()+index+count);
+      }
+SWIGINTERN std::vector< MotifNote > *std_vector_Sl_MotifNote_Sg__Repeat(MotifNote const &value,int count){
+        if (count < 0)
+          throw std::out_of_range("count");
+        return new std::vector< MotifNote >(count, value);
+      }
+SWIGINTERN void std_vector_Sl_MotifNote_Sg__Reverse__SWIG_0(std::vector< MotifNote > *self){
+        std::reverse(self->begin(), self->end());
+      }
+SWIGINTERN void std_vector_Sl_MotifNote_Sg__Reverse__SWIG_1(std::vector< MotifNote > *self,int index,int count){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (count < 0)
+          throw std::out_of_range("count");
+        if (index >= (int)self->size()+1 || index+count > (int)self->size())
+          throw std::invalid_argument("invalid range");
+        std::reverse(self->begin()+index, self->begin()+index+count);
+      }
+SWIGINTERN void std_vector_Sl_MotifNote_Sg__SetRange(std::vector< MotifNote > *self,int index,std::vector< MotifNote > const &values){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (index+values.size() > self->size())
+          throw std::out_of_range("index");
+        std::copy(values.begin(), values.end(), self->begin()+index);
+      }
 SWIGINTERN std::vector< Node > *new_std_vector_Sl_Node_Sg___SWIG_2(int capacity){
         std::vector< Node >* pv = 0;
         if (capacity >= 0) {
@@ -495,65 +586,65 @@ SWIGINTERN void std_vector_Sl_Edge_Sg__SetRange(std::vector< Edge > *self,int in
           throw std::out_of_range("index");
         std::copy(values.begin(), values.end(), self->begin()+index);
       }
-SWIGINTERN std::vector< int > *new_std_vector_Sl_int_Sg___SWIG_2(int capacity){
-        std::vector< int >* pv = 0;
+SWIGINTERN std::vector< unsigned int > *new_std_vector_Sl_unsigned_SS_int_Sg___SWIG_2(int capacity){
+        std::vector< unsigned int >* pv = 0;
         if (capacity >= 0) {
-          pv = new std::vector< int >();
+          pv = new std::vector< unsigned int >();
           pv->reserve(capacity);
        } else {
           throw std::out_of_range("capacity");
        }
        return pv;
       }
-SWIGINTERN int std_vector_Sl_int_Sg__getitemcopy(std::vector< int > *self,int index){
+SWIGINTERN unsigned int std_vector_Sl_unsigned_SS_int_Sg__getitemcopy(std::vector< unsigned int > *self,int index){
         if (index>=0 && index<(int)self->size())
           return (*self)[index];
         else
           throw std::out_of_range("index");
       }
-SWIGINTERN std::vector< int >::value_type const &std_vector_Sl_int_Sg__getitem(std::vector< int > *self,int index){
+SWIGINTERN std::vector< unsigned int >::value_type const &std_vector_Sl_unsigned_SS_int_Sg__getitem(std::vector< unsigned int > *self,int index){
         if (index>=0 && index<(int)self->size())
           return (*self)[index];
         else
           throw std::out_of_range("index");
       }
-SWIGINTERN void std_vector_Sl_int_Sg__setitem(std::vector< int > *self,int index,int const &val){
+SWIGINTERN void std_vector_Sl_unsigned_SS_int_Sg__setitem(std::vector< unsigned int > *self,int index,unsigned int const &val){
         if (index>=0 && index<(int)self->size())
           (*self)[index] = val;
         else
           throw std::out_of_range("index");
       }
-SWIGINTERN void std_vector_Sl_int_Sg__AddRange(std::vector< int > *self,std::vector< int > const &values){
+SWIGINTERN void std_vector_Sl_unsigned_SS_int_Sg__AddRange(std::vector< unsigned int > *self,std::vector< unsigned int > const &values){
         self->insert(self->end(), values.begin(), values.end());
       }
-SWIGINTERN std::vector< int > *std_vector_Sl_int_Sg__GetRange(std::vector< int > *self,int index,int count){
+SWIGINTERN std::vector< unsigned int > *std_vector_Sl_unsigned_SS_int_Sg__GetRange(std::vector< unsigned int > *self,int index,int count){
         if (index < 0)
           throw std::out_of_range("index");
         if (count < 0)
           throw std::out_of_range("count");
         if (index >= (int)self->size()+1 || index+count > (int)self->size())
           throw std::invalid_argument("invalid range");
-        return new std::vector< int >(self->begin()+index, self->begin()+index+count);
+        return new std::vector< unsigned int >(self->begin()+index, self->begin()+index+count);
       }
-SWIGINTERN void std_vector_Sl_int_Sg__Insert(std::vector< int > *self,int index,int const &x){
+SWIGINTERN void std_vector_Sl_unsigned_SS_int_Sg__Insert(std::vector< unsigned int > *self,int index,unsigned int const &x){
         if (index>=0 && index<(int)self->size()+1)
           self->insert(self->begin()+index, x);
         else
           throw std::out_of_range("index");
       }
-SWIGINTERN void std_vector_Sl_int_Sg__InsertRange(std::vector< int > *self,int index,std::vector< int > const &values){
+SWIGINTERN void std_vector_Sl_unsigned_SS_int_Sg__InsertRange(std::vector< unsigned int > *self,int index,std::vector< unsigned int > const &values){
         if (index>=0 && index<(int)self->size()+1)
           self->insert(self->begin()+index, values.begin(), values.end());
         else
           throw std::out_of_range("index");
       }
-SWIGINTERN void std_vector_Sl_int_Sg__RemoveAt(std::vector< int > *self,int index){
+SWIGINTERN void std_vector_Sl_unsigned_SS_int_Sg__RemoveAt(std::vector< unsigned int > *self,int index){
         if (index>=0 && index<(int)self->size())
           self->erase(self->begin() + index);
         else
           throw std::out_of_range("index");
       }
-SWIGINTERN void std_vector_Sl_int_Sg__RemoveRange(std::vector< int > *self,int index,int count){
+SWIGINTERN void std_vector_Sl_unsigned_SS_int_Sg__RemoveRange(std::vector< unsigned int > *self,int index,int count){
         if (index < 0)
           throw std::out_of_range("index");
         if (count < 0)
@@ -562,15 +653,15 @@ SWIGINTERN void std_vector_Sl_int_Sg__RemoveRange(std::vector< int > *self,int i
           throw std::invalid_argument("invalid range");
         self->erase(self->begin()+index, self->begin()+index+count);
       }
-SWIGINTERN std::vector< int > *std_vector_Sl_int_Sg__Repeat(int const &value,int count){
+SWIGINTERN std::vector< unsigned int > *std_vector_Sl_unsigned_SS_int_Sg__Repeat(unsigned int const &value,int count){
         if (count < 0)
           throw std::out_of_range("count");
-        return new std::vector< int >(count, value);
+        return new std::vector< unsigned int >(count, value);
       }
-SWIGINTERN void std_vector_Sl_int_Sg__Reverse__SWIG_0(std::vector< int > *self){
+SWIGINTERN void std_vector_Sl_unsigned_SS_int_Sg__Reverse__SWIG_0(std::vector< unsigned int > *self){
         std::reverse(self->begin(), self->end());
       }
-SWIGINTERN void std_vector_Sl_int_Sg__Reverse__SWIG_1(std::vector< int > *self,int index,int count){
+SWIGINTERN void std_vector_Sl_unsigned_SS_int_Sg__Reverse__SWIG_1(std::vector< unsigned int > *self,int index,int count){
         if (index < 0)
           throw std::out_of_range("index");
         if (count < 0)
@@ -579,97 +670,97 @@ SWIGINTERN void std_vector_Sl_int_Sg__Reverse__SWIG_1(std::vector< int > *self,i
           throw std::invalid_argument("invalid range");
         std::reverse(self->begin()+index, self->begin()+index+count);
       }
-SWIGINTERN void std_vector_Sl_int_Sg__SetRange(std::vector< int > *self,int index,std::vector< int > const &values){
+SWIGINTERN void std_vector_Sl_unsigned_SS_int_Sg__SetRange(std::vector< unsigned int > *self,int index,std::vector< unsigned int > const &values){
         if (index < 0)
           throw std::out_of_range("index");
         if (index+values.size() > self->size())
           throw std::out_of_range("index");
         std::copy(values.begin(), values.end(), self->begin()+index);
       }
-SWIGINTERN bool std_vector_Sl_int_Sg__Contains(std::vector< int > *self,int const &value){
+SWIGINTERN bool std_vector_Sl_unsigned_SS_int_Sg__Contains(std::vector< unsigned int > *self,unsigned int const &value){
         return std::find(self->begin(), self->end(), value) != self->end();
       }
-SWIGINTERN int std_vector_Sl_int_Sg__IndexOf(std::vector< int > *self,int const &value){
+SWIGINTERN int std_vector_Sl_unsigned_SS_int_Sg__IndexOf(std::vector< unsigned int > *self,unsigned int const &value){
         int index = -1;
-        std::vector< int >::iterator it = std::find(self->begin(), self->end(), value);
+        std::vector< unsigned int >::iterator it = std::find(self->begin(), self->end(), value);
         if (it != self->end())
           index = (int)(it - self->begin());
         return index;
       }
-SWIGINTERN int std_vector_Sl_int_Sg__LastIndexOf(std::vector< int > *self,int const &value){
+SWIGINTERN int std_vector_Sl_unsigned_SS_int_Sg__LastIndexOf(std::vector< unsigned int > *self,unsigned int const &value){
         int index = -1;
-        std::vector< int >::reverse_iterator rit = std::find(self->rbegin(), self->rend(), value);
+        std::vector< unsigned int >::reverse_iterator rit = std::find(self->rbegin(), self->rend(), value);
         if (rit != self->rend())
           index = (int)(self->rend() - 1 - rit);
         return index;
       }
-SWIGINTERN bool std_vector_Sl_int_Sg__Remove(std::vector< int > *self,int const &value){
-        std::vector< int >::iterator it = std::find(self->begin(), self->end(), value);
+SWIGINTERN bool std_vector_Sl_unsigned_SS_int_Sg__Remove(std::vector< unsigned int > *self,unsigned int const &value){
+        std::vector< unsigned int >::iterator it = std::find(self->begin(), self->end(), value);
         if (it != self->end()) {
           self->erase(it);
           return true;
         }
         return false;
       }
-SWIGINTERN std::vector< NoteConcrete > *new_std_vector_Sl_NoteConcrete_Sg___SWIG_2(int capacity){
-        std::vector< NoteConcrete >* pv = 0;
+SWIGINTERN std::vector< NoteToPlay > *new_std_vector_Sl_NoteToPlay_Sg___SWIG_2(int capacity){
+        std::vector< NoteToPlay >* pv = 0;
         if (capacity >= 0) {
-          pv = new std::vector< NoteConcrete >();
+          pv = new std::vector< NoteToPlay >();
           pv->reserve(capacity);
        } else {
           throw std::out_of_range("capacity");
        }
        return pv;
       }
-SWIGINTERN NoteConcrete std_vector_Sl_NoteConcrete_Sg__getitemcopy(std::vector< NoteConcrete > *self,int index){
+SWIGINTERN NoteToPlay std_vector_Sl_NoteToPlay_Sg__getitemcopy(std::vector< NoteToPlay > *self,int index){
         if (index>=0 && index<(int)self->size())
           return (*self)[index];
         else
           throw std::out_of_range("index");
       }
-SWIGINTERN std::vector< NoteConcrete >::value_type const &std_vector_Sl_NoteConcrete_Sg__getitem(std::vector< NoteConcrete > *self,int index){
+SWIGINTERN std::vector< NoteToPlay >::value_type const &std_vector_Sl_NoteToPlay_Sg__getitem(std::vector< NoteToPlay > *self,int index){
         if (index>=0 && index<(int)self->size())
           return (*self)[index];
         else
           throw std::out_of_range("index");
       }
-SWIGINTERN void std_vector_Sl_NoteConcrete_Sg__setitem(std::vector< NoteConcrete > *self,int index,NoteConcrete const &val){
+SWIGINTERN void std_vector_Sl_NoteToPlay_Sg__setitem(std::vector< NoteToPlay > *self,int index,NoteToPlay const &val){
         if (index>=0 && index<(int)self->size())
           (*self)[index] = val;
         else
           throw std::out_of_range("index");
       }
-SWIGINTERN void std_vector_Sl_NoteConcrete_Sg__AddRange(std::vector< NoteConcrete > *self,std::vector< NoteConcrete > const &values){
+SWIGINTERN void std_vector_Sl_NoteToPlay_Sg__AddRange(std::vector< NoteToPlay > *self,std::vector< NoteToPlay > const &values){
         self->insert(self->end(), values.begin(), values.end());
       }
-SWIGINTERN std::vector< NoteConcrete > *std_vector_Sl_NoteConcrete_Sg__GetRange(std::vector< NoteConcrete > *self,int index,int count){
+SWIGINTERN std::vector< NoteToPlay > *std_vector_Sl_NoteToPlay_Sg__GetRange(std::vector< NoteToPlay > *self,int index,int count){
         if (index < 0)
           throw std::out_of_range("index");
         if (count < 0)
           throw std::out_of_range("count");
         if (index >= (int)self->size()+1 || index+count > (int)self->size())
           throw std::invalid_argument("invalid range");
-        return new std::vector< NoteConcrete >(self->begin()+index, self->begin()+index+count);
+        return new std::vector< NoteToPlay >(self->begin()+index, self->begin()+index+count);
       }
-SWIGINTERN void std_vector_Sl_NoteConcrete_Sg__Insert(std::vector< NoteConcrete > *self,int index,NoteConcrete const &x){
+SWIGINTERN void std_vector_Sl_NoteToPlay_Sg__Insert(std::vector< NoteToPlay > *self,int index,NoteToPlay const &x){
         if (index>=0 && index<(int)self->size()+1)
           self->insert(self->begin()+index, x);
         else
           throw std::out_of_range("index");
       }
-SWIGINTERN void std_vector_Sl_NoteConcrete_Sg__InsertRange(std::vector< NoteConcrete > *self,int index,std::vector< NoteConcrete > const &values){
+SWIGINTERN void std_vector_Sl_NoteToPlay_Sg__InsertRange(std::vector< NoteToPlay > *self,int index,std::vector< NoteToPlay > const &values){
         if (index>=0 && index<(int)self->size()+1)
           self->insert(self->begin()+index, values.begin(), values.end());
         else
           throw std::out_of_range("index");
       }
-SWIGINTERN void std_vector_Sl_NoteConcrete_Sg__RemoveAt(std::vector< NoteConcrete > *self,int index){
+SWIGINTERN void std_vector_Sl_NoteToPlay_Sg__RemoveAt(std::vector< NoteToPlay > *self,int index){
         if (index>=0 && index<(int)self->size())
           self->erase(self->begin() + index);
         else
           throw std::out_of_range("index");
       }
-SWIGINTERN void std_vector_Sl_NoteConcrete_Sg__RemoveRange(std::vector< NoteConcrete > *self,int index,int count){
+SWIGINTERN void std_vector_Sl_NoteToPlay_Sg__RemoveRange(std::vector< NoteToPlay > *self,int index,int count){
         if (index < 0)
           throw std::out_of_range("index");
         if (count < 0)
@@ -678,15 +769,15 @@ SWIGINTERN void std_vector_Sl_NoteConcrete_Sg__RemoveRange(std::vector< NoteConc
           throw std::invalid_argument("invalid range");
         self->erase(self->begin()+index, self->begin()+index+count);
       }
-SWIGINTERN std::vector< NoteConcrete > *std_vector_Sl_NoteConcrete_Sg__Repeat(NoteConcrete const &value,int count){
+SWIGINTERN std::vector< NoteToPlay > *std_vector_Sl_NoteToPlay_Sg__Repeat(NoteToPlay const &value,int count){
         if (count < 0)
           throw std::out_of_range("count");
-        return new std::vector< NoteConcrete >(count, value);
+        return new std::vector< NoteToPlay >(count, value);
       }
-SWIGINTERN void std_vector_Sl_NoteConcrete_Sg__Reverse__SWIG_0(std::vector< NoteConcrete > *self){
+SWIGINTERN void std_vector_Sl_NoteToPlay_Sg__Reverse__SWIG_0(std::vector< NoteToPlay > *self){
         std::reverse(self->begin(), self->end());
       }
-SWIGINTERN void std_vector_Sl_NoteConcrete_Sg__Reverse__SWIG_1(std::vector< NoteConcrete > *self,int index,int count){
+SWIGINTERN void std_vector_Sl_NoteToPlay_Sg__Reverse__SWIG_1(std::vector< NoteToPlay > *self,int index,int count){
         if (index < 0)
           throw std::out_of_range("index");
         if (count < 0)
@@ -695,98 +786,7 @@ SWIGINTERN void std_vector_Sl_NoteConcrete_Sg__Reverse__SWIG_1(std::vector< Note
           throw std::invalid_argument("invalid range");
         std::reverse(self->begin()+index, self->begin()+index+count);
       }
-SWIGINTERN void std_vector_Sl_NoteConcrete_Sg__SetRange(std::vector< NoteConcrete > *self,int index,std::vector< NoteConcrete > const &values){
-        if (index < 0)
-          throw std::out_of_range("index");
-        if (index+values.size() > self->size())
-          throw std::out_of_range("index");
-        std::copy(values.begin(), values.end(), self->begin()+index);
-      }
-SWIGINTERN std::vector< NoteConcept > *new_std_vector_Sl_NoteConcept_Sg___SWIG_2(int capacity){
-        std::vector< NoteConcept >* pv = 0;
-        if (capacity >= 0) {
-          pv = new std::vector< NoteConcept >();
-          pv->reserve(capacity);
-       } else {
-          throw std::out_of_range("capacity");
-       }
-       return pv;
-      }
-SWIGINTERN NoteConcept std_vector_Sl_NoteConcept_Sg__getitemcopy(std::vector< NoteConcept > *self,int index){
-        if (index>=0 && index<(int)self->size())
-          return (*self)[index];
-        else
-          throw std::out_of_range("index");
-      }
-SWIGINTERN std::vector< NoteConcept >::value_type const &std_vector_Sl_NoteConcept_Sg__getitem(std::vector< NoteConcept > *self,int index){
-        if (index>=0 && index<(int)self->size())
-          return (*self)[index];
-        else
-          throw std::out_of_range("index");
-      }
-SWIGINTERN void std_vector_Sl_NoteConcept_Sg__setitem(std::vector< NoteConcept > *self,int index,NoteConcept const &val){
-        if (index>=0 && index<(int)self->size())
-          (*self)[index] = val;
-        else
-          throw std::out_of_range("index");
-      }
-SWIGINTERN void std_vector_Sl_NoteConcept_Sg__AddRange(std::vector< NoteConcept > *self,std::vector< NoteConcept > const &values){
-        self->insert(self->end(), values.begin(), values.end());
-      }
-SWIGINTERN std::vector< NoteConcept > *std_vector_Sl_NoteConcept_Sg__GetRange(std::vector< NoteConcept > *self,int index,int count){
-        if (index < 0)
-          throw std::out_of_range("index");
-        if (count < 0)
-          throw std::out_of_range("count");
-        if (index >= (int)self->size()+1 || index+count > (int)self->size())
-          throw std::invalid_argument("invalid range");
-        return new std::vector< NoteConcept >(self->begin()+index, self->begin()+index+count);
-      }
-SWIGINTERN void std_vector_Sl_NoteConcept_Sg__Insert(std::vector< NoteConcept > *self,int index,NoteConcept const &x){
-        if (index>=0 && index<(int)self->size()+1)
-          self->insert(self->begin()+index, x);
-        else
-          throw std::out_of_range("index");
-      }
-SWIGINTERN void std_vector_Sl_NoteConcept_Sg__InsertRange(std::vector< NoteConcept > *self,int index,std::vector< NoteConcept > const &values){
-        if (index>=0 && index<(int)self->size()+1)
-          self->insert(self->begin()+index, values.begin(), values.end());
-        else
-          throw std::out_of_range("index");
-      }
-SWIGINTERN void std_vector_Sl_NoteConcept_Sg__RemoveAt(std::vector< NoteConcept > *self,int index){
-        if (index>=0 && index<(int)self->size())
-          self->erase(self->begin() + index);
-        else
-          throw std::out_of_range("index");
-      }
-SWIGINTERN void std_vector_Sl_NoteConcept_Sg__RemoveRange(std::vector< NoteConcept > *self,int index,int count){
-        if (index < 0)
-          throw std::out_of_range("index");
-        if (count < 0)
-          throw std::out_of_range("count");
-        if (index >= (int)self->size()+1 || index+count > (int)self->size())
-          throw std::invalid_argument("invalid range");
-        self->erase(self->begin()+index, self->begin()+index+count);
-      }
-SWIGINTERN std::vector< NoteConcept > *std_vector_Sl_NoteConcept_Sg__Repeat(NoteConcept const &value,int count){
-        if (count < 0)
-          throw std::out_of_range("count");
-        return new std::vector< NoteConcept >(count, value);
-      }
-SWIGINTERN void std_vector_Sl_NoteConcept_Sg__Reverse__SWIG_0(std::vector< NoteConcept > *self){
-        std::reverse(self->begin(), self->end());
-      }
-SWIGINTERN void std_vector_Sl_NoteConcept_Sg__Reverse__SWIG_1(std::vector< NoteConcept > *self,int index,int count){
-        if (index < 0)
-          throw std::out_of_range("index");
-        if (count < 0)
-          throw std::out_of_range("count");
-        if (index >= (int)self->size()+1 || index+count > (int)self->size())
-          throw std::invalid_argument("invalid range");
-        std::reverse(self->begin()+index, self->begin()+index+count);
-      }
-SWIGINTERN void std_vector_Sl_NoteConcept_Sg__SetRange(std::vector< NoteConcept > *self,int index,std::vector< NoteConcept > const &values){
+SWIGINTERN void std_vector_Sl_NoteToPlay_Sg__SetRange(std::vector< NoteToPlay > *self,int index,std::vector< NoteToPlay > const &values){
         if (index < 0)
           throw std::out_of_range("index");
         if (index+values.size() > self->size())
@@ -798,805 +798,360 @@ SWIGINTERN void std_vector_Sl_NoteConcept_Sg__SetRange(std::vector< NoteConcept 
 extern "C" {
 #endif
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcept_duration_set(void * jarg1, int jarg2) {
-  NoteConcept *arg1 = (NoteConcept *) 0 ;
-  int arg2 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_MotifList_Clear(void * jarg1) {
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
   
-  arg1 = (NoteConcept *)jarg1; 
-  arg2 = (int)jarg2; 
-  if (arg1) (arg1)->duration = arg2;
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  (arg1)->clear();
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_NoteConcept_duration_get(void * jarg1) {
-  int jresult ;
-  NoteConcept *arg1 = (NoteConcept *) 0 ;
-  int result;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_MotifList_Add(void * jarg1, void * jarg2) {
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  MotifNote *arg2 = 0 ;
   
-  arg1 = (NoteConcept *)jarg1; 
-  result = (int) ((arg1)->duration);
-  jresult = result; 
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  arg2 = (MotifNote *)jarg2;
+  if (!arg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "MotifNote const & type is null", 0);
+    return ;
+  } 
+  (arg1)->push_back((MotifNote const &)*arg2);
+}
+
+
+SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_MotifList_size(void * jarg1) {
+  unsigned long jresult ;
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  std::vector< MotifNote >::size_type result;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  result = ((std::vector< MotifNote > const *)arg1)->size();
+  jresult = (unsigned long)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcept_value_set(void * jarg1, int jarg2) {
-  NoteConcept *arg1 = (NoteConcept *) 0 ;
-  int arg2 ;
+SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_MotifList_capacity(void * jarg1) {
+  unsigned long jresult ;
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  std::vector< MotifNote >::size_type result;
   
-  arg1 = (NoteConcept *)jarg1; 
-  arg2 = (int)jarg2; 
-  if (arg1) (arg1)->value = arg2;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_NoteConcept_value_get(void * jarg1) {
-  int jresult ;
-  NoteConcept *arg1 = (NoteConcept *) 0 ;
-  int result;
-  
-  arg1 = (NoteConcept *)jarg1; 
-  result = (int) ((arg1)->value);
-  jresult = result; 
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  result = ((std::vector< MotifNote > const *)arg1)->capacity();
+  jresult = (unsigned long)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NoteConcept() {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_MotifList_reserve(void * jarg1, unsigned long jarg2) {
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  std::vector< MotifNote >::size_type arg2 ;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  arg2 = (std::vector< MotifNote >::size_type)jarg2; 
+  (arg1)->reserve(arg2);
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_MotifList__SWIG_0() {
   void * jresult ;
-  NoteConcept *result = 0 ;
+  std::vector< MotifNote > *result = 0 ;
   
-  result = (NoteConcept *)new NoteConcept();
+  result = (std::vector< MotifNote > *)new std::vector< MotifNote >();
   jresult = (void *)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_NoteConcept(void * jarg1) {
-  NoteConcept *arg1 = (NoteConcept *) 0 ;
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_MotifList__SWIG_1(void * jarg1) {
+  void * jresult ;
+  std::vector< MotifNote > *arg1 = 0 ;
+  std::vector< MotifNote > *result = 0 ;
   
-  arg1 = (NoteConcept *)jarg1; 
+  arg1 = (std::vector< MotifNote > *)jarg1;
+  if (!arg1) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< MotifNote > const & type is null", 0);
+    return 0;
+  } 
+  result = (std::vector< MotifNote > *)new std::vector< MotifNote >((std::vector< MotifNote > const &)*arg1);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_MotifList__SWIG_2(int jarg1) {
+  void * jresult ;
+  int arg1 ;
+  std::vector< MotifNote > *result = 0 ;
+  
+  arg1 = (int)jarg1; 
+  try {
+    result = (std::vector< MotifNote > *)new_std_vector_Sl_MotifNote_Sg___SWIG_2(arg1);
+  } catch(std::out_of_range &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+    return 0;
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_MotifList_getitemcopy(void * jarg1, int jarg2) {
+  void * jresult ;
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  int arg2 ;
+  MotifNote result;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  arg2 = (int)jarg2; 
+  try {
+    result = std_vector_Sl_MotifNote_Sg__getitemcopy(arg1,arg2);
+  } catch(std::out_of_range &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+    return 0;
+  }
+  jresult = new MotifNote((const MotifNote &)result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_MotifList_getitem(void * jarg1, int jarg2) {
+  void * jresult ;
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  int arg2 ;
+  std::vector< MotifNote >::value_type *result = 0 ;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  arg2 = (int)jarg2; 
+  try {
+    result = (std::vector< MotifNote >::value_type *) &std_vector_Sl_MotifNote_Sg__getitem(arg1,arg2);
+  } catch(std::out_of_range &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+    return 0;
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_MotifList_setitem(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  int arg2 ;
+  MotifNote *arg3 = 0 ;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (MotifNote *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "MotifNote const & type is null", 0);
+    return ;
+  } 
+  try {
+    std_vector_Sl_MotifNote_Sg__setitem(arg1,arg2,(MotifNote const &)*arg3);
+  } catch(std::out_of_range &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+    return ;
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_MotifList_AddRange(void * jarg1, void * jarg2) {
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  std::vector< MotifNote > *arg2 = 0 ;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  arg2 = (std::vector< MotifNote > *)jarg2;
+  if (!arg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< MotifNote > const & type is null", 0);
+    return ;
+  } 
+  std_vector_Sl_MotifNote_Sg__AddRange(arg1,(std::vector< MotifNote > const &)*arg2);
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_MotifList_GetRange(void * jarg1, int jarg2, int jarg3) {
+  void * jresult ;
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  std::vector< MotifNote > *result = 0 ;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  try {
+    result = (std::vector< MotifNote > *)std_vector_Sl_MotifNote_Sg__GetRange(arg1,arg2,arg3);
+  } catch(std::out_of_range &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+    return 0;
+  } catch(std::invalid_argument &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
+    return 0;
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_MotifList_Insert(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  int arg2 ;
+  MotifNote *arg3 = 0 ;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (MotifNote *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "MotifNote const & type is null", 0);
+    return ;
+  } 
+  try {
+    std_vector_Sl_MotifNote_Sg__Insert(arg1,arg2,(MotifNote const &)*arg3);
+  } catch(std::out_of_range &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+    return ;
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_MotifList_InsertRange(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  int arg2 ;
+  std::vector< MotifNote > *arg3 = 0 ;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (std::vector< MotifNote > *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< MotifNote > const & type is null", 0);
+    return ;
+  } 
+  try {
+    std_vector_Sl_MotifNote_Sg__InsertRange(arg1,arg2,(std::vector< MotifNote > const &)*arg3);
+  } catch(std::out_of_range &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+    return ;
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_MotifList_RemoveAt(void * jarg1, int jarg2) {
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  int arg2 ;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  arg2 = (int)jarg2; 
+  try {
+    std_vector_Sl_MotifNote_Sg__RemoveAt(arg1,arg2);
+  } catch(std::out_of_range &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+    return ;
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_MotifList_RemoveRange(void * jarg1, int jarg2, int jarg3) {
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  try {
+    std_vector_Sl_MotifNote_Sg__RemoveRange(arg1,arg2,arg3);
+  } catch(std::out_of_range &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+    return ;
+  } catch(std::invalid_argument &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
+    return ;
+  }
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_MotifList_Repeat(void * jarg1, int jarg2) {
+  void * jresult ;
+  MotifNote *arg1 = 0 ;
+  int arg2 ;
+  std::vector< MotifNote > *result = 0 ;
+  
+  arg1 = (MotifNote *)jarg1;
+  if (!arg1) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "MotifNote const & type is null", 0);
+    return 0;
+  } 
+  arg2 = (int)jarg2; 
+  try {
+    result = (std::vector< MotifNote > *)std_vector_Sl_MotifNote_Sg__Repeat((MotifNote const &)*arg1,arg2);
+  } catch(std::out_of_range &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+    return 0;
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_MotifList_Reverse__SWIG_0(void * jarg1) {
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  std_vector_Sl_MotifNote_Sg__Reverse__SWIG_0(arg1);
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_MotifList_Reverse__SWIG_1(void * jarg1, int jarg2, int jarg3) {
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  try {
+    std_vector_Sl_MotifNote_Sg__Reverse__SWIG_1(arg1,arg2,arg3);
+  } catch(std::out_of_range &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+    return ;
+  } catch(std::invalid_argument &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
+    return ;
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_MotifList_SetRange(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  int arg2 ;
+  std::vector< MotifNote > *arg3 = 0 ;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (std::vector< MotifNote > *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< MotifNote > const & type is null", 0);
+    return ;
+  } 
+  try {
+    std_vector_Sl_MotifNote_Sg__SetRange(arg1,arg2,(std::vector< MotifNote > const &)*arg3);
+  } catch(std::out_of_range &_e) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+    return ;
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_MotifList(void * jarg1) {
+  std::vector< MotifNote > *arg1 = (std::vector< MotifNote > *) 0 ;
+  
+  arg1 = (std::vector< MotifNote > *)jarg1; 
   delete arg1;
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcrete_duration_set(void * jarg1, int jarg2) {
-  NoteConcrete *arg1 = (NoteConcrete *) 0 ;
-  int arg2 ;
-  
-  arg1 = (NoteConcrete *)jarg1; 
-  arg2 = (int)jarg2; 
-  if (arg1) (arg1)->duration = arg2;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_NoteConcrete_duration_get(void * jarg1) {
-  int jresult ;
-  NoteConcrete *arg1 = (NoteConcrete *) 0 ;
-  int result;
-  
-  arg1 = (NoteConcrete *)jarg1; 
-  result = (int) ((arg1)->duration);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcrete_midi_set(void * jarg1, int jarg2) {
-  NoteConcrete *arg1 = (NoteConcrete *) 0 ;
-  int arg2 ;
-  
-  arg1 = (NoteConcrete *)jarg1; 
-  arg2 = (int)jarg2; 
-  if (arg1) (arg1)->midi = arg2;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_NoteConcrete_midi_get(void * jarg1) {
-  int jresult ;
-  NoteConcrete *arg1 = (NoteConcrete *) 0 ;
-  int result;
-  
-  arg1 = (NoteConcrete *)jarg1; 
-  result = (int) ((arg1)->midi);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcrete_velocity_set(void * jarg1, int jarg2) {
-  NoteConcrete *arg1 = (NoteConcrete *) 0 ;
-  int arg2 ;
-  
-  arg1 = (NoteConcrete *)jarg1; 
-  arg2 = (int)jarg2; 
-  if (arg1) (arg1)->velocity = arg2;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_NoteConcrete_velocity_get(void * jarg1) {
-  int jresult ;
-  NoteConcrete *arg1 = (NoteConcrete *) 0 ;
-  int result;
-  
-  arg1 = (NoteConcrete *)jarg1; 
-  result = (int) ((arg1)->velocity);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NoteConcrete() {
-  void * jresult ;
-  NoteConcrete *result = 0 ;
-  
-  result = (NoteConcrete *)new NoteConcrete();
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_NoteConcrete(void * jarg1) {
-  NoteConcrete *arg1 = (NoteConcrete *) 0 ;
-  
-  arg1 = (NoteConcrete *)jarg1; 
-  delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Motif_name_set(void * jarg1, char * jarg2) {
-  Motif *arg1 = (Motif *) 0 ;
-  std::string *arg2 = 0 ;
-  
-  arg1 = (Motif *)jarg1; 
-  if (!jarg2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
-    return ;
-  }
-  std::string arg2_str(jarg2);
-  arg2 = &arg2_str; 
-  if (arg1) (arg1)->name = *arg2;
-}
-
-
-SWIGEXPORT char * SWIGSTDCALL CSharp_DryadUnity_Motif_name_get(void * jarg1) {
-  char * jresult ;
-  Motif *arg1 = (Motif *) 0 ;
-  std::string *result = 0 ;
-  
-  arg1 = (Motif *)jarg1; 
-  result = (std::string *) & ((arg1)->name);
-  jresult = SWIG_csharp_string_callback(result->c_str()); 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Motif_notes_set(void * jarg1, void * jarg2) {
-  Motif *arg1 = (Motif *) 0 ;
-  std::vector< NoteConcept > *arg2 = (std::vector< NoteConcept > *) 0 ;
-  
-  arg1 = (Motif *)jarg1; 
-  arg2 = (std::vector< NoteConcept > *)jarg2; 
-  if (arg1) (arg1)->notes = *arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_Motif_notes_get(void * jarg1) {
-  void * jresult ;
-  Motif *arg1 = (Motif *) 0 ;
-  std::vector< NoteConcept > *result = 0 ;
-  
-  arg1 = (Motif *)jarg1; 
-  result = (std::vector< NoteConcept > *)& ((arg1)->notes);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_Motif() {
-  void * jresult ;
-  Motif *result = 0 ;
-  
-  result = (Motif *)new Motif();
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_Motif(void * jarg1) {
-  Motif *arg1 = (Motif *) 0 ;
-  
-  arg1 = (Motif *)jarg1; 
-  delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Scale_name_set(void * jarg1, char * jarg2) {
-  Scale *arg1 = (Scale *) 0 ;
-  std::string *arg2 = 0 ;
-  
-  arg1 = (Scale *)jarg1; 
-  if (!jarg2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
-    return ;
-  }
-  std::string arg2_str(jarg2);
-  arg2 = &arg2_str; 
-  if (arg1) (arg1)->name = *arg2;
-}
-
-
-SWIGEXPORT char * SWIGSTDCALL CSharp_DryadUnity_Scale_name_get(void * jarg1) {
-  char * jresult ;
-  Scale *arg1 = (Scale *) 0 ;
-  std::string *result = 0 ;
-  
-  arg1 = (Scale *)jarg1; 
-  result = (std::string *) & ((arg1)->name);
-  jresult = SWIG_csharp_string_callback(result->c_str()); 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Scale_intervals_set(void * jarg1, void * jarg2) {
-  Scale *arg1 = (Scale *) 0 ;
-  std::vector< int > *arg2 = (std::vector< int > *) 0 ;
-  
-  arg1 = (Scale *)jarg1; 
-  arg2 = (std::vector< int > *)jarg2; 
-  if (arg1) (arg1)->intervals = *arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_Scale_intervals_get(void * jarg1) {
-  void * jresult ;
-  Scale *arg1 = (Scale *) 0 ;
-  std::vector< int > *result = 0 ;
-  
-  arg1 = (Scale *)jarg1; 
-  result = (std::vector< int > *)& ((arg1)->intervals);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_Scale() {
-  void * jresult ;
-  Scale *result = 0 ;
-  
-  result = (Scale *)new Scale();
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_Scale(void * jarg1) {
-  Scale *arg1 = (Scale *) 0 ;
-  
-  arg1 = (Scale *)jarg1; 
-  delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Node_id_set(void * jarg1, int jarg2) {
-  Node *arg1 = (Node *) 0 ;
-  int arg2 ;
-  
-  arg1 = (Node *)jarg1; 
-  arg2 = (int)jarg2; 
-  if (arg1) (arg1)->id = arg2;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_Node_id_get(void * jarg1) {
-  int jresult ;
-  Node *arg1 = (Node *) 0 ;
-  int result;
-  
-  arg1 = (Node *)jarg1; 
-  result = (int) ((arg1)->id);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Node_degree_set(void * jarg1, int jarg2) {
-  Node *arg1 = (Node *) 0 ;
-  int arg2 ;
-  
-  arg1 = (Node *)jarg1; 
-  arg2 = (int)jarg2; 
-  if (arg1) (arg1)->degree = arg2;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_Node_degree_get(void * jarg1) {
-  int jresult ;
-  Node *arg1 = (Node *) 0 ;
-  int result;
-  
-  arg1 = (Node *)jarg1; 
-  result = (int) ((arg1)->degree);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Node_inversion_set(void * jarg1, int jarg2) {
-  Node *arg1 = (Node *) 0 ;
-  int arg2 ;
-  
-  arg1 = (Node *)jarg1; 
-  arg2 = (int)jarg2; 
-  if (arg1) (arg1)->inversion = arg2;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_Node_inversion_get(void * jarg1) {
-  int jresult ;
-  Node *arg1 = (Node *) 0 ;
-  int result;
-  
-  arg1 = (Node *)jarg1; 
-  result = (int) ((arg1)->inversion);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Node_accidental_set(void * jarg1, int jarg2) {
-  Node *arg1 = (Node *) 0 ;
-  int arg2 ;
-  
-  arg1 = (Node *)jarg1; 
-  arg2 = (int)jarg2; 
-  if (arg1) (arg1)->accidental = arg2;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_Node_accidental_get(void * jarg1) {
-  int jresult ;
-  Node *arg1 = (Node *) 0 ;
-  int result;
-  
-  arg1 = (Node *)jarg1; 
-  result = (int) ((arg1)->accidental);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Node_chordVoicingFlags_set(void * jarg1, int jarg2) {
-  Node *arg1 = (Node *) 0 ;
-  int arg2 ;
-  
-  arg1 = (Node *)jarg1; 
-  arg2 = (int)jarg2; 
-  if (arg1) (arg1)->chordVoicingFlags = arg2;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_Node_chordVoicingFlags_get(void * jarg1) {
-  int jresult ;
-  Node *arg1 = (Node *) 0 ;
-  int result;
-  
-  arg1 = (Node *)jarg1; 
-  result = (int) ((arg1)->chordVoicingFlags);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_Node() {
-  void * jresult ;
-  Node *result = 0 ;
-  
-  result = (Node *)new Node();
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_Node(void * jarg1) {
-  Node *arg1 = (Node *) 0 ;
-  
-  arg1 = (Node *)jarg1; 
-  delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Edge_from_set(void * jarg1, int jarg2) {
-  Edge *arg1 = (Edge *) 0 ;
-  int arg2 ;
-  
-  arg1 = (Edge *)jarg1; 
-  arg2 = (int)jarg2; 
-  if (arg1) (arg1)->from = arg2;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_Edge_from_get(void * jarg1) {
-  int jresult ;
-  Edge *arg1 = (Edge *) 0 ;
-  int result;
-  
-  arg1 = (Edge *)jarg1; 
-  result = (int) ((arg1)->from);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Edge_to_set(void * jarg1, int jarg2) {
-  Edge *arg1 = (Edge *) 0 ;
-  int arg2 ;
-  
-  arg1 = (Edge *)jarg1; 
-  arg2 = (int)jarg2; 
-  if (arg1) (arg1)->to = arg2;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_Edge_to_get(void * jarg1) {
-  int jresult ;
-  Edge *arg1 = (Edge *) 0 ;
-  int result;
-  
-  arg1 = (Edge *)jarg1; 
-  result = (int) ((arg1)->to);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_Edge() {
-  void * jresult ;
-  Edge *result = 0 ;
-  
-  result = (Edge *)new Edge();
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_Edge(void * jarg1) {
-  Edge *arg1 = (Edge *) 0 ;
-  
-  arg1 = (Edge *)jarg1; 
-  delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_HarmonyGraph_scale_set(void * jarg1, void * jarg2) {
-  HarmonyGraph *arg1 = (HarmonyGraph *) 0 ;
-  Scale *arg2 = (Scale *) 0 ;
-  
-  arg1 = (HarmonyGraph *)jarg1; 
-  arg2 = (Scale *)jarg2; 
-  if (arg1) (arg1)->scale = *arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_HarmonyGraph_scale_get(void * jarg1) {
-  void * jresult ;
-  HarmonyGraph *arg1 = (HarmonyGraph *) 0 ;
-  Scale *result = 0 ;
-  
-  arg1 = (HarmonyGraph *)jarg1; 
-  result = (Scale *)& ((arg1)->scale);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_HarmonyGraph_nodes_set(void * jarg1, void * jarg2) {
-  HarmonyGraph *arg1 = (HarmonyGraph *) 0 ;
-  std::vector< Node > *arg2 = (std::vector< Node > *) 0 ;
-  
-  arg1 = (HarmonyGraph *)jarg1; 
-  arg2 = (std::vector< Node > *)jarg2; 
-  if (arg1) (arg1)->nodes = *arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_HarmonyGraph_nodes_get(void * jarg1) {
-  void * jresult ;
-  HarmonyGraph *arg1 = (HarmonyGraph *) 0 ;
-  std::vector< Node > *result = 0 ;
-  
-  arg1 = (HarmonyGraph *)jarg1; 
-  result = (std::vector< Node > *)& ((arg1)->nodes);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_HarmonyGraph_edges_set(void * jarg1, void * jarg2) {
-  HarmonyGraph *arg1 = (HarmonyGraph *) 0 ;
-  std::vector< Edge > *arg2 = (std::vector< Edge > *) 0 ;
-  
-  arg1 = (HarmonyGraph *)jarg1; 
-  arg2 = (std::vector< Edge > *)jarg2; 
-  if (arg1) (arg1)->edges = *arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_HarmonyGraph_edges_get(void * jarg1) {
-  void * jresult ;
-  HarmonyGraph *arg1 = (HarmonyGraph *) 0 ;
-  std::vector< Edge > *result = 0 ;
-  
-  arg1 = (HarmonyGraph *)jarg1; 
-  result = (std::vector< Edge > *)& ((arg1)->edges);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_HarmonyGraph() {
-  void * jresult ;
-  HarmonyGraph *result = 0 ;
-  
-  result = (HarmonyGraph *)new HarmonyGraph();
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_HarmonyGraph(void * jarg1) {
-  HarmonyGraph *arg1 = (HarmonyGraph *) 0 ;
-  
-  arg1 = (HarmonyGraph *)jarg1; 
-  delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Event_flag_set(void * jarg1, int jarg2) {
-  Event *arg1 = (Event *) 0 ;
-  EventFlag arg2 ;
-  
-  arg1 = (Event *)jarg1; 
-  arg2 = (EventFlag)jarg2; 
-  if (arg1) (arg1)->flag = arg2;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_Event_flag_get(void * jarg1) {
-  int jresult ;
-  Event *arg1 = (Event *) 0 ;
-  EventFlag result;
-  
-  arg1 = (Event *)jarg1; 
-  result = (EventFlag) ((arg1)->flag);
-  jresult = (int)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Event_id_set(void * jarg1, int jarg2) {
-  Event *arg1 = (Event *) 0 ;
-  int arg2 ;
-  
-  arg1 = (Event *)jarg1; 
-  arg2 = (int)jarg2; 
-  if (arg1) (arg1)->id = arg2;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_Event_id_get(void * jarg1) {
-  int jresult ;
-  Event *arg1 = (Event *) 0 ;
-  int result;
-  
-  arg1 = (Event *)jarg1; 
-  result = (int) ((arg1)->id);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Event_time_set(void * jarg1, double jarg2) {
-  Event *arg1 = (Event *) 0 ;
-  double arg2 ;
-  
-  arg1 = (Event *)jarg1; 
-  arg2 = (double)jarg2; 
-  if (arg1) (arg1)->time = arg2;
-}
-
-
-SWIGEXPORT double SWIGSTDCALL CSharp_DryadUnity_Event_time_get(void * jarg1) {
-  double jresult ;
-  Event *arg1 = (Event *) 0 ;
-  double result;
-  
-  arg1 = (Event *)jarg1; 
-  result = (double) ((arg1)->time);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Event_notes_set(void * jarg1, void * jarg2) {
-  Event *arg1 = (Event *) 0 ;
-  std::vector< NoteConcrete > *arg2 = (std::vector< NoteConcrete > *) 0 ;
-  
-  arg1 = (Event *)jarg1; 
-  arg2 = (std::vector< NoteConcrete > *)jarg2; 
-  if (arg1) (arg1)->notes = *arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_Event_notes_get(void * jarg1) {
-  void * jresult ;
-  Event *arg1 = (Event *) 0 ;
-  std::vector< NoteConcrete > *result = 0 ;
-  
-  arg1 = (Event *)jarg1; 
-  result = (std::vector< NoteConcrete > *)& ((arg1)->notes);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_Event() {
-  void * jresult ;
-  Event *result = 0 ;
-  
-  result = (Event *)new Event();
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_Event(void * jarg1) {
-  Event *arg1 = (Event *) 0 ;
-  
-  arg1 = (Event *)jarg1; 
-  delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Engine_Start(void * jarg1, double jarg2) {
-  Engine *arg1 = (Engine *) 0 ;
-  double arg2 ;
-  
-  arg1 = (Engine *)jarg1; 
-  arg2 = (double)jarg2; 
-  (arg1)->Start(arg2);
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Engine_SetTempo(void * jarg1, int jarg2) {
-  Engine *arg1 = (Engine *) 0 ;
-  int arg2 ;
-  
-  arg1 = (Engine *)jarg1; 
-  arg2 = (int)jarg2; 
-  (arg1)->SetTempo(arg2);
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Engine_RegisterMotif(void * jarg1, char * jarg2, void * jarg3) {
-  Engine *arg1 = (Engine *) 0 ;
-  std::string arg2 ;
-  Motif arg3 ;
-  Motif *argp3 ;
-  
-  arg1 = (Engine *)jarg1; 
-  if (!jarg2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
-    return ;
-  }
-  (&arg2)->assign(jarg2); 
-  argp3 = (Motif *)jarg3; 
-  if (!argp3) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "Attempt to dereference null Motif", 0);
-    return ;
-  }
-  arg3 = *argp3; 
-  (arg1)->RegisterMotif(arg2,arg3);
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Engine_AddMotif(void * jarg1, char * jarg2) {
-  Engine *arg1 = (Engine *) 0 ;
-  std::string arg2 ;
-  
-  arg1 = (Engine *)jarg1; 
-  if (!jarg2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
-    return ;
-  }
-  (&arg2)->assign(jarg2); 
-  (arg1)->AddMotif(arg2);
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Engine_RemoveMotif(void * jarg1, char * jarg2) {
-  Engine *arg1 = (Engine *) 0 ;
-  std::string arg2 ;
-  
-  arg1 = (Engine *)jarg1; 
-  if (!jarg2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
-    return ;
-  }
-  (&arg2)->assign(jarg2); 
-  (arg1)->RemoveMotif(arg2);
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Engine_RegisterHarmonyGraph(void * jarg1, char * jarg2, void * jarg3) {
-  Engine *arg1 = (Engine *) 0 ;
-  std::string arg2 ;
-  HarmonyGraph arg3 ;
-  HarmonyGraph *argp3 ;
-  
-  arg1 = (Engine *)jarg1; 
-  if (!jarg2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
-    return ;
-  }
-  (&arg2)->assign(jarg2); 
-  argp3 = (HarmonyGraph *)jarg3; 
-  if (!argp3) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "Attempt to dereference null HarmonyGraph", 0);
-    return ;
-  }
-  arg3 = *argp3; 
-  (arg1)->RegisterHarmonyGraph(arg2,arg3);
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_Engine_TransitionToHarmonyGraph(void * jarg1, char * jarg2) {
-  Engine *arg1 = (Engine *) 0 ;
-  std::string arg2 ;
-  
-  arg1 = (Engine *)jarg1; 
-  if (!jarg2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
-    return ;
-  }
-  (&arg2)->assign(jarg2); 
-  (arg1)->TransitionToHarmonyGraph(arg2);
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_Engine_GetUpcomingEvents(void * jarg1, int jarg2) {
-  void * jresult ;
-  Engine *arg1 = (Engine *) 0 ;
-  int arg2 ;
-  SwigValueWrapper< std::vector< Event > > result;
-  
-  arg1 = (Engine *)jarg1; 
-  arg2 = (int)jarg2; 
-  result = (arg1)->GetUpcomingEvents(arg2);
-  jresult = new std::vector< Event >((const std::vector< Event > &)result); 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_Engine() {
-  void * jresult ;
-  Engine *result = 0 ;
-  
-  result = (Engine *)new Engine();
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_Engine(void * jarg1) {
-  Engine *arg1 = (Engine *) 0 ;
-  
-  arg1 = (Engine *)jarg1; 
-  delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_Clear(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeList_Clear(void * jarg1) {
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   
   arg1 = (std::vector< Node > *)jarg1; 
@@ -1604,7 +1159,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_Clear(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_Add(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeList_Add(void * jarg1, void * jarg2) {
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   Node *arg2 = 0 ;
   
@@ -1618,7 +1173,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_Add(void * jarg1, void 
 }
 
 
-SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_NodeVector_size(void * jarg1) {
+SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_NodeList_size(void * jarg1) {
   unsigned long jresult ;
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   std::vector< Node >::size_type result;
@@ -1630,7 +1185,7 @@ SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_NodeVector_size(void * ja
 }
 
 
-SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_NodeVector_capacity(void * jarg1) {
+SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_NodeList_capacity(void * jarg1) {
   unsigned long jresult ;
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   std::vector< Node >::size_type result;
@@ -1642,7 +1197,7 @@ SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_NodeVector_capacity(void 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_reserve(void * jarg1, unsigned long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeList_reserve(void * jarg1, unsigned long jarg2) {
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   std::vector< Node >::size_type arg2 ;
   
@@ -1652,7 +1207,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_reserve(void * jarg1, u
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NodeVector__SWIG_0() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NodeList__SWIG_0() {
   void * jresult ;
   std::vector< Node > *result = 0 ;
   
@@ -1662,7 +1217,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NodeVector__SWIG_0() {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NodeVector__SWIG_1(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NodeList__SWIG_1(void * jarg1) {
   void * jresult ;
   std::vector< Node > *arg1 = 0 ;
   std::vector< Node > *result = 0 ;
@@ -1678,7 +1233,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NodeVector__SWIG_1(void * ja
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NodeVector__SWIG_2(int jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NodeList__SWIG_2(int jarg1) {
   void * jresult ;
   int arg1 ;
   std::vector< Node > *result = 0 ;
@@ -1695,7 +1250,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NodeVector__SWIG_2(int jarg1
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NodeVector_getitemcopy(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NodeList_getitemcopy(void * jarg1, int jarg2) {
   void * jresult ;
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   int arg2 ;
@@ -1714,7 +1269,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NodeVector_getitemcopy(void * ja
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NodeVector_getitem(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NodeList_getitem(void * jarg1, int jarg2) {
   void * jresult ;
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   int arg2 ;
@@ -1733,7 +1288,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NodeVector_getitem(void * jarg1,
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_setitem(void * jarg1, int jarg2, void * jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeList_setitem(void * jarg1, int jarg2, void * jarg3) {
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   int arg2 ;
   Node *arg3 = 0 ;
@@ -1754,7 +1309,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_setitem(void * jarg1, i
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_AddRange(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeList_AddRange(void * jarg1, void * jarg2) {
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   std::vector< Node > *arg2 = 0 ;
   
@@ -1768,7 +1323,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_AddRange(void * jarg1, 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NodeVector_GetRange(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NodeList_GetRange(void * jarg1, int jarg2, int jarg3) {
   void * jresult ;
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   int arg2 ;
@@ -1792,7 +1347,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NodeVector_GetRange(void * jarg1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_Insert(void * jarg1, int jarg2, void * jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeList_Insert(void * jarg1, int jarg2, void * jarg3) {
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   int arg2 ;
   Node *arg3 = 0 ;
@@ -1813,7 +1368,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_Insert(void * jarg1, in
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_InsertRange(void * jarg1, int jarg2, void * jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeList_InsertRange(void * jarg1, int jarg2, void * jarg3) {
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   int arg2 ;
   std::vector< Node > *arg3 = 0 ;
@@ -1834,7 +1389,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_InsertRange(void * jarg
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_RemoveAt(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeList_RemoveAt(void * jarg1, int jarg2) {
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   int arg2 ;
   
@@ -1849,7 +1404,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_RemoveAt(void * jarg1, 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_RemoveRange(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeList_RemoveRange(void * jarg1, int jarg2, int jarg3) {
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   int arg2 ;
   int arg3 ;
@@ -1869,7 +1424,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_RemoveRange(void * jarg
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NodeVector_Repeat(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NodeList_Repeat(void * jarg1, int jarg2) {
   void * jresult ;
   Node *arg1 = 0 ;
   int arg2 ;
@@ -1892,7 +1447,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NodeVector_Repeat(void * jarg1, 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_Reverse__SWIG_0(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeList_Reverse__SWIG_0(void * jarg1) {
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   
   arg1 = (std::vector< Node > *)jarg1; 
@@ -1900,7 +1455,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_Reverse__SWIG_0(void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_Reverse__SWIG_1(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeList_Reverse__SWIG_1(void * jarg1, int jarg2, int jarg3) {
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   int arg2 ;
   int arg3 ;
@@ -1920,7 +1475,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_Reverse__SWIG_1(void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_SetRange(void * jarg1, int jarg2, void * jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeList_SetRange(void * jarg1, int jarg2, void * jarg3) {
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   int arg2 ;
   std::vector< Node > *arg3 = 0 ;
@@ -1941,7 +1496,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NodeVector_SetRange(void * jarg1, 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_NodeVector(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_NodeList(void * jarg1) {
   std::vector< Node > *arg1 = (std::vector< Node > *) 0 ;
   
   arg1 = (std::vector< Node > *)jarg1; 
@@ -1949,7 +1504,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_NodeVector(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_Clear(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeList_Clear(void * jarg1) {
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   
   arg1 = (std::vector< Edge > *)jarg1; 
@@ -1957,7 +1512,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_Clear(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_Add(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeList_Add(void * jarg1, void * jarg2) {
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   Edge *arg2 = 0 ;
   
@@ -1971,7 +1526,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_Add(void * jarg1, void 
 }
 
 
-SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_EdgeVector_size(void * jarg1) {
+SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_EdgeList_size(void * jarg1) {
   unsigned long jresult ;
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   std::vector< Edge >::size_type result;
@@ -1983,7 +1538,7 @@ SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_EdgeVector_size(void * ja
 }
 
 
-SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_EdgeVector_capacity(void * jarg1) {
+SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_EdgeList_capacity(void * jarg1) {
   unsigned long jresult ;
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   std::vector< Edge >::size_type result;
@@ -1995,7 +1550,7 @@ SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_EdgeVector_capacity(void 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_reserve(void * jarg1, unsigned long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeList_reserve(void * jarg1, unsigned long jarg2) {
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   std::vector< Edge >::size_type arg2 ;
   
@@ -2005,7 +1560,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_reserve(void * jarg1, u
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_EdgeVector__SWIG_0() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_EdgeList__SWIG_0() {
   void * jresult ;
   std::vector< Edge > *result = 0 ;
   
@@ -2015,7 +1570,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_EdgeVector__SWIG_0() {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_EdgeVector__SWIG_1(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_EdgeList__SWIG_1(void * jarg1) {
   void * jresult ;
   std::vector< Edge > *arg1 = 0 ;
   std::vector< Edge > *result = 0 ;
@@ -2031,7 +1586,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_EdgeVector__SWIG_1(void * ja
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_EdgeVector__SWIG_2(int jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_EdgeList__SWIG_2(int jarg1) {
   void * jresult ;
   int arg1 ;
   std::vector< Edge > *result = 0 ;
@@ -2048,7 +1603,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_EdgeVector__SWIG_2(int jarg1
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_EdgeVector_getitemcopy(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_EdgeList_getitemcopy(void * jarg1, int jarg2) {
   void * jresult ;
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   int arg2 ;
@@ -2067,7 +1622,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_EdgeVector_getitemcopy(void * ja
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_EdgeVector_getitem(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_EdgeList_getitem(void * jarg1, int jarg2) {
   void * jresult ;
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   int arg2 ;
@@ -2086,7 +1641,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_EdgeVector_getitem(void * jarg1,
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_setitem(void * jarg1, int jarg2, void * jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeList_setitem(void * jarg1, int jarg2, void * jarg3) {
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   int arg2 ;
   Edge *arg3 = 0 ;
@@ -2107,7 +1662,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_setitem(void * jarg1, i
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_AddRange(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeList_AddRange(void * jarg1, void * jarg2) {
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   std::vector< Edge > *arg2 = 0 ;
   
@@ -2121,7 +1676,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_AddRange(void * jarg1, 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_EdgeVector_GetRange(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_EdgeList_GetRange(void * jarg1, int jarg2, int jarg3) {
   void * jresult ;
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   int arg2 ;
@@ -2145,7 +1700,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_EdgeVector_GetRange(void * jarg1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_Insert(void * jarg1, int jarg2, void * jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeList_Insert(void * jarg1, int jarg2, void * jarg3) {
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   int arg2 ;
   Edge *arg3 = 0 ;
@@ -2166,7 +1721,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_Insert(void * jarg1, in
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_InsertRange(void * jarg1, int jarg2, void * jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeList_InsertRange(void * jarg1, int jarg2, void * jarg3) {
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   int arg2 ;
   std::vector< Edge > *arg3 = 0 ;
@@ -2187,7 +1742,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_InsertRange(void * jarg
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_RemoveAt(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeList_RemoveAt(void * jarg1, int jarg2) {
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   int arg2 ;
   
@@ -2202,7 +1757,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_RemoveAt(void * jarg1, 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_RemoveRange(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeList_RemoveRange(void * jarg1, int jarg2, int jarg3) {
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   int arg2 ;
   int arg3 ;
@@ -2222,7 +1777,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_RemoveRange(void * jarg
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_EdgeVector_Repeat(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_EdgeList_Repeat(void * jarg1, int jarg2) {
   void * jresult ;
   Edge *arg1 = 0 ;
   int arg2 ;
@@ -2245,7 +1800,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_EdgeVector_Repeat(void * jarg1, 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_Reverse__SWIG_0(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeList_Reverse__SWIG_0(void * jarg1) {
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   
   arg1 = (std::vector< Edge > *)jarg1; 
@@ -2253,7 +1808,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_Reverse__SWIG_0(void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_Reverse__SWIG_1(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeList_Reverse__SWIG_1(void * jarg1, int jarg2, int jarg3) {
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   int arg2 ;
   int arg3 ;
@@ -2273,7 +1828,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_Reverse__SWIG_1(void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_SetRange(void * jarg1, int jarg2, void * jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeList_SetRange(void * jarg1, int jarg2, void * jarg3) {
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   int arg2 ;
   std::vector< Edge > *arg3 = 0 ;
@@ -2294,7 +1849,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_EdgeVector_SetRange(void * jarg1, 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_EdgeVector(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_EdgeList(void * jarg1) {
   std::vector< Edge > *arg1 = (std::vector< Edge > *) 0 ;
   
   arg1 = (std::vector< Edge > *)jarg1; 
@@ -2302,94 +1857,94 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_EdgeVector(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_Clear(void * jarg1) {
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntervalList_Clear(void * jarg1) {
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
   (arg1)->clear();
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_Add(void * jarg1, int jarg2) {
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
-  int *arg2 = 0 ;
-  int temp2 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntervalList_Add(void * jarg1, unsigned int jarg2) {
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
+  unsigned int *arg2 = 0 ;
+  unsigned int temp2 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
-  temp2 = (int)jarg2; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
+  temp2 = (unsigned int)jarg2; 
   arg2 = &temp2; 
-  (arg1)->push_back((int const &)*arg2);
+  (arg1)->push_back((unsigned int const &)*arg2);
 }
 
 
-SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_IntVector_size(void * jarg1) {
+SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_IntervalList_size(void * jarg1) {
   unsigned long jresult ;
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
-  std::vector< int >::size_type result;
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
+  std::vector< unsigned int >::size_type result;
   
-  arg1 = (std::vector< int > *)jarg1; 
-  result = ((std::vector< int > const *)arg1)->size();
+  arg1 = (std::vector< unsigned int > *)jarg1; 
+  result = ((std::vector< unsigned int > const *)arg1)->size();
   jresult = (unsigned long)result; 
   return jresult;
 }
 
 
-SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_IntVector_capacity(void * jarg1) {
+SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_IntervalList_capacity(void * jarg1) {
   unsigned long jresult ;
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
-  std::vector< int >::size_type result;
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
+  std::vector< unsigned int >::size_type result;
   
-  arg1 = (std::vector< int > *)jarg1; 
-  result = ((std::vector< int > const *)arg1)->capacity();
+  arg1 = (std::vector< unsigned int > *)jarg1; 
+  result = ((std::vector< unsigned int > const *)arg1)->capacity();
   jresult = (unsigned long)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_reserve(void * jarg1, unsigned long jarg2) {
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
-  std::vector< int >::size_type arg2 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntervalList_reserve(void * jarg1, unsigned long jarg2) {
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
+  std::vector< unsigned int >::size_type arg2 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
-  arg2 = (std::vector< int >::size_type)jarg2; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
+  arg2 = (std::vector< unsigned int >::size_type)jarg2; 
   (arg1)->reserve(arg2);
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_IntVector__SWIG_0() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_IntervalList__SWIG_0() {
   void * jresult ;
-  std::vector< int > *result = 0 ;
+  std::vector< unsigned int > *result = 0 ;
   
-  result = (std::vector< int > *)new std::vector< int >();
+  result = (std::vector< unsigned int > *)new std::vector< unsigned int >();
   jresult = (void *)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_IntVector__SWIG_1(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_IntervalList__SWIG_1(void * jarg1) {
   void * jresult ;
-  std::vector< int > *arg1 = 0 ;
-  std::vector< int > *result = 0 ;
+  std::vector< unsigned int > *arg1 = 0 ;
+  std::vector< unsigned int > *result = 0 ;
   
-  arg1 = (std::vector< int > *)jarg1;
+  arg1 = (std::vector< unsigned int > *)jarg1;
   if (!arg1) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< int > const & type is null", 0);
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< unsigned int > const & type is null", 0);
     return 0;
   } 
-  result = (std::vector< int > *)new std::vector< int >((std::vector< int > const &)*arg1);
+  result = (std::vector< unsigned int > *)new std::vector< unsigned int >((std::vector< unsigned int > const &)*arg1);
   jresult = (void *)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_IntVector__SWIG_2(int jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_IntervalList__SWIG_2(int jarg1) {
   void * jresult ;
   int arg1 ;
-  std::vector< int > *result = 0 ;
+  std::vector< unsigned int > *result = 0 ;
   
   arg1 = (int)jarg1; 
   try {
-    result = (std::vector< int > *)new_std_vector_Sl_int_Sg___SWIG_2(arg1);
+    result = (std::vector< unsigned int > *)new_std_vector_Sl_unsigned_SS_int_Sg___SWIG_2(arg1);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return 0;
@@ -2399,16 +1954,16 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_IntVector__SWIG_2(int jarg1)
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_IntVector_getitemcopy(void * jarg1, int jarg2) {
-  int jresult ;
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_DryadUnity_IntervalList_getitemcopy(void * jarg1, int jarg2) {
+  unsigned int jresult ;
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
   int arg2 ;
-  int result;
+  unsigned int result;
   
-  arg1 = (std::vector< int > *)jarg1; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
   arg2 = (int)jarg2; 
   try {
-    result = (int)std_vector_Sl_int_Sg__getitemcopy(arg1,arg2);
+    result = (unsigned int)std_vector_Sl_unsigned_SS_int_Sg__getitemcopy(arg1,arg2);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return 0;
@@ -2418,16 +1973,16 @@ SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_IntVector_getitemcopy(void * jarg1,
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_IntVector_getitem(void * jarg1, int jarg2) {
-  int jresult ;
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_DryadUnity_IntervalList_getitem(void * jarg1, int jarg2) {
+  unsigned int jresult ;
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
   int arg2 ;
-  std::vector< int >::value_type *result = 0 ;
+  std::vector< unsigned int >::value_type *result = 0 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
   arg2 = (int)jarg2; 
   try {
-    result = (std::vector< int >::value_type *) &std_vector_Sl_int_Sg__getitem(arg1,arg2);
+    result = (std::vector< unsigned int >::value_type *) &std_vector_Sl_unsigned_SS_int_Sg__getitem(arg1,arg2);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return 0;
@@ -2437,18 +1992,18 @@ SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_IntVector_getitem(void * jarg1, int
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_setitem(void * jarg1, int jarg2, int jarg3) {
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntervalList_setitem(void * jarg1, int jarg2, unsigned int jarg3) {
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
   int arg2 ;
-  int *arg3 = 0 ;
-  int temp3 ;
+  unsigned int *arg3 = 0 ;
+  unsigned int temp3 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
   arg2 = (int)jarg2; 
-  temp3 = (int)jarg3; 
+  temp3 = (unsigned int)jarg3; 
   arg3 = &temp3; 
   try {
-    std_vector_Sl_int_Sg__setitem(arg1,arg2,(int const &)*arg3);
+    std_vector_Sl_unsigned_SS_int_Sg__setitem(arg1,arg2,(unsigned int const &)*arg3);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return ;
@@ -2456,32 +2011,32 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_setitem(void * jarg1, in
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_AddRange(void * jarg1, void * jarg2) {
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
-  std::vector< int > *arg2 = 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntervalList_AddRange(void * jarg1, void * jarg2) {
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
+  std::vector< unsigned int > *arg2 = 0 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
-  arg2 = (std::vector< int > *)jarg2;
+  arg1 = (std::vector< unsigned int > *)jarg1; 
+  arg2 = (std::vector< unsigned int > *)jarg2;
   if (!arg2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< int > const & type is null", 0);
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< unsigned int > const & type is null", 0);
     return ;
   } 
-  std_vector_Sl_int_Sg__AddRange(arg1,(std::vector< int > const &)*arg2);
+  std_vector_Sl_unsigned_SS_int_Sg__AddRange(arg1,(std::vector< unsigned int > const &)*arg2);
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_IntVector_GetRange(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_IntervalList_GetRange(void * jarg1, int jarg2, int jarg3) {
   void * jresult ;
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
   int arg2 ;
   int arg3 ;
-  std::vector< int > *result = 0 ;
+  std::vector< unsigned int > *result = 0 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
   arg2 = (int)jarg2; 
   arg3 = (int)jarg3; 
   try {
-    result = (std::vector< int > *)std_vector_Sl_int_Sg__GetRange(arg1,arg2,arg3);
+    result = (std::vector< unsigned int > *)std_vector_Sl_unsigned_SS_int_Sg__GetRange(arg1,arg2,arg3);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return 0;
@@ -2494,18 +2049,18 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_IntVector_GetRange(void * jarg1,
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_Insert(void * jarg1, int jarg2, int jarg3) {
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntervalList_Insert(void * jarg1, int jarg2, unsigned int jarg3) {
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
   int arg2 ;
-  int *arg3 = 0 ;
-  int temp3 ;
+  unsigned int *arg3 = 0 ;
+  unsigned int temp3 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
   arg2 = (int)jarg2; 
-  temp3 = (int)jarg3; 
+  temp3 = (unsigned int)jarg3; 
   arg3 = &temp3; 
   try {
-    std_vector_Sl_int_Sg__Insert(arg1,arg2,(int const &)*arg3);
+    std_vector_Sl_unsigned_SS_int_Sg__Insert(arg1,arg2,(unsigned int const &)*arg3);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return ;
@@ -2513,20 +2068,20 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_Insert(void * jarg1, int
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_InsertRange(void * jarg1, int jarg2, void * jarg3) {
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntervalList_InsertRange(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
   int arg2 ;
-  std::vector< int > *arg3 = 0 ;
+  std::vector< unsigned int > *arg3 = 0 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
   arg2 = (int)jarg2; 
-  arg3 = (std::vector< int > *)jarg3;
+  arg3 = (std::vector< unsigned int > *)jarg3;
   if (!arg3) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< int > const & type is null", 0);
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< unsigned int > const & type is null", 0);
     return ;
   } 
   try {
-    std_vector_Sl_int_Sg__InsertRange(arg1,arg2,(std::vector< int > const &)*arg3);
+    std_vector_Sl_unsigned_SS_int_Sg__InsertRange(arg1,arg2,(std::vector< unsigned int > const &)*arg3);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return ;
@@ -2534,14 +2089,14 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_InsertRange(void * jarg1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_RemoveAt(void * jarg1, int jarg2) {
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntervalList_RemoveAt(void * jarg1, int jarg2) {
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
   int arg2 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
   arg2 = (int)jarg2; 
   try {
-    std_vector_Sl_int_Sg__RemoveAt(arg1,arg2);
+    std_vector_Sl_unsigned_SS_int_Sg__RemoveAt(arg1,arg2);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return ;
@@ -2549,16 +2104,16 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_RemoveAt(void * jarg1, i
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_RemoveRange(void * jarg1, int jarg2, int jarg3) {
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntervalList_RemoveRange(void * jarg1, int jarg2, int jarg3) {
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
   int arg2 ;
   int arg3 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
   arg2 = (int)jarg2; 
   arg3 = (int)jarg3; 
   try {
-    std_vector_Sl_int_Sg__RemoveRange(arg1,arg2,arg3);
+    std_vector_Sl_unsigned_SS_int_Sg__RemoveRange(arg1,arg2,arg3);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return ;
@@ -2569,18 +2124,18 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_RemoveRange(void * jarg1
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_IntVector_Repeat(int jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_IntervalList_Repeat(unsigned int jarg1, int jarg2) {
   void * jresult ;
-  int *arg1 = 0 ;
+  unsigned int *arg1 = 0 ;
   int arg2 ;
-  int temp1 ;
-  std::vector< int > *result = 0 ;
+  unsigned int temp1 ;
+  std::vector< unsigned int > *result = 0 ;
   
-  temp1 = (int)jarg1; 
+  temp1 = (unsigned int)jarg1; 
   arg1 = &temp1; 
   arg2 = (int)jarg2; 
   try {
-    result = (std::vector< int > *)std_vector_Sl_int_Sg__Repeat((int const &)*arg1,arg2);
+    result = (std::vector< unsigned int > *)std_vector_Sl_unsigned_SS_int_Sg__Repeat((unsigned int const &)*arg1,arg2);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return 0;
@@ -2590,24 +2145,24 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_IntVector_Repeat(int jarg1, int 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_Reverse__SWIG_0(void * jarg1) {
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntervalList_Reverse__SWIG_0(void * jarg1) {
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
-  std_vector_Sl_int_Sg__Reverse__SWIG_0(arg1);
+  arg1 = (std::vector< unsigned int > *)jarg1; 
+  std_vector_Sl_unsigned_SS_int_Sg__Reverse__SWIG_0(arg1);
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_Reverse__SWIG_1(void * jarg1, int jarg2, int jarg3) {
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntervalList_Reverse__SWIG_1(void * jarg1, int jarg2, int jarg3) {
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
   int arg2 ;
   int arg3 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
   arg2 = (int)jarg2; 
   arg3 = (int)jarg3; 
   try {
-    std_vector_Sl_int_Sg__Reverse__SWIG_1(arg1,arg2,arg3);
+    std_vector_Sl_unsigned_SS_int_Sg__Reverse__SWIG_1(arg1,arg2,arg3);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return ;
@@ -2618,20 +2173,20 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_Reverse__SWIG_1(void * j
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_SetRange(void * jarg1, int jarg2, void * jarg3) {
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntervalList_SetRange(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
   int arg2 ;
-  std::vector< int > *arg3 = 0 ;
+  std::vector< unsigned int > *arg3 = 0 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
   arg2 = (int)jarg2; 
-  arg3 = (std::vector< int > *)jarg3;
+  arg3 = (std::vector< unsigned int > *)jarg3;
   if (!arg3) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< int > const & type is null", 0);
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< unsigned int > const & type is null", 0);
     return ;
   } 
   try {
-    std_vector_Sl_int_Sg__SetRange(arg1,arg2,(std::vector< int > const &)*arg3);
+    std_vector_Sl_unsigned_SS_int_Sg__SetRange(arg1,arg2,(std::vector< unsigned int > const &)*arg3);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return ;
@@ -2639,168 +2194,168 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_IntVector_SetRange(void * jarg1, i
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_DryadUnity_IntVector_Contains(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_DryadUnity_IntervalList_Contains(void * jarg1, unsigned int jarg2) {
   unsigned int jresult ;
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
-  int *arg2 = 0 ;
-  int temp2 ;
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
+  unsigned int *arg2 = 0 ;
+  unsigned int temp2 ;
   bool result;
   
-  arg1 = (std::vector< int > *)jarg1; 
-  temp2 = (int)jarg2; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
+  temp2 = (unsigned int)jarg2; 
   arg2 = &temp2; 
-  result = (bool)std_vector_Sl_int_Sg__Contains(arg1,(int const &)*arg2);
+  result = (bool)std_vector_Sl_unsigned_SS_int_Sg__Contains(arg1,(unsigned int const &)*arg2);
   jresult = result; 
   return jresult;
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_IntVector_IndexOf(void * jarg1, int jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_IntervalList_IndexOf(void * jarg1, unsigned int jarg2) {
   int jresult ;
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
-  int *arg2 = 0 ;
-  int temp2 ;
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
+  unsigned int *arg2 = 0 ;
+  unsigned int temp2 ;
   int result;
   
-  arg1 = (std::vector< int > *)jarg1; 
-  temp2 = (int)jarg2; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
+  temp2 = (unsigned int)jarg2; 
   arg2 = &temp2; 
-  result = (int)std_vector_Sl_int_Sg__IndexOf(arg1,(int const &)*arg2);
+  result = (int)std_vector_Sl_unsigned_SS_int_Sg__IndexOf(arg1,(unsigned int const &)*arg2);
   jresult = result; 
   return jresult;
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_IntVector_LastIndexOf(void * jarg1, int jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_DryadUnity_IntervalList_LastIndexOf(void * jarg1, unsigned int jarg2) {
   int jresult ;
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
-  int *arg2 = 0 ;
-  int temp2 ;
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
+  unsigned int *arg2 = 0 ;
+  unsigned int temp2 ;
   int result;
   
-  arg1 = (std::vector< int > *)jarg1; 
-  temp2 = (int)jarg2; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
+  temp2 = (unsigned int)jarg2; 
   arg2 = &temp2; 
-  result = (int)std_vector_Sl_int_Sg__LastIndexOf(arg1,(int const &)*arg2);
+  result = (int)std_vector_Sl_unsigned_SS_int_Sg__LastIndexOf(arg1,(unsigned int const &)*arg2);
   jresult = result; 
   return jresult;
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_DryadUnity_IntVector_Remove(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_DryadUnity_IntervalList_Remove(void * jarg1, unsigned int jarg2) {
   unsigned int jresult ;
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
-  int *arg2 = 0 ;
-  int temp2 ;
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
+  unsigned int *arg2 = 0 ;
+  unsigned int temp2 ;
   bool result;
   
-  arg1 = (std::vector< int > *)jarg1; 
-  temp2 = (int)jarg2; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
+  temp2 = (unsigned int)jarg2; 
   arg2 = &temp2; 
-  result = (bool)std_vector_Sl_int_Sg__Remove(arg1,(int const &)*arg2);
+  result = (bool)std_vector_Sl_unsigned_SS_int_Sg__Remove(arg1,(unsigned int const &)*arg2);
   jresult = result; 
   return jresult;
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_IntVector(void * jarg1) {
-  std::vector< int > *arg1 = (std::vector< int > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_IntervalList(void * jarg1) {
+  std::vector< unsigned int > *arg1 = (std::vector< unsigned int > *) 0 ;
   
-  arg1 = (std::vector< int > *)jarg1; 
+  arg1 = (std::vector< unsigned int > *)jarg1; 
   delete arg1;
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_Clear(void * jarg1) {
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_Clear(void * jarg1) {
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
   (arg1)->clear();
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_Add(void * jarg1, void * jarg2) {
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
-  NoteConcrete *arg2 = 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_Add(void * jarg1, void * jarg2) {
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
+  NoteToPlay *arg2 = 0 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
-  arg2 = (NoteConcrete *)jarg2;
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
+  arg2 = (NoteToPlay *)jarg2;
   if (!arg2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "NoteConcrete const & type is null", 0);
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "NoteToPlay const & type is null", 0);
     return ;
   } 
-  (arg1)->push_back((NoteConcrete const &)*arg2);
+  (arg1)->push_back((NoteToPlay const &)*arg2);
 }
 
 
-SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_size(void * jarg1) {
+SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_size(void * jarg1) {
   unsigned long jresult ;
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
-  std::vector< NoteConcrete >::size_type result;
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
+  std::vector< NoteToPlay >::size_type result;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
-  result = ((std::vector< NoteConcrete > const *)arg1)->size();
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
+  result = ((std::vector< NoteToPlay > const *)arg1)->size();
   jresult = (unsigned long)result; 
   return jresult;
 }
 
 
-SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_capacity(void * jarg1) {
+SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_capacity(void * jarg1) {
   unsigned long jresult ;
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
-  std::vector< NoteConcrete >::size_type result;
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
+  std::vector< NoteToPlay >::size_type result;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
-  result = ((std::vector< NoteConcrete > const *)arg1)->capacity();
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
+  result = ((std::vector< NoteToPlay > const *)arg1)->capacity();
   jresult = (unsigned long)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_reserve(void * jarg1, unsigned long jarg2) {
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
-  std::vector< NoteConcrete >::size_type arg2 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_reserve(void * jarg1, unsigned long jarg2) {
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
+  std::vector< NoteToPlay >::size_type arg2 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
-  arg2 = (std::vector< NoteConcrete >::size_type)jarg2; 
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
+  arg2 = (std::vector< NoteToPlay >::size_type)jarg2; 
   (arg1)->reserve(arg2);
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NoteConcreteVector__SWIG_0() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NoteToPlayList__SWIG_0() {
   void * jresult ;
-  std::vector< NoteConcrete > *result = 0 ;
+  std::vector< NoteToPlay > *result = 0 ;
   
-  result = (std::vector< NoteConcrete > *)new std::vector< NoteConcrete >();
+  result = (std::vector< NoteToPlay > *)new std::vector< NoteToPlay >();
   jresult = (void *)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NoteConcreteVector__SWIG_1(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NoteToPlayList__SWIG_1(void * jarg1) {
   void * jresult ;
-  std::vector< NoteConcrete > *arg1 = 0 ;
-  std::vector< NoteConcrete > *result = 0 ;
+  std::vector< NoteToPlay > *arg1 = 0 ;
+  std::vector< NoteToPlay > *result = 0 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1;
+  arg1 = (std::vector< NoteToPlay > *)jarg1;
   if (!arg1) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< NoteConcrete > const & type is null", 0);
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< NoteToPlay > const & type is null", 0);
     return 0;
   } 
-  result = (std::vector< NoteConcrete > *)new std::vector< NoteConcrete >((std::vector< NoteConcrete > const &)*arg1);
+  result = (std::vector< NoteToPlay > *)new std::vector< NoteToPlay >((std::vector< NoteToPlay > const &)*arg1);
   jresult = (void *)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NoteConcreteVector__SWIG_2(int jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NoteToPlayList__SWIG_2(int jarg1) {
   void * jresult ;
   int arg1 ;
-  std::vector< NoteConcrete > *result = 0 ;
+  std::vector< NoteToPlay > *result = 0 ;
   
   arg1 = (int)jarg1; 
   try {
-    result = (std::vector< NoteConcrete > *)new_std_vector_Sl_NoteConcrete_Sg___SWIG_2(arg1);
+    result = (std::vector< NoteToPlay > *)new_std_vector_Sl_NoteToPlay_Sg___SWIG_2(arg1);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return 0;
@@ -2810,35 +2365,35 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NoteConcreteVector__SWIG_2(i
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_getitemcopy(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_getitemcopy(void * jarg1, int jarg2) {
   void * jresult ;
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
   int arg2 ;
-  NoteConcrete result;
+  NoteToPlay result;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
   arg2 = (int)jarg2; 
   try {
-    result = std_vector_Sl_NoteConcrete_Sg__getitemcopy(arg1,arg2);
+    result = std_vector_Sl_NoteToPlay_Sg__getitemcopy(arg1,arg2);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return 0;
   }
-  jresult = new NoteConcrete((const NoteConcrete &)result); 
+  jresult = new NoteToPlay((const NoteToPlay &)result); 
   return jresult;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_getitem(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_getitem(void * jarg1, int jarg2) {
   void * jresult ;
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
   int arg2 ;
-  std::vector< NoteConcrete >::value_type *result = 0 ;
+  std::vector< NoteToPlay >::value_type *result = 0 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
   arg2 = (int)jarg2; 
   try {
-    result = (std::vector< NoteConcrete >::value_type *) &std_vector_Sl_NoteConcrete_Sg__getitem(arg1,arg2);
+    result = (std::vector< NoteToPlay >::value_type *) &std_vector_Sl_NoteToPlay_Sg__getitem(arg1,arg2);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return 0;
@@ -2848,20 +2403,20 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_getitem(void 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_setitem(void * jarg1, int jarg2, void * jarg3) {
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_setitem(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
   int arg2 ;
-  NoteConcrete *arg3 = 0 ;
+  NoteToPlay *arg3 = 0 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
   arg2 = (int)jarg2; 
-  arg3 = (NoteConcrete *)jarg3;
+  arg3 = (NoteToPlay *)jarg3;
   if (!arg3) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "NoteConcrete const & type is null", 0);
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "NoteToPlay const & type is null", 0);
     return ;
   } 
   try {
-    std_vector_Sl_NoteConcrete_Sg__setitem(arg1,arg2,(NoteConcrete const &)*arg3);
+    std_vector_Sl_NoteToPlay_Sg__setitem(arg1,arg2,(NoteToPlay const &)*arg3);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return ;
@@ -2869,32 +2424,32 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_setitem(void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_AddRange(void * jarg1, void * jarg2) {
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
-  std::vector< NoteConcrete > *arg2 = 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_AddRange(void * jarg1, void * jarg2) {
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
+  std::vector< NoteToPlay > *arg2 = 0 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
-  arg2 = (std::vector< NoteConcrete > *)jarg2;
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
+  arg2 = (std::vector< NoteToPlay > *)jarg2;
   if (!arg2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< NoteConcrete > const & type is null", 0);
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< NoteToPlay > const & type is null", 0);
     return ;
   } 
-  std_vector_Sl_NoteConcrete_Sg__AddRange(arg1,(std::vector< NoteConcrete > const &)*arg2);
+  std_vector_Sl_NoteToPlay_Sg__AddRange(arg1,(std::vector< NoteToPlay > const &)*arg2);
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_GetRange(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_GetRange(void * jarg1, int jarg2, int jarg3) {
   void * jresult ;
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
   int arg2 ;
   int arg3 ;
-  std::vector< NoteConcrete > *result = 0 ;
+  std::vector< NoteToPlay > *result = 0 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
   arg2 = (int)jarg2; 
   arg3 = (int)jarg3; 
   try {
-    result = (std::vector< NoteConcrete > *)std_vector_Sl_NoteConcrete_Sg__GetRange(arg1,arg2,arg3);
+    result = (std::vector< NoteToPlay > *)std_vector_Sl_NoteToPlay_Sg__GetRange(arg1,arg2,arg3);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return 0;
@@ -2907,20 +2462,20 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_GetRange(void
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_Insert(void * jarg1, int jarg2, void * jarg3) {
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_Insert(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
   int arg2 ;
-  NoteConcrete *arg3 = 0 ;
+  NoteToPlay *arg3 = 0 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
   arg2 = (int)jarg2; 
-  arg3 = (NoteConcrete *)jarg3;
+  arg3 = (NoteToPlay *)jarg3;
   if (!arg3) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "NoteConcrete const & type is null", 0);
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "NoteToPlay const & type is null", 0);
     return ;
   } 
   try {
-    std_vector_Sl_NoteConcrete_Sg__Insert(arg1,arg2,(NoteConcrete const &)*arg3);
+    std_vector_Sl_NoteToPlay_Sg__Insert(arg1,arg2,(NoteToPlay const &)*arg3);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return ;
@@ -2928,20 +2483,20 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_Insert(void * j
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_InsertRange(void * jarg1, int jarg2, void * jarg3) {
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_InsertRange(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
   int arg2 ;
-  std::vector< NoteConcrete > *arg3 = 0 ;
+  std::vector< NoteToPlay > *arg3 = 0 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
   arg2 = (int)jarg2; 
-  arg3 = (std::vector< NoteConcrete > *)jarg3;
+  arg3 = (std::vector< NoteToPlay > *)jarg3;
   if (!arg3) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< NoteConcrete > const & type is null", 0);
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< NoteToPlay > const & type is null", 0);
     return ;
   } 
   try {
-    std_vector_Sl_NoteConcrete_Sg__InsertRange(arg1,arg2,(std::vector< NoteConcrete > const &)*arg3);
+    std_vector_Sl_NoteToPlay_Sg__InsertRange(arg1,arg2,(std::vector< NoteToPlay > const &)*arg3);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return ;
@@ -2949,14 +2504,14 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_InsertRange(voi
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_RemoveAt(void * jarg1, int jarg2) {
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_RemoveAt(void * jarg1, int jarg2) {
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
   int arg2 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
   arg2 = (int)jarg2; 
   try {
-    std_vector_Sl_NoteConcrete_Sg__RemoveAt(arg1,arg2);
+    std_vector_Sl_NoteToPlay_Sg__RemoveAt(arg1,arg2);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return ;
@@ -2964,16 +2519,16 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_RemoveAt(void *
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_RemoveRange(void * jarg1, int jarg2, int jarg3) {
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_RemoveRange(void * jarg1, int jarg2, int jarg3) {
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
   int arg2 ;
   int arg3 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
   arg2 = (int)jarg2; 
   arg3 = (int)jarg3; 
   try {
-    std_vector_Sl_NoteConcrete_Sg__RemoveRange(arg1,arg2,arg3);
+    std_vector_Sl_NoteToPlay_Sg__RemoveRange(arg1,arg2,arg3);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return ;
@@ -2984,20 +2539,20 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_RemoveRange(voi
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_Repeat(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_Repeat(void * jarg1, int jarg2) {
   void * jresult ;
-  NoteConcrete *arg1 = 0 ;
+  NoteToPlay *arg1 = 0 ;
   int arg2 ;
-  std::vector< NoteConcrete > *result = 0 ;
+  std::vector< NoteToPlay > *result = 0 ;
   
-  arg1 = (NoteConcrete *)jarg1;
+  arg1 = (NoteToPlay *)jarg1;
   if (!arg1) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "NoteConcrete const & type is null", 0);
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "NoteToPlay const & type is null", 0);
     return 0;
   } 
   arg2 = (int)jarg2; 
   try {
-    result = (std::vector< NoteConcrete > *)std_vector_Sl_NoteConcrete_Sg__Repeat((NoteConcrete const &)*arg1,arg2);
+    result = (std::vector< NoteToPlay > *)std_vector_Sl_NoteToPlay_Sg__Repeat((NoteToPlay const &)*arg1,arg2);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return 0;
@@ -3007,24 +2562,24 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_Repeat(void *
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_Reverse__SWIG_0(void * jarg1) {
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_Reverse__SWIG_0(void * jarg1) {
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
-  std_vector_Sl_NoteConcrete_Sg__Reverse__SWIG_0(arg1);
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
+  std_vector_Sl_NoteToPlay_Sg__Reverse__SWIG_0(arg1);
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_Reverse__SWIG_1(void * jarg1, int jarg2, int jarg3) {
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_Reverse__SWIG_1(void * jarg1, int jarg2, int jarg3) {
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
   int arg2 ;
   int arg3 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
   arg2 = (int)jarg2; 
   arg3 = (int)jarg3; 
   try {
-    std_vector_Sl_NoteConcrete_Sg__Reverse__SWIG_1(arg1,arg2,arg3);
+    std_vector_Sl_NoteToPlay_Sg__Reverse__SWIG_1(arg1,arg2,arg3);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return ;
@@ -3035,20 +2590,20 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_Reverse__SWIG_1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_SetRange(void * jarg1, int jarg2, void * jarg3) {
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteToPlayList_SetRange(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
   int arg2 ;
-  std::vector< NoteConcrete > *arg3 = 0 ;
+  std::vector< NoteToPlay > *arg3 = 0 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
   arg2 = (int)jarg2; 
-  arg3 = (std::vector< NoteConcrete > *)jarg3;
+  arg3 = (std::vector< NoteToPlay > *)jarg3;
   if (!arg3) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< NoteConcrete > const & type is null", 0);
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< NoteToPlay > const & type is null", 0);
     return ;
   } 
   try {
-    std_vector_Sl_NoteConcrete_Sg__SetRange(arg1,arg2,(std::vector< NoteConcrete > const &)*arg3);
+    std_vector_Sl_NoteToPlay_Sg__SetRange(arg1,arg2,(std::vector< NoteToPlay > const &)*arg3);
   } catch(std::out_of_range &_e) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
     return ;
@@ -3056,363 +2611,10 @@ SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConcreteVector_SetRange(void *
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_NoteConcreteVector(void * jarg1) {
-  std::vector< NoteConcrete > *arg1 = (std::vector< NoteConcrete > *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_NoteToPlayList(void * jarg1) {
+  std::vector< NoteToPlay > *arg1 = (std::vector< NoteToPlay > *) 0 ;
   
-  arg1 = (std::vector< NoteConcrete > *)jarg1; 
-  delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_Clear(void * jarg1) {
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  (arg1)->clear();
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_Add(void * jarg1, void * jarg2) {
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  NoteConcept *arg2 = 0 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  arg2 = (NoteConcept *)jarg2;
-  if (!arg2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "NoteConcept const & type is null", 0);
-    return ;
-  } 
-  (arg1)->push_back((NoteConcept const &)*arg2);
-}
-
-
-SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_size(void * jarg1) {
-  unsigned long jresult ;
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  std::vector< NoteConcept >::size_type result;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  result = ((std::vector< NoteConcept > const *)arg1)->size();
-  jresult = (unsigned long)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT unsigned long SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_capacity(void * jarg1) {
-  unsigned long jresult ;
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  std::vector< NoteConcept >::size_type result;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  result = ((std::vector< NoteConcept > const *)arg1)->capacity();
-  jresult = (unsigned long)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_reserve(void * jarg1, unsigned long jarg2) {
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  std::vector< NoteConcept >::size_type arg2 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  arg2 = (std::vector< NoteConcept >::size_type)jarg2; 
-  (arg1)->reserve(arg2);
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NoteConceptVector__SWIG_0() {
-  void * jresult ;
-  std::vector< NoteConcept > *result = 0 ;
-  
-  result = (std::vector< NoteConcept > *)new std::vector< NoteConcept >();
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NoteConceptVector__SWIG_1(void * jarg1) {
-  void * jresult ;
-  std::vector< NoteConcept > *arg1 = 0 ;
-  std::vector< NoteConcept > *result = 0 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1;
-  if (!arg1) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< NoteConcept > const & type is null", 0);
-    return 0;
-  } 
-  result = (std::vector< NoteConcept > *)new std::vector< NoteConcept >((std::vector< NoteConcept > const &)*arg1);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_new_NoteConceptVector__SWIG_2(int jarg1) {
-  void * jresult ;
-  int arg1 ;
-  std::vector< NoteConcept > *result = 0 ;
-  
-  arg1 = (int)jarg1; 
-  try {
-    result = (std::vector< NoteConcept > *)new_std_vector_Sl_NoteConcept_Sg___SWIG_2(arg1);
-  } catch(std::out_of_range &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
-    return 0;
-  }
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_getitemcopy(void * jarg1, int jarg2) {
-  void * jresult ;
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  int arg2 ;
-  NoteConcept result;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  arg2 = (int)jarg2; 
-  try {
-    result = std_vector_Sl_NoteConcept_Sg__getitemcopy(arg1,arg2);
-  } catch(std::out_of_range &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
-    return 0;
-  }
-  jresult = new NoteConcept((const NoteConcept &)result); 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_getitem(void * jarg1, int jarg2) {
-  void * jresult ;
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  int arg2 ;
-  std::vector< NoteConcept >::value_type *result = 0 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  arg2 = (int)jarg2; 
-  try {
-    result = (std::vector< NoteConcept >::value_type *) &std_vector_Sl_NoteConcept_Sg__getitem(arg1,arg2);
-  } catch(std::out_of_range &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
-    return 0;
-  }
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_setitem(void * jarg1, int jarg2, void * jarg3) {
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  int arg2 ;
-  NoteConcept *arg3 = 0 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  arg2 = (int)jarg2; 
-  arg3 = (NoteConcept *)jarg3;
-  if (!arg3) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "NoteConcept const & type is null", 0);
-    return ;
-  } 
-  try {
-    std_vector_Sl_NoteConcept_Sg__setitem(arg1,arg2,(NoteConcept const &)*arg3);
-  } catch(std::out_of_range &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
-    return ;
-  }
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_AddRange(void * jarg1, void * jarg2) {
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  std::vector< NoteConcept > *arg2 = 0 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  arg2 = (std::vector< NoteConcept > *)jarg2;
-  if (!arg2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< NoteConcept > const & type is null", 0);
-    return ;
-  } 
-  std_vector_Sl_NoteConcept_Sg__AddRange(arg1,(std::vector< NoteConcept > const &)*arg2);
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_GetRange(void * jarg1, int jarg2, int jarg3) {
-  void * jresult ;
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  std::vector< NoteConcept > *result = 0 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  arg2 = (int)jarg2; 
-  arg3 = (int)jarg3; 
-  try {
-    result = (std::vector< NoteConcept > *)std_vector_Sl_NoteConcept_Sg__GetRange(arg1,arg2,arg3);
-  } catch(std::out_of_range &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
-    return 0;
-  } catch(std::invalid_argument &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
-    return 0;
-  }
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_Insert(void * jarg1, int jarg2, void * jarg3) {
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  int arg2 ;
-  NoteConcept *arg3 = 0 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  arg2 = (int)jarg2; 
-  arg3 = (NoteConcept *)jarg3;
-  if (!arg3) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "NoteConcept const & type is null", 0);
-    return ;
-  } 
-  try {
-    std_vector_Sl_NoteConcept_Sg__Insert(arg1,arg2,(NoteConcept const &)*arg3);
-  } catch(std::out_of_range &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
-    return ;
-  }
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_InsertRange(void * jarg1, int jarg2, void * jarg3) {
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  int arg2 ;
-  std::vector< NoteConcept > *arg3 = 0 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  arg2 = (int)jarg2; 
-  arg3 = (std::vector< NoteConcept > *)jarg3;
-  if (!arg3) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< NoteConcept > const & type is null", 0);
-    return ;
-  } 
-  try {
-    std_vector_Sl_NoteConcept_Sg__InsertRange(arg1,arg2,(std::vector< NoteConcept > const &)*arg3);
-  } catch(std::out_of_range &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
-    return ;
-  }
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_RemoveAt(void * jarg1, int jarg2) {
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  int arg2 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  arg2 = (int)jarg2; 
-  try {
-    std_vector_Sl_NoteConcept_Sg__RemoveAt(arg1,arg2);
-  } catch(std::out_of_range &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
-    return ;
-  }
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_RemoveRange(void * jarg1, int jarg2, int jarg3) {
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  arg2 = (int)jarg2; 
-  arg3 = (int)jarg3; 
-  try {
-    std_vector_Sl_NoteConcept_Sg__RemoveRange(arg1,arg2,arg3);
-  } catch(std::out_of_range &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
-    return ;
-  } catch(std::invalid_argument &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
-    return ;
-  }
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_Repeat(void * jarg1, int jarg2) {
-  void * jresult ;
-  NoteConcept *arg1 = 0 ;
-  int arg2 ;
-  std::vector< NoteConcept > *result = 0 ;
-  
-  arg1 = (NoteConcept *)jarg1;
-  if (!arg1) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "NoteConcept const & type is null", 0);
-    return 0;
-  } 
-  arg2 = (int)jarg2; 
-  try {
-    result = (std::vector< NoteConcept > *)std_vector_Sl_NoteConcept_Sg__Repeat((NoteConcept const &)*arg1,arg2);
-  } catch(std::out_of_range &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
-    return 0;
-  }
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_Reverse__SWIG_0(void * jarg1) {
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  std_vector_Sl_NoteConcept_Sg__Reverse__SWIG_0(arg1);
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_Reverse__SWIG_1(void * jarg1, int jarg2, int jarg3) {
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  arg2 = (int)jarg2; 
-  arg3 = (int)jarg3; 
-  try {
-    std_vector_Sl_NoteConcept_Sg__Reverse__SWIG_1(arg1,arg2,arg3);
-  } catch(std::out_of_range &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
-    return ;
-  } catch(std::invalid_argument &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
-    return ;
-  }
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_NoteConceptVector_SetRange(void * jarg1, int jarg2, void * jarg3) {
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  int arg2 ;
-  std::vector< NoteConcept > *arg3 = 0 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
-  arg2 = (int)jarg2; 
-  arg3 = (std::vector< NoteConcept > *)jarg3;
-  if (!arg3) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< NoteConcept > const & type is null", 0);
-    return ;
-  } 
-  try {
-    std_vector_Sl_NoteConcept_Sg__SetRange(arg1,arg2,(std::vector< NoteConcept > const &)*arg3);
-  } catch(std::out_of_range &_e) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
-    return ;
-  }
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_DryadUnity_delete_NoteConceptVector(void * jarg1) {
-  std::vector< NoteConcept > *arg1 = (std::vector< NoteConcept > *) 0 ;
-  
-  arg1 = (std::vector< NoteConcept > *)jarg1; 
+  arg1 = (std::vector< NoteToPlay > *)jarg1; 
   delete arg1;
 }
 

@@ -8,7 +8,6 @@ namespace Dryad
 
 struct MotifLocalData
 {
-    MotifLocalData() = delete;
     MotifLocalData(U32 activeCount = 0, bool isMotifBeginning = false)
         : activeCount(activeCount)
         , isMotifBeginning(isMotifBeginning)
@@ -74,17 +73,7 @@ public:
         if(_motifsData.find(motif) == _motifsData.end())
             _motifsData[motif] = {1, true};
         else
-            _activeMotifs[motifName]++;
-    }
-
-    Result<> removeMotif(const String& motifName)
-    {
-        if(_activeMotifs.find(motifName) == _activeMotifs.end())
-            return {ErrorCode::MotifDoesNotExist};
-        else if(_activeMotifs.at(motifName) == 0)
-            return {ErrorCode::MotifAlreadyFullyDeactivated};
-        else
-            _activeMotifs[motifName]--;
+            _activeMotifs[motif->getDescriptor().getName()]++;
     }
 
 private:

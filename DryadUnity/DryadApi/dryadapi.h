@@ -3,96 +3,97 @@
 #include <vector>
 #include <string>
 
-struct NoteConcept
+struct NoteToPlay
 {
-    int duration;
-    int value;
+    unsigned scoreTime;
+    unsigned midiValue;
+    unsigned duration;
+    unsigned parentMotif;
 };
 
-struct NoteConcrete
+struct MotifNote
 {
-    int duration;
-    int midi;
-    int velocity;
+    unsigned scoreTime;
+    unsigned duration;
+    int offset;
 };
 
 struct Motif
 {
+    unsigned id;
     std::string name;
-    std::vector<NoteConcept> notes;
+    unsigned duration;
+    std::vector<MotifNote> notes;
+};
+
+enum class FlatOrSharp
+{
+    Sharp,
+    Flat,
+    Unspecified
 };
 
 struct Scale
 {
     std::string name;
-    std::vector<int> intervals;
+    unsigned rootNote;
+    FlatOrSharp flatOrSharp;
+    std::vector<unsigned> intervals;
 };
 
-enum class ChordVoicingMask
+enum class TriadVoicing
 {
-    None            = 0,
-    Major           = 1,
-    Minor           = 2,
-    Augmented       = 3,
-    Diminished      = 4,
-    Seventh         = 1 >> 4,
-    MajorSeventh    = 2 >> 4,
-    Ninth           = 1 >> 8,
-    Eleventh        = 2 >> 8,
-    Thirteenth      = 3 >> 8,
-    Sus2            = 1 >> 12,
-    Sus4            = 2 >> 12
+    Major,
+    Minor,
+    Augmented,
+    Diminished
+};
+
+enum class ChordExtension
+{
+    None,
+    Seventh,
+    MajorSeventh,
+    Ninth
 };
 
 struct Node
 {
-    int id;
-    int degree;
+    unsigned id;
+    unsigned degree;
     int inversion;
     int accidental;
-    int chordVoicingFlags;
+    int shift;
+    bool entry;
+    TriadVoicing triadVoicing;
+    ChordExtension chordExtension;
 };
 
 struct Edge
 {
-    int from;
-    int to;
+    unsigned from;
+    unsigned to;
 };
 
-struct HarmonyGraph
+struct LandscapeGraph
 {
+    unsigned id;
     Scale scale;
+    std::string name;
     std::vector<Node> nodes;
     std::vector<Edge> edges;
 };
 
-enum class EventFlag
+struct Score
 {
-    None,
-    Update
-};
-
-struct Event
-{
-    EventFlag flag;
-    int id;
-    double time;
-    std::vector<NoteConcrete> notes;
-};
-
-struct Engine
-{
-    void Start(double time){};
-    void Stop(){};
-    void SetTempo(int tempo){};
-    void RegisterMotif(std::string name, Motif motif){};
-    void AddMotif(std::string name){};
-    void RemoveMotif(std::string name){};
-
-    void RegisterHarmonyGraph(std::string name, HarmonyGraph HarmonyGraph){};
-    void TransitionToHarmonyGraph(std::string name){};
-
-    std::vector<Event> GetUpcomingEvents(int count) { return std::vector<Event>(); };
+    Score() {};
+    void RegisterMotif(Motif motif) {};
+    void RegisterLandscape(LandscapeGraph landscape) {};
+    void AddMotif(unsigned motifId) {};
+    void RemoveMotif(unsigned motifId) {};
+    void SetLandscape(unsigned landscapeId) {};
+    void Generate(unsigned durationToGenerate) {};
+    std::vector<NoteToPlay> Play(unsigned durationToPlay) { return {}; };
 
 private:
     class DryadFacade;

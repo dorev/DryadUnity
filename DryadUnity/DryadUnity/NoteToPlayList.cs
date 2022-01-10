@@ -10,21 +10,21 @@
 
 namespace DryadUnity {
 
-public class NoteConcreteVector : global::System.IDisposable, global::System.Collections.IEnumerable, global::System.Collections.Generic.IEnumerable<NoteConcrete>
+public class NoteToPlayList : global::System.IDisposable, global::System.Collections.IEnumerable, global::System.Collections.Generic.IEnumerable<SWIGTYPE_p_NoteToPlay>
  {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
   protected bool swigCMemOwn;
 
-  internal NoteConcreteVector(global::System.IntPtr cPtr, bool cMemoryOwn) {
+  internal NoteToPlayList(global::System.IntPtr cPtr, bool cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
   }
 
-  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(NoteConcreteVector obj) {
+  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(NoteToPlayList obj) {
     return (obj == null) ? new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero) : obj.swigCPtr;
   }
 
-  ~NoteConcreteVector() {
+  ~NoteToPlayList() {
     Dispose(false);
   }
 
@@ -38,25 +38,25 @@ public class NoteConcreteVector : global::System.IDisposable, global::System.Col
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          DryadApiPINVOKE.delete_NoteConcreteVector(swigCPtr);
+          DryadApiPINVOKE.delete_NoteToPlayList(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public NoteConcreteVector(global::System.Collections.IEnumerable c) : this() {
+  public NoteToPlayList(global::System.Collections.IEnumerable c) : this() {
     if (c == null)
       throw new global::System.ArgumentNullException("c");
-    foreach (NoteConcrete element in c) {
+    foreach (SWIGTYPE_p_NoteToPlay element in c) {
       this.Add(element);
     }
   }
 
-  public NoteConcreteVector(global::System.Collections.Generic.IEnumerable<NoteConcrete> c) : this() {
+  public NoteToPlayList(global::System.Collections.Generic.IEnumerable<SWIGTYPE_p_NoteToPlay> c) : this() {
     if (c == null)
       throw new global::System.ArgumentNullException("c");
-    foreach (NoteConcrete element in c) {
+    foreach (SWIGTYPE_p_NoteToPlay element in c) {
       this.Add(element);
     }
   }
@@ -73,7 +73,7 @@ public class NoteConcreteVector : global::System.IDisposable, global::System.Col
     }
   }
 
-  public NoteConcrete this[int index]  {
+  public SWIGTYPE_p_NoteToPlay this[int index]  {
     get {
       return getitem(index);
     }
@@ -105,17 +105,17 @@ public class NoteConcreteVector : global::System.IDisposable, global::System.Col
     }
   }
 
-  public void CopyTo(NoteConcrete[] array)
+  public void CopyTo(SWIGTYPE_p_NoteToPlay[] array)
   {
     CopyTo(0, array, 0, this.Count);
   }
 
-  public void CopyTo(NoteConcrete[] array, int arrayIndex)
+  public void CopyTo(SWIGTYPE_p_NoteToPlay[] array, int arrayIndex)
   {
     CopyTo(0, array, arrayIndex, this.Count);
   }
 
-  public void CopyTo(int index, NoteConcrete[] array, int arrayIndex, int count)
+  public void CopyTo(int index, SWIGTYPE_p_NoteToPlay[] array, int arrayIndex, int count)
   {
     if (array == null)
       throw new global::System.ArgumentNullException("array");
@@ -133,22 +133,22 @@ public class NoteConcreteVector : global::System.IDisposable, global::System.Col
       array.SetValue(getitemcopy(index+i), arrayIndex+i);
   }
 
-  public NoteConcrete[] ToArray() {
-    NoteConcrete[] array = new NoteConcrete[this.Count];
+  public SWIGTYPE_p_NoteToPlay[] ToArray() {
+    SWIGTYPE_p_NoteToPlay[] array = new SWIGTYPE_p_NoteToPlay[this.Count];
     this.CopyTo(array);
     return array;
   }
 
-  global::System.Collections.Generic.IEnumerator<NoteConcrete> global::System.Collections.Generic.IEnumerable<NoteConcrete>.GetEnumerator() {
-    return new NoteConcreteVectorEnumerator(this);
+  global::System.Collections.Generic.IEnumerator<SWIGTYPE_p_NoteToPlay> global::System.Collections.Generic.IEnumerable<SWIGTYPE_p_NoteToPlay>.GetEnumerator() {
+    return new NoteToPlayListEnumerator(this);
   }
 
   global::System.Collections.IEnumerator global::System.Collections.IEnumerable.GetEnumerator() {
-    return new NoteConcreteVectorEnumerator(this);
+    return new NoteToPlayListEnumerator(this);
   }
 
-  public NoteConcreteVectorEnumerator GetEnumerator() {
-    return new NoteConcreteVectorEnumerator(this);
+  public NoteToPlayListEnumerator GetEnumerator() {
+    return new NoteToPlayListEnumerator(this);
   }
 
   // Type-safe enumerator
@@ -156,15 +156,15 @@ public class NoteConcreteVector : global::System.IDisposable, global::System.Col
   /// whenever the collection is modified. This has been done for changes in the size of the
   /// collection but not when one of the elements of the collection is modified as it is a bit
   /// tricky to detect unmanaged code that modifies the collection under our feet.
-  public sealed class NoteConcreteVectorEnumerator : global::System.Collections.IEnumerator
-    , global::System.Collections.Generic.IEnumerator<NoteConcrete>
+  public sealed class NoteToPlayListEnumerator : global::System.Collections.IEnumerator
+    , global::System.Collections.Generic.IEnumerator<SWIGTYPE_p_NoteToPlay>
   {
-    private NoteConcreteVector collectionRef;
+    private NoteToPlayList collectionRef;
     private int currentIndex;
     private object currentObject;
     private int currentSize;
 
-    public NoteConcreteVectorEnumerator(NoteConcreteVector collection) {
+    public NoteToPlayListEnumerator(NoteToPlayList collection) {
       collectionRef = collection;
       currentIndex = -1;
       currentObject = null;
@@ -172,7 +172,7 @@ public class NoteConcreteVector : global::System.IDisposable, global::System.Col
     }
 
     // Type-safe iterator Current
-    public NoteConcrete Current {
+    public SWIGTYPE_p_NoteToPlay Current {
       get {
         if (currentIndex == -1)
           throw new global::System.InvalidOperationException("Enumeration not started.");
@@ -180,7 +180,7 @@ public class NoteConcreteVector : global::System.IDisposable, global::System.Col
           throw new global::System.InvalidOperationException("Enumeration finished.");
         if (currentObject == null)
           throw new global::System.InvalidOperationException("Collection modified.");
-        return (NoteConcrete)currentObject;
+        return (SWIGTYPE_p_NoteToPlay)currentObject;
       }
     }
 
@@ -218,106 +218,106 @@ public class NoteConcreteVector : global::System.IDisposable, global::System.Col
   }
 
   public void Clear() {
-    DryadApiPINVOKE.NoteConcreteVector_Clear(swigCPtr);
+    DryadApiPINVOKE.NoteToPlayList_Clear(swigCPtr);
   }
 
-  public void Add(NoteConcrete x) {
-    DryadApiPINVOKE.NoteConcreteVector_Add(swigCPtr, NoteConcrete.getCPtr(x));
+  public void Add(SWIGTYPE_p_NoteToPlay x) {
+    DryadApiPINVOKE.NoteToPlayList_Add(swigCPtr, SWIGTYPE_p_NoteToPlay.getCPtr(x));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
   private uint size() {
-    uint ret = DryadApiPINVOKE.NoteConcreteVector_size(swigCPtr);
+    uint ret = DryadApiPINVOKE.NoteToPlayList_size(swigCPtr);
     return ret;
   }
 
   private uint capacity() {
-    uint ret = DryadApiPINVOKE.NoteConcreteVector_capacity(swigCPtr);
+    uint ret = DryadApiPINVOKE.NoteToPlayList_capacity(swigCPtr);
     return ret;
   }
 
   private void reserve(uint n) {
-    DryadApiPINVOKE.NoteConcreteVector_reserve(swigCPtr, n);
+    DryadApiPINVOKE.NoteToPlayList_reserve(swigCPtr, n);
   }
 
-  public NoteConcreteVector() : this(DryadApiPINVOKE.new_NoteConcreteVector__SWIG_0(), true) {
+  public NoteToPlayList() : this(DryadApiPINVOKE.new_NoteToPlayList__SWIG_0(), true) {
   }
 
-  public NoteConcreteVector(NoteConcreteVector other) : this(DryadApiPINVOKE.new_NoteConcreteVector__SWIG_1(NoteConcreteVector.getCPtr(other)), true) {
+  public NoteToPlayList(NoteToPlayList other) : this(DryadApiPINVOKE.new_NoteToPlayList__SWIG_1(NoteToPlayList.getCPtr(other)), true) {
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public NoteConcreteVector(int capacity) : this(DryadApiPINVOKE.new_NoteConcreteVector__SWIG_2(capacity), true) {
+  public NoteToPlayList(int capacity) : this(DryadApiPINVOKE.new_NoteToPlayList__SWIG_2(capacity), true) {
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  private NoteConcrete getitemcopy(int index) {
-    NoteConcrete ret = new NoteConcrete(DryadApiPINVOKE.NoteConcreteVector_getitemcopy(swigCPtr, index), true);
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-    return ret;
-  }
-
-  private NoteConcrete getitem(int index) {
-    NoteConcrete ret = new NoteConcrete(DryadApiPINVOKE.NoteConcreteVector_getitem(swigCPtr, index), false);
+  private SWIGTYPE_p_NoteToPlay getitemcopy(int index) {
+    SWIGTYPE_p_NoteToPlay ret = new SWIGTYPE_p_NoteToPlay(DryadApiPINVOKE.NoteToPlayList_getitemcopy(swigCPtr, index), true);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  private void setitem(int index, NoteConcrete val) {
-    DryadApiPINVOKE.NoteConcreteVector_setitem(swigCPtr, index, NoteConcrete.getCPtr(val));
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-  }
-
-  public void AddRange(NoteConcreteVector values) {
-    DryadApiPINVOKE.NoteConcreteVector_AddRange(swigCPtr, NoteConcreteVector.getCPtr(values));
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-  }
-
-  public NoteConcreteVector GetRange(int index, int count) {
-    global::System.IntPtr cPtr = DryadApiPINVOKE.NoteConcreteVector_GetRange(swigCPtr, index, count);
-    NoteConcreteVector ret = (cPtr == global::System.IntPtr.Zero) ? null : new NoteConcreteVector(cPtr, true);
+  private SWIGTYPE_p_NoteToPlay getitem(int index) {
+    SWIGTYPE_p_NoteToPlay ret = new SWIGTYPE_p_NoteToPlay(DryadApiPINVOKE.NoteToPlayList_getitem(swigCPtr, index), false);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public void Insert(int index, NoteConcrete x) {
-    DryadApiPINVOKE.NoteConcreteVector_Insert(swigCPtr, index, NoteConcrete.getCPtr(x));
+  private void setitem(int index, SWIGTYPE_p_NoteToPlay val) {
+    DryadApiPINVOKE.NoteToPlayList_setitem(swigCPtr, index, SWIGTYPE_p_NoteToPlay.getCPtr(val));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public void InsertRange(int index, NoteConcreteVector values) {
-    DryadApiPINVOKE.NoteConcreteVector_InsertRange(swigCPtr, index, NoteConcreteVector.getCPtr(values));
+  public void AddRange(NoteToPlayList values) {
+    DryadApiPINVOKE.NoteToPlayList_AddRange(swigCPtr, NoteToPlayList.getCPtr(values));
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public NoteToPlayList GetRange(int index, int count) {
+    global::System.IntPtr cPtr = DryadApiPINVOKE.NoteToPlayList_GetRange(swigCPtr, index, count);
+    NoteToPlayList ret = (cPtr == global::System.IntPtr.Zero) ? null : new NoteToPlayList(cPtr, true);
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public void Insert(int index, SWIGTYPE_p_NoteToPlay x) {
+    DryadApiPINVOKE.NoteToPlayList_Insert(swigCPtr, index, SWIGTYPE_p_NoteToPlay.getCPtr(x));
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public void InsertRange(int index, NoteToPlayList values) {
+    DryadApiPINVOKE.NoteToPlayList_InsertRange(swigCPtr, index, NoteToPlayList.getCPtr(values));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
   public void RemoveAt(int index) {
-    DryadApiPINVOKE.NoteConcreteVector_RemoveAt(swigCPtr, index);
+    DryadApiPINVOKE.NoteToPlayList_RemoveAt(swigCPtr, index);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
   public void RemoveRange(int index, int count) {
-    DryadApiPINVOKE.NoteConcreteVector_RemoveRange(swigCPtr, index, count);
+    DryadApiPINVOKE.NoteToPlayList_RemoveRange(swigCPtr, index, count);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public static NoteConcreteVector Repeat(NoteConcrete value, int count) {
-    global::System.IntPtr cPtr = DryadApiPINVOKE.NoteConcreteVector_Repeat(NoteConcrete.getCPtr(value), count);
-    NoteConcreteVector ret = (cPtr == global::System.IntPtr.Zero) ? null : new NoteConcreteVector(cPtr, true);
+  public static NoteToPlayList Repeat(SWIGTYPE_p_NoteToPlay value, int count) {
+    global::System.IntPtr cPtr = DryadApiPINVOKE.NoteToPlayList_Repeat(SWIGTYPE_p_NoteToPlay.getCPtr(value), count);
+    NoteToPlayList ret = (cPtr == global::System.IntPtr.Zero) ? null : new NoteToPlayList(cPtr, true);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public void Reverse() {
-    DryadApiPINVOKE.NoteConcreteVector_Reverse__SWIG_0(swigCPtr);
+    DryadApiPINVOKE.NoteToPlayList_Reverse__SWIG_0(swigCPtr);
   }
 
   public void Reverse(int index, int count) {
-    DryadApiPINVOKE.NoteConcreteVector_Reverse__SWIG_1(swigCPtr, index, count);
+    DryadApiPINVOKE.NoteToPlayList_Reverse__SWIG_1(swigCPtr, index, count);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public void SetRange(int index, NoteConcreteVector values) {
-    DryadApiPINVOKE.NoteConcreteVector_SetRange(swigCPtr, index, NoteConcreteVector.getCPtr(values));
+  public void SetRange(int index, NoteToPlayList values) {
+    DryadApiPINVOKE.NoteToPlayList_SetRange(swigCPtr, index, NoteToPlayList.getCPtr(values));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 

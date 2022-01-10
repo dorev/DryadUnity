@@ -10,21 +10,21 @@
 
 namespace DryadUnity {
 
-public class NoteConceptVector : global::System.IDisposable, global::System.Collections.IEnumerable, global::System.Collections.Generic.IEnumerable<NoteConcept>
+public class EdgeList : global::System.IDisposable, global::System.Collections.IEnumerable, global::System.Collections.Generic.IEnumerable<SWIGTYPE_p_Edge>
  {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
   protected bool swigCMemOwn;
 
-  internal NoteConceptVector(global::System.IntPtr cPtr, bool cMemoryOwn) {
+  internal EdgeList(global::System.IntPtr cPtr, bool cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
   }
 
-  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(NoteConceptVector obj) {
+  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(EdgeList obj) {
     return (obj == null) ? new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero) : obj.swigCPtr;
   }
 
-  ~NoteConceptVector() {
+  ~EdgeList() {
     Dispose(false);
   }
 
@@ -38,25 +38,25 @@ public class NoteConceptVector : global::System.IDisposable, global::System.Coll
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          DryadApiPINVOKE.delete_NoteConceptVector(swigCPtr);
+          DryadApiPINVOKE.delete_EdgeList(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public NoteConceptVector(global::System.Collections.IEnumerable c) : this() {
+  public EdgeList(global::System.Collections.IEnumerable c) : this() {
     if (c == null)
       throw new global::System.ArgumentNullException("c");
-    foreach (NoteConcept element in c) {
+    foreach (SWIGTYPE_p_Edge element in c) {
       this.Add(element);
     }
   }
 
-  public NoteConceptVector(global::System.Collections.Generic.IEnumerable<NoteConcept> c) : this() {
+  public EdgeList(global::System.Collections.Generic.IEnumerable<SWIGTYPE_p_Edge> c) : this() {
     if (c == null)
       throw new global::System.ArgumentNullException("c");
-    foreach (NoteConcept element in c) {
+    foreach (SWIGTYPE_p_Edge element in c) {
       this.Add(element);
     }
   }
@@ -73,7 +73,7 @@ public class NoteConceptVector : global::System.IDisposable, global::System.Coll
     }
   }
 
-  public NoteConcept this[int index]  {
+  public SWIGTYPE_p_Edge this[int index]  {
     get {
       return getitem(index);
     }
@@ -105,17 +105,17 @@ public class NoteConceptVector : global::System.IDisposable, global::System.Coll
     }
   }
 
-  public void CopyTo(NoteConcept[] array)
+  public void CopyTo(SWIGTYPE_p_Edge[] array)
   {
     CopyTo(0, array, 0, this.Count);
   }
 
-  public void CopyTo(NoteConcept[] array, int arrayIndex)
+  public void CopyTo(SWIGTYPE_p_Edge[] array, int arrayIndex)
   {
     CopyTo(0, array, arrayIndex, this.Count);
   }
 
-  public void CopyTo(int index, NoteConcept[] array, int arrayIndex, int count)
+  public void CopyTo(int index, SWIGTYPE_p_Edge[] array, int arrayIndex, int count)
   {
     if (array == null)
       throw new global::System.ArgumentNullException("array");
@@ -133,22 +133,22 @@ public class NoteConceptVector : global::System.IDisposable, global::System.Coll
       array.SetValue(getitemcopy(index+i), arrayIndex+i);
   }
 
-  public NoteConcept[] ToArray() {
-    NoteConcept[] array = new NoteConcept[this.Count];
+  public SWIGTYPE_p_Edge[] ToArray() {
+    SWIGTYPE_p_Edge[] array = new SWIGTYPE_p_Edge[this.Count];
     this.CopyTo(array);
     return array;
   }
 
-  global::System.Collections.Generic.IEnumerator<NoteConcept> global::System.Collections.Generic.IEnumerable<NoteConcept>.GetEnumerator() {
-    return new NoteConceptVectorEnumerator(this);
+  global::System.Collections.Generic.IEnumerator<SWIGTYPE_p_Edge> global::System.Collections.Generic.IEnumerable<SWIGTYPE_p_Edge>.GetEnumerator() {
+    return new EdgeListEnumerator(this);
   }
 
   global::System.Collections.IEnumerator global::System.Collections.IEnumerable.GetEnumerator() {
-    return new NoteConceptVectorEnumerator(this);
+    return new EdgeListEnumerator(this);
   }
 
-  public NoteConceptVectorEnumerator GetEnumerator() {
-    return new NoteConceptVectorEnumerator(this);
+  public EdgeListEnumerator GetEnumerator() {
+    return new EdgeListEnumerator(this);
   }
 
   // Type-safe enumerator
@@ -156,15 +156,15 @@ public class NoteConceptVector : global::System.IDisposable, global::System.Coll
   /// whenever the collection is modified. This has been done for changes in the size of the
   /// collection but not when one of the elements of the collection is modified as it is a bit
   /// tricky to detect unmanaged code that modifies the collection under our feet.
-  public sealed class NoteConceptVectorEnumerator : global::System.Collections.IEnumerator
-    , global::System.Collections.Generic.IEnumerator<NoteConcept>
+  public sealed class EdgeListEnumerator : global::System.Collections.IEnumerator
+    , global::System.Collections.Generic.IEnumerator<SWIGTYPE_p_Edge>
   {
-    private NoteConceptVector collectionRef;
+    private EdgeList collectionRef;
     private int currentIndex;
     private object currentObject;
     private int currentSize;
 
-    public NoteConceptVectorEnumerator(NoteConceptVector collection) {
+    public EdgeListEnumerator(EdgeList collection) {
       collectionRef = collection;
       currentIndex = -1;
       currentObject = null;
@@ -172,7 +172,7 @@ public class NoteConceptVector : global::System.IDisposable, global::System.Coll
     }
 
     // Type-safe iterator Current
-    public NoteConcept Current {
+    public SWIGTYPE_p_Edge Current {
       get {
         if (currentIndex == -1)
           throw new global::System.InvalidOperationException("Enumeration not started.");
@@ -180,7 +180,7 @@ public class NoteConceptVector : global::System.IDisposable, global::System.Coll
           throw new global::System.InvalidOperationException("Enumeration finished.");
         if (currentObject == null)
           throw new global::System.InvalidOperationException("Collection modified.");
-        return (NoteConcept)currentObject;
+        return (SWIGTYPE_p_Edge)currentObject;
       }
     }
 
@@ -218,106 +218,106 @@ public class NoteConceptVector : global::System.IDisposable, global::System.Coll
   }
 
   public void Clear() {
-    DryadApiPINVOKE.NoteConceptVector_Clear(swigCPtr);
+    DryadApiPINVOKE.EdgeList_Clear(swigCPtr);
   }
 
-  public void Add(NoteConcept x) {
-    DryadApiPINVOKE.NoteConceptVector_Add(swigCPtr, NoteConcept.getCPtr(x));
+  public void Add(SWIGTYPE_p_Edge x) {
+    DryadApiPINVOKE.EdgeList_Add(swigCPtr, SWIGTYPE_p_Edge.getCPtr(x));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
   private uint size() {
-    uint ret = DryadApiPINVOKE.NoteConceptVector_size(swigCPtr);
+    uint ret = DryadApiPINVOKE.EdgeList_size(swigCPtr);
     return ret;
   }
 
   private uint capacity() {
-    uint ret = DryadApiPINVOKE.NoteConceptVector_capacity(swigCPtr);
+    uint ret = DryadApiPINVOKE.EdgeList_capacity(swigCPtr);
     return ret;
   }
 
   private void reserve(uint n) {
-    DryadApiPINVOKE.NoteConceptVector_reserve(swigCPtr, n);
+    DryadApiPINVOKE.EdgeList_reserve(swigCPtr, n);
   }
 
-  public NoteConceptVector() : this(DryadApiPINVOKE.new_NoteConceptVector__SWIG_0(), true) {
+  public EdgeList() : this(DryadApiPINVOKE.new_EdgeList__SWIG_0(), true) {
   }
 
-  public NoteConceptVector(NoteConceptVector other) : this(DryadApiPINVOKE.new_NoteConceptVector__SWIG_1(NoteConceptVector.getCPtr(other)), true) {
+  public EdgeList(EdgeList other) : this(DryadApiPINVOKE.new_EdgeList__SWIG_1(EdgeList.getCPtr(other)), true) {
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public NoteConceptVector(int capacity) : this(DryadApiPINVOKE.new_NoteConceptVector__SWIG_2(capacity), true) {
+  public EdgeList(int capacity) : this(DryadApiPINVOKE.new_EdgeList__SWIG_2(capacity), true) {
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  private NoteConcept getitemcopy(int index) {
-    NoteConcept ret = new NoteConcept(DryadApiPINVOKE.NoteConceptVector_getitemcopy(swigCPtr, index), true);
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-    return ret;
-  }
-
-  private NoteConcept getitem(int index) {
-    NoteConcept ret = new NoteConcept(DryadApiPINVOKE.NoteConceptVector_getitem(swigCPtr, index), false);
+  private SWIGTYPE_p_Edge getitemcopy(int index) {
+    SWIGTYPE_p_Edge ret = new SWIGTYPE_p_Edge(DryadApiPINVOKE.EdgeList_getitemcopy(swigCPtr, index), true);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  private void setitem(int index, NoteConcept val) {
-    DryadApiPINVOKE.NoteConceptVector_setitem(swigCPtr, index, NoteConcept.getCPtr(val));
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-  }
-
-  public void AddRange(NoteConceptVector values) {
-    DryadApiPINVOKE.NoteConceptVector_AddRange(swigCPtr, NoteConceptVector.getCPtr(values));
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-  }
-
-  public NoteConceptVector GetRange(int index, int count) {
-    global::System.IntPtr cPtr = DryadApiPINVOKE.NoteConceptVector_GetRange(swigCPtr, index, count);
-    NoteConceptVector ret = (cPtr == global::System.IntPtr.Zero) ? null : new NoteConceptVector(cPtr, true);
+  private SWIGTYPE_p_Edge getitem(int index) {
+    SWIGTYPE_p_Edge ret = new SWIGTYPE_p_Edge(DryadApiPINVOKE.EdgeList_getitem(swigCPtr, index), false);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public void Insert(int index, NoteConcept x) {
-    DryadApiPINVOKE.NoteConceptVector_Insert(swigCPtr, index, NoteConcept.getCPtr(x));
+  private void setitem(int index, SWIGTYPE_p_Edge val) {
+    DryadApiPINVOKE.EdgeList_setitem(swigCPtr, index, SWIGTYPE_p_Edge.getCPtr(val));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public void InsertRange(int index, NoteConceptVector values) {
-    DryadApiPINVOKE.NoteConceptVector_InsertRange(swigCPtr, index, NoteConceptVector.getCPtr(values));
+  public void AddRange(EdgeList values) {
+    DryadApiPINVOKE.EdgeList_AddRange(swigCPtr, EdgeList.getCPtr(values));
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public EdgeList GetRange(int index, int count) {
+    global::System.IntPtr cPtr = DryadApiPINVOKE.EdgeList_GetRange(swigCPtr, index, count);
+    EdgeList ret = (cPtr == global::System.IntPtr.Zero) ? null : new EdgeList(cPtr, true);
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public void Insert(int index, SWIGTYPE_p_Edge x) {
+    DryadApiPINVOKE.EdgeList_Insert(swigCPtr, index, SWIGTYPE_p_Edge.getCPtr(x));
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public void InsertRange(int index, EdgeList values) {
+    DryadApiPINVOKE.EdgeList_InsertRange(swigCPtr, index, EdgeList.getCPtr(values));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
   public void RemoveAt(int index) {
-    DryadApiPINVOKE.NoteConceptVector_RemoveAt(swigCPtr, index);
+    DryadApiPINVOKE.EdgeList_RemoveAt(swigCPtr, index);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
   public void RemoveRange(int index, int count) {
-    DryadApiPINVOKE.NoteConceptVector_RemoveRange(swigCPtr, index, count);
+    DryadApiPINVOKE.EdgeList_RemoveRange(swigCPtr, index, count);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public static NoteConceptVector Repeat(NoteConcept value, int count) {
-    global::System.IntPtr cPtr = DryadApiPINVOKE.NoteConceptVector_Repeat(NoteConcept.getCPtr(value), count);
-    NoteConceptVector ret = (cPtr == global::System.IntPtr.Zero) ? null : new NoteConceptVector(cPtr, true);
+  public static EdgeList Repeat(SWIGTYPE_p_Edge value, int count) {
+    global::System.IntPtr cPtr = DryadApiPINVOKE.EdgeList_Repeat(SWIGTYPE_p_Edge.getCPtr(value), count);
+    EdgeList ret = (cPtr == global::System.IntPtr.Zero) ? null : new EdgeList(cPtr, true);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public void Reverse() {
-    DryadApiPINVOKE.NoteConceptVector_Reverse__SWIG_0(swigCPtr);
+    DryadApiPINVOKE.EdgeList_Reverse__SWIG_0(swigCPtr);
   }
 
   public void Reverse(int index, int count) {
-    DryadApiPINVOKE.NoteConceptVector_Reverse__SWIG_1(swigCPtr, index, count);
+    DryadApiPINVOKE.EdgeList_Reverse__SWIG_1(swigCPtr, index, count);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public void SetRange(int index, NoteConceptVector values) {
-    DryadApiPINVOKE.NoteConceptVector_SetRange(swigCPtr, index, NoteConceptVector.getCPtr(values));
+  public void SetRange(int index, EdgeList values) {
+    DryadApiPINVOKE.EdgeList_SetRange(swigCPtr, index, EdgeList.getCPtr(values));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 

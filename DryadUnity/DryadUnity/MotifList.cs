@@ -10,21 +10,21 @@
 
 namespace DryadUnity {
 
-public class IntVector : global::System.IDisposable, global::System.Collections.IEnumerable, global::System.Collections.Generic.IList<int>
+public class MotifList : global::System.IDisposable, global::System.Collections.IEnumerable, global::System.Collections.Generic.IEnumerable<SWIGTYPE_p_MotifNote>
  {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
   protected bool swigCMemOwn;
 
-  internal IntVector(global::System.IntPtr cPtr, bool cMemoryOwn) {
+  internal MotifList(global::System.IntPtr cPtr, bool cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
   }
 
-  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(IntVector obj) {
+  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(MotifList obj) {
     return (obj == null) ? new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero) : obj.swigCPtr;
   }
 
-  ~IntVector() {
+  ~MotifList() {
     Dispose(false);
   }
 
@@ -38,25 +38,25 @@ public class IntVector : global::System.IDisposable, global::System.Collections.
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          DryadApiPINVOKE.delete_IntVector(swigCPtr);
+          DryadApiPINVOKE.delete_MotifList(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public IntVector(global::System.Collections.IEnumerable c) : this() {
+  public MotifList(global::System.Collections.IEnumerable c) : this() {
     if (c == null)
       throw new global::System.ArgumentNullException("c");
-    foreach (int element in c) {
+    foreach (SWIGTYPE_p_MotifNote element in c) {
       this.Add(element);
     }
   }
 
-  public IntVector(global::System.Collections.Generic.IEnumerable<int> c) : this() {
+  public MotifList(global::System.Collections.Generic.IEnumerable<SWIGTYPE_p_MotifNote> c) : this() {
     if (c == null)
       throw new global::System.ArgumentNullException("c");
-    foreach (int element in c) {
+    foreach (SWIGTYPE_p_MotifNote element in c) {
       this.Add(element);
     }
   }
@@ -73,7 +73,7 @@ public class IntVector : global::System.IDisposable, global::System.Collections.
     }
   }
 
-  public int this[int index]  {
+  public SWIGTYPE_p_MotifNote this[int index]  {
     get {
       return getitem(index);
     }
@@ -105,17 +105,17 @@ public class IntVector : global::System.IDisposable, global::System.Collections.
     }
   }
 
-  public void CopyTo(int[] array)
+  public void CopyTo(SWIGTYPE_p_MotifNote[] array)
   {
     CopyTo(0, array, 0, this.Count);
   }
 
-  public void CopyTo(int[] array, int arrayIndex)
+  public void CopyTo(SWIGTYPE_p_MotifNote[] array, int arrayIndex)
   {
     CopyTo(0, array, arrayIndex, this.Count);
   }
 
-  public void CopyTo(int index, int[] array, int arrayIndex, int count)
+  public void CopyTo(int index, SWIGTYPE_p_MotifNote[] array, int arrayIndex, int count)
   {
     if (array == null)
       throw new global::System.ArgumentNullException("array");
@@ -133,22 +133,22 @@ public class IntVector : global::System.IDisposable, global::System.Collections.
       array.SetValue(getitemcopy(index+i), arrayIndex+i);
   }
 
-  public int[] ToArray() {
-    int[] array = new int[this.Count];
+  public SWIGTYPE_p_MotifNote[] ToArray() {
+    SWIGTYPE_p_MotifNote[] array = new SWIGTYPE_p_MotifNote[this.Count];
     this.CopyTo(array);
     return array;
   }
 
-  global::System.Collections.Generic.IEnumerator<int> global::System.Collections.Generic.IEnumerable<int>.GetEnumerator() {
-    return new IntVectorEnumerator(this);
+  global::System.Collections.Generic.IEnumerator<SWIGTYPE_p_MotifNote> global::System.Collections.Generic.IEnumerable<SWIGTYPE_p_MotifNote>.GetEnumerator() {
+    return new MotifListEnumerator(this);
   }
 
   global::System.Collections.IEnumerator global::System.Collections.IEnumerable.GetEnumerator() {
-    return new IntVectorEnumerator(this);
+    return new MotifListEnumerator(this);
   }
 
-  public IntVectorEnumerator GetEnumerator() {
-    return new IntVectorEnumerator(this);
+  public MotifListEnumerator GetEnumerator() {
+    return new MotifListEnumerator(this);
   }
 
   // Type-safe enumerator
@@ -156,15 +156,15 @@ public class IntVector : global::System.IDisposable, global::System.Collections.
   /// whenever the collection is modified. This has been done for changes in the size of the
   /// collection but not when one of the elements of the collection is modified as it is a bit
   /// tricky to detect unmanaged code that modifies the collection under our feet.
-  public sealed class IntVectorEnumerator : global::System.Collections.IEnumerator
-    , global::System.Collections.Generic.IEnumerator<int>
+  public sealed class MotifListEnumerator : global::System.Collections.IEnumerator
+    , global::System.Collections.Generic.IEnumerator<SWIGTYPE_p_MotifNote>
   {
-    private IntVector collectionRef;
+    private MotifList collectionRef;
     private int currentIndex;
     private object currentObject;
     private int currentSize;
 
-    public IntVectorEnumerator(IntVector collection) {
+    public MotifListEnumerator(MotifList collection) {
       collectionRef = collection;
       currentIndex = -1;
       currentObject = null;
@@ -172,7 +172,7 @@ public class IntVector : global::System.IDisposable, global::System.Collections.
     }
 
     // Type-safe iterator Current
-    public int Current {
+    public SWIGTYPE_p_MotifNote Current {
       get {
         if (currentIndex == -1)
           throw new global::System.InvalidOperationException("Enumeration not started.");
@@ -180,7 +180,7 @@ public class IntVector : global::System.IDisposable, global::System.Collections.
           throw new global::System.InvalidOperationException("Enumeration finished.");
         if (currentObject == null)
           throw new global::System.InvalidOperationException("Collection modified.");
-        return (int)currentObject;
+        return (SWIGTYPE_p_MotifNote)currentObject;
       }
     }
 
@@ -218,126 +218,107 @@ public class IntVector : global::System.IDisposable, global::System.Collections.
   }
 
   public void Clear() {
-    DryadApiPINVOKE.IntVector_Clear(swigCPtr);
+    DryadApiPINVOKE.MotifList_Clear(swigCPtr);
   }
 
-  public void Add(int x) {
-    DryadApiPINVOKE.IntVector_Add(swigCPtr, x);
+  public void Add(SWIGTYPE_p_MotifNote x) {
+    DryadApiPINVOKE.MotifList_Add(swigCPtr, SWIGTYPE_p_MotifNote.getCPtr(x));
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
   private uint size() {
-    uint ret = DryadApiPINVOKE.IntVector_size(swigCPtr);
+    uint ret = DryadApiPINVOKE.MotifList_size(swigCPtr);
     return ret;
   }
 
   private uint capacity() {
-    uint ret = DryadApiPINVOKE.IntVector_capacity(swigCPtr);
+    uint ret = DryadApiPINVOKE.MotifList_capacity(swigCPtr);
     return ret;
   }
 
   private void reserve(uint n) {
-    DryadApiPINVOKE.IntVector_reserve(swigCPtr, n);
+    DryadApiPINVOKE.MotifList_reserve(swigCPtr, n);
   }
 
-  public IntVector() : this(DryadApiPINVOKE.new_IntVector__SWIG_0(), true) {
+  public MotifList() : this(DryadApiPINVOKE.new_MotifList__SWIG_0(), true) {
   }
 
-  public IntVector(IntVector other) : this(DryadApiPINVOKE.new_IntVector__SWIG_1(IntVector.getCPtr(other)), true) {
+  public MotifList(MotifList other) : this(DryadApiPINVOKE.new_MotifList__SWIG_1(MotifList.getCPtr(other)), true) {
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public IntVector(int capacity) : this(DryadApiPINVOKE.new_IntVector__SWIG_2(capacity), true) {
+  public MotifList(int capacity) : this(DryadApiPINVOKE.new_MotifList__SWIG_2(capacity), true) {
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  private int getitemcopy(int index) {
-    int ret = DryadApiPINVOKE.IntVector_getitemcopy(swigCPtr, index);
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-    return ret;
-  }
-
-  private int getitem(int index) {
-    int ret = DryadApiPINVOKE.IntVector_getitem(swigCPtr, index);
+  private SWIGTYPE_p_MotifNote getitemcopy(int index) {
+    SWIGTYPE_p_MotifNote ret = new SWIGTYPE_p_MotifNote(DryadApiPINVOKE.MotifList_getitemcopy(swigCPtr, index), true);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  private void setitem(int index, int val) {
-    DryadApiPINVOKE.IntVector_setitem(swigCPtr, index, val);
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-  }
-
-  public void AddRange(IntVector values) {
-    DryadApiPINVOKE.IntVector_AddRange(swigCPtr, IntVector.getCPtr(values));
-    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-  }
-
-  public IntVector GetRange(int index, int count) {
-    global::System.IntPtr cPtr = DryadApiPINVOKE.IntVector_GetRange(swigCPtr, index, count);
-    IntVector ret = (cPtr == global::System.IntPtr.Zero) ? null : new IntVector(cPtr, true);
+  private SWIGTYPE_p_MotifNote getitem(int index) {
+    SWIGTYPE_p_MotifNote ret = new SWIGTYPE_p_MotifNote(DryadApiPINVOKE.MotifList_getitem(swigCPtr, index), false);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public void Insert(int index, int x) {
-    DryadApiPINVOKE.IntVector_Insert(swigCPtr, index, x);
+  private void setitem(int index, SWIGTYPE_p_MotifNote val) {
+    DryadApiPINVOKE.MotifList_setitem(swigCPtr, index, SWIGTYPE_p_MotifNote.getCPtr(val));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public void InsertRange(int index, IntVector values) {
-    DryadApiPINVOKE.IntVector_InsertRange(swigCPtr, index, IntVector.getCPtr(values));
+  public void AddRange(MotifList values) {
+    DryadApiPINVOKE.MotifList_AddRange(swigCPtr, MotifList.getCPtr(values));
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public MotifList GetRange(int index, int count) {
+    global::System.IntPtr cPtr = DryadApiPINVOKE.MotifList_GetRange(swigCPtr, index, count);
+    MotifList ret = (cPtr == global::System.IntPtr.Zero) ? null : new MotifList(cPtr, true);
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public void Insert(int index, SWIGTYPE_p_MotifNote x) {
+    DryadApiPINVOKE.MotifList_Insert(swigCPtr, index, SWIGTYPE_p_MotifNote.getCPtr(x));
+    if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public void InsertRange(int index, MotifList values) {
+    DryadApiPINVOKE.MotifList_InsertRange(swigCPtr, index, MotifList.getCPtr(values));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
   public void RemoveAt(int index) {
-    DryadApiPINVOKE.IntVector_RemoveAt(swigCPtr, index);
+    DryadApiPINVOKE.MotifList_RemoveAt(swigCPtr, index);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
   public void RemoveRange(int index, int count) {
-    DryadApiPINVOKE.IntVector_RemoveRange(swigCPtr, index, count);
+    DryadApiPINVOKE.MotifList_RemoveRange(swigCPtr, index, count);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public static IntVector Repeat(int value, int count) {
-    global::System.IntPtr cPtr = DryadApiPINVOKE.IntVector_Repeat(value, count);
-    IntVector ret = (cPtr == global::System.IntPtr.Zero) ? null : new IntVector(cPtr, true);
+  public static MotifList Repeat(SWIGTYPE_p_MotifNote value, int count) {
+    global::System.IntPtr cPtr = DryadApiPINVOKE.MotifList_Repeat(SWIGTYPE_p_MotifNote.getCPtr(value), count);
+    MotifList ret = (cPtr == global::System.IntPtr.Zero) ? null : new MotifList(cPtr, true);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public void Reverse() {
-    DryadApiPINVOKE.IntVector_Reverse__SWIG_0(swigCPtr);
+    DryadApiPINVOKE.MotifList_Reverse__SWIG_0(swigCPtr);
   }
 
   public void Reverse(int index, int count) {
-    DryadApiPINVOKE.IntVector_Reverse__SWIG_1(swigCPtr, index, count);
+    DryadApiPINVOKE.MotifList_Reverse__SWIG_1(swigCPtr, index, count);
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public void SetRange(int index, IntVector values) {
-    DryadApiPINVOKE.IntVector_SetRange(swigCPtr, index, IntVector.getCPtr(values));
+  public void SetRange(int index, MotifList values) {
+    DryadApiPINVOKE.MotifList_SetRange(swigCPtr, index, MotifList.getCPtr(values));
     if (DryadApiPINVOKE.SWIGPendingException.Pending) throw DryadApiPINVOKE.SWIGPendingException.Retrieve();
-  }
-
-  public bool Contains(int value) {
-    bool ret = DryadApiPINVOKE.IntVector_Contains(swigCPtr, value);
-    return ret;
-  }
-
-  public int IndexOf(int value) {
-    int ret = DryadApiPINVOKE.IntVector_IndexOf(swigCPtr, value);
-    return ret;
-  }
-
-  public int LastIndexOf(int value) {
-    int ret = DryadApiPINVOKE.IntVector_LastIndexOf(swigCPtr, value);
-    return ret;
-  }
-
-  public bool Remove(int value) {
-    bool ret = DryadApiPINVOKE.IntVector_Remove(swigCPtr, value);
-    return ret;
   }
 
 }

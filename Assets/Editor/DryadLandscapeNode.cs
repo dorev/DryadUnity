@@ -103,7 +103,7 @@ public class DryadLandscapeNode : DryadEditorObjectBase
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Extension", labelWidth);
-        Chord.Extension = (Dryad.Extension)EditorGUILayout.EnumPopup(Chord.Extension, valueWidth);
+        Chord.Extension = (Dryad.ChordExtension)EditorGUILayout.EnumPopup(Chord.Extension, valueWidth);
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();

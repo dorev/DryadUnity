@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 namespace Dryad
 {
-
     static public class Duration
     {
         // DryadCore note duration sizes
@@ -61,7 +60,7 @@ namespace Dryad
     }
 
     [System.Serializable]
-    public enum Extension
+    public enum ChordExtension
     {
         None,
         Seventh,
@@ -112,7 +111,7 @@ namespace Dryad
         public Scale Scale;
         public uint Degree;
         public TriadVoicing TriadVoicing;
-        public Extension Extension;
+        public ChordExtension Extension;
         public int Inversion;
         public int Shift;
         public bool Entry;
@@ -132,7 +131,7 @@ namespace Dryad
         {
             Scale = scale;
             Degree = degree;
-            Extension = Extension.None;
+            Extension = ChordExtension.None;
             Inversion = 0;
             Shift = 0;
             Entry = false;
@@ -211,10 +210,10 @@ namespace Dryad
 
             switch (Extension)
             {
-                case Extension.None: break;
-                case Extension.Seventh: result += "7"; break;
-                case Extension.MajorSeventh: result += "M7"; break;
-                case Extension.Ninth: result += "9"; break;
+                case ChordExtension.None: break;
+                case ChordExtension.Seventh: result += "7"; break;
+                case ChordExtension.MajorSeventh: result += "M7"; break;
+                case ChordExtension.Ninth: result += "9"; break;
                 default:
                     throw new System.Exception($"Impossible chord extension value: {Extension}");
             }
@@ -226,7 +225,6 @@ namespace Dryad
 
 }
 
-
 public class DryadGlobal : MonoBehaviour
 {
     public float RefreshPeriod;
@@ -234,6 +232,7 @@ public class DryadGlobal : MonoBehaviour
     static DryadGlobal Instance;
     WaitForSeconds SlowPeriod;
     uint Tempo = 120;
+    uint ScoreTimeTickInterval = Dryad.Duration.ThirtySecondTriplet;
     List<DryadListener> Listeners = new List<DryadListener>();
 
     enum GlobalStatus
@@ -295,24 +294,8 @@ public class DryadGlobal : MonoBehaviour
     {
         while (Status != GlobalStatus.ShuttingDown)
         {
-
-            // MULTIPLE LISTENERS IS WEIRD!!
-
-            foreach(DryadListener listener in Listeners)
-            {
-                if (!listener.HasChanged)
-                {
-                    listener.HasChanged = false;
-                    // compute appropriate duration of considering new elements
-                }
-                else
-                {
-                    // still check if we must generate more measures
-                }
-            }
-
-            // play next notes from score
-
+            foreach (DryadListener listener in Listeners)
+                listener.Tick(ScoreTimeTickInterval);
             yield return ScoreTickPeriodFromTempo();
         }
     }
@@ -320,8 +303,8 @@ public class DryadGlobal : MonoBehaviour
     WaitForSeconds ScoreTickPeriodFromTempo()
     {
         float beatDuration = 60.0f / (float)Tempo;
-        float smallestScoreTimeDuration = beatDuration / (Dryad.Duration.Quarter / Dryad.Duration.ThirtySecondTriplet);
-        return new WaitForSeconds(smallestScoreTimeDuration);
+        float tickInterval = beatDuration / (Dryad.Duration.Quarter / ScoreTimeTickInterval);
+        return new WaitForSeconds(tickInterval);
     }
 
     void UpdateListenersMotifs()
@@ -329,17 +312,13 @@ public class DryadGlobal : MonoBehaviour
         // Check what motifs are in range of listeners
         foreach (DryadListener listener in Listeners)
         {
-            listener.ClearMotifs();
-
             List<DryadMotif> motifsInRange = new List<DryadMotif>();
-
             foreach (DryadMotif motif in FindObjectsOfType<DryadMotif>())
             {
                 float distance = Vector3.Distance(listener.transform.position, motif.transform.position);
                 if (distance < motif.BroadcastRange)
                     motifsInRange.Add(motif);
             }
-
             listener.CompareUpdateWithSurroundingMotifs(motifsInRange);
         }
     }

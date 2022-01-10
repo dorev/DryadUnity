@@ -83,6 +83,32 @@ public class DryadListener : MonoBehaviour
         return motifs;
     }
 
+    public void Tick(uint scoreTimeIncrement)
+    {
+        /*
+        List<Notes> notesToPlay = Score.Play(scoreTimeIncrement);
+
+        global.Play(Notes);
+
+        if(HasChanged)
+        {
+            UpdateScore();
+            HasChanged = false;
+        }
+
+        if (Score.RemainingDuration <= Dryad.Duration.Whole)
+            Score.Generate(Dryad.Duration.Whole);
+        */
+    }
+
+    public void UpdateScore()
+    {
+        /*
+        Score.SetMotifs(motifs);
+        Score.SetLandscape(currentLandscape);
+        */
+    }
+
     public void CompareUpdateWithSurroundingMotifs(List<DryadMotif> surroundingMotifs)
     {
         IEnumerable<DryadMotif> distinctMotifs = motifs.Distinct();
