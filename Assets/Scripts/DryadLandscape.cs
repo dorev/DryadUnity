@@ -8,11 +8,11 @@ using UnityEngine;
 public class LandscapeNodeData
 {
     public uint Id;
-    public Dryad.Chord Chord;
+    public DryadUnity.Chord Chord;
     public List<uint> Edges;
     public Rect Rect;
 
-    public LandscapeNodeData(uint id, Dryad.Chord chord, List<uint> edges, Rect position)
+    public LandscapeNodeData(uint id, DryadUnity.Chord chord, List<uint> edges, Rect position)
     {   
         Id = id;
         Chord = chord;
@@ -26,7 +26,7 @@ public class DryadLandscape : MonoBehaviour
     [HideInInspector]
     public string Name;
     [HideInInspector]
-    public Dryad.Scale Scale;
+    public DryadUnity.Scale Scale;
     [SerializeField]
     public List<LandscapeNodeData> NodesData;
 

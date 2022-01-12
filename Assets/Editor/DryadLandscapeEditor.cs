@@ -200,9 +200,9 @@ public class DryadLandscapeEditor : DryadEditorBase
         dataHasChanged = true;
     }
 
-    private void OnClickAddNode(Vector2 mousePosition, Dryad.Chord chord)
+    private void OnClickAddNode(Vector2 mousePosition, DryadUnity.Chord chord)
     {
-        nodes.Add(new DryadLandscapeNode(new Dryad.Chord(chord), mousePosition, OnClickInitNewEdge, OnClickInNode, OnClickRemoveNode));
+        nodes.Add(new DryadLandscapeNode(new DryadUnity.Chord(chord), mousePosition, OnClickInitNewEdge, OnClickInNode, OnClickRemoveNode));
         dataHasChanged = true;
     }
     

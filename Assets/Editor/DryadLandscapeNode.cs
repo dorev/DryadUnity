@@ -8,7 +8,7 @@ public class DryadLandscapeNode : DryadEditorObjectBase
     #region Members
 
     public List<uint> Edges = new List<uint>();
-    public Dryad.Chord Chord;
+    public DryadUnity.Chord Chord;
     public GUIStyle Style;
     Action<DryadLandscapeNode> OnRemoveNode;
     Action<DryadLandscapeNode> OnCreateLink;
@@ -51,7 +51,7 @@ public class DryadLandscapeNode : DryadEditorObjectBase
     }
 
     public DryadLandscapeNode(
-        Dryad.Chord chord,
+        DryadUnity.Chord chord,
         Vector2 position,
         Action<DryadLandscapeNode> OnClickCreateLink,
         Action<DryadLandscapeNode> OnClickInNode,
@@ -98,12 +98,12 @@ public class DryadLandscapeNode : DryadEditorObjectBase
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Voicing", labelWidth);
-        Chord.TriadVoicing = (Dryad.TriadVoicing)EditorGUILayout.EnumPopup(Chord.TriadVoicing, valueWidth);
+        Chord.TriadVoicing = (DryadUnity.TriadVoicing)EditorGUILayout.EnumPopup(Chord.TriadVoicing, valueWidth);
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Extension", labelWidth);
-        Chord.Extension = (Dryad.ChordExtension)EditorGUILayout.EnumPopup(Chord.Extension, valueWidth);
+        Chord.Extension = (DryadUnity.ChordExtension)EditorGUILayout.EnumPopup(Chord.Extension, valueWidth);
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();

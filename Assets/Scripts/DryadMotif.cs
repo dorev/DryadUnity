@@ -28,7 +28,7 @@ public class DryadMotif : MonoBehaviour
     [SerializeField]
     public float BroadcastRange = 5f;
     [SerializeField]
-    public uint Duration = Dryad.Duration.Quarter;
+    public uint Duration = DryadUnity.Duration.Quarter;
 
     [HideInInspector]
     [SerializeField]

@@ -228,14 +228,14 @@ public class DryadMotifNote : DryadEditorObjectBase
     void UpdatePositionInEditorFromNoteData()
     {
         Rect.position = motifEditor.ScoreTimeAndTonicOffsetToPosition(ScoreTime, TonicOffset);
-        Rect.width = Duration / Dryad.Duration.Sixteenth * EditorGridUnitSize();
+        Rect.width = Duration / DryadUnity.Duration.Sixteenth * EditorGridUnitSize();
         Rect.height = EditorGridUnitSize();
     }
 
     void UpdateNoteDataFromRect()
     {
         (ScoreTime, TonicOffset) = motifEditor.PositionToScoreTimeAndTonicOffset(Rect.position);
-        Duration = (uint) Mathf.RoundToInt(Rect.width / EditorGridUnitSize()) * Dryad.Duration.Sixteenth;
+        Duration = (uint) Mathf.RoundToInt(Rect.width / EditorGridUnitSize()) * DryadUnity.Duration.Sixteenth;
     }
 
     #endregion

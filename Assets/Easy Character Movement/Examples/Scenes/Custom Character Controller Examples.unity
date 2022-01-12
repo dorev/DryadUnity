@@ -218,7 +218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4780268590734426, guid: ee7ad282805ec7243af64550c5a0b2e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.94
       objectReference: {fileID: 0}
     - target: {fileID: 4780268590734426, guid: ee7ad282805ec7243af64550c5a0b2e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -226,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4780268590734426, guid: ee7ad282805ec7243af64550c5a0b2e0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 3.27
       objectReference: {fileID: 0}
     - target: {fileID: 4780268590734426, guid: ee7ad282805ec7243af64550c5a0b2e0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -451,7 +451,24 @@ MonoBehaviour:
   Name: MotifRed
   Voice: VoiceRed
   BroadcastRange: 5
-  Notes: []
+  Duration: 84
+  NotesData:
+  - Id: 0
+    ScoreTime: 0
+    TonicOffset: 0
+    Duration: 24
+  - Id: 1
+    ScoreTime: 24
+    TonicOffset: 3
+    Duration: 24
+  - Id: 2
+    ScoreTime: 48
+    TonicOffset: 4
+    Duration: 12
+  - Id: 3
+    ScoreTime: 60
+    TonicOffset: 4
+    Duration: 12
 --- !u!1 &817883385
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,13 +628,70 @@ MonoBehaviour:
     RootNote: 48
     FlatOrSharp: 1
   NodesData:
-  - Id: 0
+  - Id: 1
     Chord:
       Scale:
         Intervals: 0000000002000000040000000500000007000000090000000b000000
         RootNote: 48
         FlatOrSharp: 1
       Degree: 2
+      TriadVoicing: 0
+      Extension: 0
+      Inversion: 0
+      Shift: 0
+      Entry: 0
+    Edges: 
+    Rect:
+      serializedVersion: 2
+      x: 329
+      y: 70
+      width: 230
+      height: 145
+  - Id: 2
+    Chord:
+      Scale:
+        Intervals: 0000000002000000040000000500000007000000090000000b000000
+        RootNote: 48
+        FlatOrSharp: 1
+      Degree: 7
+      TriadVoicing: 2
+      Extension: 1
+      Inversion: 0
+      Shift: 0
+      Entry: 0
+    Edges: 
+    Rect:
+      serializedVersion: 2
+      x: 273
+      y: 266
+      width: 230
+      height: 145
+  - Id: 3
+    Chord:
+      Scale:
+        Intervals: 0000000002000000040000000500000007000000090000000b000000
+        RootNote: 48
+        FlatOrSharp: 1
+      Degree: 3
+      TriadVoicing: 1
+      Extension: 0
+      Inversion: 0
+      Shift: 0
+      Entry: 1
+    Edges: 010000000100000002000000010000000100000002000000
+    Rect:
+      serializedVersion: 2
+      x: 28
+      y: 72
+      width: 230
+      height: 145
+  - Id: 4
+    Chord:
+      Scale:
+        Intervals: 0000000002000000040000000500000007000000090000000b000000
+        RootNote: 48
+        FlatOrSharp: 1
+      Degree: 6
       TriadVoicing: 1
       Extension: 0
       Inversion: 0
@@ -626,27 +700,8 @@ MonoBehaviour:
     Edges: 
     Rect:
       serializedVersion: 2
-      x: 337
-      y: 165
-      width: 230
-      height: 145
-  - Id: 1
-    Chord:
-      Scale:
-        Intervals: 0000000002000000040000000500000007000000090000000b000000
-        RootNote: 48
-        FlatOrSharp: 1
-      Degree: 5
-      TriadVoicing: 0
-      Extension: 0
-      Inversion: 0
-      Shift: 0
-      Entry: 1
-    Edges: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-    Rect:
-      serializedVersion: 2
-      x: 25
-      y: 189
+      x: 635
+      y: 49
       width: 230
       height: 145
 --- !u!1 &1099185332
@@ -913,6 +968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2778126ec454b14da80f5603267d946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HasChanged: 1
 --- !u!1 &1209067765
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,7 +1081,8 @@ MonoBehaviour:
   Name: MotifYellow
   Voice: VoiceYellow
   BroadcastRange: 5
-  Notes: []
+  Duration: 72
+  NotesData: []
 --- !u!850595691 &1215814383
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -1214,17 +1271,36 @@ MonoBehaviour:
         Intervals: 0000000002000000040000000500000007000000090000000b000000
         RootNote: 48
         FlatOrSharp: 1
-      Degree: 7
-      TriadVoicing: 3
-      Extension: 3
+      Degree: 1
+      TriadVoicing: 0
+      Extension: 0
+      Inversion: 0
+      Shift: 0
+      Entry: 0
+    Edges: 01000000
+    Rect:
+      serializedVersion: 2
+      x: 42
+      y: 131
+      width: 230
+      height: 145
+  - Id: 1
+    Chord:
+      Scale:
+        Intervals: 0000000002000000040000000500000007000000090000000b000000
+        RootNote: 48
+        FlatOrSharp: 1
+      Degree: 5
+      TriadVoicing: 1
+      Extension: 0
       Inversion: 0
       Shift: 0
       Entry: 0
     Edges: 
     Rect:
       serializedVersion: 2
-      x: 176
-      y: 190
+      x: 297
+      y: 131
       width: 230
       height: 145
 --- !u!1 &1878205352

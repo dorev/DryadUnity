@@ -46,7 +46,7 @@ public class DryadMotifEditor : DryadEditorBase
         MotifDurationStyle.normal.background = DryadEditorUtility.ColorTexture(Color.white, 0.5f);
         MotifDurationRect = new Rect(0, 0, GridUnitSize, Screen.height);
 
-        MotifDurationRect.x = (Motif.Duration + 1) / Dryad.Duration.Sixteenth * GridUnitSize;
+        MotifDurationRect.x = (Motif.Duration + 1) / DryadUnity.Duration.Sixteenth * GridUnitSize;
         MotifDurationRect.y = 0;
         MotifDurationRect.width = GridUnitSize;
         MotifDurationRect.height = Screen.height;
@@ -173,7 +173,7 @@ public class DryadMotifEditor : DryadEditorBase
                 dataHasChanged = true;
             }
 
-            MotifDurationRect.x = Duration / Dryad.Duration.Sixteenth * GridUnitSize + offset.x;
+            MotifDurationRect.x = Duration / DryadUnity.Duration.Sixteenth * GridUnitSize + offset.x;
         }
 
         MotifDurationRect.y = 0;
@@ -358,7 +358,7 @@ public class DryadMotifEditor : DryadEditorBase
 
         notes.Add(new DryadMotifNote(
             this,
-            Dryad.Duration.Quarter,
+            DryadUnity.Duration.Quarter,
             noteData.scoreTime,
             noteData.tonicOffset,
             OnClickRemoveNote,
@@ -445,7 +445,7 @@ public class DryadMotifEditor : DryadEditorBase
 
         // Removing 1 because the first grid contains the labels
         uint scoreTime = (uint) (Mathf.FloorToInt(snapPosition.x / GridUnitSize) - 1);
-        scoreTime *= Dryad.Duration.Sixteenth;
+        scoreTime *= DryadUnity.Duration.Sixteenth;
 
         NormalizeScoreTime(ref scoreTime);
 
@@ -454,7 +454,7 @@ public class DryadMotifEditor : DryadEditorBase
 
     public Vector2 ScoreTimeAndTonicOffsetToPosition(uint scoreTime, int tonicOffset)
     {
-        float x = scoreTime / Dryad.Duration.Sixteenth * GridUnitSize;
+        float x = scoreTime / DryadUnity.Duration.Sixteenth * GridUnitSize;
         float y = tonicOffset * -1.0f * GridUnitSize;
         return new Vector2(x, y) + offset;
     }
@@ -462,14 +462,14 @@ public class DryadMotifEditor : DryadEditorBase
     void NormalizeScoreTime(ref uint scoreTime)
     {
         // Fit to grid Dryad.Duration unit value
-        if (scoreTime % Dryad.Duration.Sixteenth != 0)
-            scoreTime -= scoreTime % Dryad.Duration.Sixteenth;
+        if (scoreTime % DryadUnity.Duration.Sixteenth != 0)
+            scoreTime -= scoreTime % DryadUnity.Duration.Sixteenth;
     }
 
     void UpdateMotifDurationAfterDrag()
     {
         MotifDurationRect.x -= MotifDurationRect.x % GridUnitSize;
-        Duration = (uint) Mathf.FloorToInt(MotifDurationRect.x / GridUnitSize) * Dryad.Duration.Sixteenth;
+        Duration = (uint) Mathf.FloorToInt(MotifDurationRect.x / GridUnitSize) * DryadUnity.Duration.Sixteenth;
         NormalizeScoreTime(ref Duration);
         GUI.changed = true;
         dataHasChanged = true;

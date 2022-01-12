@@ -15,7 +15,7 @@ public class DryadLandscapeInspector : Editor
 {
     DryadLandscape script;
     LandscapeScale landscapeScale = LandscapeScale.Major;
-    Dryad.Note landscapeScaleRoot;
+    DryadUnity.Note landscapeScaleRoot;
     string customScaleName = "Custom scale";
     int customSecondInterval = 2;
     int customThirdInterval = 4;
@@ -23,7 +23,7 @@ public class DryadLandscapeInspector : Editor
     int customFifthInterval = 7;
     int customSixthInterval = 9;
     int customSeventhInterval = 11;
-    Dryad.FlatOrSharp customFlatOrSharp = Dryad.FlatOrSharp.Unspecified;
+    DryadUnity.FlatOrSharp customFlatOrSharp = DryadUnity.FlatOrSharp.Unspecified;
     List<string> warnings = new List<string>();
 
     private void OnEnable()
@@ -37,19 +37,19 @@ public class DryadLandscapeInspector : Editor
         
         script.Name = EditorGUILayout.TextField("Name", script.Name);
 
-        landscapeScaleRoot = (Dryad.Note)EditorGUILayout.EnumPopup("Root", landscapeScaleRoot);
+        landscapeScaleRoot = (DryadUnity.Note)EditorGUILayout.EnumPopup("Root", landscapeScaleRoot);
         landscapeScale = (LandscapeScale)EditorGUILayout.EnumPopup("Scale", landscapeScale);
 
         switch (landscapeScale)
         {
             case LandscapeScale.Major:
-                script.Scale = Dryad.Scale.Major;
+                script.Scale = DryadUnity.Scale.Major;
                 break;
             case LandscapeScale.MinorNatural:
-                script.Scale = Dryad.Scale.MinorNatural;
+                script.Scale = DryadUnity.Scale.MinorNatural;
                 break;
             case LandscapeScale.MinorMelodic:
-                script.Scale = Dryad.Scale.MinorMelodic;
+                script.Scale = DryadUnity.Scale.MinorMelodic;
                 break;
             case LandscapeScale.Custom:
                 EditorGUI.indentLevel++;
@@ -60,11 +60,11 @@ public class DryadLandscapeInspector : Editor
                 customFifthInterval = EditorGUILayout.IntField("Fifth", customFifthInterval);
                 customSixthInterval = EditorGUILayout.IntField("Sixth", customSixthInterval);
                 customSeventhInterval = EditorGUILayout.IntField("Seventh", customSeventhInterval);
-                customFlatOrSharp = (Dryad.FlatOrSharp)EditorGUILayout.EnumPopup("Flat or Sharp", customFlatOrSharp);
+                customFlatOrSharp = (DryadUnity.FlatOrSharp)EditorGUILayout.EnumPopup("Flat or Sharp", customFlatOrSharp);
                 EditorGUI.indentLevel--;
 
                 if(!CustomScaleHasError())
-                    script.Scale = new Dryad.Scale(
+                    script.Scale = new DryadUnity.Scale(
                         new uint[7]
                         {
                             0,

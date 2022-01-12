@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Dryad
+namespace DryadUnity
 {
     static public class Duration
     {
@@ -232,7 +232,7 @@ public class DryadGlobal : MonoBehaviour
     static DryadGlobal Instance;
     WaitForSeconds SlowPeriod;
     uint Tempo = 120;
-    uint ScoreTimeTickInterval = Dryad.Duration.ThirtySecondTriplet;
+    uint ScoreTimeTickInterval = DryadUnity.Duration.ThirtySecondTriplet;
     List<DryadListener> Listeners = new List<DryadListener>();
 
     enum GlobalStatus
@@ -303,7 +303,7 @@ public class DryadGlobal : MonoBehaviour
     WaitForSeconds ScoreTickPeriodFromTempo()
     {
         float beatDuration = 60.0f / (float)Tempo;
-        float tickInterval = beatDuration / (Dryad.Duration.Quarter / ScoreTimeTickInterval);
+        float tickInterval = beatDuration / (DryadUnity.Duration.Quarter / ScoreTimeTickInterval);
         return new WaitForSeconds(tickInterval);
     }
 

@@ -75,10 +75,11 @@ crashlytics-build.properties
 # Repo-specific
 # =============================================================================
 
-!DryadUnity/**/*.csproj
-!DryadUnity/**/*.vcxproj
-!DryadUnity/**/*.sln
+!Dryad/**/*.csproj
+!Dryad/**/*.vcxproj
+!Dryad/**/*.sln
 
-DryadUnity/.vs/
-DryadUnity/**/x64/
-DryadUnity/**/obj
+Dryad/.vs/
+Dryad/**/x64/
+Dryad/**/obj
+Dryad/**/*.props
