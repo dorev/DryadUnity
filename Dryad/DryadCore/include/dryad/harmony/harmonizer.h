@@ -20,7 +20,7 @@ public:
     {
     }
 
-    Result<> harmonizeFrom(Position& position)
+    Result<> HarmonizeFrom(Position& position)
     {
         return Success;
     }

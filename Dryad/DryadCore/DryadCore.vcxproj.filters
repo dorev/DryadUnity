@@ -52,10 +52,10 @@
     <ClInclude Include="include\dryad\score\traits\traitscorewritable.h">
       <Filter>dryad\score\traits</Filter>
     </ClInclude>
-    <ClInclude Include="include\dryad\harmony\harmonygraph.h">
+    <ClInclude Include="include\dryad\harmony\landscapegraph.h">
       <Filter>dryad\harmony</Filter>
     </ClInclude>
-    <ClInclude Include="include\dryad\harmony\harmonynode.h">
+    <ClInclude Include="include\dryad\harmony\landscapenode.h">
       <Filter>dryad\harmony</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\harmony\motif.h">

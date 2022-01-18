@@ -21,13 +21,13 @@ public:
     {
     }
 
-    Result<> decreaseMotifPresence(const Motif& motif, U32 amount = 1)
+    Result<> DecreaseMotifPresence(const Motif& motif, U32 amount = 1)
     {
         // decrease presence vs removeMotif
         return Success;
     }
 
-    Result<> increaseMotifPresence(const Motif& motif, U32 amount = 1)
+    Result<> IncreaseMotifPresence(const Motif& motif, U32 amount = 1)
     {
         return Success;
     }

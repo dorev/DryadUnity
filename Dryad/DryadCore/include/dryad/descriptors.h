@@ -24,12 +24,12 @@ public:
     {
     }
 
-    U32 getId() const
+    U32 GetId() const
     {
         return _id;
     }
 
-    const String& getName() const
+    const String& GetName() const
     {
         return _name;
     }
@@ -55,7 +55,7 @@ public:
 
     bool operator<(const VoiceDescriptor& other) const
     {
-        return getId() < other.getId();
+        return GetId() < other.GetId();
     }
 };
 
@@ -74,28 +74,28 @@ public:
 
     bool operator<(const MotifDescriptor& other) const
     {
-        return getId() < other.getId();
+        return GetId() < other.GetId();
     }
 };
 
-class HarmonyGraphDescriptor : public BaseDescriptor
+class LandscapeGraphDescriptor : public BaseDescriptor
 {
 public:
 
-    HarmonyGraphDescriptor(U32 graphId, const String& graphName)
-        : BaseDescriptor(graphId, graphName)
+    LandscapeGraphDescriptor(U32 landscapeId, const String& landscapeName)
+        : BaseDescriptor(landscapeId, landscapeName)
         , _nextNodeId(0)
     {
     }
 
-    bool operator<(const HarmonyGraphDescriptor& other) const
+    bool operator<(const LandscapeGraphDescriptor& other) const
     {
-        return getId() < other.getId();
+        return GetId() < other.GetId();
     }
 
 protected:
 
-    U32 nextNodeId()
+    U32 NextNodeId()
     {
         return ++_nextNodeId;
     }
@@ -105,36 +105,36 @@ private:
     U32 _nextNodeId;
 };
 
-class HarmonyNodeId : public HarmonyGraphDescriptor
+class LandscapeNodeId : public LandscapeGraphDescriptor
 {
 public:
 
-    HarmonyNodeId(HarmonyGraphDescriptor& graphId)
-        : HarmonyGraphDescriptor(graphId)
-        , _nodeId(nextNodeId())
+    LandscapeNodeId(LandscapeGraphDescriptor& graphId)
+        : LandscapeGraphDescriptor(graphId)
+        , _nodeId(NextNodeId())
     {
     }
 
-    U32 getId() const
+    U32 GetId() const
     {
         return _nodeId;
     }
 
-    const HarmonyGraphDescriptor getGraphDescriptor() const
+    const LandscapeGraphDescriptor getGraphDescriptor() const
     {
         return *this;
     }
 
-    bool operator<(const HarmonyNodeId& other) const
+    bool operator<(const LandscapeNodeId& other) const
     {
-        return getGraphDescriptor().getId() < other.getGraphDescriptor().getId()
-            || (getGraphDescriptor().getId() == other.getGraphDescriptor().getId()
-                && getId() < other.getId());
+        return getGraphDescriptor().GetId() < other.getGraphDescriptor().GetId()
+            || (getGraphDescriptor().GetId() == other.getGraphDescriptor().GetId()
+                && GetId() < other.GetId());
     }
 
 private:
 
-    using BaseDescriptor::getId;
+    using BaseDescriptor::GetId;
     U32 _nodeId;
 };
 

@@ -30,7 +30,7 @@ public:
     {
     }
 
-    Result<> update(TimestampMs currentTimestamp)
+    Result<> Update(TimestampMs currentTimestamp)
     {
         // Commit past notes
         if (currentTimestamp <= _latestTimestamp)
@@ -38,55 +38,55 @@ public:
 
         _latestTimestamp = currentTimestamp;
 
-        Result<> commitResult = _score.commitPositionsUntil(_latestTimestamp);
-        if(commitResult.hasError())
-            return commitResult.getError();
+        Result<> commitResult = _score.CommitPositionsUntil(_latestTimestamp);
+        if(commitResult.HasError())
+            return commitResult.GetError();
 
         // Do we have enough phrases progressions generated?
-        U32 uncommittedPhraseCount = _score.uncommittedPhraseCount();
+        U32 uncommittedPhraseCount = _score.UncommittedPhraseCount();
         U32 phraseDifference = _minPregeneratedPhrases - uncommittedPhraseCount;
         if (phraseDifference > 1)
         {
-            Result<> generateProgResult = _composer.generatePhrases(phraseDifference);
-            if(generateProgResult.hasError())
-                return generateProgResult.getError();
+            Result<> generateProgResult = _composer.GeneratePhrases(phraseDifference);
+            if(generateProgResult.HasError())
+                return generateProgResult.GetError();
         }
 
         // Do we have enough notes generated?
-        Position* position = _score.getFirstUncommittedPosition();
+        Position* position = _score.GetFirstUncommittedPosition();
         if(position == nullptr)
             return {ErrorCode::PositionDoesNotExist};
 
-        ScoreTime scoreTime = position->getScoreTime();
+        ScoreTime scoreTime = position->GetScoreTime();
 
-        return _composer.generateNotesUntil(scoreTime + _minPregeneratedNotesDuration);
+        return _composer.GenerateNotesUntil(scoreTime + _minPregeneratedNotesDuration);
     }
 
-    Result<Vector<MidiNote>> fetchUpcomingNotes(TimestampMs currentTimestamp)
+    Result<Vector<MidiNote>> FetchUpcomingNotes(TimestampMs currentTimestamp)
     {
-        Result<> updateResult = update(currentTimestamp);
-        if(updateResult.hasError())
-            return updateResult.getError();
+        Result<> updateResult = Update(currentTimestamp);
+        if(updateResult.HasError())
+            return updateResult.GetError();
 
-        Position* position = _score.getFirstUncommittedPosition();
+        Position* position = _score.GetFirstUncommittedPosition();
         if(position == nullptr)
             return {ErrorCode::PositionDoesNotExist};
 
-        Result<> harmonizeResult = _composer.harmonizeFrom(*position);
-        if(harmonizeResult.hasError())
-            return harmonizeResult.getError();
+        Result<> harmonizeResult = _composer.HarmonizeFrom(*position);
+        if(harmonizeResult.HasError())
+            return harmonizeResult.GetError();
 
         // Return all notes currently generated and harmonized
         Vector<MidiNote> result;
 
         while (position != nullptr)
         {
-            List<Note>& notes = position->getChildren();
+            List<Note>& notes = position->GetChildren();
 
             if (!notes.empty())
             {
-                TimestampMs timestamp = scoreTimeToTimestamp(
-                    position->getScoreTime(),
+                TimestampMs timestamp = ScoreTimeToTimestamp(
+                    position->GetScoreTime(),
                     _tempo,
                     _startTimestamp);
 
@@ -97,7 +97,7 @@ public:
                         timestamp);
             }
 
-            position = position->next();
+            position = position->Next();
         }
 
         if(result.empty())
@@ -108,30 +108,30 @@ public:
 
     // Forwarding to composer
 
-    Result<> registerMotif(const String& motifName, const Motif& motif)
+    Result<> RegisterMotif(const String& motifName, const Motif& motif)
     {
-        return _composer.registerMotif(motifName, motif);
+        return _composer.RegisterMotif(motifName, motif);
     }
 
-    Result<> registerHarmonyGraph(const String& graphName, const HarmonyGraph& graph)
+    Result<> RegisterLandscapeGraph(const String& graphName, const LandscapeGraph& graph)
     {
-        return _composer.registerHarmonyGraph(graphName, graph);
+        return _composer.RegisterLandscapeGraph(graphName, graph);
     }
 
-    Result<> removeMotif(const String& motifName)
+    Result<> RemoveMotif(const String& motifName)
     {
-        return _composer.removeMotif(motifName);
+        return _composer.RemoveMotif(motifName);
     }
 
-    Result<> addMotif(const String& motifName)
+    Result<> AddMotif(const String& motifName)
     {
-         return _composer.addMotif(motifName);
+         return _composer.AddMotif(motifName);
     }
 
-    Score& getScore() { return _score; }
-    Session& getSession() { return *this; }
-    void setTempo(U32 tempo) { _tempo = tempo; }
-    U32 getTempo() const { return _tempo; }
+    Score& GetScore() { return _score; }
+    Session& GetSession() { return *this; }
+    void SetTempo(U32 tempo) { _tempo = tempo; }
+    U32 GetTempo() const { return _tempo; }
 
 private:
 
@@ -147,7 +147,7 @@ private:
     Score _score;
     Composer _composer;
     Map<String, Motif> _motifs;
-    Map<String, HarmonyGraph> _graphs;
+    Map<String, LandscapeGraph> _graphs;
 
     //void stop();
     //void setPhraseLength(uint phraseLength);

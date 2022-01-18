@@ -26,26 +26,26 @@ public:
     Position(Measure& parent)
         : ScoreTraits(parent)
         , _scoreTime(0)
-        , _harmonyNode(nullptr)
+        , _landscapeNode(nullptr)
     {
     }
 
-    void setScoreTime(ScoreTime scoreTime)
+    void SetScoreTime(ScoreTime scoreTime)
     {
         _scoreTime = scoreTime;
     }
 
-    ScoreTime getScoreTime() const
+    ScoreTime GetScoreTime() const
     {
         return _scoreTime;
     }
 
-    Map<U32, U32> getActiveMotifs() const
+    Map<U32, U32> GetActiveMotifs() const
     {
         return _activeMotifs;
     }
 
-    void addMotif(U32 motifId)
+    void AddMotif(U32 motifId)
     {
         if(_activeMotifs.find(motifId) == _activeMotifs.end())
             _activeMotifs[motifId] = 1;
@@ -53,7 +53,7 @@ public:
             _activeMotifs[motifId]++;
     }
 
-    Result<> removeMotif(U32 motifId)
+    Result<> RemoveMotif(U32 motifId)
     {
         if(_activeMotifs.find(motifId) == _activeMotifs.end())
             return {ErrorCode::MotifDoesNotExist};
@@ -63,7 +63,7 @@ public:
             _activeMotifs[motifId]--;
     }
 
-    Result<> addMotif(Motif* motif)
+    Result<> AddMotif(Motif* motif)
     {
         if(motif == nullptr)
             return {ErrorCode::NullPointer};
@@ -73,7 +73,7 @@ public:
         if(_motifsData.find(motif) == _motifsData.end())
             _motifsData[motif] = {1, true};
         else
-            _activeMotifs[motif->getDescriptor().getId()]++;
+            _activeMotifs[motif->getDescriptor().GetId()]++;
     }
 
 private:
@@ -81,7 +81,7 @@ private:
     ScoreTime _scoreTime;
     Map<U32, U32> _activeMotifs;
     Map<Motif*, MotifLocalData> _motifsData;
-    HarmonyNode* _harmonyNode;
+    LandscapeNode* _landscapeNode;
 };
 
 }

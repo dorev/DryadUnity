@@ -17,7 +17,7 @@ protected:
 
     // Only constructible through inheritance
     ScoreTraits(ParentType<T>& parent)
-        : _session(parent.getSession())
+        : _session(parent.GetSession())
         , _parent(parent)
         , _committed(false)
         , _changed(false)
@@ -31,29 +31,29 @@ public:
     {
     }
 
-    void commit()
+    void Commit()
     {
         _committed = true;
     }
 
-    bool isCommitted()
+    bool IsCommitted()
     {
         return _committed;
     }
 
-    bool hasChanged()
+    bool HasChanged()
     {
         return _changed;
     }
 
-    void setChanged(bool value = true)
+    void SetChanged(bool value = true)
     {
         _changed = value;
 
         if constexpr (!isType<Score>)
         {
             if(_changed)
-                _parent.setChanged(true);
+                _parent.SetChanged(true);
         }
     }
 

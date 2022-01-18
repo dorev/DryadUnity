@@ -90,15 +90,15 @@ class Facade
 public:
     Facade();
     ~Facade();
-    void RegisterMotif(Motif motif);
-    void RegisterLandscape(LandscapeGraph landscape);
-    void AddMotif(unsigned motifId);
-    void RemoveMotif(unsigned motifId);
-    void SetLandscape(unsigned landscapeId);
-    void Generate(unsigned durationToGenerate);
+    void RegisterMotif(const Motif& motif);
+    void RegisterLandscape(const LandscapeGraph& landscape);
+    void AddMotif(const unsigned motifId);
+    void RemoveMotif(const unsigned motifId);
+    void SetLandscape(const unsigned landscapeId);
+    void Generate(const unsigned durationToGenerate);
     std::vector<NoteToPlay> Play(unsigned durationToPlay);
 
 private:
     class Internal;
-    std::unique_ptr<Internal> _facadeInternal;
+    std::unique_ptr<Internal> _internal;
 };

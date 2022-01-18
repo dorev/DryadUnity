@@ -8,7 +8,7 @@ namespace Dryad
 {
 
 class Score;
-class HarmonyGraph;
+class LandscapeGraph;
 
 class ProgressionWriter
 {
@@ -21,7 +21,7 @@ public:
     {
     }
 
-    Result<> transitionToGraph(const HarmonyGraph& graph)
+    Result<> TransitionToGraph(const LandscapeGraph& graph)
     {
         return Success;
     }

@@ -7,7 +7,7 @@
 #include "dryad/composer/motifwriter.h"
 #include "dryad/composer/progressionwriter.h"
 
-#include "dryad/harmony/harmonygraph.h"
+#include "dryad/harmony/landscapegraph.h"
 #include "dryad/harmony/motif.h"
 #include "dryad/harmony/harmonizer.h"
 
@@ -29,7 +29,7 @@ public:
     {
     }
 
-    Result<> generatePhrases(U32 amount)
+    Result<> GeneratePhrases(U32 amount)
     {
         if(amount == 0)
             return {ErrorCode::UselessCall};
@@ -38,18 +38,18 @@ public:
         return Success;
     }
 
-    Result<> generateNotesUntil(ScoreTime scoreTime)
+    Result<> GenerateNotesUntil(ScoreTime scoreTime)
     {
-        Position* position = _score.getFirstUncommittedPosition();
+        Position* position = _score.GetFirstUncommittedPosition();
         if(position == nullptr)
             return {ErrorCode::PositionDoesNotExist};
 
-        if(scoreTime < position->getScoreTime())
+        if(scoreTime < position->GetScoreTime())
             return {ErrorCode::CannotWritePastElements};
 
         // FIND A WAY TO QUERY WHERE A MOTIF STARTS
 
-        if (!motifsChanged())
+        if (!MotifsChanged())
         {
             for (auto& motifChange : _motifsChanges)
             {
@@ -57,9 +57,9 @@ public:
                 U32 amount = motifChange.second;
 
                 if (amount > 0)
-                    _motifWriter.increaseMotifPresence(_motifs.at(motifName), amount);
+                    _motifWriter.IncreaseMotifPresence(_motifs.at(motifName), amount);
                 else if (amount < 0)
-                    _motifWriter.decreaseMotifPresence(_motifs.at(motifName), amount);
+                    _motifWriter.DecreaseMotifPresence(_motifs.at(motifName), amount);
             }
         }
 
@@ -68,14 +68,14 @@ public:
         return Success;
     }
 
-    void transitionToGraph(const String& graphName)
+    void TransitionToGraph(const String& graphName)
     {
         // LATER!!
     }
 
-    Result<> removeMotif(const String& motifName)
+    Result<> RemoveMotif(const String& motifName)
     {
-        if(!motifExists(motifName))
+        if(!MotifExists(motifName))
             return {ErrorCode::MotifDoesNotExist};
 
         if(_motifsActiveInstances[motifName] == 0)
@@ -85,23 +85,23 @@ public:
         return Success;
     }
 
-    Result<> addMotif(const String& motifName)
+    Result<> AddMotif(const String& motifName)
     {
-         if(!motifExists(motifName))
+         if(!MotifExists(motifName))
             return {ErrorCode::MotifDoesNotExist};
 
         _motifsChanges[motifName]++;
         return Success;
     }
 
-    Result<> harmonizeFrom(Position& position)
+    Result<> HarmonizeFrom(Position& position)
     {
-        return _harmonizer.harmonizeFrom(position);
+        return _harmonizer.HarmonizeFrom(position);
     }
 
-    Result<> registerMotif(const String& motifName, const Motif& motif)
+    Result<> RegisterMotif(const String& motifName, const Motif& motif)
     {
-        if (motifExists(motifName))
+        if (MotifExists(motifName))
             return { ErrorCode::MotifAlreadyExists };
 
         _motifs[motifName] = motif;
@@ -109,18 +109,18 @@ public:
         return Success;
     }
 
-    Result<> registerHarmonyGraph(const String& graphName, const HarmonyGraph& graph)
+    Result<> RegisterLandscapeGraph(const String& graphName, const LandscapeGraph& graph)
     {
-        if (graphExists(graphName))
+        if (GraphExists(graphName))
             return { ErrorCode::GraphAlreadyExists };
 
-        _graphs[graphName] = graph;
+        _landscapes[graphName] = graph;
         return Success;
     }
 
 private:
 
-    bool motifsChanged() const
+    bool MotifsChanged() const
     {
         for (auto& motifChange : _motifsChanges)
         {
@@ -132,24 +132,24 @@ private:
         return false;
     }
 
-    bool motifExists(const String& motifName) const
+    bool MotifExists(const String& motifName) const
     {
         return _motifs.find(motifName) != _motifs.end();
     }
 
-    bool motifExists(const MotifDescriptor& motifDescriptor) const
+    bool MotifExists(const MotifDescriptor& motifDescriptor) const
     {
-        return _motifs.find(motifDescriptor.getName()) != _motifs.end();
+        return _motifs.find(motifDescriptor.GetName()) != _motifs.end();
     }
 
-    bool graphExists(const String& graphName) const
+    bool GraphExists(const String& graphName) const
     {
-        return _graphs.find(graphName) != _graphs.end();
+        return _landscapes.find(graphName) != _landscapes.end();
     }
 
-    bool graphExists(const HarmonyGraphDescriptor& graphDescriptor) const
+    bool GraphExists(const LandscapeGraphDescriptor& graphDescriptor) const
     {
-        return _graphs.find(graphDescriptor.getName()) != _graphs.end();
+        return _landscapes.find(graphDescriptor.GetName()) != _landscapes.end();
     }
 
     Harmonizer _harmonizer;
@@ -160,8 +160,8 @@ private:
     Map<String, U32> _motifsChanges;
     Map<String, U32> _motifsActiveInstances;
 
-    Map<String, HarmonyGraph> _graphs;
-    String _currentGraph;
+    Map<String, LandscapeGraph> _landscapes;
+    U32 _currentLandscape;
 
     Score& _score;
 };

@@ -88,12 +88,12 @@ public:
         return strcmp(_description, other._description) == 0;
     }
 
-    constexpr U64 getCode() const
+    constexpr U64 GetCode() const
     {
         return _code;
     }
 
-    constexpr const char* getDescription() const
+    constexpr const char* GetDescription() const
     {
         return _description;
     }

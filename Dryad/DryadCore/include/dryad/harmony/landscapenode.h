@@ -5,7 +5,7 @@
 namespace Dryad
 {
 
-class HarmonyNode
+class LandscapeNode
 {
 
 };

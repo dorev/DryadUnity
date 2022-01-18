@@ -19,13 +19,13 @@ public:
     {
     }
 
-    U32 uncommittedPhraseCount()
+    U32 UncommittedPhraseCount()
     {
         U32 count = 0;
 
-        for (auto phraseIterator = getChildren().rbegin(); phraseIterator != getChildren().rend(); phraseIterator++)
+        for (auto phraseIterator = GetChildren().rbegin(); phraseIterator != GetChildren().rend(); phraseIterator++)
         {
-            if(phraseIterator->isCommitted())
+            if(phraseIterator->IsCommitted())
                 break;
 
             count++;
@@ -34,32 +34,32 @@ public:
         return count;
     }
 
-    Position* getFirstUncommittedPosition()
+    Position* GetFirstUncommittedPosition()
     {
         if(!_lastUncommittedPositionChanged)
             return _lastUncommittedPositionCache;
 
-        Phrase* phrase = getLastUncommittedChild();
+        Phrase* phrase = GetLastUncommittedChild();
         if(phrase == nullptr)
             return nullptr;
 
-        Measure* measure = phrase->getLastUncommittedChild();
+        Measure* measure = phrase->GetLastUncommittedChild();
         if(measure == nullptr)
             return nullptr;
 
-        _lastUncommittedPositionCache = measure->getLastUncommittedChild();
+        _lastUncommittedPositionCache = measure->GetLastUncommittedChild();
         return _lastUncommittedPositionCache;
     }
 
-    Result<> commitPositionsUntil(ScoreTime commitUntilScoreTime)
+    Result<> CommitPositionsUntil(ScoreTime commitUntilScoreTime)
     {
-        Position* position = getFirstUncommittedPosition();
+        Position* position = GetFirstUncommittedPosition();
 
-        while (position != nullptr && (position->getScoreTime() < commitUntilScoreTime))
+        while (position != nullptr && (position->GetScoreTime() < commitUntilScoreTime))
         {
-            position->commit();
+            position->Commit();
             _lastUncommittedPositionChanged = true;
-            position = position->next();
+            position = position->Next();
         }
 
         return Success;

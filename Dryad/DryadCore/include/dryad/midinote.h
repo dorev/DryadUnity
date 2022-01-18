@@ -6,7 +6,6 @@ namespace Dryad
 
 class MidiNote
 {
-
 public:
 
     MidiNote() = delete;

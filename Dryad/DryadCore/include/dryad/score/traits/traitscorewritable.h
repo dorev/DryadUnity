@@ -19,30 +19,30 @@ protected:
 
 public:
 
-    ChildType<T>& appendChild()
+    ChildType<T>& AppendChild()
     {
         List<ChildType<T>>& children = _self._children;
         children.emplace_back(_self);
-        _self.setChanged(true);
+        _self.SetChanged(true);
         return children.back();
     }
 
-    ChildType<T>& appendChild(ChildType<T>&& childToAppend)
+    ChildType<T>& AppendChild(ChildType<T>&& childToAppend)
     {
         auto& children = _self._children;
         children.emplace_back(childToAppend);
-        _self.setChanged(true);
+        _self.SetChanged(true);
         return children.back();
     }
 
-    T& append()
+    T& Append()
     {
-        return _self._parent.appendChild();
+        return _self._parent.AppendChild();
     }
 
-    T& append(T&& siblingToAppend)
+    T& Append(T&& siblingToAppend)
     {
-        return _self._parent.appendChild(std::forward<T>(siblingToAppend));
+        return _self._parent.AppendChild(std::forward<T>(siblingToAppend));
     }
 
 private:

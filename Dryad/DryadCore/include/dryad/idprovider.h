@@ -12,35 +12,35 @@ public:
     IdProvider()
         : _voiceId(0)
         , _motifId(0)
-        , _harmonyGraphId(0)
+        , _landscapeGraphId(0)
     {
     }
 
-    VoiceDescriptor nextVoice(const String& voiceName)
+    VoiceDescriptor NextVoice(const String& voiceName)
     {
         return VoiceDescriptor(++_voiceId, voiceName);
     }
 
-    MotifDescriptor nextMotif(const String& motifName)
+    MotifDescriptor NextMotif(const String& motifName)
     {
         return MotifDescriptor(++_motifId, motifName);
     }
 
-    HarmonyGraphDescriptor nextHarmonyGraph(const String& graphName)
+    LandscapeGraphDescriptor NextLandscapeGraph(const String& landscapeName)
     {
-        return HarmonyGraphDescriptor(++_harmonyGraphId, graphName);
+        return LandscapeGraphDescriptor(++_landscapeGraphId, landscapeName);
     }
 
-    HarmonyNodeId nextHarmonyNodeId(HarmonyGraphDescriptor& graphId)
+    LandscapeNodeId NextLandscapeNodeId(LandscapeGraphDescriptor& landscapeDescriptor)
     {
-        return HarmonyNodeId(graphId);
+        return LandscapeNodeId(landscapeDescriptor);
     }
 
 private:
 
     U32 _voiceId;
     U32 _motifId;
-    U32 _harmonyGraphId;
+    U32 _landscapeGraphId;
 };
 
 } // namespace Dryad

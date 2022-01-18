@@ -24,20 +24,20 @@ public:
     {
     }
 
-    Score& getScore()
+    Score& GetScore()
     {
         if constexpr(isType<Score>)
             return *this;
         else
-            return getSession().getScore();
+            return GetSession().GetScore();
     }
 
-    Session& getSession()
+    Session& GetSession()
     {
-        return _self._parent.getSession();
+        return _self._parent.GetSession();
     }
 
-    ParentType<T>* getParent()
+    ParentType<T>* GetParent()
     {
         if constexpr (isType<Score>)
             return nullptr;
@@ -45,17 +45,17 @@ public:
             return &_self._parent;
     }
 
-    ChildType<T>* getLastUncommittedChild()
+    ChildType<T>* GetLastUncommittedChild()
     {
-        if(getChildren().empty())
+        if(GetChildren().empty())
             return nullptr;
 
-        if(!_self.hasChanged())
+        if(!_self.HasChanged())
             return _lastUncommittedChildCache;
 
-        for (auto& child : getChildren())
+        for (auto& child : GetChildren())
         {
-            if (!child.isCommitted())
+            if (!child.IsCommitted())
             {
                 _lastUncommittedChildCache = &child;
                 return &child;
@@ -65,21 +65,21 @@ public:
         return nullptr;
     }
 
-    List<ChildType<T>>& getChildren()
+    List<ChildType<T>>& GetChildren()
     {
         return _self._children;
     }
 
-    List<T>& getSiblings()
+    List<T>& GetSiblings()
     {
-        return getParent()->getChildren();
+        return GetParent()->GetChildren();
     }
 
-    T* prev()
+    T* Prev()
     {
         if constexpr (!isType<Score>)
         {
-            List<T>& siblings = getSiblings();
+            List<T>& siblings = GetSiblings();
 
             for(auto sibling = siblings.begin(); sibling != siblings.end(); sibling++)
             {
@@ -88,17 +88,17 @@ public:
                     if (sibling == siblings.begin())
                     {
                         // Check previous parent last child
-                        ParentType<T>* parent = sibling->getParent();
+                        ParentType<T>* parent = sibling->GetParent();
 
                         if(parent == nullptr)
                             break;
 
-                        ParentType<T>* previousParent = parent->prev();
+                        ParentType<T>* previousParent = parent->Prev();
 
-                        if(previousParent == nullptr || previousParent->getChildren().empty())
+                        if(previousParent == nullptr || previousParent->GetChildren().empty())
                             break;
 
-                        return &previousParent->getChildren().back();
+                        return &previousParent->GetChildren().back();
                     }
                     else
                         return &*(--sibling);
@@ -109,11 +109,11 @@ public:
         return nullptr;
     }
 
-    T* next()
+    T* Next()
     {
         if constexpr (!isType<Score>)
         {
-            List<T>& siblings = getSiblings();
+            List<T>& siblings = GetSiblings();
 
             for(auto sibling = siblings.begin(); sibling != siblings.end(); sibling++)
             {
@@ -121,17 +121,17 @@ public:
                 {
                     if (++sibling == siblings.end())
                     {
-                        ParentType<T>* parent = sibling->getParent();
+                        ParentType<T>* parent = sibling->GetParent();
 
                         if(parent == nullptr)
                             break;
 
-                        ParentType<T>* nextParent = parent->prev();
+                        ParentType<T>* nextParent = parent->Prev();
 
-                        if(nextParent == nullptr || nextParent->getChildren().empty())
+                        if(nextParent == nullptr || nextParent->GetChildren().empty())
                             break;
 
-                        return &nextParent->getChildren().front();
+                        return &nextParent->GetChildren().front();
                     }
                     else
                         return &*(sibling);

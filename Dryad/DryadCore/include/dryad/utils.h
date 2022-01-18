@@ -14,7 +14,7 @@ namespace Random
 {
 
 template <class T, class U, class R = decltype(std::declval<T>() + std::declval<U>())>
-auto range(T min, U max) -> R
+auto Range(T min, U max) -> R
 {
     if (min == max)
         return min;
@@ -27,7 +27,7 @@ auto range(T min, U max) -> R
 }
 
 template <class T>
-const auto& in(const T& container)
+const auto& From(const T& container)
 {
     static thread_local std::mt19937 generator(std::random_device{}());
     std::uniform_int_distribution<size_t> distribution(0, container.size() - 1);
@@ -37,7 +37,7 @@ const auto& in(const T& container)
 };
 
 template <class T>
-bool contains(const Vector<T>& vector, const T& value)
+bool Contains(const Vector<T>& vector, const T& value)
 {
     for (U64 i = 0; i < vector.size(); ++i)
     {
@@ -49,12 +49,12 @@ bool contains(const Vector<T>& vector, const T& value)
 }
 
 template <class T, class U>
-bool contains(const Map<T, U>& map, const T& value)
+bool Contains(const Map<T, U>& map, const T& value)
 {
     return map.find(value) != map.end();
 }
 
-inline TimestampMs scoreTimeToTimestamp(ScoreTime scoreTime, U32 tempo, TimestampMs startTimestamp)
+inline TimestampMs ScoreTimeToTimestamp(ScoreTime scoreTime, U32 tempo, TimestampMs startTimestamp)
 {
     //TimeMs beatDurationMs = tempo * 1000 / 60;
     //TimeMs timeElapsed = scoreTime * beatDurationMs / Constants::Duration::Quarter;
@@ -63,7 +63,7 @@ inline TimestampMs scoreTimeToTimestamp(ScoreTime scoreTime, U32 tempo, Timestam
     return startTimestamp + (tempo * 1000 * scoreTime / 60 / Constants::Duration::Quarter);
 }
 
-inline Result<> getEquivalentDurationPairs(U64 duration, Vector<Pair<U64, U64>>& solutions)
+inline Result<> GetEquivalentDurationPairs(U64 duration, Vector<Pair<U64, U64>>& solutions)
 {
     solutions.clear();
 
@@ -83,7 +83,7 @@ inline Result<> getEquivalentDurationPairs(U64 duration, Vector<Pair<U64, U64>>&
         return {ErrorCode::NoAvailableEquivalence};
 }
 
-inline bool isPowerOf2(U64 value)
+inline bool IsPowerOf2(U64 value)
 {
     U64 setBits = 0;
 

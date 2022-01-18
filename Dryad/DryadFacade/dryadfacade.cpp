@@ -2,7 +2,7 @@
 #include "dryadfacadeinternal.h"
 
 Facade::Facade()
-	: _facadeInternal(std::make_unique<Internal>())
+	: _internal(std::make_unique<Internal>())
 {
 }
 
@@ -10,31 +10,37 @@ Facade::~Facade()
 {
 }
 
-void Facade::RegisterMotif(Motif motif)
+void Facade::RegisterMotif(const Motif& motif)
 {
+	_internal->RegisterMotif(motif);
 }
 
-void Facade::RegisterLandscape(LandscapeGraph landscape)
+void Facade::RegisterLandscape(const LandscapeGraph& landscape)
 {
+	_internal->RegisterLandscape(landscape);
 }
 
-void Facade::AddMotif(unsigned motifId)
+void Facade::AddMotif(const unsigned motifId)
 {
+	_internal->AddMotif(motifId);
 }
 
-void Facade::RemoveMotif(unsigned motifId)
+void Facade::RemoveMotif(const unsigned motifId)
 {
+	_internal->RemoveMotif(motifId);
 }
 
-void Facade::SetLandscape(unsigned landscapeId)
+void Facade::SetLandscape(const unsigned landscapeId)
 {
+	_internal->SetLandscape(landscapeId);
 }
 
-void Facade::Generate(unsigned durationToGenerate)
+void Facade::Generate(const unsigned durationToGenerate)
 {
+	_internal->Generate(durationToGenerate);
 }
 
-std::vector<NoteToPlay> Facade::Play(unsigned durationToPlay)
+std::vector<NoteToPlay> Facade::Play(const unsigned durationToPlay)
 {
-	return {};
+	return _internal->Play(durationToPlay);
 }

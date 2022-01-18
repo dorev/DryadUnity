@@ -62,32 +62,32 @@ public:
     {
     }
 
-    bool isValid() const
+    bool IsValid() const
     {
-        return _error.getCode() == ErrorCode::NoError;
+        return _error.GetCode() == ErrorCode::NoError;
     }
 
     explicit operator bool() const
     {
-        return isValid();
+        return IsValid();
     }
 
-    bool hasError()
+    bool HasError()
     {
-        return !isValid();
+        return !IsValid();
     }
 
-    const Error& getError()
+    const Error& GetError()
     {
         return _error;
     }
 
-    const ValueType& getValueConst()
+    const ValueType& GetValueConst()
     {
         return _value;
     }
 
-    ValueType& getValue()
+    ValueType& GetValue()
     {
         return _value;
     }
@@ -131,38 +131,38 @@ public:
     {
     }
 
-    bool isReady() const
+    bool IsReady() const
     {
         return _state != AsyncResultState::Pending
             && _state != AsyncResultState::Processing;
     }
 
-    bool isPending() const
+    bool IsPending() const
     {
         return _state == AsyncResultState::Pending;
     }
 
-    bool isProcessing() const
+    bool IsProcessing() const
     {
         return _state == AsyncResultState::Processing;
     }
 
-    bool isSuccessful() const
+    bool IsSuccessful() const
     {
         return _state == AsyncResultState::Successful;
     }
 
-    bool isCancelled() const
+    bool IsCancelled() const
     {
         return _state == AsyncResultState::Cancelled;
     }
 
-    bool isFailed() const
+    bool IsFailed() const
     {
         return _state == AsyncResultState::Failed;
     }
 
-    const AsyncResultState& getState() const
+    const AsyncResultState& GetState() const
     {
         return _state;
     }
@@ -178,12 +178,12 @@ private:
     friend Error AsyncResultUpdater::update(AsyncResult<ValueType>&, ValueType&&, AsyncResultState, bool);
     friend Error AsyncResultUpdater::update(AsyncResult<ValueType>&, Error&&, AsyncResultState, bool);
 
-    void startProcessing()
+    void StartProcessing()
     {
         _state = AsyncResultState::Processing;
     }
 
-    Error update(const ValueType& value, AsyncResultState state, bool lock = false)
+    Error Update(const ValueType& value, AsyncResultState state, bool lock = false)
     {
         if(_locked)
             return Error{ErrorCode::AsyncResultLocked, "AsyncResult already set and locked"};
@@ -193,7 +193,7 @@ private:
         return Error{0};
     }
 
-    Error update(ValueType&& value, AsyncResultState state, bool lock = false)
+    Error Update(ValueType&& value, AsyncResultState state, bool lock = false)
     {
         if(_locked)
             return Error{ ErrorCode::AsyncResultLocked, "AsyncResult already set and locked"};
@@ -204,7 +204,7 @@ private:
         return Error{0};
     }
 
-    Error update(Error&& error, AsyncResultState state, bool lock = false)
+    Error Update(Error&& error, AsyncResultState state, bool lock = false)
     {
         if(_locked)
             return Error{ ErrorCode::AsyncResultLocked, "AsyncResult already set and locked"};
@@ -228,28 +228,28 @@ public:
     DELETE_COPY_CONSTRUCTOR(AsyncResultUpdater);
 
     template <class ValueType>
-    static void startProcessing(AsyncResult<ValueType>& asyncResult)
+    static void StartProcessing(AsyncResult<ValueType>& asyncResult)
     {
-        asyncResult.startProcessing();
+        asyncResult.StartProcessing();
     }
 
     template <class ValueType>
-    static Error update(AsyncResult<ValueType>& asyncResult, const ValueType& value, AsyncResultState state, bool lock = false)
+    static Error Update(AsyncResult<ValueType>& asyncResult, const ValueType& value, AsyncResultState state, bool lock = false)
     {
         return asyncResult.update(value, state, lock);
     }
 
     template <class ValueType>
-    static Error update(AsyncResult<ValueType>& asyncResult, ValueType&& value, AsyncResultState state, bool lock = false)
+    static Error Update(AsyncResult<ValueType>& asyncResult, ValueType&& value, AsyncResultState state, bool lock = false)
     {
         return asyncResult.update(std::forward<ValueType>(value), state, lock);
     }
 
     template <class ValueType>
-    static Error update(AsyncResult<ValueType>& asyncResult, Error&& error, AsyncResultState state, bool lock = false)
+    static Error Update(AsyncResult<ValueType>& asyncResult, Error&& error, AsyncResultState state, bool lock = false)
     {
         return asyncResult.update(std::forward<Error>(error), state, lock);
     }
 };
 
-} // namespace Utils
+} // namespace Dryad
