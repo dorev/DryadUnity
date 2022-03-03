@@ -4,14 +4,10 @@
 #include "dryad/result.h"
 #include "dryad/types.h"
 
-#include "dryad/composer/motifwriter.h"
-#include "dryad/composer/progressionwriter.h"
-
 #include "dryad/harmony/landscapegraph.h"
 #include "dryad/harmony/motif.h"
 #include "dryad/harmony/harmonizer.h"
 
-#include "dryad/score/score.h"
 
 namespace Dryad
 {
@@ -29,21 +25,11 @@ public:
     {
     }
 
-    Result<> GeneratePhrases(U32 amount)
-    {
-        if(amount == 0)
-            return {ErrorCode::UselessCall};
-
-        // extend using the current active harmony graph
-        return Success;
-    }
-
     Result<> GenerateNotesUntil(ScoreTime scoreTime)
     {
         Position* position = _score.GetFirstUncommittedPosition();
         if(position == nullptr)
             return {ErrorCode::PositionDoesNotExist};
-
         if(scoreTime < position->GetScoreTime())
             return {ErrorCode::CannotWritePastElements};
 
@@ -55,7 +41,6 @@ public:
             {
                 const String& motifName = motifChange.first;
                 U32 amount = motifChange.second;
-
                 if (amount > 0)
                     _motifWriter.IncreaseMotifPresence(_motifs.at(motifName), amount);
                 else if (amount < 0)
@@ -68,19 +53,21 @@ public:
         return Success;
     }
 
-    void TransitionToGraph(const String& graphName)
+    Result<> TransitionToLandscape(const String& landscapeName)
     {
-        // LATER!!
+        if (LandscapeExists(landscapeName))
+            return { ErrorCode::LandscapeDoesNotExist };
+        _previousLandscape = _currentLandscape;
+        _currentLandscape = landscapeName;
+        return Success;
     }
 
     Result<> RemoveMotif(const String& motifName)
     {
         if(!MotifExists(motifName))
             return {ErrorCode::MotifDoesNotExist};
-
         if(_motifsActiveInstances[motifName] == 0)
             return {ErrorCode::MotifAlreadyFullyDeactivated};
-
         _motifsChanges[motifName]--;
         return Success;
     }
@@ -89,7 +76,6 @@ public:
     {
          if(!MotifExists(motifName))
             return {ErrorCode::MotifDoesNotExist};
-
         _motifsChanges[motifName]++;
         return Success;
     }
@@ -103,18 +89,16 @@ public:
     {
         if (MotifExists(motifName))
             return { ErrorCode::MotifAlreadyExists };
-
         _motifs[motifName] = motif;
         _motifsChanges[motifName] = 0;
         return Success;
     }
 
-    Result<> RegisterLandscapeGraph(const String& graphName, const LandscapeGraph& graph)
+    Result<> RegisterLandscape(const String& landscapeName, const LandscapeGraph& landscapeGraph)
     {
-        if (GraphExists(graphName))
-            return { ErrorCode::GraphAlreadyExists };
-
-        _landscapes[graphName] = graph;
+        if (LandscapeExists(landscapeName))
+            return { ErrorCode::LandscapeAlreadyExists };
+        _landscapes[landscapeName] = landscapeGraph;
         return Success;
     }
 
@@ -128,7 +112,6 @@ private:
             if(amount != 0)
                 return true;
         }
-
         return false;
     }
 
@@ -142,26 +125,25 @@ private:
         return _motifs.find(motifDescriptor.GetName()) != _motifs.end();
     }
 
-    bool GraphExists(const String& graphName) const
+    bool LandscapeExists(const String& graphName) const
     {
         return _landscapes.find(graphName) != _landscapes.end();
     }
 
-    bool GraphExists(const LandscapeGraphDescriptor& graphDescriptor) const
+    bool LandscapeExists(const LandscapeGraphDescriptor& graphDescriptor) const
     {
         return _landscapes.find(graphDescriptor.GetName()) != _landscapes.end();
     }
 
     Harmonizer _harmonizer;
-    MotifWriter _motifWriter;
-    ProgressionWriter _progressionWriter;
 
     Map<String, Motif> _motifs;
     Map<String, U32> _motifsChanges;
     Map<String, U32> _motifsActiveInstances;
 
     Map<String, LandscapeGraph> _landscapes;
-    U32 _currentLandscape;
+    String _currentLandscape;
+    String _previousLandscape;
 
     Score& _score;
 };

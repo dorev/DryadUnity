@@ -11,6 +11,17 @@
 
 #include "dryad/score/score.h"
 
+
+
+/*
+en bout de ligne on a jamais besoin de tempo ici, on indiquement seulement combien
+de mesures ou de beat on veut générer/commit
+
+le tempo va être géré par le player dans tout ça, pas pas Dryad qui est le "générateur"
+de la musique
+*/
+
+
 namespace Dryad
 {
 
@@ -19,91 +30,50 @@ class Session
 
 public:
 
-    Session(TimestampMs startTime = 0)
-        : _startTimestamp(startTime)
-        , _tempo(0)
-        , _latestTimestamp(0)
-        , _minPregeneratedNotesDuration(Constants::Duration::Whole * 2)
-        , _minPregeneratedPhrases(2)
+    Session()
+        : _committedScoreTime(0)
+        , _generatedScoreTime(0)
         , _score(*this)
         , _composer(_score)
     {
     }
 
-    Result<> Update(TimestampMs currentTimestamp)
+    Score& GetScore()
     {
-        // Commit past notes
-        if (currentTimestamp <= _latestTimestamp)
-            return {ErrorCode::CannotCommitPastElements};
-
-        _latestTimestamp = currentTimestamp;
-
-        Result<> commitResult = _score.CommitPositionsUntil(_latestTimestamp);
-        if(commitResult.HasError())
-            return commitResult.GetError();
-
-        // Do we have enough phrases progressions generated?
-        U32 uncommittedPhraseCount = _score.UncommittedPhraseCount();
-        U32 phraseDifference = _minPregeneratedPhrases - uncommittedPhraseCount;
-        if (phraseDifference > 1)
-        {
-            Result<> generateProgResult = _composer.GeneratePhrases(phraseDifference);
-            if(generateProgResult.HasError())
-                return generateProgResult.GetError();
-        }
-
-        // Do we have enough notes generated?
-        Position* position = _score.GetFirstUncommittedPosition();
-        if(position == nullptr)
-            return {ErrorCode::PositionDoesNotExist};
-
-        ScoreTime scoreTime = position->GetScoreTime();
-
-        return _composer.GenerateNotesUntil(scoreTime + _minPregeneratedNotesDuration);
+        return _score;
     }
 
-    Result<Vector<MidiNote>> FetchUpcomingNotes(TimestampMs currentTimestamp)
+    Session& GetSession()
     {
-        Result<> updateResult = Update(currentTimestamp);
-        if(updateResult.HasError())
-            return updateResult.GetError();
+        return *this;
+    }
 
+    Result<Vector<MidiNote>> Commit(ScoreTime deltaScoreTime)
+    {
+        // Early out
+        if (deltaScoreTime == 0)
+            return { ErrorCode::UselessCall };
         Position* position = _score.GetFirstUncommittedPosition();
-        if(position == nullptr)
-            return {ErrorCode::PositionDoesNotExist};
+        if (position == nullptr)
+            return { ErrorCode::NothingToCommit };
 
-        Result<> harmonizeResult = _composer.HarmonizeFrom(*position);
-        if(harmonizeResult.HasError())
-            return harmonizeResult.GetError();
-
-        // Return all notes currently generated and harmonized
+        // Gather newly committed notes
+        _committedScoreTime += deltaScoreTime;
         Vector<MidiNote> result;
-
-        while (position != nullptr)
+        while (position != nullptr && position->GetScoreTime() < _committedScoreTime)
         {
-            List<Note>& notes = position->GetChildren();
-
-            if (!notes.empty())
-            {
-                TimestampMs timestamp = ScoreTimeToTimestamp(
-                    position->GetScoreTime(),
-                    _tempo,
-                    _startTimestamp);
-
-                for(const Note& note : notes)
-                    result.emplace_back(
-                        note.midi,
-                        note.duration,
-                        timestamp);
-            }
-
+            for (const Note& note : position->GetChildren())
+                result.emplace_back(note.GetMidi(), note.GetDuration(), position->GetScoreTime());
+            position->Commit();
             position = position->Next();
         }
-
-        if(result.empty())
-            return {ErrorCode::NoUpcomingNotesAvailable};
-
         return result;
+    }
+
+    Result<> Generate(ScoreTime scoreTime)
+    {
+        // check if any motif changed, else bailout
+        // regenerate un-committed motifs cells that has not been started yet
     }
 
     // Forwarding to composer
@@ -113,9 +83,9 @@ public:
         return _composer.RegisterMotif(motifName, motif);
     }
 
-    Result<> RegisterLandscapeGraph(const String& graphName, const LandscapeGraph& graph)
+    Result<> RegisterLandscapeGraph(const String& landscapeName, const LandscapeGraph& landscapeGraph)
     {
-        return _composer.RegisterLandscapeGraph(graphName, graph);
+        return _composer.RegisterLandscape(landscapeName, landscapeGraph);
     }
 
     Result<> RemoveMotif(const String& motifName)
@@ -125,29 +95,25 @@ public:
 
     Result<> AddMotif(const String& motifName)
     {
-         return _composer.AddMotif(motifName);
+        return _composer.AddMotif(motifName);
     }
 
-    Score& GetScore() { return _score; }
-    Session& GetSession() { return *this; }
-    void SetTempo(U32 tempo) { _tempo = tempo; }
-    U32 GetTempo() const { return _tempo; }
+    Result<> SetLandscape(const String& landscapeName)
+    {
+        return _composer.TransitionToLandscape(landscapeName);
+    }
 
 private:
-
-    U32 _tempo;
-    TimestampMs _startTimestamp;
-    TimestampMs _latestTimestamp;
+    
     IdProvider _idProvider;
-
-    ScoreTime _minPregeneratedNotesDuration;
-    U32 _minPregeneratedPhrases;
-
+    ScoreTime _committedScoreTime;
+    ScoreTime _generatedScoreTime;
 
     Score _score;
     Composer _composer;
     Map<String, Motif> _motifs;
-    Map<String, LandscapeGraph> _graphs;
+    Map<String, Voice> _voices;
+    Map<String, LandscapeGraph> _landscapes;
 
     //void stop();
     //void setPhraseLength(uint phraseLength);

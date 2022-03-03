@@ -25,32 +25,8 @@
     <ClInclude Include="include\dryad\crtphelper.h">
       <Filter>dryad</Filter>
     </ClInclude>
-    <ClInclude Include="include\dryad\score\measure.h">
-      <Filter>dryad\score</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dryad\score\note.h">
-      <Filter>dryad\score</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dryad\score\phrase.h">
-      <Filter>dryad\score</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dryad\score\position.h">
-      <Filter>dryad\score</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dryad\score\score.h">
-      <Filter>dryad\score</Filter>
-    </ClInclude>
     <ClInclude Include="include\dryad\idprovider.h">
       <Filter>dryad</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dryad\score\traits\scoretraits.h">
-      <Filter>dryad\score\traits</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dryad\score\traits\traitscoreexplorable.h">
-      <Filter>dryad\score\traits</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dryad\score\traits\traitscorewritable.h">
-      <Filter>dryad\score\traits</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\harmony\landscapegraph.h">
       <Filter>dryad\harmony</Filter>
@@ -67,23 +43,32 @@
     <ClInclude Include="include\dryad\harmony\harmonizer.h">
       <Filter>dryad\harmony</Filter>
     </ClInclude>
-    <ClInclude Include="include\dryad\score\traits\traitsutils.h">
-      <Filter>dryad\score\traits</Filter>
-    </ClInclude>
     <ClInclude Include="include\dryad\session.h">
       <Filter>dryad</Filter>
     </ClInclude>
-    <ClInclude Include="include\dryad\composer\motifwriter.h">
-      <Filter>dryad\composer</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dryad\composer\progressionwriter.h">
-      <Filter>dryad\composer</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dryad\composer\composer.h">
-      <Filter>dryad\composer</Filter>
-    </ClInclude>
     <ClInclude Include="include\dryad\midinote.h">
       <Filter>dryad</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\harmony\motifnote.h">
+      <Filter>dryad\harmony</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\harmony\degree.h">
+      <Filter>dryad\harmony</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\score\instant.h">
+      <Filter>dryad\score</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\score\notedata.h">
+      <Filter>dryad\score</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\score\voice.h">
+      <Filter>dryad\score</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\harmony\composer.h">
+      <Filter>dryad\harmony</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\score\score.h">
+      <Filter>dryad\score</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -93,14 +78,8 @@
     <Filter Include="dryad\score">
       <UniqueIdentifier>{c2b7d7a6-4849-4bd1-8e47-bf5601cf0ab2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="dryad\score\traits">
-      <UniqueIdentifier>{f423fdf6-d2f4-452e-b93d-668ec372100b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="dryad\harmony">
       <UniqueIdentifier>{bafe32e0-7440-4500-b2ae-d750ef26b92b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="dryad\composer">
-      <UniqueIdentifier>{61cf8a0c-5d15-4c6f-8bcc-6fe635a6104e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

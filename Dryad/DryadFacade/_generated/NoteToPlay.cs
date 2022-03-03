@@ -84,6 +84,16 @@ public class NoteToPlay : global::System.IDisposable {
     } 
   }
 
+  public bool played {
+    set {
+      DryadFacadePINVOKE.NoteToPlay_played_set(swigCPtr, value);
+    } 
+    get {
+      bool ret = DryadFacadePINVOKE.NoteToPlay_played_get(swigCPtr);
+      return ret;
+    } 
+  }
+
   public NoteToPlay() : this(DryadFacadePINVOKE.new_NoteToPlay(), true) {
   }
 

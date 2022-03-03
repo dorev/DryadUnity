@@ -19,31 +19,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\dryad\composer\composer.h" />
-    <ClInclude Include="include\dryad\composer\motifwriter.h" />
-    <ClInclude Include="include\dryad\composer\progressionwriter.h" />
     <ClInclude Include="include\dryad\constants.h" />
     <ClInclude Include="include\dryad\definitions.h" />
     <ClInclude Include="include\dryad\error.h" />
     <ClInclude Include="include\dryad\descriptors.h" />
+    <ClInclude Include="include\dryad\harmony\composer.h" />
+    <ClInclude Include="include\dryad\harmony\degree.h" />
     <ClInclude Include="include\dryad\harmony\harmonizer.h" />
     <ClInclude Include="include\dryad\harmony\landscapegraph.h" />
     <ClInclude Include="include\dryad\harmony\landscapenode.h" />
     <ClInclude Include="include\dryad\harmony\motif.h" />
+    <ClInclude Include="include\dryad\harmony\motifnote.h" />
     <ClInclude Include="include\dryad\harmony\scale.h" />
     <ClInclude Include="include\dryad\idprovider.h" />
     <ClInclude Include="include\dryad\midinote.h" />
     <ClInclude Include="include\dryad\result.h" />
-    <ClInclude Include="include\dryad\score\measure.h" />
-    <ClInclude Include="include\dryad\score\note.h" />
-    <ClInclude Include="include\dryad\score\phrase.h" />
-    <ClInclude Include="include\dryad\score\position.h" />
-    <ClInclude Include="include\dryad\score\score.h" />
-    <ClInclude Include="include\dryad\score\traits\scoretraits.h" />
-    <ClInclude Include="include\dryad\score\traits\traitscoreexplorable.h" />
-    <ClInclude Include="include\dryad\score\traits\traitscorewritable.h" />
+    <ClInclude Include="include\dryad\score\instant.h" />
+    <ClInclude Include="include\dryad\score\notedata.h" />
     <ClInclude Include="include\dryad\crtphelper.h" />
-    <ClInclude Include="include\dryad\score\traits\traitsutils.h" />
+    <ClInclude Include="include\dryad\score\score.h" />
+    <ClInclude Include="include\dryad\score\voice.h" />
     <ClInclude Include="include\dryad\session.h" />
     <ClInclude Include="include\dryad\types.h" />
     <ClInclude Include="include\dryad\utils.h" />

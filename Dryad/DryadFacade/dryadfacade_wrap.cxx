@@ -886,6 +886,28 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_Dryad_NoteToPlay_parentMotif_get(void
 }
 
 
+SWIGEXPORT void SWIGSTDCALL CSharp_Dryad_NoteToPlay_played_set(void * jarg1, unsigned int jarg2) {
+  NoteToPlay *arg1 = (NoteToPlay *) 0 ;
+  bool arg2 ;
+  
+  arg1 = (NoteToPlay *)jarg1; 
+  arg2 = jarg2 ? true : false; 
+  if (arg1) (arg1)->played = arg2;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_Dryad_NoteToPlay_played_get(void * jarg1) {
+  unsigned int jresult ;
+  NoteToPlay *arg1 = (NoteToPlay *) 0 ;
+  bool result;
+  
+  arg1 = (NoteToPlay *)jarg1; 
+  result = (bool) ((arg1)->played);
+  jresult = result; 
+  return jresult;
+}
+
+
 SWIGEXPORT void * SWIGSTDCALL CSharp_Dryad_new_NoteToPlay() {
   void * jresult ;
   NoteToPlay *result = 0 ;
@@ -1619,33 +1641,29 @@ SWIGEXPORT void SWIGSTDCALL CSharp_Dryad_delete_Facade(void * jarg1) {
 
 SWIGEXPORT void SWIGSTDCALL CSharp_Dryad_Facade_RegisterMotif(void * jarg1, void * jarg2) {
   Facade *arg1 = (Facade *) 0 ;
-  Motif arg2 ;
-  Motif *argp2 ;
+  Motif *arg2 = 0 ;
   
   arg1 = (Facade *)jarg1; 
-  argp2 = (Motif *)jarg2; 
-  if (!argp2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "Attempt to dereference null Motif", 0);
+  arg2 = (Motif *)jarg2;
+  if (!arg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "Motif const & type is null", 0);
     return ;
-  }
-  arg2 = *argp2; 
-  (arg1)->RegisterMotif(arg2);
+  } 
+  (arg1)->RegisterMotif((Motif const &)*arg2);
 }
 
 
 SWIGEXPORT void SWIGSTDCALL CSharp_Dryad_Facade_RegisterLandscape(void * jarg1, void * jarg2) {
   Facade *arg1 = (Facade *) 0 ;
-  LandscapeGraph arg2 ;
-  LandscapeGraph *argp2 ;
+  LandscapeGraph *arg2 = 0 ;
   
   arg1 = (Facade *)jarg1; 
-  argp2 = (LandscapeGraph *)jarg2; 
-  if (!argp2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "Attempt to dereference null LandscapeGraph", 0);
+  arg2 = (LandscapeGraph *)jarg2;
+  if (!arg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "LandscapeGraph const & type is null", 0);
     return ;
-  }
-  arg2 = *argp2; 
-  (arg1)->RegisterLandscape(arg2);
+  } 
+  (arg1)->RegisterLandscape((LandscapeGraph const &)*arg2);
 }
 
 
@@ -1679,13 +1697,17 @@ SWIGEXPORT void SWIGSTDCALL CSharp_Dryad_Facade_SetLandscape(void * jarg1, unsig
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_Dryad_Facade_Generate(void * jarg1, unsigned int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_Dryad_Facade_Generate(void * jarg1, unsigned int jarg2) {
+  void * jresult ;
   Facade *arg1 = (Facade *) 0 ;
   unsigned int arg2 ;
+  std::vector< NoteToPlay > result;
   
   arg1 = (Facade *)jarg1; 
   arg2 = (unsigned int)jarg2; 
-  (arg1)->Generate(arg2);
+  result = (arg1)->Generate(arg2);
+  jresult = new std::vector< NoteToPlay >((const std::vector< NoteToPlay > &)result); 
+  return jresult;
 }
 
 
@@ -1697,7 +1719,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_Dryad_Facade_Play(void * jarg1, unsigned in
   
   arg1 = (Facade *)jarg1; 
   arg2 = (unsigned int)jarg2; 
-  result = (arg1)->Play(arg2);
+  result = (arg1)->Commit(arg2);
   jresult = new std::vector< NoteToPlay >((const std::vector< NoteToPlay > &)result); 
   return jresult;
 }

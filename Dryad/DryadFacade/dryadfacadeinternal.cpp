@@ -4,7 +4,8 @@
 
 Facade::Internal::Internal()
 {
-
+	// init session
+	_session()
 }
 
 Facade::Internal::~Internal()
@@ -31,11 +32,12 @@ void Facade::Internal::SetLandscape(const unsigned landscapeId)
 {
 }
 
-void Facade::Internal::Generate(const unsigned durationToGenerate)
+std::vector<NoteToPlay> Facade::Internal::Generate(const unsigned durationToGenerate)
 {
+	return {};
 }
 
-std::vector<NoteToPlay> Facade::Internal::Play(const unsigned durationToPlay)
+std::vector<NoteToPlay> Facade::Internal::Commit(const unsigned durationToPlay)
 {
 	return {};
 }

@@ -128,8 +128,7 @@ public:
     bool operator<(const LandscapeNodeId& other) const
     {
         return getGraphDescriptor().GetId() < other.getGraphDescriptor().GetId()
-            || (getGraphDescriptor().GetId() == other.getGraphDescriptor().GetId()
-                && GetId() < other.GetId());
+            || (getGraphDescriptor().GetId() == other.getGraphDescriptor().GetId() && GetId() < other.GetId());
     }
 
 private:

@@ -217,6 +217,12 @@ class DryadFacadePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_NoteToPlay_parentMotif_get")]
   public static extern uint NoteToPlay_parentMotif_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_NoteToPlay_played_set")]
+  public static extern void NoteToPlay_played_set(global::System.Runtime.InteropServices.HandleRef jarg1, bool jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_NoteToPlay_played_get")]
+  public static extern bool NoteToPlay_played_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_new_NoteToPlay")]
   public static extern global::System.IntPtr new_NoteToPlay();
 
@@ -437,7 +443,7 @@ class DryadFacadePINVOKE {
   public static extern void Facade_SetLandscape(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Facade_Generate")]
-  public static extern void Facade_Generate(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
+  public static extern global::System.IntPtr Facade_Generate(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Facade_Play")]
   public static extern global::System.IntPtr Facade_Play(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);

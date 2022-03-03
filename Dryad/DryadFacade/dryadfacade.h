@@ -10,6 +10,7 @@ struct NoteToPlay
     unsigned midiValue;
     unsigned duration;
     unsigned parentMotif;
+    bool played;
 };
 
 struct MotifNote
@@ -22,8 +23,8 @@ struct MotifNote
 struct Motif
 {
     unsigned id;
-    std::string name;
     unsigned duration;
+    std::string name;
     std::vector<MotifNote> notes;
 };
 
@@ -36,9 +37,9 @@ enum class FlatOrSharp
 
 struct Scale
 {
-    std::string name;
     unsigned rootNote;
     FlatOrSharp flatOrSharp;
+    std::string name;
     std::vector<unsigned> intervals;
 };
 
@@ -95,8 +96,8 @@ public:
     void AddMotif(const unsigned motifId);
     void RemoveMotif(const unsigned motifId);
     void SetLandscape(const unsigned landscapeId);
-    void Generate(const unsigned durationToGenerate);
-    std::vector<NoteToPlay> Play(unsigned durationToPlay);
+    std::vector<NoteToPlay> Generate(const unsigned durationToGenerate);
+    std::vector<NoteToPlay> Commit(unsigned durationToPlay);
 
 private:
     class Internal;

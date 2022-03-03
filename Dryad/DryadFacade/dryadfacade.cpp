@@ -35,12 +35,12 @@ void Facade::SetLandscape(const unsigned landscapeId)
 	_internal->SetLandscape(landscapeId);
 }
 
-void Facade::Generate(const unsigned durationToGenerate)
+std::vector<NoteToPlay> Facade::Generate(const unsigned durationToGenerate)
 {
-	_internal->Generate(durationToGenerate);
+	return _internal->Generate(durationToGenerate);
 }
 
-std::vector<NoteToPlay> Facade::Play(const unsigned durationToPlay)
+std::vector<NoteToPlay> Facade::Commit(const unsigned durationToPlay)
 {
-	return _internal->Play(durationToPlay);
+	return _internal->Commit(durationToPlay);
 }

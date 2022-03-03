@@ -69,8 +69,9 @@ public class Facade : global::System.IDisposable {
     DryadFacadePINVOKE.Facade_SetLandscape(swigCPtr, landscapeId);
   }
 
-  public void Generate(uint durationToGenerate) {
-    DryadFacadePINVOKE.Facade_Generate(swigCPtr, durationToGenerate);
+  public NoteToPlayList Generate(uint durationToGenerate) {
+    NoteToPlayList ret = new NoteToPlayList(DryadFacadePINVOKE.Facade_Generate(swigCPtr, durationToGenerate), true);
+    return ret;
   }
 
   public NoteToPlayList Play(uint durationToPlay) {

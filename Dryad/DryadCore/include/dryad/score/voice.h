@@ -2,18 +2,22 @@
 
 #include "dryad/types.h"
 #include "dryad/descriptors.h"
-#include "dryad/score/instant.h"
 
 namespace Dryad
 {
 
-class Score
+class Voice
 {
 public:
 
+    const VoiceDescriptor& getDescriptor() const
+    {
+        return _descriptor;
+    }
+
 private:
 
-    List<Instant> _instants;
+    VoiceDescriptor _descriptor;
 };
 
 } // namespace Dryad
