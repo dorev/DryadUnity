@@ -7,7 +7,8 @@
 #include "dryad/types.h"
 #include "dryad/utils.h"
 
-#include "dryad/composer/composer.h"
+#include "dryad/harmony/composer.h"
+#include "dryad/harmony/note.h"
 
 #include "dryad/score/score.h"
 
@@ -27,56 +28,20 @@ namespace Dryad
 
 class Session
 {
-
 public:
 
-    Session()
-        : _committedScoreTime(0)
-        , _generatedScoreTime(0)
-        , _score(*this)
-        , _composer(_score)
+    Vector<MidiNote>&& Commit(ScoreTime deltaScoreTime)
     {
-    }
-
-    Score& GetScore()
-    {
-        return _score;
-    }
-
-    Session& GetSession()
-    {
-        return *this;
-    }
-
-    Result<Vector<MidiNote>> Commit(ScoreTime deltaScoreTime)
-    {
-        // Early out
-        if (deltaScoreTime == 0)
-            return { ErrorCode::UselessCall };
-        Position* position = _score.GetFirstUncommittedPosition();
-        if (position == nullptr)
-            return { ErrorCode::NothingToCommit };
-
-        // Gather newly committed notes
-        _committedScoreTime += deltaScoreTime;
-        Vector<MidiNote> result;
-        while (position != nullptr && position->GetScoreTime() < _committedScoreTime)
-        {
-            for (const Note& note : position->GetChildren())
-                result.emplace_back(note.GetMidi(), note.GetDuration(), position->GetScoreTime());
-            position->Commit();
-            position = position->Next();
-        }
-        return result;
+        return std::move(_score.Commit(deltaScoreTime));
     }
 
     Result<> Generate(ScoreTime scoreTime)
     {
-        // check if any motif changed, else bailout
-        // regenerate un-committed motifs cells that has not been started yet
     }
 
+    //
     // Forwarding to composer
+    //
 
     Result<> RegisterMotif(const String& motifName, const Motif& motif)
     {
@@ -88,14 +53,9 @@ public:
         return _composer.RegisterLandscape(landscapeName, landscapeGraph);
     }
 
-    Result<> RemoveMotif(const String& motifName)
+    Result<> AddMotif(const String& motifName, S32 amount = 1)
     {
-        return _composer.RemoveMotif(motifName);
-    }
-
-    Result<> AddMotif(const String& motifName)
-    {
-        return _composer.AddMotif(motifName);
+        return _composer.AddMotif(motifName, amount);
     }
 
     Result<> SetLandscape(const String& landscapeName)
@@ -104,20 +64,9 @@ public:
     }
 
 private:
-    
-    IdProvider _idProvider;
-    ScoreTime _committedScoreTime;
-    ScoreTime _generatedScoreTime;
-
     Score _score;
     Composer _composer;
-    Map<String, Motif> _motifs;
-    Map<String, Voice> _voices;
-    Map<String, LandscapeGraph> _landscapes;
-
-    //void stop();
-    //void setPhraseLength(uint phraseLength);
-    //Error transitionToGraph(const String& name);
+    IdProvider _idProvider;
 };
 
 } // namespace Dryad

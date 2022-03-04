@@ -12,10 +12,14 @@ class Voice;
 class Motif
 {
 public:
-
-    const MotifDescriptor& getDescriptor() const
+    U32 GetId() const
     {
-        return _descriptor;
+        return _descriptor.GetId();
+    }
+
+    const String& GetName() const
+    {
+        return _descriptor.GetName();
     }
 
     const Vector<MotifNote>& GetNotes() const
@@ -29,9 +33,8 @@ public:
     }
 
 private:
-
+    ScoreTime _duration;
     Vector<MotifNote> _notes;
-    ScoreTime duration;
     MotifDescriptor _descriptor;
     Voice* _voice;
 };

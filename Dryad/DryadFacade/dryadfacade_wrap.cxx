@@ -1032,6 +1032,28 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_Dryad_Motif_id_get(void * jarg1) {
 }
 
 
+SWIGEXPORT void SWIGSTDCALL CSharp_Dryad_Motif_duration_set(void * jarg1, unsigned int jarg2) {
+  Motif *arg1 = (Motif *) 0 ;
+  unsigned int arg2 ;
+  
+  arg1 = (Motif *)jarg1; 
+  arg2 = (unsigned int)jarg2; 
+  if (arg1) (arg1)->duration = arg2;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_Dryad_Motif_duration_get(void * jarg1) {
+  unsigned int jresult ;
+  Motif *arg1 = (Motif *) 0 ;
+  unsigned int result;
+  
+  arg1 = (Motif *)jarg1; 
+  result = (unsigned int) ((arg1)->duration);
+  jresult = result; 
+  return jresult;
+}
+
+
 SWIGEXPORT void SWIGSTDCALL CSharp_Dryad_Motif_name_set(void * jarg1, char * jarg2) {
   Motif *arg1 = (Motif *) 0 ;
   std::string *arg2 = 0 ;
@@ -1055,28 +1077,6 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_Dryad_Motif_name_get(void * jarg1) {
   arg1 = (Motif *)jarg1; 
   result = (std::string *) & ((arg1)->name);
   jresult = SWIG_csharp_string_callback(result->c_str()); 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_Dryad_Motif_duration_set(void * jarg1, unsigned int jarg2) {
-  Motif *arg1 = (Motif *) 0 ;
-  unsigned int arg2 ;
-  
-  arg1 = (Motif *)jarg1; 
-  arg2 = (unsigned int)jarg2; 
-  if (arg1) (arg1)->duration = arg2;
-}
-
-
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_Dryad_Motif_duration_get(void * jarg1) {
-  unsigned int jresult ;
-  Motif *arg1 = (Motif *) 0 ;
-  unsigned int result;
-  
-  arg1 = (Motif *)jarg1; 
-  result = (unsigned int) ((arg1)->duration);
-  jresult = result; 
   return jresult;
 }
 
@@ -1121,33 +1121,6 @@ SWIGEXPORT void SWIGSTDCALL CSharp_Dryad_delete_Motif(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_Dryad_Scale_name_set(void * jarg1, char * jarg2) {
-  Scale *arg1 = (Scale *) 0 ;
-  std::string *arg2 = 0 ;
-  
-  arg1 = (Scale *)jarg1; 
-  if (!jarg2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
-    return ;
-  }
-  std::string arg2_str(jarg2);
-  arg2 = &arg2_str; 
-  if (arg1) (arg1)->name = *arg2;
-}
-
-
-SWIGEXPORT char * SWIGSTDCALL CSharp_Dryad_Scale_name_get(void * jarg1) {
-  char * jresult ;
-  Scale *arg1 = (Scale *) 0 ;
-  std::string *result = 0 ;
-  
-  arg1 = (Scale *)jarg1; 
-  result = (std::string *) & ((arg1)->name);
-  jresult = SWIG_csharp_string_callback(result->c_str()); 
-  return jresult;
-}
-
-
 SWIGEXPORT void SWIGSTDCALL CSharp_Dryad_Scale_rootNote_set(void * jarg1, unsigned int jarg2) {
   Scale *arg1 = (Scale *) 0 ;
   unsigned int arg2 ;
@@ -1188,6 +1161,33 @@ SWIGEXPORT int SWIGSTDCALL CSharp_Dryad_Scale_flatOrSharp_get(void * jarg1) {
   arg1 = (Scale *)jarg1; 
   result = (FlatOrSharp) ((arg1)->flatOrSharp);
   jresult = (int)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_Dryad_Scale_name_set(void * jarg1, char * jarg2) {
+  Scale *arg1 = (Scale *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  arg1 = (Scale *)jarg1; 
+  if (!jarg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
+    return ;
+  }
+  std::string arg2_str(jarg2);
+  arg2 = &arg2_str; 
+  if (arg1) (arg1)->name = *arg2;
+}
+
+
+SWIGEXPORT char * SWIGSTDCALL CSharp_Dryad_Scale_name_get(void * jarg1) {
+  char * jresult ;
+  Scale *arg1 = (Scale *) 0 ;
+  std::string *result = 0 ;
+  
+  arg1 = (Scale *)jarg1; 
+  result = (std::string *) & ((arg1)->name);
+  jresult = SWIG_csharp_string_callback(result->c_str()); 
   return jresult;
 }
 
@@ -1711,7 +1711,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_Dryad_Facade_Generate(void * jarg1, unsigne
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_Dryad_Facade_Play(void * jarg1, unsigned int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_Dryad_Facade_Commit(void * jarg1, unsigned int jarg2) {
   void * jresult ;
   Facade *arg1 = (Facade *) 0 ;
   unsigned int arg2 ;

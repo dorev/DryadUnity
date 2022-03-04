@@ -1,59 +1,25 @@
 #pragma once
 
 #include "dryad/types.h"
+#include "dryad/score/scorenote.h"
 
 namespace Dryad
 {
-
-    class Degree
-    {
-        U8 _number;
-        U8 _scaleOffsets[4];
-    };
-
-    class Scale
-    {
-        Vector<Degree> _degrees;
-        U32 _tonic;
-    };
-
-    class LandscapeNode
-    {
-        U32 _duration;
-        Degree* _degree;
-    };
-
-    class Progression
-    {
-        Vector<LandscapeNode*> _chords;
-    };
-
-    class NoteData
-    {
-        U32 _midi;
-        U32 _duration;
-        Motif* _motif;
-        Voice* _voice;
-    };
-
     class Instant
     {
-        Vector<NoteData> _notes;
-        LandscapeNode* _landscape;
-        Instant* _next;
-        Instant* prev;
-        ScoreTime _scoreTime;
-    };
+    public:
 
-    class Session
-    {
-        List<Instant> _score;
-        Map<String, LandscapeNode> _landscapes;
-        Map<String, Motif> _motifs;
-        Scale* _currentScale;
-        LandscapeNode* _currentLandscape;
-        LandscapeNode* _previousLandscape;
-        bool _transitioningLandscape;
-        Instant* _firstUncommitted;
+        ScoreTime GetScoreTime() const
+        {
+            return _scoreTime;
+        }
+
+    private:
+        ScoreTime _scoreTime;
+        Scale* _scale;
+        LandscapeNode* _landscapeNode;
+        Vector<ScoreNote> _notes;
+        Instant* _next;
+        Instant* _prev;
     };
 }

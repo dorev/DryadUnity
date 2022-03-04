@@ -14,26 +14,24 @@ namespace Dryad
 
 class Composer
 {
-
 public:
-
     Composer(Score& score)
         : _score(score)
         , _harmonizer(_score)
-        , _motifWriter(_score)
-        , _progressionWriter(_score)
     {
     }
 
     Result<> GenerateNotesUntil(ScoreTime scoreTime)
     {
-        Position* position = _score.GetFirstUncommittedPosition();
-        if(position == nullptr)
+        Instant* instant = _score.GetFirstUncommittedInstant();
+        if(instant == nullptr)
             return {ErrorCode::PositionDoesNotExist};
-        if(scoreTime < position->GetScoreTime())
+        if(scoreTime < instant->GetScoreTime())
             return {ErrorCode::CannotWritePastElements};
 
+        //
         // FIND A WAY TO QUERY WHERE A MOTIF STARTS
+        //
 
         if (!MotifsChanged())
         {
@@ -41,10 +39,8 @@ public:
             {
                 const String& motifName = motifChange.first;
                 U32 amount = motifChange.second;
-                if (amount > 0)
-                    _motifWriter.IncreaseMotifPresence(_motifs.at(motifName), amount);
-                else if (amount < 0)
-                    _motifWriter.DecreaseMotifPresence(_motifs.at(motifName), amount);
+                if (amount != 0)
+                    _motifsActiveInstances.at(motifName) += amount;
             }
         }
 
@@ -62,27 +58,25 @@ public:
         return Success;
     }
 
-    Result<> RemoveMotif(const String& motifName)
+    Result<> AddMotif(const String& motifName, S32 amount)
     {
         if(!MotifExists(motifName))
-            return {ErrorCode::MotifDoesNotExist};
-        if(_motifsActiveInstances[motifName] == 0)
-            return {ErrorCode::MotifAlreadyFullyDeactivated};
-        _motifsChanges[motifName]--;
+            return { ErrorCode::MotifDoesNotExist };
+        if (amount != 0)
+        {
+            if ((static_cast<S32>(_motifsChanges[motifName]) + amount) < 0)
+                _motifsChanges[motifName] = 0;
+            else
+                _motifsChanges[motifName] += amount;
+        }
         return Success;
     }
 
-    Result<> AddMotif(const String& motifName)
+    Result<> HarmonizeFrom(Instant* instant)
     {
-         if(!MotifExists(motifName))
-            return {ErrorCode::MotifDoesNotExist};
-        _motifsChanges[motifName]++;
-        return Success;
-    }
-
-    Result<> HarmonizeFrom(Position& position)
-    {
-        return _harmonizer.HarmonizeFrom(position);
+        if(instant != nullptr)
+            return _harmonizer.HarmonizeFrom(*instant);
+        return { ErrorCode::NullPointer };
     }
 
     Result<> RegisterMotif(const String& motifName, const Motif& motif)
@@ -103,6 +97,11 @@ public:
     }
 
 private:
+
+    bool LandscapeChanged() const
+    {
+
+    }
 
     bool MotifsChanged() const
     {
@@ -135,17 +134,21 @@ private:
         return _landscapes.find(graphDescriptor.GetName()) != _landscapes.end();
     }
 
-    Harmonizer _harmonizer;
 
+    // COMMENT ON VA GÉRER LES CHANGEMENTS DE GAMME??
+
+    Score& _score;
+    Harmonizer _harmonizer;
+    String _currentLandscape;
+    String _previousLandscape;
+    bool _landscapeChanged;
+    Scale* _currentScale;
+    Note _currentRoot;
     Map<String, Motif> _motifs;
     Map<String, U32> _motifsChanges;
     Map<String, U32> _motifsActiveInstances;
-
     Map<String, LandscapeGraph> _landscapes;
-    String _currentLandscape;
-    String _previousLandscape;
 
-    Score& _score;
 };
 
 } // namespace Dryad

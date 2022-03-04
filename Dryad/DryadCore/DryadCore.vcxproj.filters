@@ -58,7 +58,7 @@
     <ClInclude Include="include\dryad\score\instant.h">
       <Filter>dryad\score</Filter>
     </ClInclude>
-    <ClInclude Include="include\dryad\score\notedata.h">
+    <ClInclude Include="include\dryad\score\scorenote.h">
       <Filter>dryad\score</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\score\voice.h">
@@ -69,6 +69,12 @@
     </ClInclude>
     <ClInclude Include="include\dryad\score\score.h">
       <Filter>dryad\score</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\harmony\note.h">
+      <Filter>dryad\harmony</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\harmony\musicconstants.h">
+      <Filter>dryad\harmony</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -81,5 +87,8 @@
     <Filter Include="dryad\harmony">
       <UniqueIdentifier>{bafe32e0-7440-4500-b2ae-d750ef26b92b}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="include\dryad\blob.cpp" />
   </ItemGroup>
 </Project>

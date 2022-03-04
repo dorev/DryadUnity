@@ -54,6 +54,16 @@ public class Motif : global::System.IDisposable {
     } 
   }
 
+  public uint duration {
+    set {
+      DryadFacadePINVOKE.Motif_duration_set(swigCPtr, value);
+    } 
+    get {
+      uint ret = DryadFacadePINVOKE.Motif_duration_get(swigCPtr);
+      return ret;
+    } 
+  }
+
   public string name {
     set {
       DryadFacadePINVOKE.Motif_name_set(swigCPtr, value);
@@ -62,16 +72,6 @@ public class Motif : global::System.IDisposable {
     get {
       string ret = DryadFacadePINVOKE.Motif_name_get(swigCPtr);
       if (DryadFacadePINVOKE.SWIGPendingException.Pending) throw DryadFacadePINVOKE.SWIGPendingException.Retrieve();
-      return ret;
-    } 
-  }
-
-  public uint duration {
-    set {
-      DryadFacadePINVOKE.Motif_duration_set(swigCPtr, value);
-    } 
-    get {
-      uint ret = DryadFacadePINVOKE.Motif_duration_get(swigCPtr);
       return ret;
     } 
   }

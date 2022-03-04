@@ -43,9 +43,9 @@ public:
     static constexpr Type PositionDoesNotExist = ScoreCategory | 2;
     static constexpr Type NoteDoesNotExist = ScoreCategory | 3;
     static constexpr Type CannotWritePastElements = ScoreCategory | 4;
-    
 
-    static constexpr Type TBD = 42 << 32;
+
+    static constexpr Type TBD = 42 << CategoryShift;
     static constexpr Type NoAvailableEquivalence = TBD | 0;
 };
 

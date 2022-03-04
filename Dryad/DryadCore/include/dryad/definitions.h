@@ -9,9 +9,7 @@
 
 #define PRIVATE_CONSTRUCTOR(Class) \
 private: \
-    Class(); \
-    Class(const Class&);\
-    Class(Class&&);
+    Class() {}
 
 #define UNUSED(variable) (void)variable;
 

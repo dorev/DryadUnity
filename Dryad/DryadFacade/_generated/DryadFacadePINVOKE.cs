@@ -259,17 +259,17 @@ class DryadFacadePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Motif_id_get")]
   public static extern uint Motif_id_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Motif_name_set")]
-  public static extern void Motif_name_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Motif_name_get")]
-  public static extern string Motif_name_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
   [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Motif_duration_set")]
   public static extern void Motif_duration_set(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Motif_duration_get")]
   public static extern uint Motif_duration_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Motif_name_set")]
+  public static extern void Motif_name_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Motif_name_get")]
+  public static extern string Motif_name_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Motif_notes_set")]
   public static extern void Motif_notes_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
@@ -283,12 +283,6 @@ class DryadFacadePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_delete_Motif")]
   public static extern void delete_Motif(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Scale_name_set")]
-  public static extern void Scale_name_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Scale_name_get")]
-  public static extern string Scale_name_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
   [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Scale_rootNote_set")]
   public static extern void Scale_rootNote_set(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
@@ -300,6 +294,12 @@ class DryadFacadePINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Scale_flatOrSharp_get")]
   public static extern int Scale_flatOrSharp_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Scale_name_set")]
+  public static extern void Scale_name_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Scale_name_get")]
+  public static extern string Scale_name_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Scale_intervals_set")]
   public static extern void Scale_intervals_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
@@ -445,8 +445,8 @@ class DryadFacadePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Facade_Generate")]
   public static extern global::System.IntPtr Facade_Generate(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Facade_Play")]
-  public static extern global::System.IntPtr Facade_Play(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
+  [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_Facade_Commit")]
+  public static extern global::System.IntPtr Facade_Commit(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("DryadFacade", EntryPoint="CSharp_Dryad_MotifList_Clear")]
   public static extern void MotifList_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);

@@ -9,14 +9,17 @@ namespace Dryad
 class Voice
 {
 public:
-
-    const VoiceDescriptor& getDescriptor() const
+    U32 GetId() const
     {
-        return _descriptor;
+        return _descriptor.GetId();
+    }
+
+    const String& GetName()
+    {
+        return _descriptor.GetName();
     }
 
 private:
-
     VoiceDescriptor _descriptor;
 };
 

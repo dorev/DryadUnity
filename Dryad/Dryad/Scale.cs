@@ -44,18 +44,6 @@ public class Scale : global::System.IDisposable {
     }
   }
 
-  public string name {
-    set {
-      DryadFacadePINVOKE.Scale_name_set(swigCPtr, value);
-      if (DryadFacadePINVOKE.SWIGPendingException.Pending) throw DryadFacadePINVOKE.SWIGPendingException.Retrieve();
-    } 
-    get {
-      string ret = DryadFacadePINVOKE.Scale_name_get(swigCPtr);
-      if (DryadFacadePINVOKE.SWIGPendingException.Pending) throw DryadFacadePINVOKE.SWIGPendingException.Retrieve();
-      return ret;
-    } 
-  }
-
   public uint rootNote {
     set {
       DryadFacadePINVOKE.Scale_rootNote_set(swigCPtr, value);
@@ -72,6 +60,18 @@ public class Scale : global::System.IDisposable {
     } 
     get {
       FlatOrSharp ret = (FlatOrSharp)DryadFacadePINVOKE.Scale_flatOrSharp_get(swigCPtr);
+      return ret;
+    } 
+  }
+
+  public string name {
+    set {
+      DryadFacadePINVOKE.Scale_name_set(swigCPtr, value);
+      if (DryadFacadePINVOKE.SWIGPendingException.Pending) throw DryadFacadePINVOKE.SWIGPendingException.Retrieve();
+    } 
+    get {
+      string ret = DryadFacadePINVOKE.Scale_name_get(swigCPtr);
+      if (DryadFacadePINVOKE.SWIGPendingException.Pending) throw DryadFacadePINVOKE.SWIGPendingException.Retrieve();
       return ret;
     } 
   }

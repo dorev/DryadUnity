@@ -13,7 +13,6 @@
 namespace Dryad
 {
 
-
 ///////////////////////////////////////////////////////////////////////////////
 // Helper types
 ///////////////////////////////////////////////////////////////////////////////
@@ -94,9 +93,9 @@ template <class T>
 using SharedPtr = std::shared_ptr<T>;
 
 template <class T, class... Args>
-SharedPtr<T> MakeShared(Args... args)
+SharedPtr<T>&& MakeShared(Args... args)
 {
-    return std::make_shared<T>(std::forward(args)...);
+    return std::move(std::make_shared<T>(std::forward(args)...));
 }
 
 template <class T>
@@ -106,13 +105,13 @@ template <class T>
 using UniquePtr = std::unique_ptr<T>;
 
 template <class T, class... Args>
-UniquePtr<T> MakeUnique(Args... args)
+UniquePtr<T>&& MakeUnique(Args... args)
 {
-    return std::make_unique<T>(std::forward(args)...);
+    return std::move(std::make_unique<T>(std::forward(args)...));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// Dryad specific
+// Musical types
 ///////////////////////////////////////////////////////////////////////////////
 
 enum class Accidental
@@ -122,8 +121,22 @@ enum class Accidental
     Flat
 };
 
-using TimeMs = U64;
-using TimestampMs = U64;
+enum class TriadVoicing
+{
+    Major,
+    Minor,
+    Augmented,
+    Diminished
+};
+
+enum class ChordExtension
+{
+    None,
+    Seventh,
+    MajorSeventh,
+    Ninth
+};
+
 using ScoreTime = U64;
 
 } // namespace Dryad

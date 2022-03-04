@@ -30,18 +30,23 @@
     <ClInclude Include="include\dryad\harmony\landscapenode.h" />
     <ClInclude Include="include\dryad\harmony\motif.h" />
     <ClInclude Include="include\dryad\harmony\motifnote.h" />
+    <ClInclude Include="include\dryad\harmony\musicconstants.h" />
+    <ClInclude Include="include\dryad\harmony\note.h" />
     <ClInclude Include="include\dryad\harmony\scale.h" />
     <ClInclude Include="include\dryad\idprovider.h" />
     <ClInclude Include="include\dryad\midinote.h" />
     <ClInclude Include="include\dryad\result.h" />
     <ClInclude Include="include\dryad\score\instant.h" />
-    <ClInclude Include="include\dryad\score\notedata.h" />
+    <ClInclude Include="include\dryad\score\scorenote.h" />
     <ClInclude Include="include\dryad\crtphelper.h" />
     <ClInclude Include="include\dryad\score\score.h" />
     <ClInclude Include="include\dryad\score\voice.h" />
     <ClInclude Include="include\dryad\session.h" />
     <ClInclude Include="include\dryad\types.h" />
     <ClInclude Include="include\dryad\utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="include\dryad\blob.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -143,7 +148,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -161,7 +166,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>include/dryad;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>

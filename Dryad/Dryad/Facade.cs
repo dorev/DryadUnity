@@ -74,8 +74,8 @@ public class Facade : global::System.IDisposable {
     return ret;
   }
 
-  public NoteToPlayList Play(uint durationToPlay) {
-    NoteToPlayList ret = new NoteToPlayList(DryadFacadePINVOKE.Facade_Play(swigCPtr, durationToPlay), true);
+  public NoteToPlayList Commit(uint durationToPlay) {
+    NoteToPlayList ret = new NoteToPlayList(DryadFacadePINVOKE.Facade_Commit(swigCPtr, durationToPlay), true);
     return ret;
   }
 

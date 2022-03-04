@@ -8,7 +8,6 @@ namespace Dryad
 class BaseDescriptor
 {
 public:
-
     BaseDescriptor()
         : _id(0)
     {
@@ -35,7 +34,6 @@ public:
     }
 
 protected:
-
     U32 _id;
     String _name;
 };
@@ -43,7 +41,6 @@ protected:
 class VoiceDescriptor : public BaseDescriptor
 {
 public:
-
     VoiceDescriptor()
     {
     }
@@ -62,7 +59,6 @@ public:
 class MotifDescriptor : public BaseDescriptor
 {
 public:
-
     MotifDescriptor()
     {
     }
@@ -81,7 +77,6 @@ public:
 class LandscapeGraphDescriptor : public BaseDescriptor
 {
 public:
-
     LandscapeGraphDescriptor(U32 landscapeId, const String& landscapeName)
         : BaseDescriptor(landscapeId, landscapeName)
         , _nextNodeId(0)
@@ -94,21 +89,18 @@ public:
     }
 
 protected:
-
     U32 NextNodeId()
     {
-        return ++_nextNodeId;
+        return _nextNodeId++;
     }
 
 private:
-
     U32 _nextNodeId;
 };
 
 class LandscapeNodeId : public LandscapeGraphDescriptor
 {
 public:
-
     LandscapeNodeId(LandscapeGraphDescriptor& graphId)
         : LandscapeGraphDescriptor(graphId)
         , _nodeId(NextNodeId())
@@ -120,21 +112,22 @@ public:
         return _nodeId;
     }
 
-    const LandscapeGraphDescriptor getGraphDescriptor() const
+    const LandscapeGraphDescriptor GetGraphDescriptor() const
     {
         return *this;
     }
 
     bool operator<(const LandscapeNodeId& other) const
     {
-        return getGraphDescriptor().GetId() < other.getGraphDescriptor().GetId()
-            || (getGraphDescriptor().GetId() == other.getGraphDescriptor().GetId() && GetId() < other.GetId());
+        return GetGraphDescriptor().GetId() < other.GetGraphDescriptor().GetId()
+            || (GetGraphDescriptor().GetId() == other.GetGraphDescriptor().GetId() && GetId() < other.GetId());
     }
 
 private:
-
-    using BaseDescriptor::GetId;
     U32 _nodeId;
+
+    // Hide base class GetId method
+    using BaseDescriptor::GetId;
 };
 
 } // namespace Dryad
