@@ -19,11 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\dryad\configurations.h" />
     <ClInclude Include="include\dryad\constants.h" />
     <ClInclude Include="include\dryad\definitions.h" />
     <ClInclude Include="include\dryad\error.h" />
     <ClInclude Include="include\dryad\descriptors.h" />
-    <ClInclude Include="include\dryad\harmony\composer.h" />
+    <ClInclude Include="include\dryad\harmony\harmonycontext.h" />
     <ClInclude Include="include\dryad\harmony\degree.h" />
     <ClInclude Include="include\dryad\harmony\harmonizer.h" />
     <ClInclude Include="include\dryad\harmony\landscapegraph.h" />

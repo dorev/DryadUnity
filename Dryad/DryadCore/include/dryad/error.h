@@ -20,7 +20,9 @@ public:
     static constexpr Type Undefined = GenericCategory | 1;
     static constexpr Type UselessCall = GenericCategory | 2;
     static constexpr Type NullPointer = GenericCategory | 3;
-
+    static constexpr Type UnableToStoreData = GenericCategory | 4;
+    static constexpr Type UnexpectedNegativeNumber = GenericCategory | 5;
+    
     static constexpr Type ResultCategory = 1 << CategoryShift;
     static constexpr Type UninitializedError = ResultCategory | 0;
     static constexpr Type AsyncResultLocked = ResultCategory | 1;
@@ -38,11 +40,6 @@ public:
     static constexpr Type NothingToCommit = SessionCategory | 9;
 
     static constexpr Type ScoreCategory = 3 << CategoryShift;
-    static constexpr Type PhraseDoesNotExist = ScoreCategory | 0;
-    static constexpr Type MeasureDoesNotExist = ScoreCategory | 1;
-    static constexpr Type PositionDoesNotExist = ScoreCategory | 2;
-    static constexpr Type NoteDoesNotExist = ScoreCategory | 3;
-    static constexpr Type CannotWritePastElements = ScoreCategory | 4;
 
 
     static constexpr Type TBD = 42 << CategoryShift;
@@ -61,7 +58,7 @@ public:
 
     constexpr Error()
         : _code(ErrorCode::UninitializedError)
-        , _description("Uninitialized Error")
+        , _description("Uninitialized error")
     {
     }
 
@@ -81,13 +78,10 @@ public:
     {
         if(_code != other._code)
             return false;
-
         if(_description == nullptr)
-            return other._description == nullptr;
-        
+            return other._description == nullptr;        
         if(other._description == nullptr)
             return false;
-
         return strcmp(_description, other._description) == 0;
     }
 

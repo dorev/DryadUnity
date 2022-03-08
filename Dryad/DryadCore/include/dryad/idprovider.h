@@ -16,22 +16,22 @@ public:
     {
     }
 
-    VoiceDescriptor NextVoice(const String& voiceName)
+    VoiceDescriptor GetVoiceDescriptor(const String& voiceName)
     {
         return VoiceDescriptor(++_voiceId, voiceName);
     }
 
-    MotifDescriptor NextMotif(const String& motifName)
+    MotifDescriptor CreateMotifDescriptor(const String& motifName)
     {
         return MotifDescriptor(++_motifId, motifName);
     }
 
-    LandscapeGraphDescriptor NextLandscapeGraph(const String& landscapeName)
+    LandscapeGraphDescriptor CreateLandscapeGraphDescriptor(const String& landscapeName)
     {
         return LandscapeGraphDescriptor(++_landscapeGraphId, landscapeName);
     }
 
-    LandscapeNodeId NextLandscapeNodeId(LandscapeGraphDescriptor& landscapeDescriptor)
+    LandscapeNodeId GetLandscapeNodeDescriptor(LandscapeGraphDescriptor& landscapeDescriptor)
     {
         return LandscapeNodeId(landscapeDescriptor);
     }

@@ -64,7 +64,7 @@
     <ClInclude Include="include\dryad\score\voice.h">
       <Filter>dryad\score</Filter>
     </ClInclude>
-    <ClInclude Include="include\dryad\harmony\composer.h">
+    <ClInclude Include="include\dryad\harmony\harmonycontext.h">
       <Filter>dryad\harmony</Filter>
     </ClInclude>
     <ClInclude Include="include\dryad\score\score.h">
@@ -75,6 +75,9 @@
     </ClInclude>
     <ClInclude Include="include\dryad\harmony\musicconstants.h">
       <Filter>dryad\harmony</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dryad\configurations.h">
+      <Filter>dryad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

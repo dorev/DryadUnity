@@ -7,6 +7,9 @@
     Class& operator=(const Class&) = delete; \
     Class& operator=(Class&&) = delete;
 
+#define DELETE_DEFAULT_CONSTRUCTOR(Class) \
+    Class() = delete;
+
 #define PRIVATE_CONSTRUCTOR(Class) \
 private: \
     Class() {}

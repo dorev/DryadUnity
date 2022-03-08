@@ -10,6 +10,7 @@ class BaseDescriptor
 public:
     BaseDescriptor()
         : _id(0)
+        , _name("")
     {
     }
 
@@ -33,6 +34,11 @@ public:
         return _name;
     }
 
+    bool IsValid()
+    {
+        return _id != 0 && _name != "";
+    }
+
 protected:
     U32 _id;
     String _name;
@@ -42,6 +48,7 @@ class VoiceDescriptor : public BaseDescriptor
 {
 public:
     VoiceDescriptor()
+        : BaseDescriptor(0, "")
     {
     }
 
@@ -60,6 +67,7 @@ class MotifDescriptor : public BaseDescriptor
 {
 public:
     MotifDescriptor()
+        : BaseDescriptor(0, "")
     {
     }
 
@@ -77,9 +85,14 @@ public:
 class LandscapeGraphDescriptor : public BaseDescriptor
 {
 public:
+    LandscapeGraphDescriptor()
+        : BaseDescriptor(0, "")
+        , _nextNodeId(1)
+    {
+    }
     LandscapeGraphDescriptor(U32 landscapeId, const String& landscapeName)
         : BaseDescriptor(landscapeId, landscapeName)
-        , _nextNodeId(0)
+        , _nextNodeId(1)
     {
     }
 
@@ -101,6 +114,12 @@ private:
 class LandscapeNodeId : public LandscapeGraphDescriptor
 {
 public:
+    LandscapeNodeId()
+        : LandscapeGraphDescriptor()
+        , _nodeId(0)
+    {
+    }
+
     LandscapeNodeId(LandscapeGraphDescriptor& graphId)
         : LandscapeGraphDescriptor(graphId)
         , _nodeId(NextNodeId())

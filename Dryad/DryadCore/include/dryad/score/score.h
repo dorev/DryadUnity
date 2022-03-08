@@ -18,6 +18,18 @@ public:
 
     Vector<MidiNote>&& Commit(ScoreTime deltaScoreTime)
     {
+        if (_firstUncommittedInstant != nullptr && deltaScoreTime > 0)
+        {
+            ScoreTime startTime = _firstUncommittedInstant->GetScoreTime();
+            ScoreTime commitUntil = startTime + deltaScoreTime;
+            Instant* instant = _firstUncommittedInstant;
+            do
+            {
+                instant->Commit();
+                instant = instant->Next();
+            } while (instant->GetScoreTime() < commitUntil);
+
+        }
         return std::move(Vector<MidiNote>());
     }
 

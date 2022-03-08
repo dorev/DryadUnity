@@ -16,6 +16,14 @@ struct Edge
 class LandscapeGraph
 {
 public:
+
+    LandscapeGraph(const LandscapeGraphDescriptor& descriptor)
+        : _descriptor(descriptor)
+        , _nodes()
+        , _edges()
+    {
+    }
+
     U32 GetId() const
     {
         return _descriptor.GetId();

@@ -7,21 +7,10 @@
 #include "dryad/types.h"
 #include "dryad/utils.h"
 
-#include "dryad/harmony/composer.h"
+#include "dryad/harmony/harmonycontext.h"
 #include "dryad/harmony/note.h"
 
 #include "dryad/score/score.h"
-
-
-
-/*
-en bout de ligne on a jamais besoin de tempo ici, on indiquement seulement combien
-de mesures ou de beat on veut générer/commit
-
-le tempo va être géré par le player dans tout ça, pas pas Dryad qui est le "générateur"
-de la musique
-*/
-
 
 namespace Dryad
 {
@@ -30,6 +19,12 @@ class Session
 {
 public:
 
+    Session()
+        : _harmonyContext()
+        //, _scoreWriter(_score)
+    {
+    }
+
     Vector<MidiNote>&& Commit(ScoreTime deltaScoreTime)
     {
         return std::move(_score.Commit(deltaScoreTime));
@@ -37,35 +32,51 @@ public:
 
     Result<> Generate(ScoreTime scoreTime)
     {
+        return Success;
     }
 
     //
     // Forwarding to composer
     //
 
-    Result<> RegisterMotif(const String& motifName, const Motif& motif)
+    Result<Motif*> CreateMotif(const String& motifName)
     {
-        return _composer.RegisterMotif(motifName, motif);
+        return _harmonyContext.RegisterMotif(_idProvider.CreateMotifDescriptor(motifName));
     }
 
-    Result<> RegisterLandscapeGraph(const String& landscapeName, const LandscapeGraph& landscapeGraph)
+    Result<LandscapeGraph*> CreateLandscape(const String& landscapeName)
     {
-        return _composer.RegisterLandscape(landscapeName, landscapeGraph);
+        return _harmonyContext.RegisterLandscape(_idProvider.CreateLandscapeGraphDescriptor(landscapeName));
     }
 
-    Result<> AddMotif(const String& motifName, S32 amount = 1)
+    Result<> SetMotifCount(const String& motifName, S32 amount = 1)
     {
-        return _composer.AddMotif(motifName, amount);
+        return _harmonyContext.SetMotifCount(motifName, amount);
+    }
+
+    Result<> IncrementMotifCount(const String& motifName, S32 increment = 1)
+    {
+        return _harmonyContext.IncrementMotifCount(motifName, increment);
+    }
+
+    Result<> DecrementMotifCount(const String& motifName, S32 decrement = 1)
+    {
+        return _harmonyContext.IncrementMotifCount(motifName, -1 * decrement);
     }
 
     Result<> SetLandscape(const String& landscapeName)
     {
-        return _composer.TransitionToLandscape(landscapeName);
+        return _harmonyContext.SetLandscape(landscapeName);
+    }
+
+    const Score& GetScore() const
+    {
+        return _score;
     }
 
 private:
     Score _score;
-    Composer _composer;
+    HarmonyContext _harmonyContext;
     IdProvider _idProvider;
 };
 

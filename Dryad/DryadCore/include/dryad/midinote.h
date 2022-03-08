@@ -1,15 +1,19 @@
 #pragma once
 
 #include "dryad/types.h"
+#include "dryad/definitions.h"
+
 namespace Dryad
 {
 
 class MidiNote
 {
 public:
+    DELETE_DEFAULT_CONSTRUCTOR(MidiNote);
 
-    MidiNote(U32 value = 0, ScoreTime duration = 0, ScoreTime startTime = 0)
+    MidiNote(U32 value, U32 voiceId, ScoreTime duration, ScoreTime startTime)
         : _value(value)
+        , _voiceId(voiceId)
         , _duration(duration)
         , _startTime(startTime)
     {
@@ -20,6 +24,11 @@ public:
         return _value;
     }
 
+    U32 GetVoiceId() const
+    {
+        return _voiceId;
+    }
+
     ScoreTime GetDuration() const
     {
         return _duration;
@@ -28,9 +37,10 @@ public:
     ScoreTime GetStartTime() const
     {
         return _startTime;
-    }
+    }  
 
     U32 _value;
+    U32 _voiceId;
     ScoreTime _duration;
     ScoreTime _startTime;
 };
