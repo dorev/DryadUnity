@@ -10,6 +10,11 @@
 #define DELETE_DEFAULT_CONSTRUCTOR(Class) \
     Class() = delete;
 
+#define ONLY_EXPLICIT_CONSTRUCTOR(Class) \
+	Class() = delete; \
+	Class(const Class&) = delete; \
+	Class(Class&&) = delete;
+
 #define PRIVATE_CONSTRUCTOR(Class) \
 private: \
     Class() {}

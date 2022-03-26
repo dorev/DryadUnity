@@ -79,6 +79,9 @@
     <ClInclude Include="include\dryad\configurations.h">
       <Filter>dryad</Filter>
     </ClInclude>
+    <ClInclude Include="include\dryad\composer\composer.h">
+      <Filter>dryad\composer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="dryad">
@@ -89,6 +92,9 @@
     </Filter>
     <Filter Include="dryad\harmony">
       <UniqueIdentifier>{bafe32e0-7440-4500-b2ae-d750ef26b92b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dryad\composer">
+      <UniqueIdentifier>{b31ceb77-1fc5-4f89-b4b0-1faab0eaacb2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

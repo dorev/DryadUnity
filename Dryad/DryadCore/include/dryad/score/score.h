@@ -28,8 +28,9 @@ public:
                 instant->Commit();
                 instant = instant->Next();
             } while (instant->GetScoreTime() < commitUntil);
-
         }
+
+        // FIXME
         return std::move(Vector<MidiNote>());
     }
 

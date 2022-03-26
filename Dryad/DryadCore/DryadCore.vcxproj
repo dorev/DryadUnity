@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\dryad\composer\composer.h" />
     <ClInclude Include="include\dryad\configurations.h" />
     <ClInclude Include="include\dryad\constants.h" />
     <ClInclude Include="include\dryad\definitions.h" />

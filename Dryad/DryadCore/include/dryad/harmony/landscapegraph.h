@@ -9,8 +9,8 @@ namespace Dryad
 
 struct Edge
 {
-    LandscapeNode* from;
     LandscapeNode* to;
+    LandscapeNode* from;
 };
 
 class LandscapeGraph
