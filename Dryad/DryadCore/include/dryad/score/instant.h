@@ -9,6 +9,15 @@ namespace Dryad
     class Instant
     {
     public:
+        Instant()
+            : _scale(nullptr)
+            , _landscapeNode(nullptr)
+            , _next(nullptr)
+            , _prev(nullptr)
+            , _scoreTime(0)
+            , _notes()
+        {
+        }
 
         ScoreTime GetScoreTime() const
         {
@@ -28,6 +37,11 @@ namespace Dryad
         Instant* Prev() const
         {
             return _prev;
+        }
+
+        Result<> AddNote(const ScoreNote& note)
+        {
+
         }
 
     private:

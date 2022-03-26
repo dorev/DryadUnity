@@ -2,6 +2,7 @@
 
 #include "dryad/types.h"
 #include "dryad/descriptors.h"
+#include "dryad/harmony/note.h"
 
 namespace Dryad
 {
@@ -21,6 +22,10 @@ public:
 
 private:
     VoiceDescriptor _descriptor;
+    Note _lowestNote;
+    Note _highestNote;
+    String _instrumentName;
+    
 };
 
 } // namespace Dryad

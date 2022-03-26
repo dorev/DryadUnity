@@ -198,12 +198,17 @@ public:
 
     struct Snapshot
     {
-        const LandscapeGraph* _currentLandscape;
-        const LandscapeGraph* _previousLandscape;
-        const Map<Motif*, U32> _currentMotifLevels;
-        const Scale* _currentScale;
-        const Note _currentScaleRoot;
+        const LandscapeGraph* currentLandscape;
+        const LandscapeGraph*_previousLandscape;
+        const Scale* currentScale;
+        const Note currentScaleRoot;
+        const Map<Motif*, U32> currentMotifLevels;
     };
+
+    Snapshot GetSnapshot()
+    {
+        return { _currentLandscape, _previousLandscape, _currentScale, _currentScaleRoot, FunctionGatheringMotifInstances}
+    }
 
 private:
     bool _landscapeChanged;

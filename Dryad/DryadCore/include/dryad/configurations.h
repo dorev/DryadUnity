@@ -1,3 +1,3 @@
 #pragma once
 
-#define MAX_NOTES_PER_INSTANT 4
+#define MAX_NOTES_PER_INSTANT 8
