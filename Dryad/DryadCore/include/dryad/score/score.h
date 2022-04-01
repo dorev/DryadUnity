@@ -1,10 +1,8 @@
 #pragma once
 
-#include "dryad/midinote.h"
 #include "dryad/types.h"
 #include "dryad/descriptors.h"
 #include "dryad/score/instant.h"
-#include <functional>
 
 namespace Dryad
 {
@@ -70,8 +68,7 @@ public:
         return instant;
     }
 
-    Instant* GetFirstInstant()
-    {
+    Instant* GetFirstInstant()     {
         if (_instants.empty())
             return nullptr;
         return &_instants.front();

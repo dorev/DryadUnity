@@ -82,6 +82,9 @@
     <ClInclude Include="include\dryad\composer\composer.h">
       <Filter>dryad\composer</Filter>
     </ClInclude>
+    <ClInclude Include="include\dryad\score\scoreplayer.h">
+      <Filter>dryad\score</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="dryad">

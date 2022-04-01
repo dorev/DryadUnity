@@ -42,6 +42,7 @@
     <ClInclude Include="include\dryad\score\scorenote.h" />
     <ClInclude Include="include\dryad\crtphelper.h" />
     <ClInclude Include="include\dryad\score\score.h" />
+    <ClInclude Include="include\dryad\score\scoreplayer.h" />
     <ClInclude Include="include\dryad\score\voice.h" />
     <ClInclude Include="include\dryad\session.h" />
     <ClInclude Include="include\dryad\types.h" />

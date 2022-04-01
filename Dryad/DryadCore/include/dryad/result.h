@@ -72,9 +72,14 @@ public:
         return IsValid();
     }
 
-    bool HasError()
+    bool HasError() const
     {
         return !IsValid();
+    }
+
+    bool HasError(const ErrorCode& errorCode) const
+    {
+        return _error.GetCode() == errorCode;
     }
 
     const Error& GetError()
@@ -82,7 +87,7 @@ public:
         return _error;
     }
 
-    const ValueType& GetValueConst()
+    const ValueType& GetValueConst() const
     {
         return _value;
     }
@@ -93,9 +98,9 @@ public:
     }
 
 protected:
-
     Error _error;
     ValueType _value;
+
 };
 
 enum class AsyncResultState
