@@ -40,6 +40,11 @@ public:
         return _value % 12;
     }
 
+    bool operator==(const Note& other) const
+    {
+        return _value == other._value;
+    }
+
 private:
     U32 _value;
 };

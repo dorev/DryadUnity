@@ -1,8 +1,10 @@
 #pragma once
 
+#include "dryad/midinote.h"
 #include "dryad/types.h"
 #include "dryad/descriptors.h"
 #include "dryad/score/instant.h"
+#include <functional>
 
 namespace Dryad
 {
@@ -13,33 +15,84 @@ public:
 
     Instant* GetFirstUncommittedInstant()
     {
-
+        if (_instants.empty())
+            _firstUncommittedInstant = &(*_instants.emplace(_instants.end()));
+        return _firstUncommittedInstant;
     }
 
-    Vector<MidiNote>&& Commit(ScoreTime deltaScoreTime)
+    Result<> Commit(ScoreTime deltaScoreTime)
     {
-        if (_firstUncommittedInstant != nullptr && deltaScoreTime > 0)
+        if (deltaScoreTime > 0)
         {
-            ScoreTime startTime = _firstUncommittedInstant->GetScoreTime();
-            ScoreTime commitUntil = startTime + deltaScoreTime;
-            Instant* instant = _firstUncommittedInstant;
+            Instant* instant = GetFirstUncommittedInstant();
+            ScoreTime commitUntil = instant->GetScoreTime() + deltaScoreTime;
             do
             {
                 instant->Commit();
-                instant = instant->Next();
-            } while (instant->GetScoreTime() < commitUntil);
+                Instant* next = instant->GetNext();
+                if (next == nullptr)
+                {
+                    SetFirstUncommittedInstant(nullptr);
+                    return { ErrorCode::EndOfScore };
+                }
+            }
+            while (instant->GetScoreTime() < commitUntil);
+            SetFirstUncommittedInstant(instant);
         }
+        return Success;
+    }
 
-        // FIXME
-        return std::move(Vector<MidiNote>());
+    ScoreTime GetMeasureBeginningTime(const Instant* instant)
+    {
+        ScoreTime instantTime = instant->GetScoreTime();
+        return instantTime - (instantTime % Music::Duration::Whole);
+    }
+
+    U32 GetMeasureNumber(const Instant* instant)
+    {
+        return static_cast<U32>(GetMeasureBeginningTime(instant) / Music::Duration::Whole);
+    }
+
+    Instant* GetFirstCommittedInstantFrom(ScoreTime time)
+    {
+        Instant* instant = GetFirstUncommittedInstant();
+        if (time >= instant->GetScoreTime())
+            return nullptr;
+        for(;;)
+        {
+            Instant* previous = instant->GetPrev();
+            if (previous == nullptr || previous->GetScoreTime() < time)
+                break;
+            if (previous->GetScoreTime() == time)
+                return previous;
+            instant = previous;
+        }
+        return instant;
+    }
+
+    Instant* GetFirstInstant()
+    {
+        if (_instants.empty())
+            return nullptr;
+        return &_instants.front();
+    }
+
+    Instant* GetLastInstant()
+    {
+        if (_instants.empty())
+            return nullptr;
+        return &_instants.back();
     }
 
 private:
 
+    void SetFirstUncommittedInstant(Instant* instant)
+    {
+        _firstUncommittedInstant = instant;
+    }
+
     List<Instant> _instants;
-    bool _changed;
     Instant* _firstUncommittedInstant;
-    Instant* _cachedFirstUncommittedInstant;
 };
 
 } // namespace Dryad

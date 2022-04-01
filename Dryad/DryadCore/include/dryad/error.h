@@ -12,38 +12,40 @@ namespace Dryad
 class ErrorCode
 {
 public:
-    using Type = U32;
-    static constexpr U32 CategoryShift = sizeof(Type) / 2;
+    static constexpr U32 CategoryShift = sizeof(U32) / 2;
 
-    static constexpr Type GenericCategory = 0 << CategoryShift;
-    static constexpr Type NoError = GenericCategory | 0;
-    static constexpr Type Undefined = GenericCategory | 1;
-    static constexpr Type UselessCall = GenericCategory | 2;
-    static constexpr Type NullPointer = GenericCategory | 3;
-    static constexpr Type UnableToStoreData = GenericCategory | 4;
-    static constexpr Type UnexpectedNegativeNumber = GenericCategory | 5;
+    static constexpr U32 GenericCategory = 0 << CategoryShift;
+    static constexpr U32 NoError = GenericCategory | 0;
+    static constexpr U32 Undefined = GenericCategory | 1;
+    static constexpr U32 UselessCall = GenericCategory | 2;
+    static constexpr U32 NullPointer = GenericCategory | 3;
+    static constexpr U32 UnableToStoreData = GenericCategory | 4;
+    static constexpr U32 UnexpectedNegativeNumber = GenericCategory | 5;
     
-    static constexpr Type ResultCategory = 1 << CategoryShift;
-    static constexpr Type UninitializedError = ResultCategory | 0;
-    static constexpr Type AsyncResultLocked = ResultCategory | 1;
+    static constexpr U32 ResultCategory = 1 << CategoryShift;
+    static constexpr U32 UninitializedError = ResultCategory | 0;
+    static constexpr U32 AsyncResultLocked = ResultCategory | 1;
 
-    static constexpr Type SessionCategory = 2 << CategoryShift;
-    static constexpr Type LandscapeDoesNotExist = SessionCategory | 0;
-    static constexpr Type LandscapeAlreadyExists = SessionCategory | 1;
-    static constexpr Type MotifDoesNotExist = SessionCategory | 2;
-    static constexpr Type MotifAlreadyExists = SessionCategory | 3;
-    static constexpr Type CannotCommitPastElements = SessionCategory | 4;
-    static constexpr Type NoMotifAvailable = SessionCategory | 5;
-    static constexpr Type NoHarmonyNodeAvailable = SessionCategory | 6;
-    static constexpr Type MotifAlreadyFullyDeactivated = SessionCategory | 7;
-    static constexpr Type NoUpcomingNotesAvailable = SessionCategory | 8;
-    static constexpr Type NothingToCommit = SessionCategory | 9;
+    static constexpr U32 HarmonyCategory = 2 << CategoryShift;
+    static constexpr U32 LandscapeDoesNotExist = HarmonyCategory | 0;
+    static constexpr U32 LandscapeAlreadyExists = HarmonyCategory | 1;
+    static constexpr U32 MotifDoesNotExist = HarmonyCategory | 2;
+    static constexpr U32 MotifAlreadyExists = HarmonyCategory | 3;
+    static constexpr U32 NoMotifAvailable = HarmonyCategory | 4;
+    static constexpr U32 NoHarmonyNodeAvailable = HarmonyCategory | 5;
+    static constexpr U32 MotifAlreadyFullyDeactivated = HarmonyCategory | 6;
+    // static constexpr U32  = SessionCategory | ;
 
-    static constexpr Type ScoreCategory = 3 << CategoryShift;
+    static constexpr U32 ScoreCategory = 3 << CategoryShift;
+    static constexpr U32 EndOfScore = ScoreCategory | 0;
+    static constexpr U32 NothingToCommit = ScoreCategory | 1;
+    static constexpr U32 CannotCommitPastElements = ScoreCategory | 2;
+    static constexpr U32 NoUpcomingNotesAvailable = ScoreCategory | 3;
+    //static constexpr U32   = ScoreCategory | ;
 
 
-    static constexpr Type TBD = 42 << CategoryShift;
-    static constexpr Type NoAvailableEquivalence = TBD | 0;
+    static constexpr U32 TBD = 42 << CategoryShift;
+    static constexpr U32 NoAvailableEquivalence = TBD | 0;
 };
 
 

@@ -37,9 +37,9 @@ public:
         return _duration;
     }
 
-    void SetDuration(ScoreTime duration)
+    void SetWindowDuration(ScoreTime windowDuration)
     {
-        _duration = duration;
+        _duration = windowDuration;
     }
 
     const Voice& GetVoice()

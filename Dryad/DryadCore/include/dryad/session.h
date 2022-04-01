@@ -25,9 +25,9 @@ public:
     {
     }
 
-    Vector<MidiNote>&& Commit(ScoreTime deltaScoreTime)
+    Result<> Commit(ScoreTime deltaScoreTime)
     {
-        return std::move(_score.Commit(deltaScoreTime));
+        return _score.Commit(deltaScoreTime);
     }
 
     Result<> Generate(ScoreTime scoreTime)

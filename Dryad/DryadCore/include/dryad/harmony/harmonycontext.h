@@ -27,6 +27,36 @@ struct MotifContext
     U32 level;
 };
 
+/* DEPRECATED?
+struct HarmonyContextSnapshot
+{
+    LandscapeGraph* currentLandscape;
+    LandscapeGraph* previousLandscape;
+    Scale* scale;
+    Note scaleRoot;
+    Map<Motif*, U32> motifLevels;
+
+    bool HasNoMotifs() const
+    {
+        for (const auto& [motif, level] : motifLevels)
+        {
+            if (level > 0)
+                return false;
+        }
+        return true;
+    }
+
+    bool operator==(const HarmonyContextSnapshot& other) const
+    {
+        return currentLandscape == other.currentLandscape
+            && previousLandscape == other.previousLandscape
+            && scale == other.scale
+            && scaleRoot == other.scaleRoot
+            && motifLevels == other.motifLevels;
+    }
+};
+*/
+
 class HarmonyContext
 {
 public:
@@ -38,43 +68,6 @@ public:
         , _currentScaleRoot(0)
     {
     }
-
-    /*
-    Result<> GenerateNotesUntil(ScoreTime scoreTime)
-    {
-        Instant* instant = _score.GetFirstUncommittedInstant();
-        if(instant == nullptr)
-            return {ErrorCode::PositionDoesNotExist};
-        if(scoreTime < instant->GetScoreTime())
-            return {ErrorCode::CannotWritePastElements};
-
-        //
-        // FIND A WAY TO QUERY WHERE A MOTIF STARTS
-        //
-
-        if (!MotifsChanged())
-        {
-            for (auto& motifChange : _motifsChanges)
-            {
-                const String& motifName = motifChange.first;
-                U32 amount = motifChange.second;
-                if (amount != 0)
-                    _motifsActiveInstances.at(motifName) += amount;
-            }
-        }
-
-        // extend all active motifs at least until scoreTime
-        // 
-        return Success;
-    }
-
-    Result<> HarmonizeFrom(Instant* instant)
-    {
-        if(instant != nullptr)
-            return _harmonizer.HarmonizeFrom(*instant);
-        return { ErrorCode::NullPointer };
-    }
-    */
 
     Result<> SetLandscape(const String& landscapeName)
     {
@@ -172,6 +165,21 @@ public:
         return false;
     }
 
+    bool ScaleChanged()
+    {
+        if (_scaleChanged)
+        {
+            _scaleChanged = false;
+            return true;
+        }
+        return false;
+    }
+
+    bool HasChanged()
+    {
+        return MotifsChanged() || LandscapeChanged() || ScaleChanged();
+    }
+
     Motif* FindMotif(const String& motifName)
     {
         auto findResult = _motifContexts.find(motifName);
@@ -188,26 +196,22 @@ public:
         return &(findResult->second);
     }
 
+    bool HasNoMotifs() const
+    {
+        for (const auto& [name, motifContext] : _motifContexts)
+        {
+            if (motifContext.level > 0)
+                return false;
+        }
+        return true;
+    }
+
     LandscapeGraph* FindLandscape(const String& landscapeName)
     {
         auto findResult = _landscapes.find(landscapeName);
         if (findResult == _landscapes.end())
             return nullptr;
         return &(findResult->second);
-    }
-
-    struct Snapshot
-    {
-        const LandscapeGraph* currentLandscape;
-        const LandscapeGraph*_previousLandscape;
-        const Scale* currentScale;
-        const Note currentScaleRoot;
-        const Map<Motif*, U32> currentMotifLevels;
-    };
-
-    Snapshot GetSnapshot()
-    {
-        return { _currentLandscape, _previousLandscape, _currentScale, _currentScaleRoot, FunctionGatheringMotifInstances}
     }
 
 private:
