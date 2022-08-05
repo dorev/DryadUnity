@@ -32,8 +32,10 @@ public:
     const ScoreNote* GetCurrentNote() const
     {
         const Instant* instant = GetCurrentInstant();
+
         if (instant != nullptr)
             return &instant->GetNotes()[_instantNoteIndex];
+
         return nullptr;
     }
 
@@ -56,6 +58,7 @@ public:
             if (GetCurrentNote()->GetDuration() > 0)
                 return GetCurrentNote();
         }
+
         return nullptr;
     }
 
@@ -67,6 +70,7 @@ public:
             if (GetCurrentNote()->GetDuration() > 0)
                 return GetCurrentNote();
         }
+
         return nullptr;
     }
 
@@ -76,12 +80,15 @@ private:
         if (_instantNoteIndex == (MAX_NOTES_PER_INSTANT - 1))
         {
             Instant* nextInstant = _currentInstant->GetNext();
+
             if (nextInstant == nullptr || (instantMustBeCommitted && nextInstant->IsNotCommitted()))
                 return false;
+
             UpdateCursor(nextInstant, 0);
         }
         else
             UpdateCursor(_currentInstant, ++_instantNoteIndex);
+
         return true;
     }
 
@@ -96,8 +103,5 @@ private:
     Instant* _currentInstant;
     U32 _instantNoteIndex;
 };
-
-
-
 
 } // namespace Dryad

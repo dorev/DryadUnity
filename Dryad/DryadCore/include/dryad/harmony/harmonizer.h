@@ -8,23 +8,19 @@ namespace Dryad
 {
 
 class Instant;
+class Score;
 
 class Harmonizer
 {
 public:
-    Harmonizer() = delete;
-    Harmonizer(Score& score)
-        : _score(score)
+    Harmonizer()
     {
     }
 
-    Result<> HarmonizeFrom(Instant& instant)
+    static Result<> HarmonizeFrom(Score& score, Instant& instant)
     {
         return Success;
     }
-
-private:
-    Score& _score;
 
 };
 

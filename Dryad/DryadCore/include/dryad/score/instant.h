@@ -88,12 +88,14 @@ public:
         for (U32 i = 0; i < MAX_NOTES_PER_INSTANT; ++i)
         {
             ScoreNote& note = _notes[i];
+
             if (note.GetDuration() == 0)
             {
                 note = noteToAdd;
                 return Success;
             }
         }
+
         return { ErrorCode::UnableToStoreData };
     }
 

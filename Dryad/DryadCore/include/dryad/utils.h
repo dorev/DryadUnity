@@ -17,10 +17,13 @@ namespace Random
     {
         if (min == max)
             return min;
+
         if (max < min)
             std::swap(min, max);
+
         static thread_local std::mt19937 generator(std::random_device{}());
         std::uniform_int_distribution<R> distribution(min, max);
+
         return distribution(generator);
     }
 
@@ -41,6 +44,7 @@ bool Contains(const Vector<T>& vector, const T& value)
         if (value == vector[i])
             return true;
     }
+
     return false;
 }
 
@@ -64,19 +68,23 @@ Result<> GetEquivalentDurationPairs(U64 duration, Vector<Pair<U64, U64>>& soluti
                 solutions.emplace_back(fractions[i], fractions[j]);
         }
     }
+
     if (solutions.empty())
         return { ErrorCode::NoAvailableEquivalence };
+
     return Success;
 }
 
 bool IsPowerOf2(U64 value)
 {
     U64 setBits = 0;
+
     for (U64 bit = 0; bit < (sizeof(U64) * 8); ++bit)
     {
         if (value & (1ULL << bit) && setBits++)
             return false;
     }
+
     return true;
 }
 

@@ -15,6 +15,7 @@ public:
     {
         if (_instants.empty())
             _firstUncommittedInstant = &(*_instants.emplace(_instants.end()));
+
         return _firstUncommittedInstant;
     }
 
@@ -24,19 +25,24 @@ public:
         {
             Instant* instant = GetFirstUncommittedInstant();
             ScoreTime commitUntil = instant->GetScoreTime() + deltaScoreTime;
+
             do
             {
                 instant->Commit();
                 Instant* next = instant->GetNext();
+
                 if (next == nullptr)
                 {
                     SetFirstUncommittedInstant(nullptr);
                     return { ErrorCode::EndOfScore };
                 }
             }
+
             while (instant->GetScoreTime() < commitUntil);
+
             SetFirstUncommittedInstant(instant);
         }
+
         return Success;
     }
 
@@ -54,23 +60,31 @@ public:
     Instant* GetFirstCommittedInstantFrom(ScoreTime time)
     {
         Instant* instant = GetFirstUncommittedInstant();
+
         if (time >= instant->GetScoreTime())
             return nullptr;
+
         for(;;)
         {
             Instant* previous = instant->GetPrev();
+
             if (previous == nullptr || previous->GetScoreTime() < time)
                 break;
+
             if (previous->GetScoreTime() == time)
                 return previous;
+
             instant = previous;
         }
+
         return instant;
     }
 
-    Instant* GetFirstInstant()     {
+    Instant* GetFirstInstant()
+    {
         if (_instants.empty())
             return nullptr;
+
         return &_instants.front();
     }
 
@@ -78,6 +92,7 @@ public:
     {
         if (_instants.empty())
             return nullptr;
+
         return &_instants.back();
     }
 

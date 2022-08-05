@@ -30,13 +30,17 @@ public:
         return _score.Commit(deltaScoreTime);
     }
 
+    //
+    // Forwarding to Composer to write additionnal music
+    //
+
     Result<> Generate(ScoreTime scoreTime)
     {
         return Success;
     }
 
     //
-    // Forwarding to composer
+    // Forwarding to HarmonyContext to store musical environment data
     //
 
     Result<Motif*> CreateMotif(const String& motifName)

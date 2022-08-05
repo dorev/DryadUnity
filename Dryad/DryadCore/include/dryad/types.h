@@ -114,14 +114,14 @@ UniquePtr<T>&& MakeUnique(Args... args)
 // Musical types
 ///////////////////////////////////////////////////////////////////////////////
 
-enum class Accidental
+enum class Accidental : U8
 {
     None,
     Sharp,
     Flat
 };
 
-enum class TriadVoicing
+enum class TriadVoicing : U8
 {
     Major,
     Minor,
@@ -129,7 +129,7 @@ enum class TriadVoicing
     Diminished
 };
 
-enum class ChordExtension
+enum class ChordExtension : U8
 {
     None,
     Seventh,

@@ -72,11 +72,14 @@ public:
     Result<> SetLandscape(const String& landscapeName)
     {
         LandscapeGraph* findResult = FindLandscape(landscapeName);
+
         if (findResult == nullptr)
             return { ErrorCode::LandscapeDoesNotExist };
+        
         _landscapeChanged = true;
         _previousLandscape = _currentLandscape;
         _currentLandscape = findResult;
+        
         return Success;
     }
 
@@ -84,35 +87,44 @@ public:
     {
         if(amount < 0)
             return { ErrorCode::UnexpectedNegativeNumber };
+
         MotifContext* motifContext = FindMotifContext(motifName);
         if (motifContext == nullptr)
             return { ErrorCode::MotifDoesNotExist };
+
         S32 motifCount = static_cast<S32>(motifContext->level);
         S32 delta =  motifCount - amount;
+
         if (delta != 0)
         {
             if ((motifCount + delta) < 0)
                 motifContext->level = 0;
             else
                 motifContext->level += delta;
+
             _motifsChanged = true;
         }
+
         return Success;
     }
 
     Result<> IncrementMotifCount(const String& motifName, S32 increment)
     {
         MotifContext* motifContext = FindMotifContext(motifName);
+
         if (motifContext == nullptr)
             return { ErrorCode::MotifDoesNotExist };
+
         if (increment != 0)
         {
             if ((motifContext->level + increment) < 0)
                 motifContext->level = 0;
             else
                 motifContext->level += increment;
+
             _motifsChanged = true;
         }
+
         return Success;
     }
 
@@ -120,14 +132,17 @@ public:
     {
         if (FindMotif(descriptor.GetName()) != nullptr)
             return { ErrorCode::MotifAlreadyExists };
+
         auto emplaceResult = _motifContexts.emplace(descriptor.GetName(), descriptor);
         bool motifInserted = emplaceResult.second;
+
         if (motifInserted)
         {
             Motif* motifPointer = &(emplaceResult.first->second.motif);
             _motifContexts.at(motifPointer->GetName()).level = 0;
             return motifPointer;
         }
+
         return { ErrorCode::UnableToStoreData };
     }
 
@@ -135,13 +150,16 @@ public:
     {
         if (FindLandscape(descriptor.GetName()) != nullptr)
             return { ErrorCode::MotifAlreadyExists };
+
         auto emplaceResult = _landscapes.emplace(descriptor.GetName(), descriptor);
         bool landscapeInserted = emplaceResult.second;
+
         if (landscapeInserted)
         {
             LandscapeGraph* landscapePointer = &(emplaceResult.first->second);
             return landscapePointer;
         }
+
         return { ErrorCode::UnableToStoreData };
     }
 
@@ -162,6 +180,7 @@ public:
             _motifsChanged = false;
             return true;
         }
+
         return false;
     }
 
@@ -172,6 +191,7 @@ public:
             _scaleChanged = false;
             return true;
         }
+
         return false;
     }
 
@@ -185,6 +205,7 @@ public:
         auto findResult = _motifContexts.find(motifName);
         if (findResult == _motifContexts.end())
             return nullptr;
+
         return &(findResult->second.motif);
     }
 
@@ -193,6 +214,7 @@ public:
         auto findResult = _motifContexts.find(motifName);
         if (findResult == _motifContexts.end())
             return nullptr;
+
         return &(findResult->second);
     }
 
@@ -203,6 +225,7 @@ public:
             if (motifContext.level > 0)
                 return false;
         }
+
         return true;
     }
 
@@ -211,6 +234,7 @@ public:
         auto findResult = _landscapes.find(landscapeName);
         if (findResult == _landscapes.end())
             return nullptr;
+
         return &(findResult->second);
     }
 

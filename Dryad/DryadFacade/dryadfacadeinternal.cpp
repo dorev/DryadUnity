@@ -4,8 +4,6 @@
 
 Facade::Internal::Internal()
 {
-	// init session
-	_session()
 }
 
 Facade::Internal::~Internal()
